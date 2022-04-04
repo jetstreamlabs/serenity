@@ -149,7 +149,7 @@ const displayableRole = (role) => {
     <div v-if="team.team_invitations.length > 0 && userPermissions.canAddTeamMembers">
       <SectionBorder />
 
-      < Team Member Invitations -->
+      <!-- Team Member Invitations -->
       <ActionSection class="mt-10 sm:mt-0">
         <template #title> {{ __('Pending Team Invitations') }} </template>
 
