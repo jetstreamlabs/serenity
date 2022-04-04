@@ -11,29 +11,29 @@ const props = defineProps(['sessions'])
     <div>
       <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div v-if="$page.props.jetstream.canUpdateProfileInformation">
-          <update-profile-information-form :user="$page.props.user" />
+          <UpdateProfileInformationForm :user="$page.props.user" />
 
-          <JetSectionBorder />
+          <SectionBorder />
         </div>
 
         <div v-if="$page.props.jetstream.canUpdatePassword">
-          <update-password-form class="mt-10 sm:mt-0" />
+          <UpdatePasswordForm class="mt-10 sm:mt-0" />
 
-          <JetSectionBorder />
+          <SectionBorder />
         </div>
 
         <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
-          <two-factor-authentication-form class="mt-10 sm:mt-0" />
+          <TwoFactorAuthenticationForm class="mt-10 sm:mt-0" />
 
-          <JetSectionBorder />
+          <SectionBorder />
         </div>
 
-        <logout-other-browser-sessions-form :sessions="props.sessions" class="mt-10 sm:mt-0" />
+        <LogoutOtherBrowserSessionsForm :sessions="props.sessions" class="mt-10 sm:mt-0" />
 
         <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
-          <JetSectionBorder />
+          <SectionBorder />
 
-          <delete-user-form class="mt-10 sm:mt-0" />
+          <DeleteUserForm class="mt-10 sm:mt-0" />
         </template>
       </div>
     </div>

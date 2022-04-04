@@ -4,7 +4,9 @@ const photo = ref(null)
 
 const form = useForm({
   _method: 'PUT',
-  name: props.user.name,
+  username: props.user.username,
+  first_name: props.user.first_name,
+  last_name: props.user.last_name,
   email: props.user.email,
   photo: null,
 })
@@ -61,7 +63,7 @@ defineExpose({ photo, photoPreview })
 </script>
 
 <template>
-  <JetFormSection @submitted="updateProfileInformation">
+  <FormSection @submitted="updateProfileInformation">
     <template #title>{{ __('Profile Information') }}</template>
 
     <template #description>
@@ -74,7 +76,7 @@ defineExpose({ photo, photoPreview })
         <!-- Profile Photo File Input -->
         <input type="file" class="hidden" ref="photo" @change="updatePhotoPreview" />
 
-        <JetLabel for="photo" :value="__('Photo')" />
+        <Label for="photo" :value="__('Photo')" />
 
         <!-- Current Profile Photo -->
         <div class="mt-2" v-show="!photoPreview">
@@ -89,42 +91,57 @@ defineExpose({ photo, photoPreview })
           </span>
         </div>
 
-        <JetSecondaryButton class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
+        <SecondaryButton class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
           {{ __('Select A New Photo') }}
-        </JetSecondaryButton>
+        </SecondaryButton>
 
-        <JetSecondaryButton
-          type="button"
-          class="mt-2"
-          @click.prevent="deletePhoto"
-          v-if="props.user.profile_photo_path">
+        <SecondaryButton type="button" class="mt-2" @click.prevent="deletePhoto" v-if="props.user.profile_photo_path">
           {{ __('Remove Photo') }}
-        </JetSecondaryButton>
+        </SecondaryButton>
 
-        <JetInput-error :message="form.errors.photo" class="mt-2" />
+        <Input-error :message="form.errors.photo" class="mt-2" />
       </div>
 
-      <!-- Name -->
+      <!-- Username -->
       <div class="col-span-6 sm:col-span-4">
-        <JetLabel for="name" :value="__('Name')" />
-        <JetInput id="name" type="text" class="block w-full mt-1" v-model="form.name" autocomplete="name" />
-        <JetInput-error :message="form.errors.name" class="mt-2" />
+        <Label for="username" :value="__('Username')" />
+        <Input id="username" type="text" class="block w-full mt-1" v-model="form.username" autocomplete="username" />
+        <Input-error :message="form.errors.username" class="mt-2" />
+      </div>
+
+      <!-- First Name -->
+      <div class="col-span-6 sm:col-span-4">
+        <Label for="first_name" :value="__('First Name')" />
+        <Input
+          id="first_name"
+          type="text"
+          class="block w-full mt-1"
+          v-model="form.first_name"
+          autocomplete="first_name" />
+        <Input-error :message="form.errors.first_name" class="mt-2" />
+      </div>
+
+      <!-- Last Name -->
+      <div class="col-span-6 sm:col-span-4">
+        <Label for="last_name" :value="__('Last Name')" />
+        <Input id="last_name" type="text" class="block w-full mt-1" v-model="form.last_name" autocomplete="last_name" />
+        <Input-error :message="form.errors.last_name" class="mt-2" />
       </div>
 
       <!-- Email -->
       <div class="col-span-6 sm:col-span-4">
-        <JetLabel for="email" :value="__('Email')" />
-        <JetInput id="email" type="email" class="block w-full mt-1" v-model="form.email" />
-        <JetInput-error :message="form.errors.email" class="mt-2" />
+        <Label for="email" :value="__('Email')" />
+        <Input id="email" type="email" class="block w-full mt-1" v-model="form.email" />
+        <Input-error :message="form.errors.email" class="mt-2" />
       </div>
     </template>
 
     <template #actions>
-      <JetActionMessage :on="form.recentlySuccessful" class="mr-3"> {{ __('Saved.') }}</JetActionMessage>
+      <ActionMessage :on="form.recentlySuccessful" class="mr-3"> {{ __('Saved.') }}</ActionMessage>
 
-      <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+      <Button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
         {{ __('Save') }}
-      </JetButton>
+      </Button>
     </template>
-  </JetFormSection>
+  </FormSection>
 </template>

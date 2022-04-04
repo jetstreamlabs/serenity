@@ -77,7 +77,7 @@ const releaseNotesGeneratorOptions = {
 module.exports = {
   debug: true,
   branches: ['main'],
-  repositoryUrl: 'https://github.com/jetstreamlabs/jetstreampro',
+  repositoryUrl: 'https://github.com/jetstreamlabs/serenity',
 
   plugins: [
     // analyze commits with conventional-changelog
@@ -89,7 +89,7 @@ module.exports = {
       '@semantic-release/changelog',
       {
         changelogFile: 'CHANGELOG.md',
-        changelogTitle: '# Jetstream Pro Changelog',
+        changelogTitle: '# Serenity Changelog',
       },
     ],
     // creating a new version commit

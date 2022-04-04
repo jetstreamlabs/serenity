@@ -8,12 +8,12 @@ const hasActions = computed(() => {
 
 <template>
   <div class="md:grid md:grid-cols-3 md:gap-6">
-    <JetSectionTitle>
+    <SectionTitle>
       <template #title><slot name="title"></slot></template>
       <template #description><slot name="description"></slot></template>
-    </JetSectionTitle>
+    </SectionTitle>
 
-    <div class="mt-5 md:mt-0 md:col-span-2">
+    <div class="mt-5 md:col-span-2 md:mt-0">
       <form @submit.prevent="emit('submitted')">
         <div
           class="px-4 py-5 bg-white shadow sm:p-6"
@@ -24,7 +24,7 @@ const hasActions = computed(() => {
         </div>
 
         <div
-          class="flex items-center justify-end px-4 py-3 text-right shadow bg-gray-50 sm:px-6 sm:rounded-bl-md sm:rounded-br-md"
+          class="flex items-center justify-end px-4 py-3 text-right shadow bg-gray-50 sm:rounded-bl-md sm:rounded-br-md sm:px-6"
           v-if="hasActions">
           <slot name="actions"></slot>
         </div>

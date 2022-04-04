@@ -20,7 +20,7 @@ const logout = () => {
   <div>
     <Head :title="title" />
 
-    <JetBanner />
+    <Banner />
 
     <div class="min-h-screen bg-gray-100">
       <nav class="bg-white border-b border-color-transparent">
@@ -31,21 +31,21 @@ const logout = () => {
               <!-- Logo -->
               <div class="flex items-center shrink-0">
                 <Link :href="route('dashboard.show')">
-                  <JetApplicationMark class="block w-auto h-9" />
+                  <ApplicationMark class="block w-auto h-9" />
                 </Link>
               </div>
 
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <JetNavLink :href="route('dashboard.show')" :active="route().current('dashboard.show')">
+                <NavLink :href="route('dashboard.show')" :active="route().current('dashboard.show')">
                   {{ __('Dashboard') }}
-                </JetNavLink>
+                </NavLink>
               </div>
             </div>
             <div class="hidden sm:ml-6 sm:flex sm:items-center">
               <div class="relative ml-3">
                 <!-- Teams Dropdown -->
-                <JetDropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
+                <Dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
                   <template #trigger>
                     <span class="inline-flex rounded-md">
                       <button
@@ -64,13 +64,13 @@ const logout = () => {
                         <div class="block px-4 py-2 text-xs text-gray-400">{{ __('Manage Team') }}</div>
 
                         <!-- Team Settings -->
-                        <JetDropdownLink :href="route('teams.show', $page.props.user.current_team)">
+                        <DropdownLink :href="route('teams.show', $page.props.user.current_team)">
                           {{ __('Team Settings') }}
-                        </JetDropdownLink>
+                        </DropdownLink>
 
-                        <JetDropdownLink :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
+                        <DropdownLink :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
                           {{ __('Create New Team') }}
-                        </JetDropdownLink>
+                        </DropdownLink>
 
                         <div class="border-t border-gray-100"></div>
 
@@ -79,25 +79,25 @@ const logout = () => {
 
                         <template v-for="team in $page.props.user.all_teams" :key="team.id">
                           <form @submit.prevent="switchToTeam(team)">
-                            <JetDropdownLink has="button">
+                            <DropdownLink has="button">
                               <div class="flex items-center">
                                 <IconOutlineBadgeCheck
                                   v-if="team.id == $page.props.user.current_team_id"
                                   class="w-5 h-5 mr-2 text-green-400" />
                                 <div>{{ team.name }}</div>
                               </div>
-                            </JetDropdownLink>
+                            </DropdownLink>
                           </form>
                         </template>
                       </template>
                     </div>
                   </template>
-                </JetDropdown>
+                </Dropdown>
               </div>
 
               <!-- Settings Dropdown -->
               <div class="relative ml-3">
-                <JetDropdown align="right" width="48">
+                <Dropdown align="right" width="48">
                   <template #trigger>
                     <button
                       v-if="$page.props.jetstream.managesProfilePhotos"
@@ -123,20 +123,20 @@ const logout = () => {
                     <!-- Account Management -->
                     <div class="block px-4 py-2 text-xs text-gray-400">{{ __('Manage Account') }}</div>
 
-                    <JetDropdownLink :href="route('profile.show')"> {{ __('Profile') }} </JetDropdownLink>
+                    <DropdownLink :href="route('profile.show')"> {{ __('Profile') }} </DropdownLink>
 
-                    <JetDropdownLink :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
+                    <DropdownLink :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
                       {{ __('API Tokens') }}
-                    </JetDropdownLink>
+                    </DropdownLink>
 
                     <div class="border-t border-gray-100"></div>
 
                     <!-- Authentication -->
                     <form @submit.prevent="logout">
-                      <JetDropdownLink has="button"> {{ __('Logout') }} </JetDropdownLink>
+                      <DropdownLink has="button"> {{ __('Logout') }} </DropdownLink>
                     </form>
                   </template>
-                </JetDropdown>
+                </Dropdown>
               </div>
             </div>
 
@@ -159,9 +159,9 @@ const logout = () => {
         <!-- Responsive Navigation Menu -->
         <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }" class="sm:hidden">
           <div class="px-4 pt-2 pb-3 space-y-1">
-            <JetResponsiveNavLink :href="route('dashboard.show')" :active="route().current('dashboard.show')">
+            <ResponsiveNavLink :href="route('dashboard.show')" :active="route().current('dashboard.show')">
               {{ __('Dashboard') }}
-            </JetResponsiveNavLink>
+            </ResponsiveNavLink>
           </div>
 
           <!-- Responsive Settings Options -->
@@ -181,20 +181,20 @@ const logout = () => {
             </div>
 
             <div class="px-4 mt-3 space-y-1">
-              <JetResponsiveNavLink :href="route('profile.show')" :active="route().current('profile.show')">
+              <ResponsiveNavLink :href="route('profile.show')" :active="route().current('profile.show')">
                 {{ __('Profile') }}
-              </JetResponsiveNavLink>
+              </ResponsiveNavLink>
 
-              <JetResponsiveNavLink
+              <ResponsiveNavLink
                 :href="route('api-tokens.index')"
                 :active="route().current('api-tokens.index')"
                 v-if="$page.props.jetstream.hasApiFeatures">
                 {{ __('API Tokens') }}
-              </JetResponsiveNavLink>
+              </ResponsiveNavLink>
 
               <!-- Authentication -->
               <form method="POST" @submit.prevent="logout">
-                <JetResponsiveNavLink has="button">{{ __('Logout') }}</JetResponsiveNavLink>
+                <ResponsiveNavLink has="button">{{ __('Logout') }}</ResponsiveNavLink>
               </form>
 
               <!-- Team Management -->
@@ -204,18 +204,18 @@ const logout = () => {
                 <div class="block px-4 py-2 text-xs text-gray-400">{{ __('Manage Teams') }}</div>
 
                 <!-- Team Settings -->
-                <JetResponsiveNavLink
+                <ResponsiveNavLink
                   :href="route('teams.show', $page.props.user.current_team)"
                   :active="route().current('teams.show')">
                   {{ __('Team Settings') }}
-                </JetResponsiveNavLink>
+                </ResponsiveNavLink>
 
-                <JetResponsiveNavLink
+                <ResponsiveNavLink
                   :href="route('teams.create')"
                   :active="route().current('teams.create')"
                   v-if="$page.props.jetstream.canCreateTeams">
                   {{ __('Create New Team') }}
-                </JetResponsiveNavLink>
+                </ResponsiveNavLink>
 
                 <div class="border-t border-gray-200"></div>
 
@@ -224,14 +224,14 @@ const logout = () => {
 
                 <template v-for="team in $page.props.user.all_teams" :key="team.id">
                   <form @submit.prevent="switchToTeam(team)">
-                    <JetResponsiveNavLink has="button">
+                    <ResponsiveNavLink has="button">
                       <div class="flex items-center">
                         <IconOutlineBadgeCheck
                           v-if="team.id == $page.props.user.current_team_id"
                           class="w-5 h-5 mr-2 text-green-400" />
                         <div>{{ team.name }}</div>
                       </div>
-                    </JetResponsiveNavLink>
+                    </ResponsiveNavLink>
                   </form>
                 </template>
               </template>
