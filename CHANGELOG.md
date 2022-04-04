@@ -1,5 +1,17 @@
 # Serenity Changelog
 
+## [1.0.1](https://github.com/jetstreamlabs/serenity/compare/v1.0.0...v1.0.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* bracket error fix ([4f6d765](https://github.com/jetstreamlabs/serenity/commit/4f6d7650dd1f5c342c07220f6399527320d88cbd))
+
+
+### Maintenance
+
+* styleci fix ([be2db34](https://github.com/jetstreamlabs/serenity/commit/be2db3470e9c42d20af9988de7cd45d39faea5f1))
+
 # 1.0.0 (2022-04-04)
 
 
