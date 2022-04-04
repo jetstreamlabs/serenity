@@ -1,0 +1,17 @@
+/node_modules
+/public/build
+/public/render
+/public/storage
+/resources/js/ziggy.js
+/resources/js/zora.js
+/storage/*.key
+/vendor
+.env
+.env.main.ci
+.env.backup
+.phpunit.result.cache
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
+.DS_Store
