@@ -7,7 +7,7 @@
     "ssr": "vite build --config vite.ssr.config.js",
     "start": "node public/render/ssr.js",
     "kill": "kill -9 $(lsof -ti:3000)",
-    "lint": "php ./vendor/bin/styleci analyze -c",
+    "fix": "php ./vendor/bin/styleci analyze -c",
     "build:assets": "php artisan ziggy:generate && php artisan zora:generate"
   },
   "commitlint": {
