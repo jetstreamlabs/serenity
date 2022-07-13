@@ -55,7 +55,7 @@
     "dotenv-expand": "^8.0",
     "husky": "^7.0",
     "larasocket-js": "^1.0",
-    "laravel-echo": "^1.11",
+    "laravel-echo": "^1.12",
     "postcss": "^8.1",
     "postcss-import": "^14.1",
     "prettier-plugin-tailwindcss": "^0.1.7",
