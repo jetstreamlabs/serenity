@@ -1,5 +1,30 @@
 # Serenity Changelog
 
+## [1.0.4](https://github.com/jetstreamlabs/serenity/compare/v1.0.3...v1.0.4) (2023-03-03)
+
+
+### Bug Fixes
+
+* enabled sandbox remove command ([7b19de0](https://github.com/jetstreamlabs/serenity/commit/7b19de094bb3951b5b2afb926f94634a40093cb5))
+* update workflows to publish demo ([4a4459d](https://github.com/jetstreamlabs/serenity/commit/4a4459dee774bf61a9894d820e63a7f21a641391))
+
+
+### Code Refactoring
+
+* update workflows for prs and dpbot ([330aaae](https://github.com/jetstreamlabs/serenity/commit/330aaaebd9c05a13a8b5628a10967b1ca9a0a4f5))
+
+
+* Merge branch 'develop' ([61794e7](https://github.com/jetstreamlabs/serenity/commit/61794e7233f22bf2517c311560f78e0c08b8336d))
+* Bump pestphp/pest from 1.22.4 to 1.22.5 ([56f20b8](https://github.com/jetstreamlabs/serenity/commit/56f20b87d9262ee77b841f6408bb1dff87eed681))
+
+
+### Maintenance
+
+* disable branch remove for forge ([5fdc481](https://github.com/jetstreamlabs/serenity/commit/5fdc481a1d5a2562fe826b7d82dad0047b45e6ee))
+* remove old changes ([4a14c60](https://github.com/jetstreamlabs/serenity/commit/4a14c60bdf94044ca62b102c3f223e9613627a17))
+* remove two factor rate limit test ([b64c62d](https://github.com/jetstreamlabs/serenity/commit/b64c62dcf5dcd3640c1ca5ee2bff50b5e131eb1a))
+* update changelog ([b8aaeff](https://github.com/jetstreamlabs/serenity/commit/b8aaeff30fd936f9d912fc44a851d5c0afcab742))
+
 ## [1.0.3](https://github.com/jetstreamlabs/serenity/compare/v1.0.2...v1.0.3) (2023-03-03)
 
 ### Code Refactoring
