@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: '1.x'
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -60,7 +62,7 @@ jobs:
       - name: Checkout 1.x
         uses: actions/checkout@v3
         with:
-          ref: '1.x'
+          ref: main
           fetch-depth: 0
           persist-credentials: false
 
