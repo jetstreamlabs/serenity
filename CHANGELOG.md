@@ -1,5 +1,15 @@
 # Serenity Changelog
 
+## [1.0.3](https://github.com/jetstreamlabs/serenity/compare/v1.0.2...v1.0.3) (2023-03-03)
+
+
+### Code Refactoring
+
+* update workflows for prs and dpbot ([c3de42d](https://github.com/jetstreamlabs/serenity/commit/c3de42dd2a527c53f944ab2e54a02f4e144f1ea0))
+
+
+* Bump pestphp/pest from 1.22.4 to 1.22.5 ([8420922](https://github.com/jetstreamlabs/serenity/commit/8420922c2fb6581fe5972a0f260c860e72ae6824))
+
 ## [1.0.2](https://github.com/jetstreamlabs/serenity/compare/v1.0.1...v1.0.2) (2023-03-03)
 
 
