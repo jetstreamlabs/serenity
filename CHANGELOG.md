@@ -1,5 +1,17 @@
 # Serenity Changelog
 
+## [1.0.2](https://github.com/jetstreamlabs/serenity/compare/v1.0.1...v1.0.2) (2023-03-03)
+
+
+### Bug Fixes
+
+* enabled sandbox remove command ([31b49cf](https://github.com/jetstreamlabs/serenity/commit/31b49cf2ab811fd1c2e0312952e57fb0bf66db22))
+
+
+### Maintenance
+
+* disable branch remove for forge ([0c2a9cc](https://github.com/jetstreamlabs/serenity/commit/0c2a9cc1375fd7b9b89e0d972bf8184084ac0ead))
+
 ## [1.0.1](https://github.com/jetstreamlabs/serenity/compare/v1.0.0...v1.0.1) (2023-03-03)
 
 
