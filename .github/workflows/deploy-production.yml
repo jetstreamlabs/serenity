@@ -1,0 +1,59 @@
+name: 'Deploy Production'
+
+on:
+  release:
+    types: [published]
+
+  workflow_dispatch:
+
+jobs:
+  create:
+    name: 'Create Release Branch'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Create Branch'
+        uses: peterjgrainger/action-create-branch@v2.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.VERAN }}
+        with:
+          branch: release
+          sha: ${{ github.event.release.head.sha }}
+
+  build:
+    name: 'Build Production Demo'
+    needs: [create]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout Release'
+        uses: actions/checkout@v3
+        with:
+          ref: release
+
+      - name: Generate .env File
+        run: cp .env.example .env
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: '8.1'
+
+      - name: Install Composer Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Install Node
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 'lts/*'
+
+      - run: npm install
+      - run: npm run prod --force
+
+      - name: Commit Assets to Latest
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actor
+          message: 'chore(deploy): deploy *.x code to production'
+          add: '-f public/'
+          push: '-f origin release'

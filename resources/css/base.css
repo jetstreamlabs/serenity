@@ -1,0 +1,10 @@
+/* Add base selectors here */
+.beams {
+  background-image: url('/storage/img/hero-light.jpg');
+  @apply bg-opacity-10 bg-cover bg-left-top;
+}
+
+.dark.beams,
+.dark .beams {
+  background-image: url('/storage/img/hero-dark.jpg');
+}
