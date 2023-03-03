@@ -1,3 +1,17 @@
+# Serenity Changelog
+
+# 1.0.0 (2023-03-03)
+
+
+### Bug Fixes
+
+* removed api rate limiter test ([5142425](https://github.com/jetstreamlabs/serenity/commit/5142425774b5f2445b97dd5fc883cae5447a48f4))
+* update release workflow ([ea3e4ff](https://github.com/jetstreamlabs/serenity/commit/ea3e4ffe63b681b6e0e0a6b777e60dbea74f1406))
+* update workflows again ([ded604d](https://github.com/jetstreamlabs/serenity/commit/ded604d41408ec74ba4d8fa3f0e0f85acc53c76e))
+
+
+* initial release ([171aaae](https://github.com/jetstreamlabs/serenity/commit/171aaaea9f05cb771f1e5ba7a7d0bbc9cf56f23f))
+
 # Release Notes
 
 ## v1.0.1 - 2023-02-22
