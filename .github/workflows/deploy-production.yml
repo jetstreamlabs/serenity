@@ -8,7 +8,7 @@ on:
 
 jobs:
   create:
-    name: 'Create Release Branch'
+    name: 'Create Next Branch'
     runs-on: ubuntu-latest
 
     steps:
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Checkout Release'
+      - name: 'Checkout Next'
         uses: actions/checkout@v3
         with:
           ref: next
@@ -57,3 +57,26 @@ jobs:
           message: 'chore(deploy): deploy main code to demo'
           add: '-f public/'
           push: '-f origin next'
+
+  deploy:
+    name: Deploy to Laravel Forge
+    needs: [build, create]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Production Code
+        uses: jbrooksuk/laravel-forge-action@v1.0.4
+        with:
+          trigger_url: ${{ secrets.DEMO_TRIGGER }}
+
+  remove:
+    name: Remove Next Branch
+    needs: [deploy, build, create]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete Next
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{ secrets.VERAN }}
+          branches: next
