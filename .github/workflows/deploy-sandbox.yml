@@ -2,9 +2,9 @@ name: 'Deploy to Sandbox'
 
 on:
   push:
-    branches: [main]
+    branches: [develop]
   pull_request:
-    branches: [main]
+    branches: [develop]
 
   workflow_dispatch:
 
@@ -36,6 +36,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: sandbox
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -101,7 +103,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actor
-          message: 'chore(deploy): deploy main repo to sandbox'
+          message: 'chore(deploy): deploy develop repo to sandbox'
           add: '-f public/'
           push: '-f origin sandbox'
 

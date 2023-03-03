@@ -3,7 +3,7 @@ name: Test + Release
 on:
   push:
     branches:
-      - '1.x'
+      - main
 
   workflow_dispatch:
 
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: '1.x'
+          ref: main
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -55,11 +55,11 @@ jobs:
         run: php lotus test
 
   release:
-    name: Release 1.x
+    name: Release Main
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 1.x
+      - name: Checkout Main
         uses: actions/checkout@v3
         with:
           ref: main
