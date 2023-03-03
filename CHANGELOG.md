@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [1.0.1](https://github.com/jetstreamlabs/serenity/compare/v1.0.0...v1.0.1) (2023-03-03)
+
+
+### Bug Fixes
+
+* update workflows to publish demo ([0de4de2](https://github.com/jetstreamlabs/serenity/commit/0de4de2249a18867884df1e768c7596b172430d7))
+
 # 1.0.0 (2023-03-03)
 
 
