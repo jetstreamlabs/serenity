@@ -13,6 +13,7 @@ jobs:
     name: 'Create Sandbox Branch'
     runs-on: ubuntu-latest
 
+    if: github.event_name != 'pull_request'
     steps:
       - name: 'Create Branch'
         uses: peterjgrainger/action-create-branch@v2.4.0
@@ -74,6 +75,7 @@ jobs:
     needs: [tests, create]
     runs-on: ubuntu-latest
 
+    if: github.event_name != 'pull_request'
     steps:
       - name: 'Checkout Sandbox'
         uses: actions/checkout@v3
@@ -112,6 +114,7 @@ jobs:
     needs: [build, tests, create]
     runs-on: ubuntu-latest
 
+    if: github.event_name != 'pull_request'
     steps:
       - name: Deploy Develop Code
         uses: jbrooksuk/laravel-forge-action@v1.0.4
@@ -123,6 +126,7 @@ jobs:
     needs: [deploy, build, tests, create]
     runs-on: ubuntu-latest
 
+    if: github.event_name != 'pull_request'
     steps:
       - name: Delete Sandbox
         uses: dawidd6/action-delete-branch@v3
