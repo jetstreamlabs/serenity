@@ -10,7 +10,7 @@ on:
 
 jobs:
   create:
-    name: 'Create Release Branch'
+    name: 'Create Sandbox Branch'
     runs-on: ubuntu-latest
 
     steps:
@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Checkout Release'
+      - name: 'Checkout Sandbox'
         uses: actions/checkout@v3
         with:
           ref: sandbox
@@ -113,18 +113,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy Production Code
+      - name: Deploy Develop Code
         uses: jbrooksuk/laravel-forge-action@v1.0.4
         with:
           trigger_url: ${{ secrets.SANDBOX_TRIGGER }}
 
   remove:
-    name: Remove Latest Branch
+    name: Remove Sandbox Branch
     needs: [deploy, build, tests, create]
     runs-on: ubuntu-latest
 
     steps:
-      - name: Delete Latest
+      - name: Delete Sandbox
         uses: dawidd6/action-delete-branch@v3
         with:
           github_token: ${{ secrets.VERAN }}
