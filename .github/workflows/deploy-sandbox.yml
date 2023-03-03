@@ -118,14 +118,14 @@ jobs:
         with:
           trigger_url: ${{ secrets.SANDBOX_TRIGGER }}
 
-  remove:
-    name: Remove Sandbox Branch
-    needs: [deploy, build, tests, create]
-    runs-on: ubuntu-latest
+  # remove:
+  #   name: Remove Sandbox Branch
+  #   needs: [deploy, build, tests, create]
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Delete Sandbox
-        uses: dawidd6/action-delete-branch@v3
-        with:
-          github_token: ${{ secrets.VERAN }}
-          branches: sandbox
+  #   steps:
+  #     - name: Delete Sandbox
+  #       uses: dawidd6/action-delete-branch@v3
+  #       with:
+  #         github_token: ${{ secrets.VERAN }}
+  #         branches: sandbox
