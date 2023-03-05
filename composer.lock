@@ -3757,16 +3757,16 @@
         },
         {
             "name": "serenity/foundation",
-            "version": "v1.1.12",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jetstreamlabs/foundation.git",
-                "reference": "d47eae6d189ecceeb3bb5cfdade41a61c630bb23"
+                "reference": "c4de39ab380ceefcc988f2756c28d2cb11900309"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/d47eae6d189ecceeb3bb5cfdade41a61c630bb23",
-                "reference": "d47eae6d189ecceeb3bb5cfdade41a61c630bb23",
+                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/c4de39ab380ceefcc988f2756c28d2cb11900309",
+                "reference": "c4de39ab380ceefcc988f2756c28d2cb11900309",
                 "shasum": ""
             },
             "require": {
@@ -3827,7 +3827,7 @@
                 "issues": "https://github.com/jetstreamlabs/foundation/issues",
                 "source": "https://github.com/jetstreamlabs/foundation"
             },
-            "time": "2023-03-05T07:44:00+00:00"
+            "time": "2023-03-05T08:34:26+00:00"
         },
         {
             "name": "spiral/core",
