@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [1.0.7](https://github.com/jetstreamlabs/serenity/compare/v1.0.6...v1.0.7) (2023-03-05)
+
+
+### Task Commit
+
+* update foundation to latest semver ([c390659](https://github.com/jetstreamlabs/serenity/commit/c3906594f7b621c10602c272786fd4205c42421c))
+
 ## [1.0.6](https://github.com/jetstreamlabs/serenity/compare/v1.0.5...v1.0.6) (2023-03-05)
 
 
