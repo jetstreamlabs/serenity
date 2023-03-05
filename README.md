@@ -4,4 +4,4 @@
 
 ## Serenity
 
-All about Serenity coming soon!
+All about Serenity coming soon.
