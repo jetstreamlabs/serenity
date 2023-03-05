@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a49501bcc8adb394c613182a1340cde",
+    "content-hash": "93290a06a77a9659baebae9b5c5eabe4",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3757,16 +3757,16 @@
         },
         {
             "name": "serenity/foundation",
-            "version": "v1.2.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jetstreamlabs/foundation.git",
-                "reference": "c4de39ab380ceefcc988f2756c28d2cb11900309"
+                "reference": "fefe595ffcd5b60e599bf873493b7ba600043b51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/c4de39ab380ceefcc988f2756c28d2cb11900309",
-                "reference": "c4de39ab380ceefcc988f2756c28d2cb11900309",
+                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/fefe595ffcd5b60e599bf873493b7ba600043b51",
+                "reference": "fefe595ffcd5b60e599bf873493b7ba600043b51",
                 "shasum": ""
             },
             "require": {
@@ -3821,13 +3821,13 @@
                     "email": "secondman@jetstreamlabs.com"
                 }
             ],
-            "description": "Good stuff here.",
+            "description": "Base foundation for Serenity Zen PHP framework.",
             "homepage": "https://serenityphp.com",
             "support": {
                 "issues": "https://github.com/jetstreamlabs/foundation/issues",
                 "source": "https://github.com/jetstreamlabs/foundation"
             },
-            "time": "2023-03-05T08:34:26+00:00"
+            "time": "2023-03-05T09:59:31+00:00"
         },
         {
             "name": "spiral/core",
