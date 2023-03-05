@@ -1,5 +1,22 @@
 # Serenity Changelog
 
+## [1.0.5](https://github.com/jetstreamlabs/serenity/compare/v1.0.4...v1.0.5) (2023-03-05)
+
+
+### Code Refactoring
+
+* trigger new patch release ([f9e1306](https://github.com/jetstreamlabs/serenity/commit/f9e13064201f2d2f6e3ebc4b3126683bf326d924))
+
+
+* Merge branch 'develop' ([74da381](https://github.com/jetstreamlabs/serenity/commit/74da381c0827b66c5d35d27ced8e3e55dd6f0e60))
+
+
+### Maintenance
+
+* adjust gitattributes ([1d94c39](https://github.com/jetstreamlabs/serenity/commit/1d94c39e3eb275514ade2caf891d0ac1b507ab57))
+* **dev-deps:** update dependencies ([673f592](https://github.com/jetstreamlabs/serenity/commit/673f59252e2f5b168376a52d4b90bb5a1032a0bb))
+* update readme img ([366545b](https://github.com/jetstreamlabs/serenity/commit/366545b39047e0bf9da3ed672580a5a05483f2fb))
+
 ## [1.0.4](https://github.com/jetstreamlabs/serenity/compare/v1.0.3...v1.0.4) (2023-03-03)
 
 
