@@ -19,8 +19,8 @@ class ContractMappingServiceProvider extends ServiceProvider
     );
 
     $this->app->bind(
-      \App\Domain\Contracts\Responders\DashboardResponderInterface::class,
-      \App\Responders\DashboardResponder::class
+      \App\Domain\Contracts\Responders\Dashboard\IndexResponderInterface::class,
+      \App\Responders\Dashboard\IndexResponder::class
     );
   }
 }

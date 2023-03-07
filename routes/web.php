@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Serenity\Routing\Discovery\Discover;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,11 @@ Route::middleware(['splade'])->group(function () {
   Route::spladeTable();
   Route::spladeUploads();
 
-  Route::get('/', App\Actions\IndexAction::class)->name('home');
+  Discover::actions()->in(app_path('Actions/Public'));
 
   Route::middleware([
     'auth:sanctum', config('serenity.auth_session'), 'verified',
   ])->group(function () {
-    Route::get('/dashboard', App\Actions\DashboardAction::class)->name('dashboard');
+    Discover::actions()->in(app_path('Actions/Protected'));
   });
 });

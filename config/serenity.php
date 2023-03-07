@@ -189,4 +189,29 @@ return [
     ]),
   ],
 
+  /*
+   * Routes will be registered for all controllers found in
+   * these directories.
+   */
+  'action_directory' => [
+    // app_path('Actions'),
+  ],
+
+  /*
+   * Routes will be registered for all views found in these directories.
+   * The key of an item will be used as the prefix of the uri.
+   */
+  'responder_directory' => [
+    // 'docs' => resource_path('views/markdown'),
+  ],
+
+  /*
+   * After having discovered all controllers, these classes will manipulate the routes
+   * before registering them to Laravel.
+   *
+   * In most cases, you shouldn't change these.
+   */
+  'pending_route_transformers' => [
+    ...Serenity\Routing\Transformers::defaultRouteTransformers()
+  ],
 ];
