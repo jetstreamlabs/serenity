@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [1.0.8](https://github.com/jetstreamlabs/serenity/compare/v1.0.7...v1.0.8) (2023-03-07)
+
+
+### Code Refactoring
+
+* alias routes to public / protected ([c133664](https://github.com/jetstreamlabs/serenity/commit/c1336641636b75a91f55f1352c4b12f1be0e1e22))
+
 ## [1.0.7](https://github.com/jetstreamlabs/serenity/compare/v1.0.6...v1.0.7) (2023-03-05)
 
 
