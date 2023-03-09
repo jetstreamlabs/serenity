@@ -2,8 +2,8 @@
 
 namespace App\Domain\Serenity;
 
-use App\Models\Team;
-use App\Models\User;
+use App\Domain\Models\Team;
+use App\Domain\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;

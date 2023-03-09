@@ -2,8 +2,8 @@
 
 namespace App\Domain\Serenity;
 
-use App\Models\Team;
-use App\Models\User;
+use App\Domain\Models\Team;
+use App\Domain\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
@@ -60,8 +60,8 @@ class AddTeamMember implements AddsTeamMembersInterface
     return array_filter([
       'email' => ['required', 'email', 'exists:users'],
       'role' => Serenity::hasRoles()
-                      ? ['required', 'string', new Role]
-                      : null,
+        ? ['required', 'string', new Role]
+        : null,
     ]);
   }
 

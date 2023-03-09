@@ -1,20 +1,12 @@
-import './bootstrap'
+window.locale = document.getElementsByTagName('html')[0].getAttribute('lang')
+
 import '../css/app.css'
 
-import Switcher from './components/ThemeSwitcher.vue'
+import { createSerenityApp } from '@/Application'
+import { InertiaProgress } from '@inertiajs/progress'
 
-import { createApp } from 'vue'
-import { renderSpladeApp, SpladePlugin } from 'splade'
+const appName = import.meta.env.VITE_APP_NAME
 
-const el = document.getElementById('app')
+createSerenityApp({ appName: appName || 'Serenity' })
 
-createApp({
-  render: renderSpladeApp({ el }),
-})
-  .use(SpladePlugin, {
-    max_keep_alive: 20,
-    transform_anchors: false,
-    progress_bar: true,
-  })
-  .component('Switcher', Switcher)
-  .mount(el)
+InertiaProgress.init({ color: '#7E22CE' })

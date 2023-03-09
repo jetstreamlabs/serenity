@@ -3,7 +3,7 @@
 namespace App\Domain\Serenity;
 
 use App\Domain\Concerns\PasswordValidationRules;
-use App\Models\User;
+use App\Domain\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Serenity\Contracts\ResetsUserPasswordsInterface;

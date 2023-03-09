@@ -14,12 +14,12 @@ class Kernel extends HttpKernel
    * @var array<int, class-string|string>
    */
   protected $middleware = [
-    // \App\Middleware\TrustHosts::class,
-    \App\Middleware\TrustProxies::class,
+    //\App\Domain\Middleware\TrustHosts::class,
+    \App\Domain\Middleware\TrustProxies::class,
     \Illuminate\Http\Middleware\HandleCors::class,
-    \App\Middleware\PreventRequestsDuringMaintenance::class,
+    \App\Domain\Middleware\PreventRequestsDuringMaintenance::class,
     \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-    \App\Middleware\TrimStrings::class,
+    \App\Domain\Middleware\TrimStrings::class,
     \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
   ];
 
@@ -30,11 +30,11 @@ class Kernel extends HttpKernel
    */
   protected $middlewareGroups = [
     'web' => [
-      \App\Middleware\EncryptCookies::class,
+      \App\Domain\Middleware\EncryptCookies::class,
       \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
       \Illuminate\Session\Middleware\StartSession::class,
       \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-      \App\Middleware\VerifyCsrfToken::class,
+      \App\Domain\Middleware\VerifyCsrfToken::class,
       \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ],
 
@@ -53,15 +53,14 @@ class Kernel extends HttpKernel
    * @var array<string, class-string|string>
    */
   protected $middlewareAliases = [
-    'splade' => \ProtoneMedia\Splade\Http\SpladeMiddleware::class,
-    'auth' => \App\Middleware\Authenticate::class,
+    'auth' => \App\Domain\Middleware\Authenticate::class,
     'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
     'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
     'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
     'can' => \Illuminate\Auth\Middleware\Authorize::class,
-    'guest' => \App\Middleware\RedirectIfAuthenticated::class,
+    'guest' => \App\Domain\Middleware\RedirectIfAuthenticated::class,
     'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-    'signed' => \App\Middleware\ValidateSignature::class,
+    'signed' => \App\Domain\Middleware\ValidateSignature::class,
     'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
   ];

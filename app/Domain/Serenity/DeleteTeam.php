@@ -2,7 +2,7 @@
 
 namespace App\Domain\Serenity;
 
-use App\Models\Team;
+use App\Domain\Models\Team;
 use Serenity\Contracts\DeletesTeamsInterface;
 
 class DeleteTeam implements DeletesTeamsInterface

@@ -1,10 +1,23 @@
-import { createServer } from 'http'
-import { createSSRApp } from 'vue'
+import { createSSRApp, h } from 'vue'
 import { renderToString } from '@vue/server-renderer'
-import { renderSpladeApp, SpladePlugin, startServer } from 'splade'
+import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import createServer from '@inertiajs/server'
+import { serenityssr } from '@/Application/ssrPlugin.js'
 
-startServer(createServer, renderToString, (props) => {
-  return createSSRApp({
-    render: renderSpladeApp(props),
-  }).use(SpladePlugin)
-})
+createServer(
+  (page) =>
+    createInertiaApp({
+      title: (title) => `${title} - ${import.meta.env.VITE_APP_NAME}`,
+      page,
+      render: renderToString,
+      resolve: (name) => require(`./Pages/${name}.vue`),
+      setup({ app, props, plugin }) {
+        return createSSRApp({
+          render: () => h(app, props),
+        })
+          .use(plugin)
+          .use(serenityssr)
+      },
+    }),
+  import.meta.env.VITE_SSR_PORT
+)

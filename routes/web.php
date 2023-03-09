@@ -14,16 +14,10 @@ use Serenity\Routing\Discovery\Discover;
 |
 */
 
-Route::middleware(['splade'])->group(function () {
-  Route::spladePasswordConfirmation();
-  Route::spladeTable();
-  Route::spladeUploads();
+Discover::actions()->in(app_path('Actions/Public'));
 
-  Discover::actions()->in(app_path('Actions/Public'));
-
-  Route::middleware([
-    'auth:sanctum', config('serenity.auth_session'), 'verified',
-  ])->group(function () {
-    Discover::actions()->in(app_path('Actions/Protected'));
-  });
+Route::middleware([
+  'auth:sanctum', config('serenity.auth_session'), 'verified',
+])->group(function () {
+  Discover::actions()->in(app_path('Actions/Protected'));
 });
