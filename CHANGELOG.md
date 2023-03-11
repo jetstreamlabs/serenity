@@ -1,5 +1,20 @@
 # Serenity Changelog
 
+## [2.0.1](https://github.com/jetstreamlabs/serenity/compare/v2.0.0...v2.0.1) (2023-03-11)
+
+
+### Bug Fixes
+
+* attempting to fix momentum-modal error ([d35cedf](https://github.com/jetstreamlabs/serenity/commit/d35cedf0a2a871ef84a0c5e085ba5db1444414d7))
+* color header links ([a317a00](https://github.com/jetstreamlabs/serenity/commit/a317a00f13a6319221996c9cb2c96a327b5d2323))
+* missing env props for compiling demos ([c92bcf6](https://github.com/jetstreamlabs/serenity/commit/c92bcf62f796e46b2363549c40693fe856614cd8))
+* registration and background images ([370958e](https://github.com/jetstreamlabs/serenity/commit/370958ea8c07cc4ce9923eb967912983a16cdf04))
+
+
+### Maintenance
+
+* update gitattributes ([0415d7d](https://github.com/jetstreamlabs/serenity/commit/0415d7d0ee53daf95f2eec93373ed84c318040d3))
+
 # [2.0.0](https://github.com/jetstreamlabs/serenity/compare/v1.0.8...v2.0.0) (2023-03-11)
 
 
