@@ -9,7 +9,6 @@
   "license": "MIT",
   "require": {
     "php": "^8.1",
-    "based/momentum-modal": "^0.2.0",
     "guzzlehttp/guzzle": "^7.5",
     "inertiajs/inertia-laravel": "^0.6.9",
     "jetstreamlabs/zora": "^3.2",

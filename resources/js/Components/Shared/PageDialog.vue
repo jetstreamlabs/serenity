@@ -1,8 +1,5 @@
 <script setup>
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
-import { useModal } from 'momentum-modal'
-
-const { show, close, redirect } = useModal()
 </script>
 
 <template>
@@ -17,11 +14,11 @@ const { show, close, redirect } = useModal()
         leave="duration-200 ease-in"
         leave-from="opacity-100"
         leave-to="opacity-0">
-        <div class="fixed inset-0 transition-opacity bg-gray-500/75" />
+        <div class="fixed inset-0 bg-gray-500/75 transition-opacity" />
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex justify-center p-4 text-center max-h-fit">
+        <div class="flex max-h-fit justify-center p-4 text-center">
           <TransitionChild
             as="template"
             enter="duration-300 ease-out"
@@ -31,7 +28,7 @@ const { show, close, redirect } = useModal()
             leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95">
             <DialogPanel
-              class="w-full max-w-lg p-6 overflow-hidden text-left align-middle transition-all transform bg-white rounded-lg shadow-xl">
+              class="w-full max-w-lg transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all">
               <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
                 <slot name="title" />
               </DialogTitle>
