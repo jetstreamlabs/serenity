@@ -7,7 +7,9 @@
 *.php diff=php
 
 /.github export-ignore
-/.husky export-ignore 
+/.husky export-ignore
+.env.sandbox export-ignore
+.env.demo export-ignore
 .gitattributes export-ignore
 .prettierrc export-ignore
 CHANGELOG.md export-ignore
