@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\Team;
+use App\Domain\Models\Team;
 use Illuminate\Support\Carbon;
 
 it('can delete teams', function () {
   $this->withoutMiddleware(
-    \App\Middleware\MuteActions::class
+    \App\Domain\Middleware\MuteActions::class
   );
 
   actingAs($user = user(true));

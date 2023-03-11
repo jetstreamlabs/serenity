@@ -4136,16 +4136,16 @@
         },
         {
             "name": "serenity/foundation",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jetstreamlabs/foundation.git",
-                "reference": "dfe7121d3852eafc0b1540ca9daf0afecf0fc096"
+                "reference": "790f1053a427f46de6450ddce4aed5fd90f41667"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/dfe7121d3852eafc0b1540ca9daf0afecf0fc096",
-                "reference": "dfe7121d3852eafc0b1540ca9daf0afecf0fc096",
+                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/790f1053a427f46de6450ddce4aed5fd90f41667",
+                "reference": "790f1053a427f46de6450ddce4aed5fd90f41667",
                 "shasum": ""
             },
             "require": {
@@ -4204,7 +4204,7 @@
                 "issues": "https://github.com/jetstreamlabs/foundation/issues",
                 "source": "https://github.com/jetstreamlabs/foundation"
             },
-            "time": "2023-03-11T14:53:09+00:00"
+            "time": "2023-03-11T16:19:55+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
