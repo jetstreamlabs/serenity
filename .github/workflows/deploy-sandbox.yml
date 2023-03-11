@@ -83,7 +83,7 @@ jobs:
           ref: sandbox
 
       - name: Generate .env File
-        run: cp .env.example .env
+        run: cp .env.sandbox .env
 
       - name: Install PHP
         uses: shivammathur/setup-php@master
