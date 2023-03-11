@@ -30,6 +30,7 @@ class Kernel extends HttpKernel
    */
   protected $middlewareGroups = [
     'web' => [
+      \App\Domain\Middleware\HandleInertiaRequests::class,
       \App\Domain\Middleware\EncryptCookies::class,
       \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
       \Illuminate\Session\Middleware\StartSession::class,

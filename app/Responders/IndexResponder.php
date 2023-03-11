@@ -3,12 +3,14 @@
 namespace App\Responders;
 
 use App\Domain\Contracts\Responders\IndexResponderInterface;
-use Serenity\Responder;
+use App\Responder;
 
 class IndexResponder extends Responder implements IndexResponderInterface
 {
-  public function toResponse($request)
+  public function toResponse()
   {
-    return view('welcome', $this->payload->getData());
+    return $this->view->render(
+      $this->component, $this->data
+    );
   }
 }

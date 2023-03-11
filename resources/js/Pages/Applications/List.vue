@@ -61,7 +61,7 @@ const randomName = computed(() => {
               </p>
             </div>
             <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
-              <Table class="font-ui" :resource="apps" preventScroll="table-top">
+              <Table :resource="apps" preventScroll="table-top">
                 <template #cell(key)="{ item: app }">
                   {{
                     _.truncate(app.key, {
@@ -135,20 +135,20 @@ const randomName = computed(() => {
           {{ __("For your security, your app-secret won't be shown again.") }}
         </p>
 
-        <template v-if="$page.props.jetstream.flash.app">
+        <template v-if="$page.props.serenity.flash.app">
           <div class="my-4">
             <Label class="ml-1" :value="__('APP-ID:')" />
-            <ClipboardBlock :copytext="$page.props.jetstream.flash.app.id" />
+            <ClipboardBlock :copytext="$page.props.serenity.flash.app.id" />
           </div>
 
           <div class="my-4">
             <Label class="ml-1" :value="__('APP-KEY:')" />
-            <ClipboardBlock :copytext="$page.props.jetstream.flash.app.key" />
+            <ClipboardBlock :copytext="$page.props.serenity.flash.app.key" />
           </div>
 
           <div class="my-4">
             <Label class="ml-1" :value="__('APP-SECRET:')" />
-            <ClipboardBlock :copytext="$page.props.jetstream.flash.app.secret" />
+            <ClipboardBlock :copytext="$page.props.serenity.flash.app.secret" />
           </div>
         </template>
       </template>

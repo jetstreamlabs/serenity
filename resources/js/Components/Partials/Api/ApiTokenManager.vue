@@ -147,8 +147,8 @@ const deleteApiToken = () => {
 
         <div
           class="mt-4 rounded bg-gray-100 px-4 py-2 font-mono text-sm text-gray-500"
-          v-if="$page.props.jetstream.flash.token">
-          {{ $page.props.jetstream.flash.token }}
+          v-if="$page.props.serenity.flash.token">
+          {{ $page.props.serenity.flash.token }}
         </div>
       </template>
 

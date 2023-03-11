@@ -1,7 +1,7 @@
 <script setup>
 const show = ref(true)
-const style = computed(() => usePage().props.value.jetstream.flash?.bannerStyle || 'success')
-const message = computed(() => usePage().props.value.jetstream.flash?.banner || '')
+const style = computed(() => usePage().props.value.serenity.flash?.bannerStyle || 'success')
+const message = computed(() => usePage().props.value.serenity.flash?.banner || '')
 </script>
 
 <template>

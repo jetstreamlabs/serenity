@@ -61,7 +61,9 @@ const alignmentClasses = computed(() => {
         :class="[widthClass, alignmentClasses]"
         style="display: none"
         @click="open = false">
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 dark:ring-gray-100" :class="contentClasses">
+        <div
+          class="py-1 mt-2 bg-white rounded-md shadow-lg w-60 ring-1 ring-black ring-opacity-5 dark:bg-gray-800 dark:ring-gray-700"
+          :class="contentClasses">
           <slot name="content"></slot>
         </div>
       </div>

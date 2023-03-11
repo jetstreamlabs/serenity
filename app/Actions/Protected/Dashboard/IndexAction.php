@@ -7,8 +7,13 @@ use Serenity\Action;
 
 class IndexAction extends Action
 {
+  public function __construct(protected IndexResponderInterface $responder)
+  {
+    $this->with('Dashboard');
+  }
+
   public function __invoke()
   {
-    return app(IndexResponderInterface::class);
+    return $this->responder->send();
   }
 }

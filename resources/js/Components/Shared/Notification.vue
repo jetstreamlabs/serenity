@@ -1,8 +1,8 @@
 <template>
   <div
     aria-live="assertive"
-    class="fixed inset-0 z-50 flex items-end px-4 py-6 pointer-events-none sm:items-start sm:p-6">
-    <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
+    class="pointer-events-none fixed inset-0 z-50 flex items-end px-4 py-6 sm:items-start sm:p-6">
+    <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
       <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
       <Transition
         enter-active-class="transition duration-300 ease-out transform"
@@ -13,21 +13,21 @@
         leave-to-class="opacity-0"
         v-if="show">
         <div
-          class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5">
+          class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <NotifySuccess v-if="type == 'success'" show @close="dismiss">
-            {{ $page.props.jetstream.flash.success }}
+            {{ $page.props.serenity.flash.success }}
           </NotifySuccess>
           <NotifyError v-else-if="type == 'error'" show @close="dismiss">
-            {{ $page.props.jetstream.flash.error }}
+            {{ $page.props.serenity.flash.error }}
           </NotifyError>
           <NotifyWarning v-else-if="type == 'warning'" show @close="dismiss">
-            {{ $page.props.jetstream.flash.warning }}
+            {{ $page.props.serenity.flash.warning }}
           </NotifyWarning>
           <NotifyInfo v-else-if="type == 'info'" show @close="dismiss">
-            {{ $page.props.jetstream.flash.info }}
+            {{ $page.props.serenity.flash.info }}
           </NotifyInfo>
           <NotifyStatus v-else-if="type == 'status'" show @close="dismiss">
-            {{ $page.props.jetstream.flash.status }}
+            {{ $page.props.serenity.flash.status }}
           </NotifyStatus>
         </div>
       </Transition>
@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     flashMessages() {
-      return this.$page.props.jetstream.flash
+      return this.$page.props.serenity.flash
     },
     showing() {
       return this.show

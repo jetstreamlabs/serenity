@@ -11,10 +11,10 @@ const title = props.title || useTrans('Dashboard')
 
   <Banner />
 
-  <div class="min-h-screen">
+  <div class="min-h-screen bg-gray-100 beams dark:bg-gray-900">
     <MainNavigation />
 
-    <main>
+    <main class="p-10">
       <slot></slot>
     </main>
 

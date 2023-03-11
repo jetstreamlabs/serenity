@@ -72,7 +72,7 @@ defineExpose({ photo, photoPreview })
 
     <template #form>
       <!-- Profile Photo -->
-      <div class="col-span-6 sm:col-span-4" v-if="$page.props.jetstream.managesProfilePhotos">
+      <div class="col-span-6 sm:col-span-4" v-if="$page.props.serenity.managesProfilePhotos">
         <!-- Profile Photo File Input -->
         <input type="file" class="hidden" ref="photo" @change="updatePhotoPreview" />
 

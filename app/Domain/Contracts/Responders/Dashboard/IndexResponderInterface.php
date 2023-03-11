@@ -2,8 +2,8 @@
 
 namespace App\Domain\Contracts\Responders\Dashboard;
 
-use Serenity\Contracts\ResponderInterface;
+use Serenity\Contracts\ViewResponderInterface;
 
-interface IndexResponderInterface extends ResponderInterface
+interface IndexResponderInterface extends ViewResponderInterface
 {
 }

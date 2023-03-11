@@ -5,7 +5,7 @@ const props = defineProps({
 })
 
 const form = useForm({
-  username: '',
+  email: '',
   password: '',
   remember: false,
 })
@@ -37,13 +37,13 @@ const submit = () => {
 
       <form @submit.prevent="submit">
         <div>
-          <Label for="username" :value="__('Username')" req />
+          <Label for="email" :value="__('Email Address')" req />
           <Input
-            id="username"
+            id="email"
             type="text"
-            class="mt-1 block w-full"
-            v-model="form.username"
-            autocomplete="username"
+            class="block w-full mt-1"
+            v-model="form.email"
+            autocomplete="email"
             required
             autofocus />
         </div>
@@ -53,20 +53,20 @@ const submit = () => {
           <Input
             id="password"
             type="password"
-            class="mt-1 block w-full"
+            class="block w-full mt-1"
             v-model="form.password"
             required
             autocomplete="current-password" />
         </div>
 
-        <div class="mt-4 block">
+        <div class="block mt-4">
           <label class="flex items-center">
             <Checkbox name="remember" v-model:checked="form.remember" />
             <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
           </label>
         </div>
 
-        <div class="mt-4 flex items-center justify-end">
+        <div class="flex items-center justify-end mt-4">
           <Link
             v-if="props.canResetPassword"
             :href="route('password.request')"

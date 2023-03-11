@@ -13,8 +13,8 @@ const props = defineProps({
 <template>
   <div
     v-if="isSupported"
-    class="flex items-center justify-between px-4 py-2 font-mono text-sm text-gray-500 bg-gray-100 rounded">
-    <!-- {{ $page.props.jetstream.flash.app }} -->
+    class="flex items-center justify-between rounded bg-gray-100 px-4 py-2 font-mono text-sm text-gray-500">
+    <!-- {{ $page.props.serenity.flash.app }} -->
     <span>{{ copytext }}</span>
     <IconOutlineClipboard
       v-if="!copied"

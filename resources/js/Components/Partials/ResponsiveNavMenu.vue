@@ -12,19 +12,19 @@ const logout = () => {
 </script>
 
 <template>
-  <div :class="{ block: show, hidden: !show }" class="font-ui sm:hidden">
-    <div class="space-y-1 pt-2 pb-3 pl-6 pr-4">
-      <ResponsiveNavLink :href="route('dashboard.show')" :active="route().current('dashboard.show')">
+  <div :class="{ block: show, hidden: !show }" class="sm:hidden">
+    <div class="pt-2 pb-3 pl-6 pr-4 space-y-1">
+      <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
         {{ __('Dashboard') }}
       </ResponsiveNavLink>
     </div>
 
     <!-- Responsive Settings Options -->
-    <div class="border-t border-gray-200 pt-4 pb-1">
+    <div class="pt-4 pb-1 border-t border-gray-200">
       <div class="flex items-center px-4">
-        <div v-if="$page.props.jetstream.managesProfilePhotos" class="mr-3 shrink-0">
+        <div v-if="$page.props.serenity.managesProfilePhotos" class="mr-3 shrink-0">
           <img
-            class="h-10 w-10 rounded-full object-cover"
+            class="object-cover w-10 h-10 rounded-full"
             :src="$page.props.user.profile_photo_url"
             :alt="$page.props.user.name" />
         </div>
@@ -35,7 +35,7 @@ const logout = () => {
         </div>
       </div>
 
-      <div class="mt-3 space-y-2 pl-6 pr-4">
+      <div class="pl-6 pr-4 mt-3 space-y-2">
         <ResponsiveNavLink :href="route('profile.show')" :active="route().current('profile.show')">
           {{ __('Profile') }}
         </ResponsiveNavLink>
@@ -43,7 +43,7 @@ const logout = () => {
         <ResponsiveNavLink
           :href="route('api-tokens.index')"
           :active="route().current('api-tokens.index')"
-          v-if="$page.props.jetstream.hasApiFeatures">
+          v-if="$page.props.serenity.hasApiFeatures">
           {{ __('API Tokens') }}
         </ResponsiveNavLink>
 
@@ -53,7 +53,7 @@ const logout = () => {
         </form>
 
         <!-- Team Management -->
-        <template v-if="$page.props.jetstream.hasTeamFeatures">
+        <template v-if="$page.props.serenity.hasTeamFeatures">
           <div class="border-t border-gray-200"></div>
 
           <div class="block py-2 pr-4 text-xs text-gray-400">{{ __('Manage Teams') }}</div>
@@ -68,7 +68,7 @@ const logout = () => {
           <ResponsiveNavLink
             :href="route('teams.create')"
             :active="route().current('teams.create')"
-            v-if="$page.props.jetstream.canCreateTeams">
+            v-if="$page.props.serenity.canCreateTeams">
             {{ __('Create New Team') }}
           </ResponsiveNavLink>
 
@@ -83,7 +83,7 @@ const logout = () => {
                 <div class="flex items-center">
                   <IconOutlineBadgeCheck
                     v-if="team.id == $page.props.user.current_team_id"
-                    class="mr-2 h-5 w-5 text-green-400" />
+                    class="w-5 h-5 mr-2 text-green-400" />
                   <div>{{ team.name }}</div>
                 </div>
               </ResponsiveNavLink>

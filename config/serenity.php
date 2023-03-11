@@ -30,16 +30,16 @@ return [
 
   /*
    |--------------------------------------------------------------------------
-   | Jetstream Stack
+   | Serenity Stack
    |--------------------------------------------------------------------------
    |
-   | This configuration value informs Jetstream which "stack" you will be
+   | This configuration value informs Serenity which "stack" you will be
    | using for your application. In general, this value is set for you
    | during installation and will not need to be changed after that.
    |
    */
 
-  'stack' => 'splade',
+  'stack' => 'inertia',
 
   /*
    |--------------------------------------------------------------------------
@@ -127,7 +127,7 @@ return [
    |
    */
 
-  'middleware' => ['splade', 'web'],
+  'middleware' => ['web'],
 
   'auth_session' => AuthenticateSession::class,
 
@@ -212,6 +212,6 @@ return [
    * In most cases, you shouldn't change these.
    */
   'pending_route_transformers' => [
-    ...Serenity\Routing\Transformers::defaultRouteTransformers()
+    ...Serenity\Routing\Transformers::defaultRouteTransformers(),
   ],
 ];

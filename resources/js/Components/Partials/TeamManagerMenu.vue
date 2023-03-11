@@ -8,8 +8,8 @@ const props = defineProps({
 
 const switchToTeam = (team) => {
   // prettier-ignore
-  Inertia.put(useRoutes('current-team.update'), 
-    { team_id: team.id }, 
+  Inertia.put(useRoutes('current-team.update'),
+    { team_id: team.id },
     { preserveState: false }
 	)
 }
@@ -18,12 +18,12 @@ const switchToTeam = (team) => {
 <template>
   <div class="relative ml-3">
     <!-- Teams Dropdown -->
-    <Dropdown align="right" class="font-ui" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
+    <Dropdown align="right" width="60" v-if="$page.props.serenity.hasTeamFeatures">
       <template #trigger>
         <span class="inline-flex rounded-md">
           <button
             type="button"
-            class="inline-flex items-center rounded-md border border-transparent px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:active:bg-gray-900"
+            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition border border-transparent rounded-md hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:active:bg-gray-900"
             :class="[
               sticky
                 ? 'bg-white hover:bg-gray-50 focus:bg-gray-50 active:bg-gray-50'
@@ -38,7 +38,7 @@ const switchToTeam = (team) => {
       <template #content>
         <div class="w-60">
           <!-- Team Management -->
-          <template v-if="$page.props.jetstream.hasTeamFeatures">
+          <template v-if="$page.props.serenity.hasTeamFeatures">
             <div class="block px-4 py-2 text-xs text-gray-400 dark:font-semibold dark:text-gray-500">
               {{ __('Manage Team') }}
             </div>
@@ -48,7 +48,7 @@ const switchToTeam = (team) => {
               {{ __('Team Settings') }}
             </DropdownLink>
 
-            <DropdownLink :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
+            <DropdownLink :href="route('teams.create')" v-if="$page.props.serenity.canCreateTeams">
               {{ __('Create New Team') }}
             </DropdownLink>
 
@@ -65,7 +65,7 @@ const switchToTeam = (team) => {
                   <div class="flex items-center">
                     <IconOutlineBadgeCheck
                       v-if="team.id == $page.props.user.current_team_id"
-                      class="mr-2 h-5 w-5 text-green-400" />
+                      class="w-5 h-5 mr-2 text-green-400" />
                     <div>{{ team.name }}</div>
                   </div>
                 </DropdownLink>

@@ -25,18 +25,18 @@ const handleScroll = () => {
         <div class="flex">
           <!-- Logo -->
           <div class="flex items-center shrink-0">
-            <Link :href="route('dashboard.show')">
+            <Link :href="route('dashboard')">
               <ApplicationMark class="block w-auto h-9" />
             </Link>
           </div>
 
           <!-- Navigation Links -->
-          <div class="hidden space-x-8 font-ui sm:-my-px sm:ml-10 sm:flex">
-            <NavLink :href="route('dashboard.show')" :active="route().current('dashboard.show')">
+          <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
               {{ __('Dashboard') }}
             </NavLink>
 
-            <NavLink :href="route('applications.index')" :active="route().current('applications.index')">
+            <NavLink href="#" active="#">
               {{ __('Applications') }}
             </NavLink>
           </div>
@@ -47,6 +47,9 @@ const handleScroll = () => {
 
           <!-- Settings Dropdown -->
           <AccountManagerMenu />
+          <div class="ml-3">
+            <ThemeSwitcher />
+          </div>
         </div>
 
         <!-- Hamburger -->

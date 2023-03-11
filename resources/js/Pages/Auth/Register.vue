@@ -66,7 +66,7 @@ const submit = () => {
             autocomplete="new-password" />
         </div>
 
-        <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
+        <div class="mt-4" v-if="$page.props.serenity.hasTermsAndPrivacyPolicyFeature">
           <Label for="terms">
             <div class="flex items-center">
               <Checkbox name="terms" id="terms" v-model:checked="form.terms" />

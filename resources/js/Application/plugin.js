@@ -16,26 +16,26 @@ export const serenity = {
 	install(app) {
 		axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 		axios.defaults.withCredentials = true
-    
-    const echo = new Echo({
-      broadcaster: 'pusher',
-      key: import.meta.env.VITE_PUSHER_APP_KEY,
-      wsHost: import.meta.env.VITE_PUSHER_HOST,
-      wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
-      wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
-      forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
-      cluster: '',
-      enabledTransports: ['ws', 'wss'],
-      encrypted: true,
-      disableStats: true,
-    })
+
+    // const echo = new Echo({
+    //   broadcaster: 'pusher',
+    //   key: import.meta.env.VITE_PUSHER_APP_KEY,
+    //   wsHost: import.meta.env.VITE_PUSHER_HOST,
+    //   wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
+    //   wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
+    //   forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
+    //   cluster: '',
+    //   enabledTransports: ['ws', 'wss'],
+    //   encrypted: true,
+    //   disableStats: true,
+    // })
 
     app.provide('emitter', mitt())
-    app.provide('echo', echo)
+    //app.provide('echo', echo)
     app.provide('axios', axios)
     app.provide('_', lodash)
 
-    window.Pusher = Pusher
+    //window.Pusher = Pusher
 		window.axios = axios
 		window._ = lodash
 

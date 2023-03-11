@@ -61,7 +61,6 @@
     "@iconify-json/heroicons-outline": "^1.1.6",
     "@iconify-json/heroicons-solid": "^1.1.7",
     "@inertiajs/progress": "^0.2.7",
-    "@protonemedia/laravel-splade": "^1.2.15",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",

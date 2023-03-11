@@ -21,7 +21,7 @@ const maxWidthClass = computed(() => {
 <template>
   <div class="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0">
     <div>
-      <slot name="logo" />
+      <slot name="logo" cls="w-24" />
     </div>
 
     <div

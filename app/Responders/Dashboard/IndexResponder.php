@@ -3,12 +3,12 @@
 namespace App\Responders\Dashboard;
 
 use App\Domain\Contracts\Responders\Dashboard\IndexResponderInterface;
-use Serenity\Responder;
+use App\Responder;
 
 class IndexResponder extends Responder implements IndexResponderInterface
 {
-  public function toResponse($request)
+  public function send()
   {
-    return view('dashboard');
+    return $this->view->render($this->component);
   }
 }

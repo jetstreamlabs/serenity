@@ -8,14 +8,14 @@ const props = defineProps(['sessions'])
       <h2 class="text-xl font-semibold leading-tight">{{ __('Settings') }}</h2>
     </template>
 
-    <div class="mx-auto max-w-7xl py-10 sm:px-6 lg:px-8">
-      <div v-if="$page.props.jetstream.canUpdatePassword">
+    <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div v-if="$page.props.serenity.canUpdatePassword">
         <UpdatePasswordForm class="mt-10 sm:mt-0" />
 
         <SectionBorder />
       </div>
 
-      <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
+      <div v-if="$page.props.serenity.canManageTwoFactorAuthentication">
         <TwoFactorAuthenticationForm class="mt-10 sm:mt-0" />
 
         <SectionBorder />
@@ -23,7 +23,7 @@ const props = defineProps(['sessions'])
 
       <LogoutOtherBrowserSessionsForm :sessions="props.sessions" class="mt-10 sm:mt-0" />
 
-      <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
+      <template v-if="$page.props.serenity.hasAccountDeletionFeatures">
         <SectionBorder />
 
         <DeleteUserForm class="mt-10 sm:mt-0" />

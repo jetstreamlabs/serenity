@@ -4,7 +4,7 @@ const props = defineProps(['message'])
 
 <template>
   <div v-show="props.message">
-    <p class="text-sm font-semibold text-red-600 font-ui">
+    <p class="text-sm font-semibold text-red-600">
       {{ props.message }}
     </p>
   </div>
