@@ -1,8 +1,6 @@
 <script setup>
 const form = useForm({
-  username: '',
-  first: '',
-  last: '',
+  name: '',
   email: '',
   password: '',
   password_confirmation: '',
@@ -28,15 +26,15 @@ const submit = () => {
 
       <form @submit.prevent="submit">
         <div>
-          <Label for="username" :value="__('Username')" req />
+          <Label for="name" :value="__('Name')" req />
           <Input
-            id="username"
+            id="name"
             type="text"
             class="mt-1 block w-full"
-            v-model="form.username"
+            v-model="form.name"
             required
             autofocus
-            autocomplete="username" />
+            autocomplete="name" />
         </div>
 
         <div class="mt-4">

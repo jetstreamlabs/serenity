@@ -17,16 +17,16 @@ const handleScroll = () => {
 </script>
 <template>
   <nav
-    class="bg-white border-b border-transparent dark:border-gray-900 dark:bg-gray-800"
+    class="border-b border-gray-100 bg-white dark:border-gray-900 dark:bg-gray-800"
     :class="{ stickyHeader: stickyHeader }">
     <!-- Primary Navigation Menu -->
     <div class="px-6">
-      <div class="flex justify-between h-16">
+      <div class="flex h-16 justify-between">
         <div class="flex">
           <!-- Logo -->
-          <div class="flex items-center shrink-0">
+          <div class="flex shrink-0 items-center">
             <Link :href="route('dashboard')">
-              <ApplicationMark class="block w-auto h-9" />
+              <ApplicationMark class="block h-9 w-auto" />
             </Link>
           </div>
 
@@ -53,15 +53,15 @@ const handleScroll = () => {
         </div>
 
         <!-- Hamburger -->
-        <div class="flex items-center -mr-2 sm:hidden">
+        <div class="-mr-2 flex items-center sm:hidden">
           <button
             @click="showingNavigationDropdown = !showingNavigationDropdown"
-            class="inline-flex items-center justify-center p-2 text-gray-400 transition rounded-md hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:focus:bg-gray-700 dark:focus:text-gray-200">
+            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:focus:bg-gray-700 dark:focus:text-gray-200">
             <IconOutlineMenu
-              class="w-6 h-6"
+              class="h-6 w-6"
               :class="{ hidden: showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }" />
             <IconOutlineX
-              class="w-6 h-6"
+              class="h-6 w-6"
               :class="{ hidden: !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" />
           </button>
         </div>

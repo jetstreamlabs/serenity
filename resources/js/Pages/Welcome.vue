@@ -15,19 +15,19 @@ const copyright = dayjs().format('YYYY')
 
   <div
     id="home"
-    class="relative flex justify-center min-h-screen bg-gray-200 dark:bg-gray-900 dark:text-gray-100 sm:items-center sm:pt-0">
+    class="beams relative flex min-h-screen justify-center bg-gray-200 dark:bg-gray-900 dark:text-gray-100 sm:items-center sm:pt-0">
     <div v-if="canLogin" class="fixed top-0 right-0 hidden px-6 py-4 sm:block">
       <Link
         v-if="$page.props.user"
         :href="route('dashboard')"
-        class="text-gray-600 font-base hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white">
+        class="font-base text-gray-600 hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white">
         {{ __('Dashboard') }}
       </Link>
 
       <template v-else>
         <Link
           :href="route('login')"
-          class="text-gray-600 font-base hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white">
+          class="font-base text-gray-600 hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white">
           {{ __('Login') }}
         </Link>
         <Link
@@ -39,13 +39,13 @@ const copyright = dayjs().format('YYYY')
       <ThemeSwitcher class="ml-3" />
     </div>
 
-    <div class="z-50 p-6 mx-auto max-w-7xl lg:p-8">
+    <div class="z-50 mx-auto max-w-7xl p-6 lg:p-8">
       <div class="flex justify-center">
         <ApplicationLogo class="h-64 fill-gray-700 dark:fill-gray-100" />
       </div>
 
-      <div class="flex items-center justify-center px-0 mt-16">
-        <div class="ml-4 text-base text-center text-gray-500 dark:text-gray-400">
+      <div class="mt-16 flex items-center justify-center px-0">
+        <div class="ml-4 text-center text-base text-gray-500 dark:text-gray-400">
           Serenity v{{ serenityVersion }} (PHP v{{ phpVersion }})
         </div>
       </div>
