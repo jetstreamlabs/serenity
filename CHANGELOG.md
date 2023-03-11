@@ -1,5 +1,29 @@
 # Serenity Changelog
 
+# [2.0.0](https://github.com/jetstreamlabs/serenity/compare/v1.0.8...v2.0.0) (2023-03-11)
+
+
+### Breaking
+
+* revert back to inertia and remove splade ([c580092](https://github.com/jetstreamlabs/serenity/commit/c58009282daac642e3e3828d1cac44fda376a24a))
+
+
+### Bug Fixes
+
+* patched errors discovered in testing ([f8adce2](https://github.com/jetstreamlabs/serenity/commit/f8adce2e4980e10ebc9948f9e3c67f416630c88d))
+
+
+### Maintenance
+
+* begin removing splade to go back to inertia ([931887f](https://github.com/jetstreamlabs/serenity/commit/931887f7d7401fddd75d7deea473098e075cf5cf))
+* still broken ([5264b10](https://github.com/jetstreamlabs/serenity/commit/5264b10c0fd6a5e6b9a80b3ec0f6297c09053891))
+* update error in env.example ([ee9ce4b](https://github.com/jetstreamlabs/serenity/commit/ee9ce4b6b70c0e8fb2adf6bcc22cd450b23ff74b))
+
+
+### Task Commit
+
+* more work to swap out splade with inertia ([1af1868](https://github.com/jetstreamlabs/serenity/commit/1af18686b85681069b8613f9da6a405aac06df8a))
+
 ## [1.0.8](https://github.com/jetstreamlabs/serenity/compare/v1.0.7...v1.0.8) (2023-03-07)
 
 
