@@ -1,6 +1,5 @@
 <script setup>
 const props = defineProps({ title: String })
-//const title = props.title
 </script>
 <template>
   <Head :title="title" />

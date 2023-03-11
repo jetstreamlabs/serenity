@@ -8,3 +8,11 @@
 .dark .beams {
   background-image: url('/storage/img/hero-dark.jpg');
 }
+
+.stickyHeader {
+  @apply sticky top-0 z-50 bg-white shadow-md transition-all duration-200;
+}
+
+.wrapper {
+  @apply mx-auto w-full max-w-full md:px-6 2xl:max-w-screen-2xl;
+}

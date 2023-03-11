@@ -6,9 +6,9 @@ use App\Domain\Concerns\PasswordValidationRules;
 use App\Domain\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Serenity\Contracts\ResetsUserPasswordsInterface;
+use Serenity\Contracts\ResetsUserPasswords;
 
-class ResetUserPassword implements ResetsUserPasswordsInterface
+class ResetUserPassword implements ResetsUserPasswords
 {
   use PasswordValidationRules;
 

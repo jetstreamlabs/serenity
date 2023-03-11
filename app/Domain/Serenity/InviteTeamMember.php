@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Serenity\Contracts\InvitesTeamMembersInterface;
+use Serenity\Contracts\InvitesTeamMembers;
 use Serenity\Events\InvitingTeamMember;
 use Serenity\Mail\TeamInvitation;
 use Serenity\Rules\Role;
 use Serenity\Serenity;
 
-class InviteTeamMember implements InvitesTeamMembersInterface
+class InviteTeamMember implements InvitesTeamMembers
 {
   /**
    * Invite a new team member to the given team.

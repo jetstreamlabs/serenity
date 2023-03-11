@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "469fa9444a1f665d0f90f620bba9f414",
+    "content-hash": "c7758ee83b48e29b3b7aff600f8e8c1c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4136,11 +4136,17 @@
         },
         {
             "name": "serenity/foundation",
-            "version": "dev-develop",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jetstreamlabs/foundation.git",
+                "reference": "dfe7121d3852eafc0b1540ca9daf0afecf0fc096"
+            },
             "dist": {
-                "type": "path",
-                "url": "../foundation",
-                "reference": "193c6efb4e2717e7c4ae3fb69be2686ba7406b4b"
+                "type": "zip",
+                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/dfe7121d3852eafc0b1540ca9daf0afecf0fc096",
+                "reference": "dfe7121d3852eafc0b1540ca9daf0afecf0fc096",
+                "shasum": ""
             },
             "require": {
                 "bacon/bacon-qr-code": "^2.0",
@@ -4175,18 +4181,14 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Serenity\\": "src/Serenity/"
-                },
                 "files": [
-                    "src/Serenity/helpers.php"
-                ]
-            },
-            "autoload-dev": {
+                    "src/helpers.php"
+                ],
                 "psr-4": {
-                    "Tests\\": "tests/"
+                    "Serenity\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4202,9 +4204,7 @@
                 "issues": "https://github.com/jetstreamlabs/foundation/issues",
                 "source": "https://github.com/jetstreamlabs/foundation"
             },
-            "transport-options": {
-                "relative": true
-            }
+            "time": "2023-03-11T14:53:09+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -10462,9 +10462,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "serenity/foundation": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

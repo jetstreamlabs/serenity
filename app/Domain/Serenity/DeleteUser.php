@@ -5,22 +5,22 @@ namespace App\Domain\Serenity;
 use App\Domain\Models\Team;
 use App\Domain\Models\User;
 use Illuminate\Support\Facades\DB;
-use Serenity\Contracts\DeletesTeamsInterface;
-use Serenity\Contracts\DeletesUsersInterface;
+use Serenity\Contracts\DeletesTeams;
+use Serenity\Contracts\DeletesUsers;
 
-class DeleteUser implements DeletesUsersInterface
+class DeleteUser implements DeletesUsers
 {
   /**
    * The team deleter implementation.
    *
-   * @var \Serenity\Contracts\DeletesTeamsInterface
+   * @var \Serenity\Contracts\DeletesTeams
    */
   protected $deletesTeams;
 
   /**
    * Create a new action instance.
    */
-  public function __construct(DeletesTeamsInterface $deletesTeams)
+  public function __construct(DeletesTeams $deletesTeams)
   {
     $this->deletesTeams = $deletesTeams;
   }

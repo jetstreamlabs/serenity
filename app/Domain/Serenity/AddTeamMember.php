@@ -7,13 +7,13 @@ use App\Domain\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Serenity\Contracts\AddsTeamMembersInterface;
+use Serenity\Contracts\AddsTeamMembers;
 use Serenity\Events\AddingTeamMember;
 use Serenity\Events\TeamMemberAdded;
 use Serenity\Rules\Role;
 use Serenity\Serenity;
 
-class AddTeamMember implements AddsTeamMembersInterface
+class AddTeamMember implements AddsTeamMembers
 {
   /**
    * Add a new team member to the given team.

@@ -2,12 +2,12 @@
 
 namespace App\Actions\Protected\Dashboard;
 
-use App\Domain\Contracts\Responders\Dashboard\IndexResponderInterface;
+use App\Domain\Contracts\Responders\Dashboard\Index;
 use Serenity\Action;
 
 class IndexAction extends Action
 {
-  public function __construct(protected IndexResponderInterface $responder)
+  public function __construct(protected Index $responder)
   {
     $this->with('Dashboard');
   }

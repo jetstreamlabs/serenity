@@ -11,7 +11,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <label class="form-label block text-sm font-medium text-gray-700" :class="[props.req ? 'required' : '']">
+  <label
+    class="form-label block text-sm font-medium text-gray-700 dark:text-gray-100"
+    :class="[props.req ? 'required' : '']">
     <span v-if="props.value">{{ props.value }}</span>
     <span v-else><slot></slot></span>
   </label>

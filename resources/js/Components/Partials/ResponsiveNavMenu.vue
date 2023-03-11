@@ -20,7 +20,7 @@ const logout = () => {
     </div>
 
     <!-- Responsive Settings Options -->
-    <div class="pt-4 pb-1 border-t border-gray-200">
+    <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
       <div class="flex items-center px-4">
         <div v-if="$page.props.serenity.managesProfilePhotos" class="mr-3 shrink-0">
           <img
@@ -54,7 +54,7 @@ const logout = () => {
 
         <!-- Team Management -->
         <template v-if="$page.props.serenity.hasTeamFeatures">
-          <div class="border-t border-gray-200"></div>
+          <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
           <div class="block py-2 pr-4 text-xs text-gray-400">{{ __('Manage Teams') }}</div>
 
@@ -72,7 +72,7 @@ const logout = () => {
             {{ __('Create New Team') }}
           </ResponsiveNavLink>
 
-          <div class="border-t border-gray-200"></div>
+          <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
           <!-- Team Switcher -->
           <div class="block py-2 pr-4 text-xs text-gray-400">{{ __('Switch Teams') }}</div>

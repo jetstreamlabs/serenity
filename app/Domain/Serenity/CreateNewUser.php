@@ -8,10 +8,10 @@ use App\Domain\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Serenity\Contracts\CreatesNewUsersInterface;
+use Serenity\Contracts\CreatesNewUsers;
 use Serenity\Serenity;
 
-class CreateNewUser implements CreatesNewUsersInterface
+class CreateNewUser implements CreatesNewUsers
 {
   use PasswordValidationRules;
 

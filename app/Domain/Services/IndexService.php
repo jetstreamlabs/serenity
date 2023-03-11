@@ -4,13 +4,13 @@ namespace App\Domain\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Serenity\Contracts\PayloadInterface;
+use Serenity\Contracts\Payload;
 use Serenity\Serenity;
 use Serenity\Service;
 
 class IndexService extends Service
 {
-  public function handle(Request $request): PayloadInterface
+  public function handle(Request $request): Payload
   {
     if ($request->session()->has('error')) {
       return $this->payloadResponse([

@@ -20,7 +20,7 @@ const handleScroll = () => {
     class="bg-white border-b border-transparent dark:border-gray-900 dark:bg-gray-800"
     :class="{ stickyHeader: stickyHeader }">
     <!-- Primary Navigation Menu -->
-    <div class="px-6 wrapper">
+    <div class="px-6">
       <div class="flex justify-between h-16">
         <div class="flex">
           <!-- Logo -->
@@ -37,7 +37,7 @@ const handleScroll = () => {
             </NavLink>
 
             <NavLink href="#" active="#">
-              {{ __('Applications') }}
+              {{ __('Documentation') }}
             </NavLink>
           </div>
         </div>
@@ -56,7 +56,7 @@ const handleScroll = () => {
         <div class="flex items-center -mr-2 sm:hidden">
           <button
             @click="showingNavigationDropdown = !showingNavigationDropdown"
-            class="inline-flex items-center justify-center p-2 text-gray-400 transition rounded-md hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none">
+            class="inline-flex items-center justify-center p-2 text-gray-400 transition rounded-md hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:focus:bg-gray-700 dark:focus:text-gray-200">
             <IconOutlineMenu
               class="w-6 h-6"
               :class="{ hidden: showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }" />
@@ -71,13 +71,4 @@ const handleScroll = () => {
     <!-- Responsive Navigation Menu -->
     <ResponsiveNavMenu :show="showingNavigationDropdown" />
   </nav>
-
-  <!-- Page Heading -->
-  <!-- <header class="color-heading" v-if="$slots.header">
-        <div class="unwrap">
-          <div class="px-4 py-6 mx-auto text-gray-100 max-w-7xl dark:text-gray-100 sm:px-6 lg:px-8">
-            <slot name="header"></slot>
-          </div>
-        </div>
-      </header> -->
 </template>

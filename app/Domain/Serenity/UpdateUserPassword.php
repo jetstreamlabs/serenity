@@ -6,9 +6,9 @@ use App\Domain\Concerns\PasswordValidationRules;
 use App\Domain\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Serenity\Contracts\UpdatesUserPasswordsInterface;
+use Serenity\Contracts\UpdatesUserPasswords;
 
-class UpdateUserPassword implements UpdatesUserPasswordsInterface
+class UpdateUserPassword implements UpdatesUserPasswords
 {
   use PasswordValidationRules;
 

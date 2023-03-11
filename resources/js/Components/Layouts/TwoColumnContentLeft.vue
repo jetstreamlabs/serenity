@@ -1,5 +1,5 @@
 <template>
-  <div class="py-12 wrapper md:flex">
+  <div class="py-12 md:flex">
     <section class="w-full h-full md:w-8/12 md:pr-3">
       <slot name="content" />
     </section>

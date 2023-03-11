@@ -44,7 +44,7 @@ class ContractMappingServiceProvider extends ServiceProvider
         }
 
         $fileClass = rtrim($file, '.'.$file->getExtension());
-        $contract = 'App\\Domain\\Contracts\\Responders'.$path.'\\'.basename($fileClass).'Interface';
+        $contract = 'App\\Domain\\Contracts\\Responders'.$path.'\\'.basename($fileClass);
         $concrete = 'App\\'.str_replace('/', '\\', ltrim($fileClass, app_path()));
 
         if ($this->hasInterface($concrete, $contract)) {

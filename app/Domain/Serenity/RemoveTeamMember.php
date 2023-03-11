@@ -7,10 +7,10 @@ use App\Domain\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
-use Serenity\Contracts\RemovesTeamMembersInterface;
+use Serenity\Contracts\RemovesTeamMembers;
 use Serenity\Events\TeamMemberRemoved;
 
-class RemoveTeamMember implements RemovesTeamMembersInterface
+class RemoveTeamMember implements RemovesTeamMembers
 {
   /**
    * Remove the team member from the given team.

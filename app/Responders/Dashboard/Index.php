@@ -2,10 +2,10 @@
 
 namespace App\Responders\Dashboard;
 
-use App\Domain\Contracts\Responders\Dashboard\IndexResponderInterface;
+use App\Domain\Contracts\Responders\Dashboard\Index as IndexInterface;
 use App\Responder;
 
-class IndexResponder extends Responder implements IndexResponderInterface
+class Index extends Responder implements IndexInterface
 {
   public function send()
   {

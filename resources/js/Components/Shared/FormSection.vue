@@ -26,11 +26,11 @@ const hasActions = computed(() => {
           v-if="props.passform"
           type="text"
           class="hidden"
-          name="username"
-          autocomplete="username"
-          :value="$page.props.user.username" />
+          name="email"
+          autocomplete="email"
+          :value="$page.props.user.email" />
         <div
-          class="bg-white px-4 py-5 shadow sm:p-6"
+          class="bg-white px-4 py-5 shadow dark:bg-gray-800 dark:text-gray-100 sm:p-6"
           :class="hasActions ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md'">
           <div class="grid grid-cols-6 gap-6">
             <slot name="form"></slot>
@@ -38,7 +38,7 @@ const hasActions = computed(() => {
         </div>
 
         <div
-          class="flex items-center justify-end bg-gray-200 px-4 py-3 text-right shadow sm:rounded-bl-md sm:rounded-br-md sm:px-6"
+          class="flex items-center justify-end bg-gray-200 px-4 py-3 text-right shadow dark:bg-gray-700 sm:rounded-bl-md sm:rounded-br-md sm:px-6"
           v-if="hasActions">
           <slot name="actions"></slot>
         </div>

@@ -6,9 +6,9 @@ use App\Domain\Models\Team;
 use App\Domain\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Serenity\Contracts\UpdatesTeamNamesInterface;
+use Serenity\Contracts\UpdatesTeamNames;
 
-class UpdateTeamName implements UpdatesTeamNamesInterface
+class UpdateTeamName implements UpdatesTeamNames
 {
   /**
    * Validate and update the given team's name.

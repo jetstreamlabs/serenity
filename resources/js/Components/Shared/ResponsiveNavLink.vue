@@ -1,10 +1,14 @@
 <script setup>
-const props = defineProps(['active', 'href', 'as'])
-const { active, href, as } = toRefs(props)
+const props = defineProps({
+  active: Boolean,
+  href: String,
+  as: String,
+})
+
 const classes = computed(() => {
-  active.value === true
-    ? 'block pl-3 pr-4 py-2 border-l-4 border-contrast-400 text-base font-medium text-contrast-700 bg-contrast-50 focus:outline-none focus:text-contrast-800 focus:bg-contrast-100 focus:border-contrast-700 transition'
-    : 'block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition'
+  return props.active === true
+    ? 'block pl-3 pr-4 py-2 border-l-4 border-orange-500 text-sm font-normal text-gray-900 dark:text-gray-100 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-100 dark:focus:bg-gray-600 focus:border-gray-700 dark:focus:border-red-500 transition'
+    : 'block pl-3 pr-4 py-2 border-l-4 border-transparent text-sm font-normal text-gray-900 dark:text-gray-100 hover:text-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-blue-500 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-600 focus:border-gray-300 dark:focus:border-red-500 transition'
 })
 </script>
 

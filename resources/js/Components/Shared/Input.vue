@@ -24,13 +24,9 @@ defineExpose({ input })
 
 <template>
   <input
-    class="border-2 form-input"
+    class="form-input border-2"
     :value="props.modelValue"
-    :class="[
-      props.static
-        ? 'cursor-not-allowed bg-gray-200 focus:border-gray-300 focus:ring-0'
-        : 'focus:border-contrast-300 focus:ring focus:ring-contrast-200 focus:ring-opacity-50',
-    ]"
+    :class="[props.static ? 'cursor-not-allowed bg-gray-200 focus:border-gray-300 focus:ring-0 dark:bg-gray-400' : '']"
     @input="emit('update:modelValue', $event.target.value)"
     ref="input"
     :readonly="props.static" />

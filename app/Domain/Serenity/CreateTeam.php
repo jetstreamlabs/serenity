@@ -6,11 +6,11 @@ use App\Domain\Models\Team;
 use App\Domain\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Serenity\Contracts\CreatesTeamsInterface;
+use Serenity\Contracts\CreatesTeams;
 use Serenity\Events\AddingTeam;
 use Serenity\Serenity;
 
-class CreateTeam implements CreatesTeamsInterface
+class CreateTeam implements CreatesTeams
 {
   /**
    * Validate and create a new team for the given user.

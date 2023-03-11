@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Serenity\Contracts\ViewResponderInterface;
+use Serenity\Contracts\ViewResponder as ViewResponderInterface;
 use Serenity\Responders\ViewResponder;
 
 class Responder extends ViewResponder implements ViewResponderInterface

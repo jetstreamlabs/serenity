@@ -3,9 +3,9 @@
 namespace App\Domain\Serenity;
 
 use App\Domain\Models\Team;
-use Serenity\Contracts\DeletesTeamsInterface;
+use Serenity\Contracts\DeletesTeams;
 
-class DeleteTeam implements DeletesTeamsInterface
+class DeleteTeam implements DeletesTeams
 {
   /**
    * Delete the given team.
