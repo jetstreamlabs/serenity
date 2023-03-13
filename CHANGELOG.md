@@ -1,5 +1,31 @@
 # Serenity Changelog
 
+# [2.2.0](https://github.com/jetstreamlabs/serenity/compare/v2.1.0...v2.2.0) (2023-03-13)
+
+
+### Bug Fixes
+
+* attempting to fix momentum-modal error ([7485f5c](https://github.com/jetstreamlabs/serenity/commit/7485f5c89aa11c506639ace7017b13afe7c0b709))
+* color header links ([07b5136](https://github.com/jetstreamlabs/serenity/commit/07b5136fa02e36ce74e6af84794e375ce3808519))
+* missing env props for compiling demos ([3f4ce29](https://github.com/jetstreamlabs/serenity/commit/3f4ce292fb8eab8990cbf756a95612b1fb411a31))
+* registration and background images ([bbf973e](https://github.com/jetstreamlabs/serenity/commit/bbf973e39db69cbe3813efff60576dc7e18fa5e7))
+
+
+* Merge branch 'main' into develop ([12b4257](https://github.com/jetstreamlabs/serenity/commit/12b4257f8f6d22dc3c99f9a4d306bccafc7c5530))
+
+
+### Features
+
+* add dark mode support and shiki ([8217ea2](https://github.com/jetstreamlabs/serenity/commit/8217ea25d6c537fff8ad79453aa1b19a152f6ed1))
+
+
+### Maintenance
+
+* **release:** 2.0.0 [skip ci] ([a4b370d](https://github.com/jetstreamlabs/serenity/commit/a4b370d57908e0d69aa958a98531439487bef145))
+* **release:** 2.0.1 [skip ci] ([e02dbcd](https://github.com/jetstreamlabs/serenity/commit/e02dbcd8160145833788ee3b0f0210b867af7b08))
+* **release:** 2.1.0 [skip ci] ([4be1f1f](https://github.com/jetstreamlabs/serenity/commit/4be1f1f2a20f29cbe3b4eeafb02315faf5979d5c))
+* update gitattributes ([020ee84](https://github.com/jetstreamlabs/serenity/commit/020ee84a461799b00e2785f50219f49abcb7d8d2))
+
 # [2.1.0](https://github.com/jetstreamlabs/serenity/compare/v2.0.1...v2.1.0) (2023-03-13)
 
 
