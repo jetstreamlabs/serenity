@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+# [2.1.0](https://github.com/jetstreamlabs/serenity/compare/v2.0.1...v2.1.0) (2023-03-13)
+
+
+### Features
+
+* add dark mode support and shiki ([1f50a77](https://github.com/jetstreamlabs/serenity/commit/1f50a77434b3779a04931f9565d70c996ac69b31))
+
 ## [2.0.1](https://github.com/jetstreamlabs/serenity/compare/v2.0.0...v2.0.1) (2023-03-11)
 
 
