@@ -10,6 +10,9 @@ import Icons from 'unplugin-icons/vite'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import Markdown from 'vite-plugin-vue-markdown'
+import Shiki from 'markdown-it-shiki'
+import Anchor from 'markdown-it-anchor'
 import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers'
 
 const env = expandDotenv.expand(dotenv.config()).parsed
@@ -29,6 +32,23 @@ export default defineConfig(({ command }) => {
             base: null,
             includeAbsolute: false,
           },
+        },
+      }),
+      Markdown({
+        markdownItOptions: {
+          html: true,
+          linkify: true,
+          typographer: true,
+        },
+        markdownItSetup(md) {
+          // for example
+          md.use(Anchor)
+          md.use(Shiki, {
+            theme: {
+              light: JSON.parse(fs.readFileSync('./resources/js/Shiki/light.json', 'utf-8')),
+              dark: JSON.parse(fs.readFileSync('./resources/js/Shiki/dark.json', 'utf-8')),
+            },
+          })
         },
       }),
       Icons({

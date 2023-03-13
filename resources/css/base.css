@@ -16,3 +16,19 @@
 .wrapper {
   @apply mx-auto w-full max-w-full md:px-6 2xl:max-w-screen-2xl;
 }
+
+html.dark {
+  .shiki {
+    &.serenity-light {
+      display: none;
+    }
+  }
+}
+
+html:not(.dark) {
+  .shiki {
+    &.serenity-dark {
+      display: none;
+    }
+  }
+}

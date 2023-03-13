@@ -21,11 +21,11 @@ const close = () => {
 
 <template>
   <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
-    <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
+    <div class="bg-white px-4 pt-5 pb-4 dark:bg-gray-800 dark:text-gray-100 sm:p-6 sm:pb-4">
       <div class="sm:flex sm:items-start">
         <div
-          class="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full shrink-0 sm:mx-0 sm:h-10 sm:w-10">
-          <IconOutlineExclamation class="w-6 h-6 text-red-600" />
+          class="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+          <IconOutlineExclamation class="h-6 w-6 text-red-600" />
         </div>
 
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
@@ -40,7 +40,7 @@ const close = () => {
       </div>
     </div>
 
-    <div class="px-6 py-4 text-right bg-gray-100">
+    <div class="bg-gray-100 px-6 py-4 text-right dark:bg-gray-700">
       <slot name="footer"> </slot>
     </div>
   </Modal>

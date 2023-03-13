@@ -41,7 +41,7 @@ const submit = () => {
           <Input
             id="email"
             type="text"
-            class="block w-full mt-1"
+            class="mt-1 block w-full"
             v-model="form.email"
             autocomplete="email"
             required
@@ -53,24 +53,24 @@ const submit = () => {
           <Input
             id="password"
             type="password"
-            class="block w-full mt-1"
+            class="mt-1 block w-full"
             v-model="form.password"
             required
             autocomplete="current-password" />
         </div>
 
-        <div class="block mt-4">
+        <div class="mt-4 block">
           <label class="flex items-center">
             <Checkbox name="remember" v-model:checked="form.remember" />
-            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+            <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
           </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="mt-4 flex items-center justify-end">
           <Link
             v-if="props.canResetPassword"
             :href="route('password.request')"
-            class="text-sm text-gray-600 underline hover:text-gray-900">
+            class="text-sm text-gray-600 underline hover:text-gray-900 dark:text-gray-400">
             {{ __('Forgot your password?') }}
           </Link>
 

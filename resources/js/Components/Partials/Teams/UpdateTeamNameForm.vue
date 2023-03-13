@@ -30,7 +30,7 @@ const updateTeamName = () => {
 
           <div class="ml-4 leading-tight">
             <div>{{ team.owner.name }}</div>
-            <div class="text-sm text-gray-700">{{ team.owner.email }}</div>
+            <div class="text-sm text-gray-700 dark:text-gray-500">{{ team.owner.email }}</div>
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@ const updateTeamName = () => {
     </template>
 
     <template #actions v-if="permissions.canUpdateTeam">
-      <ActionMessage :on="form.recentlySuccessful" class="mr-3"> {{ __('Saved.') }}</ActionMessage>
+      <ActionMessage :on="form.recentlySuccessful" class="mr-3 text-green-500"> {{ __('Saved.') }}</ActionMessage>
 
       <Button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
         {{ __('Save') }}

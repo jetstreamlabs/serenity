@@ -22,7 +22,7 @@ const deleteTeam = () => {
     <template #description> {{ __('Permanently delete this team.') }} </template>
 
     <template #content>
-      <div class="max-w-xl text-sm text-gray-600">
+      <div class="max-w-xl text-sm text-gray-700 dark:text-gray-500">
         {{
           __(
             'Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regarding this team that you wish to retain.'
@@ -39,11 +39,13 @@ const deleteTeam = () => {
         <template #title> {{ __('Delete Team') }} </template>
 
         <template #content>
-          {{
-            __(
-              'Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.'
-            )
-          }}
+          <span class="dark:text-gray-500">
+            {{
+              __(
+                'Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.'
+              )
+            }}
+          </span>
         </template>
 
         <template #footer>

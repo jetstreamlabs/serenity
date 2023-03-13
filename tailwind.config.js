@@ -2,6 +2,14 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 
+const round = (num) =>
+  num
+    .toFixed(7)
+    .replace(/(\.[0-9]+?)0+$/, '$1')
+    .replace(/\.0$/, '')
+const rem = (px) => `${round(px / 16)}rem`
+const em = (px, base) => `${round(px / base)}em`
+
 // prettier-ignore
 module.exports = {
   content: [
@@ -58,9 +66,8 @@ module.exports = {
           800: '#71390A',
           900: '#3D1F05',
         },
-        gray: colors.slate
+        gray: colors.slate,
       },
-
     },
   },
   plugins: [

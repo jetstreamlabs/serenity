@@ -13,12 +13,11 @@
     "inertiajs/inertia-laravel": "^0.6.9",
     "jetstreamlabs/zora": "^3.2",
     "laravel/framework": "^10.0",
-    "laravel/horizon": "^5.15",
     "laravel/octane": "*",
     "laravel/sanctum": "*",
     "laravel/tinker": "*",
     "pusher/pusher-php-server": "^7.2",
-    "serenity/foundation": "^2.0",
+    "serenity/foundation": "^2.1",
     "spatie/laravel-query-builder": "^5.2",
     "spiral/roadrunner": "^2.12",
     "tightenco/ziggy": "^1.5"
