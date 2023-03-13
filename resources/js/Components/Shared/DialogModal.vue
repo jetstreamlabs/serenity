@@ -31,7 +31,7 @@ const close = () => {
       </div>
     </div>
 
-    <div class="px-6 py-4 text-right bg-gray-100">
+    <div class="bg-gray-100 px-6 py-4 text-right dark:bg-gray-700">
       <slot name="footer"> </slot>
     </div>
   </Modal>

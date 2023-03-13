@@ -77,7 +77,7 @@ const deleteApiToken = () => {
             <div v-for="permission in availablePermissions" :key="permission">
               <label class="flex items-center">
                 <Checkbox :value="permission" v-model:checked="createApiTokenForm.permissions" />
-                <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
+                <span class="ml-2 text-sm text-gray-700 dark:text-gray-500">{{ permission }}</span>
               </label>
             </div>
           </div>
@@ -141,12 +141,12 @@ const deleteApiToken = () => {
       <template #title>{{ __('API Token') }}</template>
 
       <template #content>
-        <div>
+        <div class="dark:text-gray-500">
           {{ __("Please copy your new API token. For your security, it won't be shown again.") }}
         </div>
 
         <div
-          class="mt-4 rounded bg-gray-100 px-4 py-2 font-mono text-sm text-gray-500"
+          class="mt-4 rounded bg-gray-100 px-4 py-2 font-mono text-sm text-gray-500 dark:bg-gray-600 dark:text-gray-100"
           v-if="$page.props.serenity.flash.token">
           {{ $page.props.serenity.flash.token }}
         </div>
@@ -168,7 +168,7 @@ const deleteApiToken = () => {
           <div v-for="permission in availablePermissions" :key="permission">
             <label class="flex items-center">
               <Checkbox :value="permission" v-model:checked="updateApiTokenForm.permissions" />
-              <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
+              <span class="ml-2 text-sm text-gray-700 dark:text-gray-500">{{ permission }}</span>
             </label>
           </div>
         </div>
@@ -194,7 +194,7 @@ const deleteApiToken = () => {
       <template #title>{{ __('Delete API Token') }}</template>
 
       <template #content>
-        {{ __('Are you sure you would like to delete this API token?') }}
+        <span class="dark:text-gray-500">{{ __('Are you sure you would like to delete this API token?') }}</span>
       </template>
 
       <template #footer>

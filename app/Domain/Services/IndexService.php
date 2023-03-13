@@ -16,7 +16,6 @@ class IndexService extends Service
       return $this->payloadResponse([
         'message' => $request->session()->get('error'),
         'level' => 'error',
-        'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'serenityVersion' => Serenity::version(),
         'phpVersion' => PHP_VERSION,
@@ -24,7 +23,6 @@ class IndexService extends Service
     }
 
     return $this->payloadResponse([
-      'canLogin' => Route::has('login'),
       'canRegister' => Route::has('register'),
       'serenityVersion' => Serenity::version(),
       'phpVersion' => PHP_VERSION,

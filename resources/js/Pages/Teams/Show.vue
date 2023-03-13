@@ -1,6 +1,5 @@
 <script setup>
 const props = defineProps(['team', 'availableRoles', 'permissions'])
-const { team, availableRoles, permissions } = toRefs(props)
 </script>
 
 <template>

@@ -87,7 +87,7 @@ const displayableRole = (role) => {
 
         <template #form>
           <div class="col-span-6">
-            <div class="max-w-xl text-sm text-gray-600">
+            <div class="max-w-xl text-sm text-gray-700 dark:text-gray-500">
               {{ __('Please provide the email address of the person you would like to add to this team.') }}
             </div>
           </div>
@@ -95,7 +95,7 @@ const displayableRole = (role) => {
           <!-- Member Email -->
           <div class="col-span-6 sm:col-span-4">
             <Label for="email" value="Email" />
-            <Input id="email" type="email" class="block w-full mt-1" v-model="addTeamMemberForm.email" />
+            <Input id="email" type="email" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
             <InputError :message="addTeamMemberForm.errors.email" class="mt-2" />
           </div>
 
@@ -104,12 +104,12 @@ const displayableRole = (role) => {
             <Label for="roles" value="Role" />
             <InputError :message="addTeamMemberForm.errors.role" class="mt-2" />
 
-            <div class="relative z-0 mt-1 border-2 border-gray-200 rounded-lg cursor-pointer">
+            <div class="relative z-0 mt-1 cursor-pointer rounded-lg border-2 border-gray-200 dark:border-gray-600">
               <button
                 type="button"
-                class="relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:border-contrast-300 focus:outline-none focus:ring focus:ring-contrast-200"
+                class="focus:border-contrast-300 focus:ring-contrast-200 relative inline-flex w-full rounded-lg px-4 py-3 focus:z-10 focus:outline-none focus:ring"
                 :class="{
-                  'rounded-t-none border-t-2 border-gray-200': i > 0,
+                  'rounded-t-none border-t-2 border-gray-200 dark:border-gray-600': i > 0,
                   'rounded-b-none': i != Object.keys(availableRoles).length - 1,
                 }"
                 @click="addTeamMemberForm.role = role.key"
@@ -118,16 +118,18 @@ const displayableRole = (role) => {
                 <div :class="{ 'opacity-50': addTeamMemberForm.role && addTeamMemberForm.role != role.key }">
                   <!-- Role Name -->
                   <div class="flex items-center">
-                    <div class="text-sm text-gray-600" :class="{ 'font-semibold': addTeamMemberForm.role == role.key }">
+                    <div
+                      class="text-sm text-gray-700 dark:text-gray-500"
+                      :class="{ 'font-semibold': addTeamMemberForm.role == role.key }">
                       {{ role.name }}
                     </div>
                     <IconOutlineCheckCircle
                       v-if="addTeamMemberForm.role == role.key"
-                      class="w-5 h-5 ml-2 text-green-400" />
+                      class="ml-2 h-5 w-5 text-green-400" />
                   </div>
 
                   <!-- Role Description -->
-                  <div class="mt-2 text-xs text-left text-gray-600">
+                  <div class="mt-2 text-left text-xs text-gray-700 dark:text-gray-500">
                     {{ role.description }}
                   </div>
                 </div>
@@ -168,12 +170,12 @@ const displayableRole = (role) => {
               class="flex items-center justify-between"
               v-for="invitation in team.team_invitations"
               :key="invitation.id">
-              <div class="text-gray-600">{{ invitation.email }}</div>
+              <div class="text-gray-700 dark:text-gray-500">{{ invitation.email }}</div>
 
               <div class="flex items-center">
                 <!-- Cancel Team Invitation -->
                 <button
-                  class="ml-6 text-sm text-red-500 cursor-pointer focus:outline-none"
+                  class="ml-6 cursor-pointer font-medium text-red-500 focus:outline-none"
                   @click="cancelTeamInvitation(invitation)"
                   v-if="userPermissions.canRemoveTeamMembers">
                   {{ __('Cancel') }}
@@ -199,7 +201,7 @@ const displayableRole = (role) => {
           <div class="space-y-6">
             <div class="flex items-center justify-between" v-for="user in team.users" :key="user.id">
               <div class="flex items-center">
-                <img class="w-8 h-8 rounded-full" :src="user.profile_photo_url" :alt="user.name" />
+                <img class="h-8 w-8 rounded-full" :src="user.profile_photo_url" :alt="user.name" />
                 <div class="ml-4">{{ user.name }}</div>
               </div>
 
@@ -218,7 +220,7 @@ const displayableRole = (role) => {
 
                 <!-- Leave Team -->
                 <button
-                  class="ml-6 text-sm text-red-500 cursor-pointer"
+                  class="ml-6 cursor-pointer text-sm text-red-500"
                   @click="confirmLeavingTeam"
                   v-if="$page.props.user.id === user.id">
                   {{ __('Leave') }}
@@ -226,7 +228,7 @@ const displayableRole = (role) => {
 
                 <!-- Remove Team Member -->
                 <button
-                  class="ml-6 text-sm text-red-500 cursor-pointer"
+                  class="ml-6 cursor-pointer text-sm text-red-500"
                   @click="confirmTeamMemberRemoval(user)"
                   v-if="userPermissions.canRemoveTeamMembers">
                   {{ __('Remove') }}
@@ -244,12 +246,12 @@ const displayableRole = (role) => {
 
       <template #content>
         <div v-if="managingRoleFor">
-          <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
+          <div class="relative z-0 mt-1 cursor-pointer rounded-lg border border-gray-200 dark:border-gray-600">
             <button
               type="button"
-              class="relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200"
+              class="relative inline-flex w-full rounded-lg px-4 py-3 focus:z-10 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200"
               :class="{
-                'rounded-t-none border-t border-gray-200': i > 0,
+                'rounded-t-none border-t border-gray-200 dark:border-gray-600': i > 0,
                 'rounded-b-none': i !== Object.keys(availableRoles).length - 1,
               }"
               @click="updateRoleForm.role = role.key"
@@ -258,14 +260,16 @@ const displayableRole = (role) => {
               <div :class="{ 'opacity-50': updateRoleForm.role && updateRoleForm.role !== role.key }">
                 <!-- Role Name -->
                 <div class="flex items-center">
-                  <div class="text-sm text-gray-600" :class="{ 'font-semibold': updateRoleForm.role === role.key }">
+                  <div
+                    class="text-sm text-gray-700 dark:text-gray-500"
+                    :class="{ 'font-semibold': updateRoleForm.role === role.key }">
                     {{ role.name }}
                   </div>
-                  <IconOutlineCheckCircle v-if="updateRoleForm.role === role.key" class="w-5 h-5 ml-2 text-green-400" />
+                  <IconOutlineCheckCircle v-if="updateRoleForm.role === role.key" class="ml-2 h-5 w-5 text-green-400" />
                 </div>
 
                 <!-- Role Description -->
-                <div class="mt-2 text-xs text-gray-600">
+                <div class="mt-2 text-xs text-gray-700 dark:text-gray-500">
                   {{ role.description }}
                 </div>
               </div>
@@ -291,7 +295,11 @@ const displayableRole = (role) => {
     <ConfirmationModal :show="confirmingLeavingTeam" @close="confirmingLeavingTeam = false">
       <template #title> {{ __('Leave Team') }} </template>
 
-      <template #content> {{ __('Are you sure you would like to leave this team?') }} </template>
+      <template #content>
+        <span class="dark:text-gray-500">
+          {{ __('Are you sure you would like to leave this team?') }}
+        </span>
+      </template>
 
       <template #footer>
         <SecondaryButton @click="confirmingLeavingTeam = false"> {{ __('Cancel') }} </SecondaryButton>
