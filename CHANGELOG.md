@@ -1,5 +1,17 @@
 # Serenity Changelog
 
+## [2.2.1](https://github.com/jetstreamlabs/serenity/compare/v2.2.0...v2.2.1) (2023-03-13)
+
+
+### Code Refactoring
+
+* add windows testing workflow ([5882e1c](https://github.com/jetstreamlabs/serenity/commit/5882e1cab5013aaa95545dd1e69c41611771bd69))
+
+
+### Maintenance
+
+* changed names of action test ([81b5b93](https://github.com/jetstreamlabs/serenity/commit/81b5b935a3f7a393593480092fee7392b0ecad7c))
+
 # [2.2.0](https://github.com/jetstreamlabs/serenity/compare/v2.1.0...v2.2.0) (2023-03-13)
 
 
