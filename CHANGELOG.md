@@ -1,5 +1,13 @@
 # Serenity Changelog
 
+## [2.2.2](https://github.com/jetstreamlabs/serenity/compare/v2.2.1...v2.2.2) (2023-03-14)
+
+
+### Bug Fixes
+
+* contract mapper, components, two-factor ([61a1041](https://github.com/jetstreamlabs/serenity/commit/61a1041cb0da9682ae1d0405a8627096e8e4288a))
+* failing two factor test ([c3179b0](https://github.com/jetstreamlabs/serenity/commit/c3179b0fd721f7b90dc3b83a65d52ff47a9f8b26))
+
 ## [2.2.1](https://github.com/jetstreamlabs/serenity/compare/v2.2.0...v2.2.1) (2023-03-13)
 
 
