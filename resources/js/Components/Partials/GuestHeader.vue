@@ -27,17 +27,18 @@ const showingNavigationDropdown = ref(false)
         </div>
         <div class="hidden sm:ml-6 sm:flex sm:items-center">
           <div v-if="$page.props.canLogin" class="hidden px-6 py-4 sm:flex sm:items-center sm:justify-end">
-            <Link
-              :href="route('login')"
-              class="text-sm text-gray-600 hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white">
-              {{ __('Login') }}
-            </Link>
-            <Link
-              :href="route('register')"
-              class="ml-4 inline-flex w-full items-center justify-center rounded-full border-2 border-orange bg-orange px-4 py-1.5 text-center text-sm font-medium text-white duration-200 hover:bg-transparent hover:text-orange-600 focus:outline-none focus-visible:outline-white focus-visible:ring-white dark:border-white dark:bg-white dark:text-gray-700 dark:hover:bg-transparent dark:hover:text-white lg:w-auto">
-              {{ __('Register') }}
-            </Link>
-
+            <template v-if="!$page.props.user">
+              <Link
+                :href="route('login')"
+                class="text-sm text-gray-600 hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white">
+                {{ __('Login') }}
+              </Link>
+              <Link
+                :href="route('register')"
+                class="ml-4 inline-flex w-full items-center justify-center rounded-full border-2 border-orange bg-orange px-4 py-1.5 text-center text-sm font-medium text-white duration-200 hover:bg-transparent hover:text-orange-600 focus:outline-none focus-visible:outline-white focus-visible:ring-white dark:border-white dark:bg-white dark:text-gray-700 dark:hover:bg-transparent dark:hover:text-white lg:w-auto">
+                {{ __('Register') }}
+              </Link>
+            </template>
             <ThemeSwitcher class="ml-3" />
           </div>
         </div>

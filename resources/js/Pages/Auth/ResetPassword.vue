@@ -20,12 +20,8 @@ const submit = () => {
 </script>
 
 <template>
-  <AuthLayout :title="__('Reset Password')">
+  <GuestLayout :title="__('Reset Password')">
     <AuthenticationCard max-width="sm">
-      <template #logo>
-        <AuthenticationCard-logo />
-      </template>
-
       <ValidationErrors class="mb-4" />
 
       <form @submit.prevent="submit">
@@ -63,5 +59,5 @@ const submit = () => {
         </div>
       </form>
     </AuthenticationCard>
-  </AuthLayout>
+  </GuestLayout>
 </template>

@@ -12,12 +12,8 @@ const submit = () => {
 </script>
 
 <template>
-  <AuthLayout :title="__('Secure Area')">
+  <GuestLayout :title="__('Secure Area')">
     <AuthenticationCard max-width="md">
-      <template #logo>
-        <AuthenticationCard-logo />
-      </template>
-
       <div class="mb-4 text-sm text-gray-600">
         {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
       </div>
@@ -44,5 +40,5 @@ const submit = () => {
         </div>
       </form>
     </AuthenticationCard>
-  </AuthLayout>
+  </GuestLayout>
 </template>

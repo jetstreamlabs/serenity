@@ -10,11 +10,11 @@
     "kill": "kill -9 $(lsof -ti:3000)",
     "lint": "php ./vendor/bin/pinte --dirty",
     "pinte": "php ./vendor/bin/pinte",
-    "build:assets": "php lotus ziggy:generate && php lotus zora:generate",
-    "octane": "php lotus octane:start --watch",
+    "build:assets": "php zen ziggy:generate && php zen zora:generate",
+    "octane": "php zen octane:start --watch",
     "queue:start": "pm2 start horizon.json",
     "tests": "php ./vendor/bin/pest",
-    "coverage": "XDEBUG_MODE=coverage php lotus test --coverage --min=80",
+    "coverage": "XDEBUG_MODE=coverage php zen test --coverage --min=80",
     "cn": "composer update && npm update"
   },
   "commitlint": {

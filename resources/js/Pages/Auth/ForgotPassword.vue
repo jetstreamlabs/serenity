@@ -16,13 +16,9 @@ const submit = () => {
 </script>
 
 <template>
-  <AuthLayout :title="__('Forgot Password')">
+  <GuestLayout :title="__('Forgot Password')">
     <AuthenticationCard max-width="sm">
-      <template #logo>
-        <AuthenticationCard-logo />
-      </template>
-
-      <div class="mb-4 text-sm text-gray-600">
+      <div class="mb-4 text-sm text-gray-600 dark:text-gray-500">
         {{
           __(
             'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.'
@@ -49,5 +45,5 @@ const submit = () => {
         </div>
       </form>
     </AuthenticationCard>
-  </AuthLayout>
+  </GuestLayout>
 </template>

@@ -48,16 +48,16 @@
   "scripts": {
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-      "@php lotus package:discover --ansi"
+      "@php zen package:discover --ansi"
     ],
     "post-update-cmd": [
-      "@php lotus vendor:publish --tag=laravel-assets --ansi --force"
+      "@php zen vendor:publish --tag=laravel-assets --ansi --force"
     ],
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ],
     "post-create-project-cmd": [
-      "@php lotus key:generate --ansi"
+      "@php zen key:generate --ansi"
     ]
   },
   "extra": {

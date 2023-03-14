@@ -3995,16 +3995,16 @@
         },
         {
             "name": "serenity/foundation",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jetstreamlabs/foundation.git",
-                "reference": "a1570050da0ca4c08ebe55c682866a5831d91c64"
+                "reference": "407681da601fe9d5e222c74363701e625c5f2275"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/a1570050da0ca4c08ebe55c682866a5831d91c64",
-                "reference": "a1570050da0ca4c08ebe55c682866a5831d91c64",
+                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/407681da601fe9d5e222c74363701e625c5f2275",
+                "reference": "407681da601fe9d5e222c74363701e625c5f2275",
                 "shasum": ""
             },
             "require": {
@@ -4036,7 +4036,10 @@
                 "laravel": {
                     "providers": [
                         "Serenity\\SerenityServiceProvider"
-                    ]
+                    ],
+                    "aliases": {
+                        "ContractBinder": "Serenity\\Support\\ContractBinder"
+                    }
                 }
             },
             "autoload": {
@@ -4063,7 +4066,7 @@
                 "issues": "https://github.com/jetstreamlabs/foundation/issues",
                 "source": "https://github.com/jetstreamlabs/foundation"
             },
-            "time": "2023-03-13T06:45:38+00:00"
+            "time": "2023-03-14T02:52:41+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",

@@ -12,12 +12,8 @@ const verificationLinkSent = computed(() => {
 </script>
 
 <template>
-  <AuthLayout :title="__('Email Verification')">
+  <GuestLayout :title="__('Email Verification')">
     <AuthenticationCard max-width="md">
-      <template #logo>
-        <AuthenticationCard-logo />
-      </template>
-
       <div class="mb-4 text-sm text-gray-600">
         {{
           __(
@@ -46,5 +42,5 @@ const verificationLinkSent = computed(() => {
         </div>
       </form>
     </AuthenticationCard>
-  </AuthLayout>
+  </GuestLayout>
 </template>

@@ -23,12 +23,8 @@ const submit = () => {
 </script>
 
 <template>
-  <AuthLayout :title="__('Login')">
+  <GuestLayout :title="__('Login')">
     <AuthenticationCard max-width="sm">
-      <template #logo>
-        <AuthenticationCard-logo />
-      </template>
-
       <ValidationErrors class="mb-4" />
 
       <div v-if="props.status" class="mb-4 text-sm font-medium text-green-600">
@@ -41,7 +37,7 @@ const submit = () => {
           <Input
             id="email"
             type="text"
-            class="mt-1 block w-full"
+            class="block w-full mt-1"
             v-model="form.email"
             autocomplete="email"
             required
@@ -53,20 +49,20 @@ const submit = () => {
           <Input
             id="password"
             type="password"
-            class="mt-1 block w-full"
+            class="block w-full mt-1"
             v-model="form.password"
             required
             autocomplete="current-password" />
         </div>
 
-        <div class="mt-4 block">
+        <div class="block mt-4">
           <label class="flex items-center">
             <Checkbox name="remember" v-model:checked="form.remember" />
             <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
           </label>
         </div>
 
-        <div class="mt-4 flex items-center justify-end">
+        <div class="flex items-center justify-end mt-4">
           <Link
             v-if="props.canResetPassword"
             :href="route('password.request')"
@@ -80,5 +76,5 @@ const submit = () => {
         </div>
       </form>
     </AuthenticationCard>
-  </AuthLayout>
+  </GuestLayout>
 </template>

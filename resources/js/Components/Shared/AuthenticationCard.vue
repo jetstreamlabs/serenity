@@ -19,13 +19,13 @@ const maxWidthClass = computed(() => {
 })
 </script>
 <template>
-  <div class="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0">
+  <div class="flex flex-col items-center pt-6 sm:justify-center sm:pt-0">
     <div>
       <slot name="logo" cls="w-24" />
     </div>
 
     <div
-      class="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded"
+      class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md dark:bg-gray-800 sm:rounded"
       :class="maxWidthClass">
       <slot />
     </div>

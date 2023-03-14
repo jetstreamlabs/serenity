@@ -5,10 +5,6 @@ const props = defineProps({
     required: true,
   },
 })
-
-const logout = () => {
-  Inertia.post(useRoutes('logout'))
-}
 </script>
 
 <template>
@@ -24,7 +20,7 @@ const logout = () => {
     </div>
 
     <!-- Responsive Settings Options -->
-    <div class="border-t border-gray-200 pt-4 pb-1 dark:border-gray-600">
+    <div v-if="!$page.props.user" class="border-t border-gray-200 pt-4 pb-1 dark:border-gray-600">
       <div v-if="$page.props.canLogin" class="px-6 py-4 sm:flex sm:items-center sm:justify-end">
         <ResponsiveNavLink
           :href="route('login')"
@@ -32,6 +28,7 @@ const logout = () => {
           {{ __('Login') }}
         </ResponsiveNavLink>
         <ResponsiveNavLink
+          v-if="$page.props.canRegister"
           :href="route('register')"
           class="cursor-pointer text-sm text-gray-600 hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white">
           {{ __('Register') }}

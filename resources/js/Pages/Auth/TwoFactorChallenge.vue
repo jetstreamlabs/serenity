@@ -30,12 +30,8 @@ defineExpose({ code, recovery_code })
 </script>
 
 <template>
-  <AuthLayout :title="__('Two-factor Confirmation')">
+  <GuestLayout :title="__('Two-factor Confirmation')">
     <AuthenticationCard max-width="md">
-      <template #logo>
-        <AuthenticationCard-logo />
-      </template>
-
       <div class="mb-4 text-sm text-gray-600">
         <template v-if="!recovery">
           {{
@@ -60,7 +56,7 @@ defineExpose({ code, recovery_code })
             id="code"
             type="text"
             inputmode="numeric"
-            class="mt-1 block w-full"
+            class="block w-full mt-1"
             v-model="form.code"
             autofocus
             autocomplete="one-time-code" />
@@ -72,15 +68,15 @@ defineExpose({ code, recovery_code })
             ref="recovery_code"
             id="recovery_code"
             type="text"
-            class="mt-1 block w-full"
+            class="block w-full mt-1"
             v-model="form.recovery_code"
             autocomplete="one-time-code" />
         </div>
 
-        <div class="mt-4 flex items-center justify-end">
+        <div class="flex items-center justify-end mt-4">
           <button
             type="button"
-            class="cursor-pointer text-sm text-gray-600 underline hover:text-gray-900"
+            class="text-sm text-gray-600 underline cursor-pointer hover:text-gray-900"
             @click.prevent="toggleRecovery">
             <template v-if="!recovery">{{ __('Use a recovery code') }}</template>
             <template v-else>{{ __('Use an authentication code') }}</template>
@@ -92,5 +88,5 @@ defineExpose({ code, recovery_code })
         </div>
       </form>
     </AuthenticationCard>
-  </AuthLayout>
+  </GuestLayout>
 </template>

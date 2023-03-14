@@ -34,7 +34,9 @@ defineExpose({ password, current_password })
     <template #title>{{ __('Update Password') }}</template>
 
     <template #description>
-      {{ __('Ensure your account is using a long, random password to stay secure.') }}
+      <span class="dark:text-gray-500">
+        {{ __('Ensure your account is using a long, random password to stay secure.') }}
+      </span>
     </template>
 
     <template #form>

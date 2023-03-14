@@ -10,5 +10,7 @@ const props = defineProps({ title: String })
     <main>
       <slot></slot>
     </main>
+
+    <GuestFooter />
   </div>
 </template>

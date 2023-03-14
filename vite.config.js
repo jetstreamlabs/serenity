@@ -67,7 +67,7 @@ export default defineConfig(({ command }) => {
           '@vueuse/core',
           {
             '@inertiajs/inertia': ['Inertia'],
-            '@inertiajs/inertia-vue3': ['useForm', 'usePage', 'useRemember'],
+            '@inertiajs/inertia-vue3': ['router', 'useForm', 'usePage', 'useRemember'],
             composable: ['useTrans', 'useRoutes', 'useDayjs'],
           },
         ],
