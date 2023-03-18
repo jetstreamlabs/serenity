@@ -94,7 +94,7 @@
     "unplugin-auto-import": "^0.15.1",
     "unplugin-icons": "^0.15.3",
     "unplugin-vue-components": "^0.24.1",
-    "vite": "^4.1.4",
+    "vite": "^4.2.0",
     "vite-plugin-vue-markdown": "^0.22.4",
     "vue": "^3.2.47",
     "vue-loader": "^17.0.1",
