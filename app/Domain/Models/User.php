@@ -2,6 +2,8 @@
 
 namespace App\Domain\Models;
 
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -64,4 +66,14 @@ class User extends Authenticatable
   protected $appends = [
     'profile_photo_url',
   ];
+
+  /**
+   * Create a new factory instance.
+   *
+   * @return \Illuminate\Database\Eloquent\Factories\Factory
+   */
+  protected static function newFactory(): Factory
+  {
+    return UserFactory::new();
+  }
 }

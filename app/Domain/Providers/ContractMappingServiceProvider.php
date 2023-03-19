@@ -9,7 +9,31 @@ class ContractMappingServiceProvider extends ServiceProvider
 {
   public function boot()
   {
-    $this->registerResponders();
+    /**
+     * If you choose not to auto-bind contracts to concretes
+     * you'll need to bind them manually.
+     */
+    if (config('serenity.mapping.responders')) {
+      $this->registerResponders();
+    }
+
+    if (config('serenity.mapping.repositories')) {
+      $this->registerRepositories();
+    }
+  }
+
+  /**
+   * Bind all responders to their interfaces.
+   *
+   * @return void
+   */
+  public function registerResponders(): void
+  {
+    ContractBinder::make(app_path())
+      ->setNamespace('App')
+      ->setConcretePath('Responders')
+      ->setInterfacePath('Domain/Contracts/Responders')
+      ->map();
   }
 
   /**
@@ -17,13 +41,16 @@ class ContractMappingServiceProvider extends ServiceProvider
    *
    * @return void
    */
-  public function registerResponders(): void
+  public function registerRepositories(): void
   {
-    ContractBinder::Make(app_path())
-      ->make(app_path())
+    if (! is_dir(app_path('Repositories'))) {
+      return;
+    }
+
+    ContractBinder::make(app_path())
       ->setNamespace('App')
-      ->setConcretePath('Responders')
-      ->setInterfacePath('Domain/Contracts/Responders')
+      ->setConcretePath('Domain/Repositories')
+      ->setInterfacePath('Domain/Contracts/Repositories')
       ->map();
   }
 }

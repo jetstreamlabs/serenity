@@ -207,11 +207,16 @@ return [
 
   /*
    * After having discovered all controllers, these classes will manipulate the routes
-   * before registering them to Laravel.
+   * before registering them to Serenity.
    *
    * In most cases, you shouldn't change these.
    */
   'pending_route_transformers' => [
     ...Serenity\Routing\Transformers::defaultRouteTransformers(),
+  ],
+
+  'mapping' => [
+    'responders' => true,
+    'repositories' => true,
   ],
 ];

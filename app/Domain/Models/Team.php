@@ -2,6 +2,8 @@
 
 namespace App\Domain\Models;
 
+use Database\Factories\TeamFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Serenity\Events\TeamCreated;
@@ -43,4 +45,14 @@ class Team extends BaseTeam
     'updated' => TeamUpdated::class,
     'deleted' => TeamDeleted::class,
   ];
+
+  /**
+   * Create a new factory instance.
+   *
+   * @return \Illuminate\Database\Eloquent\Factories\Factory
+   */
+  protected static function newFactory(): Factory
+  {
+    return TeamFactory::new();
+  }
 }

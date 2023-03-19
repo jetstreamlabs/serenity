@@ -1,5 +1,6 @@
 /.phpunit.cache
 /node_modules
+/docker
 /public/build
 /public/hot
 /public/storage
@@ -8,7 +9,9 @@
 .env
 .env.backup
 .env.production
+.env-docker
 .phpunit.result.cache
+docker-compose.yml
 Homestead.json
 Homestead.yaml
 auth.json

@@ -10,7 +10,8 @@
 }
 
 .stickyHeader {
-  @apply sticky top-0 z-50 bg-white shadow-md transition-all duration-200;
+  @apply sticky top-0 z-50 shadow-md transition-all duration-200;
+  @apply bg-opacity-30 backdrop-blur-lg backdrop-filter !important;
 }
 
 .wrapper {

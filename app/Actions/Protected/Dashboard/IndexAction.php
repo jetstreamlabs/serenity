@@ -2,17 +2,18 @@
 
 namespace App\Actions\Protected\Dashboard;
 
-use App\Domain\Contracts\Responders\Dashboard\Index;
+use App\Domain\Contracts\Responders\Dashboard\IndexResponder;
+use App\Domain\Requests\Dashboard\ViewRequest;
 use Serenity\Action;
 
 class IndexAction extends Action
 {
-  public function __construct(protected Index $responder)
+  public function __construct(protected IndexResponder $responder)
   {
     $this->with('Dashboard');
   }
 
-  public function __invoke()
+  public function __invoke(ViewRequest $request)
   {
     return $this->responder->send();
   }

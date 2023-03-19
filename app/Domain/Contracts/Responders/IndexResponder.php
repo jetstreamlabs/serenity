@@ -4,7 +4,7 @@ namespace App\Domain\Contracts\Responders;
 
 use Serenity\Contracts\ViewResponder;
 
-interface Index extends ViewResponder
+interface IndexResponder extends ViewResponder
 {
   //
 }

@@ -9,4 +9,4 @@ const appName = import.meta.env.VITE_APP_NAME
 
 createSerenityApp({ appName: appName || 'Serenity' })
 
-InertiaProgress.init({ color: '#7E22CE' })
+InertiaProgress.init({ color: '#00b4e2' })

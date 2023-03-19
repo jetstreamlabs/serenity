@@ -1,11 +1,14 @@
 <?php
 
-namespace Database\Factories\Domain\Models;
+namespace Database\Factories;
 
 use App\Domain\Models\Team;
 use App\Domain\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Domain\Models\Team>
+ */
 class TeamFactory extends Factory
 {
   /**

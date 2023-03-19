@@ -2,23 +2,27 @@
 
 namespace App\Actions\Public;
 
-use App\Domain\Contracts\Responders\Index;
-use App\Domain\Services\IndexService;
-use Illuminate\Http\Request;
+use App\Domain\Contracts\Responders\IndexResponder;
 use Serenity\Action;
 use Serenity\Routing\Attributes\Route;
 
 class IndexAction extends Action
 {
-  public function __construct(
-     protected Index $responder
-    ) {
+  /**
+   * Create a new instance of the action.
+   *
+   * @param  IndexResponder  $responder
+   */
+  public function __construct(protected IndexResponder $responder)
+  {
     $this->with('Welcome');
   }
 
   #[Route(name: 'home')]
-  public function __invoke(Request $request)
+  public function __invoke()
   {
+    //dd(app());
+
     return $this->responder->send();
   }
 }

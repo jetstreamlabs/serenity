@@ -129,9 +129,17 @@ export const makeServer = (command) => {
       },
       host: env.VITE_DOMAIN,
     }
-  }
-
-  return {
-    https: false,
+  } else {
+    return {
+      https: false,
+      server: {
+        hmr: {
+          host: '0.0.0.0',
+        },
+        watch: {
+          usePolling: true,
+        },
+      },
+    }
   }
 }

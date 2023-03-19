@@ -2,10 +2,10 @@
 
 namespace App\Responders;
 
-use App\Domain\Contracts\Responders\Index as IndexInterface;
+use App\Domain\Contracts\Responders\IndexResponder as IndexResponderContract;
 use App\Responder;
 
-class Index extends Responder implements IndexInterface
+class IndexResponder extends Responder implements IndexResponderContract
 {
   public function toResponse()
   {
