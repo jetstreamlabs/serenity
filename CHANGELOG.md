@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [2.2.3](https://github.com/jetstreamlabs/serenity/compare/v2.2.2...v2.2.3) (2023-03-19)
+
+
+### Code Refactoring
+
+* updates from testing generators, styles ([b34e1db](https://github.com/jetstreamlabs/serenity/commit/b34e1dbef875f377893857856317098a05e2f202))
+
 ## [2.2.2](https://github.com/jetstreamlabs/serenity/compare/v2.2.1...v2.2.2) (2023-03-14)
 
 
