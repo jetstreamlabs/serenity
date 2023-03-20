@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [2.2.4](https://github.com/jetstreamlabs/serenity/compare/v2.2.3...v2.2.4) (2023-03-20)
+
+
+### Task Commit
+
+* remove old files, update deps ([060cba7](https://github.com/jetstreamlabs/serenity/commit/060cba7df42fa17727b9115c3a9a27f2fab0f936))
+
 ## [2.2.3](https://github.com/jetstreamlabs/serenity/compare/v2.2.2...v2.2.3) (2023-03-19)
 
 
