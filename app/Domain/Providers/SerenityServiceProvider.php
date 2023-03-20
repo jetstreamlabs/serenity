@@ -2,17 +2,17 @@
 
 namespace App\Domain\Providers;
 
-use App\Domain\Serenity\AddTeamMember;
-use App\Domain\Serenity\CreateNewUser;
-use App\Domain\Serenity\CreateTeam;
-use App\Domain\Serenity\DeleteTeam;
-use App\Domain\Serenity\DeleteUser;
-use App\Domain\Serenity\InviteTeamMember;
-use App\Domain\Serenity\RemoveTeamMember;
-use App\Domain\Serenity\ResetUserPassword;
-use App\Domain\Serenity\UpdateTeamName;
-use App\Domain\Serenity\UpdateUserPassword;
-use App\Domain\Serenity\UpdateUserProfileInformation;
+use App\Domain\Operations\AddTeamMember;
+use App\Domain\Operations\CreateNewUser;
+use App\Domain\Operations\CreateTeam;
+use App\Domain\Operations\DeleteTeam;
+use App\Domain\Operations\DeleteUser;
+use App\Domain\Operations\InviteTeamMember;
+use App\Domain\Operations\RemoveTeamMember;
+use App\Domain\Operations\ResetUserPassword;
+use App\Domain\Operations\UpdateTeamName;
+use App\Domain\Operations\UpdateUserPassword;
+use App\Domain\Operations\UpdateUserProfileInformation;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;

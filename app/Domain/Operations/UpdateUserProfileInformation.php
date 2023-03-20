@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Serenity;
+namespace App\Domain\Operations;
 
 use App\Domain\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

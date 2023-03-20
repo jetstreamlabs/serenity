@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Serenity;
+namespace App\Domain\Operations;
 
 use App\Domain\Concerns\PasswordValidationRules;
 use App\Domain\Models\Team;
