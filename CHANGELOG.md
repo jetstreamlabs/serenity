@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [2.2.5](https://github.com/jetstreamlabs/serenity/compare/v2.2.4...v2.2.5) (2023-03-20)
+
+
+### Code Refactoring
+
+* change Domain\Serenity to Operations ([c29bdad](https://github.com/jetstreamlabs/serenity/commit/c29bdadf707ab38e5f07379d2e38e84dc76e5611))
+
 ## [2.2.4](https://github.com/jetstreamlabs/serenity/compare/v2.2.3...v2.2.4) (2023-03-20)
 
 
