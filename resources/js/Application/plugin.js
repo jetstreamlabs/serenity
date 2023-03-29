@@ -1,7 +1,6 @@
-import { createStore } from 'vuex'
-import { Head, Link } from '@inertiajs/inertia-vue3'
+import { createPinia } from 'pinia'
+import { Head, Link } from '@inertiajs/vue3'
 import mitt from 'mitt'
-import core from './store/core.js'
 import axios from 'axios'
 import lodash from 'lodash'
 import Pusher from 'pusher-js'
@@ -15,7 +14,9 @@ import { Zora } from '../zora.js'
 export const serenity = {
 	install(app) {
 		axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-		axios.defaults.withCredentials = true
+    axios.defaults.withCredentials = true
+
+    const pinia = createPinia()
 
     // const echo = new Echo({
     //   broadcaster: 'pusher',
@@ -37,15 +38,11 @@ export const serenity = {
 
     //window.Pusher = Pusher
 		window.axios = axios
-		window._ = lodash
-
-		const store = createStore({
-			modules: { core }
-    })
+    window._ = lodash
 
     app.use(ZiggyVue, Ziggy)
     app.use(ZoraVue, Zora)
-		app.use(store)
+    app.use(pinia)
 
 		app.component('Head', Head)
 		app.component('Link', Link)

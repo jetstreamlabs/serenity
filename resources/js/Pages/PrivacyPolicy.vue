@@ -1,5 +1,5 @@
 <script setup>
-import Privacy from './Markdown/Policy.md'
+//
 </script>
 
 <template>
@@ -13,8 +13,9 @@ import Privacy from './Markdown/Policy.md'
             <AuthenticationCard-logo />
           </div>
 
-          <div class="prose mt-6 w-full overflow-hidden p-6 shadow-md dark:bg-gray-800 sm:max-w-2xl sm:rounded-lg">
-            <Privacy />
+          <div
+            class="docs docs-slate mt-6 w-full overflow-hidden p-6 shadow-md dark:docs-invert sm:max-w-2xl sm:rounded-lg">
+            //
           </div>
         </div>
       </div>

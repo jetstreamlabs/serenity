@@ -1,7 +1,7 @@
 <script setup>
 const show = ref(true)
-const style = computed(() => usePage().props.value.serenity.flash?.bannerStyle || 'success')
-const message = computed(() => usePage().props.value.serenity.flash?.banner || '')
+const style = computed(() => usePage().props.serenity.flash?.bannerStyle || 'success')
+const message = computed(() => usePage().props.serenity.flash?.banner || '')
 </script>
 
 <template>

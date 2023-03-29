@@ -14,7 +14,7 @@ const props = defineProps({
         {{ __('Dashboard') }}
       </ResponsiveNavLink>
 
-      <ResponsiveNavLink :href="route('home')" :active="route().current('home')">
+      <ResponsiveNavLink :href="route('docs.index')" :active="route().current('docs.index')">
         {{ __('Documentation') }}
       </ResponsiveNavLink>
     </div>

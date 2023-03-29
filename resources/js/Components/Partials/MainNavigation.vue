@@ -1,5 +1,6 @@
 <script setup>
 const showingNavigationDropdown = ref(false)
+const searchModalOpen = ref(false)
 
 onBeforeMount(() => {
   window.addEventListener('scroll', handleScroll)
@@ -16,13 +17,19 @@ const handleScroll = () => {
 }
 </script>
 <template>
-  <nav
-    class="border-b border-gray-100 bg-white dark:border-gray-900 dark:bg-gray-800"
-    :class="{ stickyHeader: stickyHeader }">
+  <Teleport to="body">
+    <SearchModal
+      id="search-modal"
+      searchId="search"
+      :modalOpen="searchModalOpen"
+      @open-modal="searchModalOpen = true"
+      @close-modal="searchModalOpen = false" />
+  </Teleport>
+  <nav class="sticky top-0 z-50 bg-white dark:bg-gray-800" :class="{ stickyHeader: stickyHeader }">
     <!-- Primary Navigation Menu -->
     <div class="px-6">
       <div class="flex h-16 justify-between">
-        <div class="flex">
+        <div class="flex w-full items-center">
           <!-- Logo -->
           <div class="flex shrink-0 items-center">
             <Link :href="route('dashboard')">
@@ -36,12 +43,36 @@ const handleScroll = () => {
               {{ __('Dashboard') }}
             </NavLink>
 
-            <NavLink href="#" active="#">
+            <NavLink :href="route('docs.index')" :active="route().current('docs.index')">
               {{ __('Documentation') }}
             </NavLink>
           </div>
+          <div class="flex w-full justify-center px-4 sm:px-0">
+            <button
+              class="m-auto inline-flex w-full items-center justify-between whitespace-nowrap rounded border border-gray-200 bg-white py-[7px] pl-3 pr-2 text-[15px] leading-5 text-gray-400 shadow-sm hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500 dark:hover:border-gray-600 sm:w-[380px]"
+              :class="{ 'bg-gray-200': searchModalOpen }"
+              @click.stop="searchModalOpen = true"
+              aria-controls="search-modal">
+              <div class="flex items-center justify-center">
+                <svg
+                  class="mr-3 h-4 w-4 shrink-0 fill-gray-500 dark:fill-gray-400"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="m14.707 13.293-1.414 1.414-2.4-2.4 1.414-1.414 2.4 2.4ZM6.8 12.6A5.8 5.8 0 1 1 6.8 1a5.8 5.8 0 0 1 0 11.6Zm0-2a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6Z" />
+                </svg>
+                <span>Search ...</span>
+              </div>
+              <div class="ml-3 flex h-5 w-5 items-center justify-center font-medium text-gray-500 dark:text-gray-400">
+                <kbd class="text-[length:1.2em]">⌘</kbd>
+                <kbd class="ml-[2px] text-[length:0.9em]">K</kbd>
+              </div>
+            </button>
+          </div>
         </div>
-        <div class="hidden sm:ml-6 sm:flex sm:items-center">
+        <div class="ml-6 hidden sm:ml-0 sm:flex sm:shrink-0 sm:items-center">
           <!-- Team Manager Menu -->
           <TeamManagerMenu :sticky="stickyHeader" />
 
@@ -70,5 +101,11 @@ const handleScroll = () => {
 
     <!-- Responsive Navigation Menu -->
     <ResponsiveNavMenu :show="showingNavigationDropdown" />
+    <header
+      class="transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 md:block">
+      <div class="mx-auto w-full px-4 py-6 sm:px-6 lg:px-8">
+        <Breadcrumbs :breadcrumbs="$page.props.breadcrumbs" />
+      </div>
+    </header>
   </nav>
 </template>

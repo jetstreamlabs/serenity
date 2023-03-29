@@ -7,7 +7,7 @@ const props = defineProps({
 })
 
 const logout = () => {
-  Inertia.post(useRoutes('logout'))
+  router.post(useRoutes('logout'))
 }
 </script>
 

@@ -1,4 +1,8 @@
 /* Add base selectors here */
+html {
+  scroll-behavior: smooth;
+}
+
 .beams {
   background-image: url('/storage/img/hero-light.jpg');
   @apply bg-opacity-10 bg-cover bg-left-top;
@@ -10,7 +14,7 @@
 }
 
 .stickyHeader {
-  @apply sticky top-0 z-50 shadow-md transition-all duration-200;
+  @apply shadow-md transition-all duration-200;
   @apply bg-opacity-30 backdrop-blur-lg backdrop-filter !important;
 }
 
@@ -18,18 +22,32 @@
   @apply mx-auto w-full max-w-full md:px-6 2xl:max-w-screen-2xl;
 }
 
-html.dark {
-  .shiki {
-    &.serenity-light {
-      display: none;
-    }
-  }
+:root {
+  --shiki-color-text: #c8d3f5;
+  --shiki-color-background: #222436;
+
+  --shiki-token-constant: #ff966c;
+  --shiki-token-string: #c3e88d;
+  --shiki-token-comment: #7a88cf;
+  --shiki-token-keyword: #82aaff;
+  --shiki-token-parameter: #c8d3f5;
+  --shiki-token-function: #65bcff;
+  --shiki-token-string-expression: #ff757f;
+  --shiki-token-punctuation: #c8d3f5;
+  --shiki-token-link: #c8d3f5;
 }
 
-html:not(.dark) {
-  .shiki {
-    &.serenity-dark {
-      display: none;
-    }
-  }
+html.dark {
+  --shiki-color-text: #c8d3f5;
+  --shiki-color-background: #1e293b;
+
+  --shiki-token-constant: #ff966c;
+  --shiki-token-string: #c3e88d;
+  --shiki-token-comment: #7a88cf;
+  --shiki-token-keyword: #82aaff;
+  --shiki-token-parameter: #c8d3f5;
+  --shiki-token-function: #65bcff;
+  --shiki-token-string-expression: #ff757f;
+  --shiki-token-punctuation: #c8d3f5;
+  --shiki-token-link: #c8d3f5;
 }

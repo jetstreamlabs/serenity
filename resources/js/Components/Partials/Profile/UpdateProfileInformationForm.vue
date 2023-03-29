@@ -42,7 +42,7 @@ const updatePhotoPreview = () => {
 }
 
 const deletePhoto = () => {
-  Inertia.delete(useRoutes('current-user-photo.destroy'), {
+  router.delete(useRoutes('current-user-photo.destroy'), {
     preserveScroll: true,
     onSuccess: () => {
       photoPreview.value = null
@@ -78,13 +78,13 @@ defineExpose({ photo, photoPreview })
 
         <!-- Current Profile Photo -->
         <div class="mt-2" v-show="!photoPreview">
-          <img :src="props.user.profile_photo_url" :alt="user.name" class="h-20 w-20 rounded-full object-cover" />
+          <img :src="props.user.profile_photo_url" :alt="user.name" class="object-cover w-20 h-20 rounded-full" />
         </div>
 
         <!-- New Profile Photo Preview -->
         <div class="mt-2" v-show="photoPreview">
           <span
-            class="block h-20 w-20 rounded-full bg-cover bg-center bg-no-repeat"
+            class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-full"
             :style="'background-image: url(\'' + photoPreview + '\');'">
           </span>
         </div>
@@ -103,14 +103,14 @@ defineExpose({ photo, photoPreview })
       <!-- First Name -->
       <div class="col-span-6 sm:col-span-4">
         <Label for="name" :value="__('Name')" req />
-        <Input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
+        <Input id="name" type="text" class="block w-full mt-1" v-model="form.name" autocomplete="name" />
         <InputError :message="form.errors.name" class="mt-2" />
       </div>
 
       <!-- Email -->
       <div class="col-span-6 sm:col-span-4">
         <Label for="email" :value="__('Email')" req />
-        <Input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
+        <Input id="email" type="email" class="block w-full mt-1" v-model="form.email" />
         <InputError :message="form.errors.email" class="mt-2" />
       </div>
     </template>

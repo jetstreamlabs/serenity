@@ -6,8 +6,8 @@
       <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
       <Transition
         enter-active-class="transition duration-300 ease-out transform"
-        enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
-        enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+        enter-from-class="trangray-y-2 opacity-0 sm:trangray-y-0 sm:trangray-x-2"
+        enter-to-class="trangray-y-0 opacity-100 sm:trangray-x-0"
         leave-active-class="transition duration-100 ease-in"
         leave-from-class="opacity-100"
         leave-to-class="opacity-0"

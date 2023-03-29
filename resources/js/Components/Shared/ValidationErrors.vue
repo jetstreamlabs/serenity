@@ -1,6 +1,6 @@
 <script setup>
 const errors = computed(() => {
-  return usePage().props.value.errors
+  return usePage().props.errors
 })
 
 const hasErrors = computed(() => {

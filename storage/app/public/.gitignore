@@ -1,4 +1,6 @@
 *
 !img/
 !img/*
+!docs
+!docs/*
 !.gitignore

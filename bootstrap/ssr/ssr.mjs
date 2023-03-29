@@ -3,10 +3,9 @@ import { registerRuntimeCompiler, initCustomFormatter, warn, createSSRApp, h as 
 import { compile } from "@vue/compiler-dom";
 import { isString, NOOP, extend, generateCodeFrame } from "@vue/shared";
 import { renderToString } from "@vue/server-renderer";
-import { Head, Link, createInertiaApp } from "@inertiajs/inertia-vue3";
-import require$$0 from "process";
-import require$$1 from "http";
-import { createStore } from "vuex";
+import { Head, Link, createInertiaApp } from "@inertiajs/vue3";
+import createServer from "@inertiajs/vue3/server";
+import { createPinia } from "pinia";
 import mitt from "mitt";
 import dayjs from "dayjs";
 import axios from "axios";
@@ -61,112 +60,6 @@ ${codeFrame}` : message);
   return compileCache[key] = render;
 }
 registerRuntimeCompiler(compileToFunction);
-var lib = {};
-Object.defineProperty(lib, "__esModule", {
-  value: true
-});
-var default_1 = lib.default = void 0;
-var process$1 = _interopRequireWildcard(require$$0);
-var _http = require$$1;
-function _getRequireWildcardCache(nodeInterop) {
-  if (typeof WeakMap !== "function")
-    return null;
-  var cacheBabelInterop = /* @__PURE__ */ new WeakMap();
-  var cacheNodeInterop = /* @__PURE__ */ new WeakMap();
-  return (_getRequireWildcardCache = function(nodeInterop2) {
-    return nodeInterop2 ? cacheNodeInterop : cacheBabelInterop;
-  })(nodeInterop);
-}
-function _interopRequireWildcard(obj, nodeInterop) {
-  if (!nodeInterop && obj && obj.__esModule) {
-    return obj;
-  }
-  if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
-    return { default: obj };
-  }
-  var cache = _getRequireWildcardCache(nodeInterop);
-  if (cache && cache.has(obj)) {
-    return cache.get(obj);
-  }
-  var newObj = {};
-  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-  for (var key in obj) {
-    if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
-      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-      if (desc && (desc.get || desc.set)) {
-        Object.defineProperty(newObj, key, desc);
-      } else {
-        newObj[key] = obj[key];
-      }
-    }
-  }
-  newObj.default = obj;
-  if (cache) {
-    cache.set(obj, newObj);
-  }
-  return newObj;
-}
-const readableToString = (readable) => new Promise((resolve, reject) => {
-  let data = "";
-  readable.on("data", (chunk) => data += chunk);
-  readable.on("end", () => resolve(data));
-  readable.on("error", (err) => reject(err));
-});
-var _default = (render, port) => {
-  const _port = port || 13714;
-  const routes = {
-    "/health": async () => ({
-      status: "OK",
-      timestamp: Date.now()
-    }),
-    "/shutdown": () => process$1.exit(),
-    "/render": async (request) => render(JSON.parse(await readableToString(request))),
-    "/404": async () => ({
-      status: "NOT_FOUND",
-      timestamp: Date.now()
-    })
-  };
-  (0, _http.createServer)(async (request, response) => {
-    const dispatchRoute = routes[request.url] || routes["/404"];
-    try {
-      response.writeHead(200, {
-        "Content-Type": "application/json",
-        "Server": "Inertia.js SSR"
-      });
-      response.write(JSON.stringify(await dispatchRoute(request)));
-    } catch (e2) {
-      console.error(e2);
-    }
-    response.end();
-  }).listen(_port, () => console.log("Inertia SSR server started."));
-  console.log(`Starting SSR server on port ${_port}...`);
-};
-default_1 = lib.default = _default;
-const core = {
-  namespaced: true,
-  state: () => ({
-    visible: false,
-    message: []
-  }),
-  getters: {
-    getVisible(state) {
-      return state.visible;
-    }
-  },
-  mutations: {
-    setVisible(state, visible) {
-      state.visible = visible;
-    }
-  },
-  actions: {
-    fire({ commit }) {
-      commit("setVisible", true);
-    },
-    dismiss({ commit }) {
-      commit("setVisible", false);
-    }
-  }
-};
 function t() {
   return t = Object.assign ? Object.assign.bind() : function(t4) {
     for (var e2 = 1; e2 < arguments.length; e2++) {
@@ -531,7 +424,7 @@ const C = { install: (t4, e2) => {
   }(t5, r3, n2, o2);
   t4.mixin({ methods: { route: r2 } }), parseInt(t4.version) > 2 && t4.provide("route", r2);
 } };
-const Ziggy$1 = { "url": "https://serenity.test", "port": null, "defaults": {}, "routes": { "sanctum.csrf-cookie": { "uri": "sanctum/csrf-cookie", "methods": ["GET", "HEAD"] }, "login": { "uri": "login", "methods": ["GET", "HEAD"] }, "login.store": { "uri": "login", "methods": ["POST"] }, "logout": { "uri": "logout", "methods": ["POST"] }, "password.request": { "uri": "forgot-password", "methods": ["GET", "HEAD"] }, "password.reset": { "uri": "reset-password/{token}", "methods": ["GET", "HEAD"] }, "password.email": { "uri": "forgot-password", "methods": ["POST"] }, "password.update": { "uri": "reset-password", "methods": ["POST"] }, "register": { "uri": "register", "methods": ["GET", "HEAD"] }, "register.store": { "uri": "register", "methods": ["POST"] }, "verification.notice": { "uri": "email/verify/prompt", "methods": ["GET", "HEAD"] }, "verification.verify": { "uri": "email/verify/{id}/{hash}", "methods": ["GET", "HEAD"] }, "verification.send": { "uri": "email/verify/store", "methods": ["POST"] }, "user-profile-information.update": { "uri": "user/profile/update", "methods": ["PUT"] }, "user-password.update": { "uri": "user/password", "methods": ["PUT"] }, "password.create": { "uri": "user/password/confirm", "methods": ["GET", "HEAD"] }, "password.confirmation": { "uri": "user/password/status", "methods": ["GET", "HEAD"] }, "password.confirm": { "uri": "user/password/confirm", "methods": ["POST"] }, "two-factor.login": { "uri": "two-factor-challenge", "methods": ["GET", "HEAD"] }, "two-factor.challenge": { "uri": "two-factor-challenge", "methods": ["POST"] }, "two-factor.enable": { "uri": "user/two-factor-authentication", "methods": ["POST"] }, "two-factor.confirm": { "uri": "user/confirmed-two-factor-authentication", "methods": ["POST"] }, "two-factor.disable": { "uri": "user/two-factor-authentication", "methods": ["DELETE"] }, "two-factor.qr-code": { "uri": "user/two-factor-qr-code", "methods": ["GET", "HEAD"] }, "two-factor.secret-key": { "uri": "user/two-factor-secret-key", "methods": ["GET", "HEAD"] }, "two-factor.recovery-codes": { "uri": "user/two-factor-recovery-codes", "methods": ["GET", "HEAD"] }, "two-factor.store": { "uri": "user/two-factor-recovery-codes", "methods": ["POST"] }, "terms.show": { "uri": "terms-of-service", "methods": ["GET", "HEAD"] }, "policy.show": { "uri": "privacy-policy", "methods": ["GET", "HEAD"] }, "profile.show": { "uri": "user/profile", "methods": ["GET", "HEAD"] }, "settings.show": { "uri": "user/settings", "methods": ["GET", "HEAD"] }, "other-browser-sessions.destroy": { "uri": "user/browsers/delete", "methods": ["DELETE"] }, "current-user-photo.destroy": { "uri": "user/profile-photo", "methods": ["DELETE"] }, "current-user.destroy": { "uri": "user", "methods": ["DELETE"] }, "api-tokens.index": { "uri": "user/api-tokens", "methods": ["GET", "HEAD"] }, "api-tokens.store": { "uri": "user/api-tokens", "methods": ["POST"] }, "api-tokens.update": { "uri": "user/api-tokens/{token}", "methods": ["PUT"] }, "api-tokens.destroy": { "uri": "user/api-tokens/{token}", "methods": ["DELETE"] }, "teams.create": { "uri": "teams/create", "methods": ["GET", "HEAD"] }, "teams.store": { "uri": "teams", "methods": ["POST"] }, "teams.show": { "uri": "teams/{team}", "methods": ["GET", "HEAD"] }, "teams.update": { "uri": "teams/{team}", "methods": ["PUT"] }, "teams.destroy": { "uri": "teams/{team}", "methods": ["DELETE"] }, "current-team.update": { "uri": "current-team", "methods": ["PUT"] }, "team-members.store": { "uri": "teams/{team}/members", "methods": ["POST"] }, "team-members.update": { "uri": "teams/{team}/members/{user}", "methods": ["PUT"] }, "team-members.destroy": { "uri": "teams/{team}/members/{user}", "methods": ["DELETE"] }, "team-invitations.accept": { "uri": "teams/invitations/{invitation}", "methods": ["GET", "HEAD"] }, "team-invitations.destroy": { "uri": "teams/invitations/{invitation}", "methods": ["DELETE"] }, "ignition.healthCheck": { "uri": "_ignition/health-check", "methods": ["GET", "HEAD"] }, "ignition.executeSolution": { "uri": "_ignition/execute-solution", "methods": ["POST"] }, "ignition.updateConfig": { "uri": "_ignition/update-config", "methods": ["POST"] }, ".__construct": { "uri": "__construct", "methods": ["GET", "HEAD"] }, "home": { "uri": "/", "methods": ["GET", "HEAD"] }, "dashboard.__construct": { "uri": "dashboard/__construct", "methods": ["GET", "HEAD"] }, "dashboard": { "uri": "dashboard", "methods": ["GET", "HEAD"] } } };
+const Ziggy$1 = { "url": "https://serenity.test", "port": null, "defaults": {}, "routes": { "sanctum.csrf-cookie": { "uri": "sanctum/csrf-cookie", "methods": ["GET", "HEAD"] }, "login": { "uri": "login", "methods": ["GET", "HEAD"] }, "login.store": { "uri": "login", "methods": ["POST"] }, "logout": { "uri": "logout", "methods": ["POST"] }, "password.request": { "uri": "forgot-password", "methods": ["GET", "HEAD"] }, "password.reset": { "uri": "reset-password/{token}", "methods": ["GET", "HEAD"] }, "password.email": { "uri": "forgot-password", "methods": ["POST"] }, "password.update": { "uri": "reset-password", "methods": ["POST"] }, "register": { "uri": "register", "methods": ["GET", "HEAD"] }, "register.store": { "uri": "register", "methods": ["POST"] }, "verification.notice": { "uri": "email/verify/prompt", "methods": ["GET", "HEAD"] }, "verification.verify": { "uri": "email/verify/{id}/{hash}", "methods": ["GET", "HEAD"] }, "verification.send": { "uri": "email/verify/store", "methods": ["POST"] }, "user-profile-information.update": { "uri": "user/profile/update", "methods": ["PUT"] }, "user-password.update": { "uri": "user/password", "methods": ["PUT"] }, "password.create": { "uri": "user/password/confirm", "methods": ["GET", "HEAD"] }, "password.confirmation": { "uri": "user/password/status", "methods": ["GET", "HEAD"] }, "password.confirm": { "uri": "user/password/confirm", "methods": ["POST"] }, "two-factor.login": { "uri": "two-factor-challenge", "methods": ["GET", "HEAD"] }, "two-factor.challenge": { "uri": "two-factor-challenge", "methods": ["POST"] }, "two-factor.enable": { "uri": "user/two-factor-authentication", "methods": ["POST"] }, "two-factor.confirm": { "uri": "user/confirmed-two-factor-authentication", "methods": ["POST"] }, "two-factor.disable": { "uri": "user/two-factor-authentication", "methods": ["DELETE"] }, "two-factor.qr-code": { "uri": "user/two-factor-qr-code", "methods": ["GET", "HEAD"] }, "two-factor.secret-key": { "uri": "user/two-factor-secret-key", "methods": ["GET", "HEAD"] }, "two-factor.recovery-codes": { "uri": "user/two-factor-recovery-codes", "methods": ["GET", "HEAD"] }, "two-factor.store": { "uri": "user/two-factor-recovery-codes", "methods": ["POST"] }, "terms.show": { "uri": "terms-of-service", "methods": ["GET", "HEAD"] }, "policy.show": { "uri": "privacy-policy", "methods": ["GET", "HEAD"] }, "profile.show": { "uri": "user/profile", "methods": ["GET", "HEAD"] }, "settings.show": { "uri": "user/settings", "methods": ["GET", "HEAD"] }, "other-browser-sessions.destroy": { "uri": "user/browsers/delete", "methods": ["DELETE"] }, "current-user-photo.destroy": { "uri": "user/profile-photo", "methods": ["DELETE"] }, "current-user.destroy": { "uri": "user", "methods": ["DELETE"] }, "api-tokens.index": { "uri": "user/api-tokens", "methods": ["GET", "HEAD"] }, "api-tokens.store": { "uri": "user/api-tokens", "methods": ["POST"] }, "api-tokens.update": { "uri": "user/api-tokens/{token}", "methods": ["PUT"] }, "api-tokens.destroy": { "uri": "user/api-tokens/{token}", "methods": ["DELETE"] }, "teams.create": { "uri": "teams/create", "methods": ["GET", "HEAD"] }, "teams.store": { "uri": "teams", "methods": ["POST"] }, "teams.show": { "uri": "teams/{team}", "methods": ["GET", "HEAD"] }, "teams.update": { "uri": "teams/{team}", "methods": ["PUT"] }, "teams.destroy": { "uri": "teams/{team}", "methods": ["DELETE"] }, "current-team.update": { "uri": "current-team", "methods": ["PUT"] }, "team-members.store": { "uri": "teams/{team}/members", "methods": ["POST"] }, "team-members.update": { "uri": "teams/{team}/members/{user}", "methods": ["PUT"] }, "team-members.destroy": { "uri": "teams/{team}/members/{user}", "methods": ["DELETE"] }, "team-invitations.accept": { "uri": "teams/invitations/{invitation}", "methods": ["GET", "HEAD"] }, "team-invitations.destroy": { "uri": "teams/invitations/{invitation}", "methods": ["DELETE"] }, "docs.index": { "uri": "docs", "methods": ["GET", "HEAD"] }, "docs.show": { "uri": "docs/{version}/{page?}", "methods": ["GET", "HEAD"], "wheres": { "page": "(.*)" } }, "ignition.healthCheck": { "uri": "_ignition/health-check", "methods": ["GET", "HEAD"] }, "ignition.executeSolution": { "uri": "_ignition/execute-solution", "methods": ["POST"] }, "ignition.updateConfig": { "uri": "_ignition/update-config", "methods": ["POST"] }, "home": { "uri": "/", "methods": ["GET", "HEAD"] }, "dashboard": { "uri": "dashboard", "methods": ["GET", "HEAD"] } } };
 if (typeof window !== "undefined" && typeof window.Ziggy !== "undefined") {
   Object.assign(Ziggy$1.routes, window.Ziggy.routes);
 }
@@ -585,25 +478,23 @@ const serenityssr = {
     app.provide("echo", echo);
     app.provide("axios", axios);
     app.provide("_", _);
-    const store = createStore({
-      modules: { core }
-    });
+    const pinia = createPinia();
     app.use(C, Ziggy$1);
     app.use(ZoraVue, Zora);
-    app.use(store);
+    app.use(pinia);
     app.component("Head", Head);
     app.component("Link", Link);
   }
 };
-default_1(
+createServer(
   (page) => createInertiaApp({
     title: (title) => `${title} - ${"Serenity"}`,
     page,
     render: renderToString,
     resolve: (name) => require(`./Pages/${name}.vue`),
-    setup({ app, props, plugin }) {
+    setup({ App, props, plugin }) {
       return createSSRApp({
-        render: () => h$1(app, props)
+        render: () => h$1(App, props)
       }).use(plugin).use(serenityssr);
     }
   }),

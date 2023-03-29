@@ -1,8 +1,7 @@
-import { createStore } from 'vuex'
-import { Head, Link } from '@inertiajs/inertia-vue3'
+import { createPinia } from 'pinia'
+import { Head, Link } from '@inertiajs/vue3'
 import mitt from 'mitt'
 import dayjs from 'dayjs'
-import core from './store/core.js'
 import axios from 'axios'
 import lodash from 'lodash'
 import { ZiggyVue } from 'ziggy'
@@ -22,13 +21,11 @@ export const serenityssr = {
     app.provide('axios', axios)
     app.provide('_', lodash)
 
-		const store = createStore({
-			modules: { core }
-    })
-    
+		const pinia = createPinia()
+
     app.use(ZiggyVue, Ziggy)
     app.use(ZoraVue, Zora)
-		app.use(store)
+		app.use(pinia)
 
 		app.component('Head', Head)
 		app.component('Link', Link)

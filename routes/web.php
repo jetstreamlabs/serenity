@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Serenity\Routing\Discovery\Discover;
+use Serenity\Routing\Finder\Find;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +14,10 @@ use Serenity\Routing\Discovery\Discover;
 |
 */
 
-Discover::actions()->in(app_path('Actions/Public'));
+Find::actions()->in(app_path('Actions/Public'));
 
 Route::middleware([
   'auth:sanctum', config('serenity.auth_session'), 'verified',
 ])->group(function () {
-  Discover::actions()->in(app_path('Actions/Protected'));
+  Find::actions()->in(app_path('Actions/Protected'));
 });

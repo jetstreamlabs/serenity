@@ -1,6 +1,6 @@
 <script setup>
 const logout = () => {
-  Inertia.post(useRoutes('logout'))
+  router.post(useRoutes('logout'))
 }
 </script>
 

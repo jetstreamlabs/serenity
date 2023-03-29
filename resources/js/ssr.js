@@ -1,7 +1,7 @@
 import { createSSRApp, h } from 'vue'
 import { renderToString } from '@vue/server-renderer'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
-import createServer from '@inertiajs/server'
+import { createInertiaApp } from '@inertiajs/vue3'
+import createServer from '@inertiajs/vue3/server'
 import { serenityssr } from '@/Application/ssrPlugin.js'
 
 createServer(
@@ -11,9 +11,9 @@ createServer(
       page,
       render: renderToString,
       resolve: (name) => require(`./Pages/${name}.vue`),
-      setup({ app, props, plugin }) {
+      setup({ App, props, plugin }) {
         return createSSRApp({
-          render: () => h(app, props),
+          render: () => h(App, props),
         })
           .use(plugin)
           .use(serenityssr)

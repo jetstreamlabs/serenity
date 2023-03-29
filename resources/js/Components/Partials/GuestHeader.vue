@@ -2,7 +2,7 @@
 const showingNavigationDropdown = ref(false)
 </script>
 <template>
-  <nav class="min-w-full bg-transparent md:mb-14">
+  <nav class="z-50 min-w-full bg-transparent md:mb-14">
     <!-- Primary Navigation Menu -->
     <div class="px-6">
       <div class="flex h-16 justify-between">
@@ -20,7 +20,7 @@ const showingNavigationDropdown = ref(false)
               {{ __('Dashboard') }}
             </NavLink>
 
-            <NavLink href="#" active="#">
+            <NavLink :href="route('docs.index')" :active="route().current('docs.index')">
               {{ __('Documentation') }}
             </NavLink>
           </div>

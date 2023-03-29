@@ -1,5 +1,5 @@
 <script setup>
-import Terms from './Markdown/Terms.md'
+//
 </script>
 
 <template>
@@ -14,8 +14,8 @@ import Terms from './Markdown/Terms.md'
           </div>
 
           <div
-            class="prose mt-6 w-full overflow-hidden bg-white p-6 shadow-md dark:bg-gray-800 sm:max-w-2xl sm:rounded-lg">
-            <Terms />
+            class="docs docs-slate mt-6 w-full overflow-hidden bg-white p-6 shadow-md dark:docs-invert sm:max-w-2xl sm:rounded-lg">
+            //
           </div>
         </div>
       </div>

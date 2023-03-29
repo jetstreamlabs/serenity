@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Serenity\Routing\Finder\Find;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
   return $request->user();
+});
+
+//Find::actions()->in(app_path('Api/Guest'));
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+  //Find::actions()->in(app_path('Api/Actions'));
 });

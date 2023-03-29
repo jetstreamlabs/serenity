@@ -16,8 +16,8 @@ const updateRoleForm = useForm({
   role: null,
 })
 
-const leaveTeamForm = useForm()
-const removeTeamMemberForm = useForm()
+const leaveTeamForm = useForm({})
+const removeTeamMemberForm = useForm({})
 
 const addTeamMember = () => {
   addTeamMemberForm.post(useRoutes('team-members.store', props.team), {
@@ -28,7 +28,7 @@ const addTeamMember = () => {
 }
 
 const cancelTeamInvitation = (invitation) => {
-  Inertia.delete(useRoutes('team-invitations.destroy', invitation), {
+  router.delete(useRoutes('team-invitations.destroy', invitation), {
     preserveScroll: true,
   })
 }
@@ -95,7 +95,7 @@ const displayableRole = (role) => {
           <!-- Member Email -->
           <div class="col-span-6 sm:col-span-4">
             <Label for="email" value="Email" />
-            <Input id="email" type="email" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
+            <Input id="email" type="email" class="block w-full mt-1" v-model="addTeamMemberForm.email" />
             <InputError :message="addTeamMemberForm.errors.email" class="mt-2" />
           </div>
 
@@ -104,10 +104,10 @@ const displayableRole = (role) => {
             <Label for="roles" value="Role" />
             <InputError :message="addTeamMemberForm.errors.role" class="mt-2" />
 
-            <div class="relative z-0 mt-1 cursor-pointer rounded-lg border-2 border-gray-200 dark:border-gray-600">
+            <div class="relative z-0 mt-1 border-2 border-gray-200 rounded-lg cursor-pointer dark:border-gray-600">
               <button
                 type="button"
-                class="focus:border-contrast-300 focus:ring-contrast-200 relative inline-flex w-full rounded-lg px-4 py-3 focus:z-10 focus:outline-none focus:ring"
+                class="relative inline-flex w-full px-4 py-3 rounded-lg focus:border-contrast-300 focus:ring-contrast-200 focus:z-10 focus:outline-none focus:ring"
                 :class="{
                   'rounded-t-none border-t-2 border-gray-200 dark:border-gray-600': i > 0,
                   'rounded-b-none': i != Object.keys(availableRoles).length - 1,
@@ -125,11 +125,11 @@ const displayableRole = (role) => {
                     </div>
                     <IconOutlineCheckCircle
                       v-if="addTeamMemberForm.role == role.key"
-                      class="ml-2 h-5 w-5 text-green-400" />
+                      class="w-5 h-5 ml-2 text-green-400" />
                   </div>
 
                   <!-- Role Description -->
-                  <div class="mt-2 text-left text-xs text-gray-700 dark:text-gray-500">
+                  <div class="mt-2 text-xs text-left text-gray-700 dark:text-gray-500">
                     {{ role.description }}
                   </div>
                 </div>
@@ -175,7 +175,7 @@ const displayableRole = (role) => {
               <div class="flex items-center">
                 <!-- Cancel Team Invitation -->
                 <button
-                  class="ml-6 cursor-pointer font-medium text-red-500 focus:outline-none"
+                  class="ml-6 font-medium text-red-500 cursor-pointer focus:outline-none"
                   @click="cancelTeamInvitation(invitation)"
                   v-if="userPermissions.canRemoveTeamMembers">
                   {{ __('Cancel') }}
@@ -201,7 +201,7 @@ const displayableRole = (role) => {
           <div class="space-y-6">
             <div class="flex items-center justify-between" v-for="user in team.users" :key="user.id">
               <div class="flex items-center">
-                <img class="h-8 w-8 rounded-full" :src="user.profile_photo_url" :alt="user.name" />
+                <img class="w-8 h-8 rounded-full" :src="user.profile_photo_url" :alt="user.name" />
                 <div class="ml-4">{{ user.name }}</div>
               </div>
 
@@ -220,7 +220,7 @@ const displayableRole = (role) => {
 
                 <!-- Leave Team -->
                 <button
-                  class="ml-6 cursor-pointer text-sm text-red-500"
+                  class="ml-6 text-sm text-red-500 cursor-pointer"
                   @click="confirmLeavingTeam"
                   v-if="$page.props.user.id === user.id">
                   {{ __('Leave') }}
@@ -228,7 +228,7 @@ const displayableRole = (role) => {
 
                 <!-- Remove Team Member -->
                 <button
-                  class="ml-6 cursor-pointer text-sm text-red-500"
+                  class="ml-6 text-sm text-red-500 cursor-pointer"
                   @click="confirmTeamMemberRemoval(user)"
                   v-if="userPermissions.canRemoveTeamMembers">
                   {{ __('Remove') }}
@@ -246,10 +246,10 @@ const displayableRole = (role) => {
 
       <template #content>
         <div v-if="managingRoleFor">
-          <div class="relative z-0 mt-1 cursor-pointer rounded-lg border border-gray-200 dark:border-gray-600">
+          <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer dark:border-gray-600">
             <button
               type="button"
-              class="relative inline-flex w-full rounded-lg px-4 py-3 focus:z-10 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200"
+              class="relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200"
               :class="{
                 'rounded-t-none border-t border-gray-200 dark:border-gray-600': i > 0,
                 'rounded-b-none': i !== Object.keys(availableRoles).length - 1,
@@ -265,7 +265,7 @@ const displayableRole = (role) => {
                     :class="{ 'font-semibold': updateRoleForm.role === role.key }">
                     {{ role.name }}
                   </div>
-                  <IconOutlineCheckCircle v-if="updateRoleForm.role === role.key" class="ml-2 h-5 w-5 text-green-400" />
+                  <IconOutlineCheckCircle v-if="updateRoleForm.role === role.key" class="w-5 h-5 ml-2 text-green-400" />
                 </div>
 
                 <!-- Role Description -->

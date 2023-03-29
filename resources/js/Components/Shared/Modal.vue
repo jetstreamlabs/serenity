@@ -66,11 +66,11 @@ watch(show, (value) => {
 
         <Transition
           enter-active-class="duration-300 ease-out"
-          enter-from-class="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
-          enter-to-class="translate-y-0 opacity-100 sm:scale-100"
+          enter-from-class="trangray-y-4 opacity-0 sm:trangray-y-0 sm:scale-95"
+          enter-to-class="trangray-y-0 opacity-100 sm:scale-100"
           leave-active-class="duration-200 ease-in"
-          leave-from-class="translate-y-0 opacity-100 sm:scale-100"
-          leave-to-class="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95">
+          leave-from-class="trangray-y-0 opacity-100 sm:scale-100"
+          leave-to-class="trangray-y-4 opacity-0 sm:trangray-y-0 sm:scale-95">
           <div
             v-show="show"
             class="mb-6 transform overflow-hidden rounded-lg bg-white shadow-xl transition-all dark:bg-gray-800 dark:text-gray-100 sm:mx-auto sm:w-full"

@@ -303,7 +303,7 @@ a {
   }
 }
 
-.prose {
+.docs {
   pre:not(.shiki) {
     @apply bg-transparent p-0;
   }

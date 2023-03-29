@@ -3,7 +3,7 @@
     <template #button>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="w-5 h-5"
+        class="h-5 w-5"
         :class="{
           'text-gray-400': !hasHiddenColumns,
           'text-violet-400': hasHiddenColumns,
@@ -32,7 +32,7 @@
 
             <button
               type="button"
-              class="relative inline-flex flex-shrink-0 h-6 ml-4 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer focus:ring-light-blue-500 w-11 focus:outline-none focus:ring-2 focus:ring-offset-2"
+              class="focus:ring-light-blue-500 relative ml-4 inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
               :class="{
                 'bg-violet-500': !column.hidden,
                 'bg-gray-200': column.hidden,
@@ -46,10 +46,10 @@
               <span
                 aria-hidden="true"
                 :class="{
-                  'translate-x-5': !column.hidden,
-                  'translate-x-0': column.hidden,
+                  'trangray-x-5': !column.hidden,
+                  'trangray-x-0': column.hidden,
                 }"
-                class="inline-block w-5 h-5 transition duration-200 ease-in-out transform bg-white rounded-full shadow ring-0" />
+                class="inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out" />
             </button>
           </li>
         </ul>
