@@ -84,7 +84,7 @@
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.4",
     "pusher-js": "^8.0.1",
-    "semantic-release": "^20.1.1",
+    "semantic-release": "^21.0.0",
     "shiki": "^0.14.1",
     "tailwindcss": "^3.3",
     "unplugin-auto-import": "^0.15.1",
