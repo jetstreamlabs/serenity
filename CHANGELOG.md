@@ -1,5 +1,18 @@
 # Serenity Changelog
 
+# [2.3.0](https://github.com/jetstreamlabs/serenity/compare/v2.2.5...v2.3.0) (2023-03-29)
+
+
+### Features
+
+* updates for documentation, TW 3.3 ([9f6b23b](https://github.com/jetstreamlabs/serenity/commit/9f6b23bf858909f7cd907fa1891f249b0dae87b5))
+
+
+### Maintenance
+
+* **deps-dev:** bump semantic-release from 20.1.3 to 21.0.0 ([01209ae](https://github.com/jetstreamlabs/serenity/commit/01209ae7bc295a2ec84feee1d0559607c2fce6db))
+* **deps-dev:** update dependencies —dp-bot ([2e1c7c7](https://github.com/jetstreamlabs/serenity/commit/2e1c7c7ecdecb024599543eca6675476364fbc75))
+
 ## [2.2.5](https://github.com/jetstreamlabs/serenity/compare/v2.2.4...v2.2.5) (2023-03-20)
 
 
