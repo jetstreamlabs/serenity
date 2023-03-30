@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
-use Serenity\Features;
+use Serenity\Foundation\Features;
 
 it('can update api token permissions', function () {
   if (Features::hasTeamFeatures()) {

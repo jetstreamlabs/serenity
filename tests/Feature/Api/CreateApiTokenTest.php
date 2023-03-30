@@ -1,6 +1,6 @@
 <?php
 
-use Serenity\Features;
+use Serenity\Foundation\Features;
 
 it('can create api tokens', function () {
   if (Features::hasTeamFeatures()) {

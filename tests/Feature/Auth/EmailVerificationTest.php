@@ -4,7 +4,7 @@ use App\Domain\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
-use Serenity\Features;
+use Serenity\Foundation\Features;
 
 it('can render the email verification screen', function () {
   $user = Features::hasTeamFeatures()

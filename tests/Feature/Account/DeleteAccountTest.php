@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Carbon;
-use Serenity\Features;
+use Serenity\Foundation\Features;
 
 it('can delete user accounts', function () {
   actingAs($user = user());

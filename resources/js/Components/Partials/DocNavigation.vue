@@ -20,12 +20,12 @@ const handleScroll = () => {
   <nav class="sticky top-0 z-50 bg-white dark:bg-gray-800" :class="{ stickyHeader: stickyHeader }">
     <!-- Primary Navigation Menu -->
     <div class="px-6">
-      <div class="flex h-16 justify-center md:justify-between">
-        <div class="flex w-full items-center">
+      <div class="flex justify-center h-16 md:justify-between">
+        <div class="flex items-center w-full">
           <!-- Logo -->
-          <div class="flex shrink-0 items-center">
+          <div class="flex items-center shrink-0">
             <Link :href="route('home')">
-              <ApplicationMark class="block h-9 w-auto" />
+              <ApplicationMark class="block w-auto h-9" />
             </Link>
           </div>
 
@@ -35,22 +35,22 @@ const handleScroll = () => {
               {{ __('Dashboard') }}
             </NavLink>
 
-            <NavLink :href="route('docs.index')" class="my-px" :active="route().current('docs.index')">
+            <NavLink :href="route('docs.home')" class="my-px" :active="route().current('docs.home')">
               {{ __('Documentation') }}
             </NavLink>
           </div>
         </div>
-        <div class="flex w-full justify-center px-4 sm:px-0">
+        <div class="flex justify-center w-full px-4 sm:px-0">
           <button
             class="m-auto inline-flex w-full items-center justify-between whitespace-nowrap rounded border border-gray-200 bg-white py-[7px] pl-3 pr-2 text-[15px] leading-5 text-gray-400 shadow-sm hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500 dark:hover:border-gray-600 sm:w-[380px]"
             :class="{ 'bg-gray-200': searchModalOpen }"
             @click.stop="searchModalOpen = true"
             aria-controls="search-modal">
             <div class="flex items-center justify-center">
-              <IconOutlineSearch class="mr-3 h-4 w-4 shrink-0 fill-gray-500 dark:fill-gray-400" />
+              <IconOutlineSearch class="w-4 h-4 mr-3 shrink-0 fill-gray-500 dark:fill-gray-400" />
               <span>Search ... </span>
             </div>
-            <div class="ml-3 flex h-5 w-5 items-center justify-center font-medium text-gray-500 dark:text-gray-400">
+            <div class="flex items-center justify-center w-5 h-5 ml-3 font-medium text-gray-500 dark:text-gray-400">
               <kbd class="text-[length:1.2em]">⌘</kbd>
               <kbd class="ml-[2px] text-[length:0.9em]">K</kbd>
             </div>
@@ -75,15 +75,15 @@ const handleScroll = () => {
         </div>
 
         <!-- Hamburger -->
-        <div class="-mr-2 flex items-center sm:hidden">
+        <div class="flex items-center -mr-2 sm:hidden">
           <button
             @click="showingNavigationDropdown = !showingNavigationDropdown"
-            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:focus:bg-gray-700 dark:focus:text-gray-200">
+            class="inline-flex items-center justify-center p-2 text-gray-400 transition rounded-md hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:focus:bg-gray-700 dark:focus:text-gray-200">
             <IconOutlineMenu
-              class="h-6 w-6"
+              class="w-6 h-6"
               :class="{ hidden: showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }" />
             <IconOutlineX
-              class="h-6 w-6"
+              class="w-6 h-6"
               :class="{ hidden: !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" />
           </button>
         </div>
@@ -93,8 +93,8 @@ const handleScroll = () => {
     <!-- Responsive Navigation Menu -->
     <GuestResponsiveNavMenu :show="showingNavigationDropdown" />
     <header
-      class="transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 md:block">
-      <div class="mx-auto w-full px-4 py-6 sm:px-6 lg:px-8">
+      class="hidden text-gray-800 border-t border-gray-100 transparent dark:border-gray-900 dark:text-gray-100 md:block">
+      <div class="w-full px-4 py-6 mx-auto sm:px-6 lg:px-8">
         <Breadcrumbs :breadcrumbs="$page.props.breadcrumbs" />
       </div>
     </header>

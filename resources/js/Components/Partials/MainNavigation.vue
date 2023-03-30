@@ -43,7 +43,7 @@ const handleScroll = () => {
               {{ __('Dashboard') }}
             </NavLink>
 
-            <NavLink :href="route('docs.index')" :active="route().current('docs.index')">
+            <NavLink :href="route('docs.home')" :active="route().current('docs.home')">
               {{ __('Documentation') }}
             </NavLink>
           </div>

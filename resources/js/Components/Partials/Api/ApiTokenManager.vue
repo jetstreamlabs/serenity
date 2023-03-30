@@ -13,7 +13,7 @@ const createApiTokenForm = useForm({
 const updateApiTokenForm = useForm({
   permissions: [],
 })
-const deleteApiTokenForm = useForm()
+const deleteApiTokenForm = useForm({})
 
 const createApiToken = () => {
   createApiTokenForm.post(useRoutes('api-tokens.store'), {

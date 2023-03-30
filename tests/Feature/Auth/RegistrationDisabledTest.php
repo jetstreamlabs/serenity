@@ -1,6 +1,6 @@
 <?php
 
-use Serenity\Features;
+use Serenity\Foundation\Features;
 
 beforeEach(function () {
   //disableRegistration();

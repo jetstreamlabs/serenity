@@ -3,7 +3,7 @@
 namespace App\Actions\Public;
 
 use App\Domain\Contracts\Responders\IndexResponder;
-use Serenity\Action;
+use Serenity\Foundation\Action;
 use Serenity\Routing\Attributes\Route;
 
 class IndexAction extends Action
@@ -21,8 +21,6 @@ class IndexAction extends Action
   #[Route(name: 'home')]
   public function __invoke()
   {
-    //dd(app());
-
     return $this->responder->send();
   }
 }

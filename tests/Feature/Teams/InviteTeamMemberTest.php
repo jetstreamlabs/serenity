@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Mail;
-use Serenity\Features;
+use Serenity\Foundation\Features;
 use Serenity\Mail\TeamInvitation;
 
 it('can invite team members to teams', function () {

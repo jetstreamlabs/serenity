@@ -6,7 +6,7 @@ use App\Domain\Models\Team;
 use App\Domain\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Serenity\Features;
+use Serenity\Foundation\Features;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Domain\Models\User>

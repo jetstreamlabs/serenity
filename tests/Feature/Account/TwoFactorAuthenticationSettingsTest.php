@@ -1,6 +1,6 @@
 <?php
 
-use Serenity\Features;
+use Serenity\Foundation\Features;
 
 it('can enable two factor authentication', function () {
   actingAs($user = user());

@@ -50,13 +50,13 @@ export default defineConfig(({ command }) => {
           {
             '@inertiajs/vue3': ['router', 'useForm', 'usePage', 'useRemember'],
             composable: ['useTrans', 'useRoutes', 'useDayjs'],
-            store: ['useDocStore'],
+            store: ['useCoreStore', 'useDocStore'],
           },
         ],
         dts: 'auto-imports.d.ts',
       }),
       Components({
-        dirs: ['resources/js/Components'],
+        dirs: ['resources/js/components'],
         resolvers: [
           HeadlessUiResolver(),
           IconsResolver({
@@ -90,7 +90,7 @@ export default defineConfig(({ command }) => {
         zora: resolve(__dirname, 'vendor/jetstreamlabs/zora/dist/vue.js'),
         'zora-js': resolve(__dirname, 'vendor/jetstreamlabs/zora/dist/index.js'),
         tableTranslations: resolve(__dirname, 'resources/js/translations.js'),
-        composable: resolve(__dirname, 'resources/js/Composable/index.js'),
+        composable: resolve(__dirname, 'resources/js/composable/index.js'),
         store: resolve(__dirname, 'resources/js/store/index.js'),
       },
     },

@@ -5,12 +5,12 @@ const showingNavigationDropdown = ref(false)
   <nav class="z-50 min-w-full bg-transparent md:mb-14">
     <!-- Primary Navigation Menu -->
     <div class="px-6">
-      <div class="flex h-16 justify-between">
+      <div class="flex justify-between h-16">
         <div class="flex">
           <!-- Logo -->
-          <div class="flex shrink-0 items-center">
+          <div class="flex items-center shrink-0">
             <Link :href="route('home')">
-              <ApplicationMark class="block h-9 w-auto" />
+              <ApplicationMark class="block w-auto h-9" />
             </Link>
           </div>
 
@@ -20,7 +20,7 @@ const showingNavigationDropdown = ref(false)
               {{ __('Dashboard') }}
             </NavLink>
 
-            <NavLink :href="route('docs.index')" :active="route().current('docs.index')">
+            <NavLink :href="route('docs.home')" :active="route().current('docs.home')">
               {{ __('Documentation') }}
             </NavLink>
           </div>
@@ -44,15 +44,15 @@ const showingNavigationDropdown = ref(false)
         </div>
 
         <!-- Hamburger -->
-        <div class="-mr-2 flex items-center sm:hidden">
+        <div class="flex items-center -mr-2 sm:hidden">
           <button
             @click="showingNavigationDropdown = !showingNavigationDropdown"
-            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:focus:bg-gray-700 dark:focus:text-gray-200">
+            class="inline-flex items-center justify-center p-2 text-gray-400 transition rounded-md hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:focus:bg-gray-700 dark:focus:text-gray-200">
             <IconOutlineMenu
-              class="h-6 w-6"
+              class="w-6 h-6"
               :class="{ hidden: showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }" />
             <IconOutlineX
-              class="h-6 w-6"
+              class="w-6 h-6"
               :class="{ hidden: !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" />
           </button>
         </div>

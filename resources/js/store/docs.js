@@ -1,4 +1,4 @@
-import useRoutes from '../Composable/useRoutes.js'
+import useRoutes from '../composable/useRoutes.js'
 import { defineStore } from 'pinia'
 
 export const useDocStore = defineStore({

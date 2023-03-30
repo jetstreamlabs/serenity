@@ -1,9 +1,9 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
-import { serenity } from '@/Application/plugin.js'
+import { serenity } from './plugin.js'
 
-const pages = import.meta.glob('../Pages/**/*.vue')
+const pages = import.meta.glob('../pages/**/*.vue')
 
 export default async function createSerenityApp({ appName }) {
   return createInertiaApp({
@@ -11,7 +11,7 @@ export default async function createSerenityApp({ appName }) {
       color: '#00b4e2',
     },
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`../Pages/${name}.vue`, pages),
+    resolve: (name) => resolvePageComponent(`../pages/${name}.vue`, pages),
     setup({ el, App, props, plugin }) {
       return createApp({ render: () => h(App, props) })
         .use(plugin)

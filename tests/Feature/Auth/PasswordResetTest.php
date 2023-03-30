@@ -2,7 +2,7 @@
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
-use Serenity\Features;
+use Serenity\Foundation\Features;
 
 it('can render the reset password link screen', function () {
   $response = $this->get(route('password.request'));

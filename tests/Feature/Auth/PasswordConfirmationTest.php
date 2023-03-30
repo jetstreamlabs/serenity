@@ -1,6 +1,6 @@
 <?php
 
-use Serenity\Features;
+use Serenity\Foundation\Features;
 
 it('can render the confirm password screen', function () {
   $user = Features::hasTeamFeatures()

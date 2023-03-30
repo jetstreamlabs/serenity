@@ -4,7 +4,7 @@ namespace App\Actions\Protected\Dashboard;
 
 use App\Domain\Contracts\Responders\Dashboard\IndexResponder;
 use App\Domain\Requests\Dashboard\ViewRequest;
-use Serenity\Action;
+use Serenity\Foundation\Action;
 
 class IndexAction extends Action
 {

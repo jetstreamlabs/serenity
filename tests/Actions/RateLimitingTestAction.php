@@ -4,7 +4,7 @@ namespace Tests\Actions;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
-use Serenity\Action;
+use Serenity\Foundation\Action;
 
 class RateLimitingTestAction extends Action
 {

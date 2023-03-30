@@ -1,7 +1,7 @@
 <?php
 
 use App\Domain\Providers\RouteServiceProvider;
-use Serenity\Features;
+use Serenity\Foundation\Features;
 use Serenity\Serenity;
 
 it('can render the registration screen', function () {
