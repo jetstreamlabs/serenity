@@ -4120,7 +4120,7 @@
             "dist": {
                 "type": "path",
                 "url": "../foundation",
-                "reference": "1d87ca0cae30bed8ef6eeb9ab276989bb3c18510"
+                "reference": "f24a5c130b2ef041dc53061520d9edd4eee37bb1"
             },
             "require": {
                 "bacon/bacon-qr-code": "^2.0",

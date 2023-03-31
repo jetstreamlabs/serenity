@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Serenity\Concerns\HasProfilePhoto;
 use Serenity\Concerns\HasTeams;
 use Serenity\Concerns\TwoFactorAuthenticatable;
-use Serenity\User as Authenticatable;
+use Serenity\Database\User as Authenticatable;
 
 class User extends Authenticatable
 {

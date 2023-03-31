@@ -5,5 +5,5 @@ const props = defineProps(['content'])
   <!--prettier-ignore-->
   <div
     class="docs docs-slate max-w-none dark:docs-invert docs-headings:font-normal"
-    v-html="content" />
+    v-html="$page.props.content" />
 </template>

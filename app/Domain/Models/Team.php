@@ -6,10 +6,10 @@ use Database\Factories\TeamFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Serenity\Database\Team as BaseTeam;
 use Serenity\Events\TeamCreated;
 use Serenity\Events\TeamDeleted;
 use Serenity\Events\TeamUpdated;
-use Serenity\Team as BaseTeam;
 
 class Team extends BaseTeam
 {

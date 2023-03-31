@@ -12,10 +12,16 @@ const logout = () => {
 </script>
 
 <template>
-  <div :class="{ block: show, hidden: !show }" class="sm:hidden">
+  <div :class="{ block: show, hidden: !show }" class="lg:hidden">
     <div class="pt-2 pb-3 pl-6 pr-4 space-y-1">
       <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
         {{ __('Dashboard') }}
+      </ResponsiveNavLink>
+    </div>
+
+    <div class="pt-2 pb-3 pl-6 pr-4 space-y-1">
+      <ResponsiveNavLink :href="route('docs.home')" :active="route().current('docs.home')">
+        {{ __('Documentation') }}
       </ResponsiveNavLink>
     </div>
 

@@ -2,7 +2,7 @@
 
 namespace App\Domain\Models;
 
-use Serenity\Membership as BaseMembership;
+use Serenity\Database\Membership as BaseMembership;
 
 class Membership extends BaseMembership
 {

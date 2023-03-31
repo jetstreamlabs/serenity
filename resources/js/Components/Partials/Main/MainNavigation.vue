@@ -38,7 +38,7 @@ const handleScroll = () => {
           </div>
 
           <!-- Navigation Links -->
-          <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+          <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
             <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
               {{ __('Dashboard') }}
             </NavLink>
@@ -47,9 +47,9 @@ const handleScroll = () => {
               {{ __('Documentation') }}
             </NavLink>
           </div>
-          <div class="flex w-full justify-center px-4 sm:px-0">
+          <div class="flex w-full justify-center px-4 lg:px-0">
             <button
-              class="m-auto inline-flex w-full items-center justify-between whitespace-nowrap rounded border border-gray-200 bg-white py-[7px] pl-3 pr-2 text-[15px] leading-5 text-gray-400 shadow-sm hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500 dark:hover:border-gray-600 sm:w-[380px]"
+              class="m-auto inline-flex w-full items-center justify-between whitespace-nowrap rounded border border-gray-200 bg-white py-[7px] pl-3 pr-2 text-[15px] leading-5 text-gray-400 shadow-sm hover:border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500 dark:hover:border-gray-600 lg:w-[380px]"
               :class="{ 'bg-gray-200': searchModalOpen }"
               @click.stop="searchModalOpen = true"
               aria-controls="search-modal">
@@ -72,7 +72,7 @@ const handleScroll = () => {
             </button>
           </div>
         </div>
-        <div class="ml-6 hidden sm:ml-0 sm:flex sm:shrink-0 sm:items-center">
+        <div class="ml-6 hidden md:ml-0 md:flex md:shrink-0 md:items-center">
           <!-- Team Manager Menu -->
           <TeamManagerMenu :sticky="stickyHeader" />
 
@@ -84,7 +84,7 @@ const handleScroll = () => {
         </div>
 
         <!-- Hamburger -->
-        <div class="-mr-2 flex items-center sm:hidden">
+        <div class="-mr-2 flex items-center lg:hidden">
           <button
             @click="showingNavigationDropdown = !showingNavigationDropdown"
             class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:focus:bg-gray-700 dark:focus:text-gray-200">
@@ -102,9 +102,9 @@ const handleScroll = () => {
     <!-- Responsive Navigation Menu -->
     <ResponsiveNavMenu :show="showingNavigationDropdown" />
     <header
-      class="transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 md:block">
-      <div class="mx-auto w-full px-4 py-6 sm:px-6 lg:px-8">
-        <Breadcrumbs :breadcrumbs="$page.props.breadcrumbs" />
+      class="transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 lg:block">
+      <div class="mx-auto w-full px-4 py-6 lg:px-8">
+        <Breadcrumbs />
       </div>
     </header>
   </nav>

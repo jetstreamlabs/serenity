@@ -1,6 +1,5 @@
-<script setup></script>
 <template>
-  <footer class="border-t border-gray-200 pt-8 dark:border-gray-800">
+  <footer class="border-t border-gray-200 pt-8 dark:border-gray-600">
     <div class="flex flex-col items-center justify-center md:flex-row md:justify-between">
       <div class="mb-4 md:mb-0">
         <div class="flex shrink-0 flex-col items-center md:flex-row">

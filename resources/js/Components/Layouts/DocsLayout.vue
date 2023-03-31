@@ -1,25 +1,5 @@
 <script setup>
-const sidebarOpen = ref(false)
-
-const prevArticle = ref(null)
-const nextArticle = ref({
-  title: 'Methods and Parameters',
-  link: '#0',
-})
-
-onBeforeMount(() => {
-  window.addEventListener('scroll', handleScroll)
-})
-
-const stickyHeader = ref(false)
-
-const handleScroll = () => {
-  if (window.pageYOffset > 0) {
-    stickyHeader.value = true
-  } else {
-    stickyHeader.value = false
-  }
-}
+//
 </script>
 
 <template>
@@ -31,60 +11,36 @@ const handleScroll = () => {
   <MainNavigation v-if="$page.props.user" />
   <DocNavigation v-else />
 
-  <div className="flex flex-col min-h-screen overflow-hidden">
-    <main class="documentation-content grow">
-      <section class="relative">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6">
-          <!-- Main content -->
-          <div>
-            <!-- Sidebar -->
-            <DocsSidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" />
+  <main class="z-0 flex py-6 overflow-y-scroll focus:outline-none" tabindex="0">
+    <div class="flex flex-col items-start justify-start px-6 lg:flex-row lg:justify-between">
+      <MobileSidebar />
 
-            <!-- Page container -->
-            <div class="md:grow md:pl-64 lg:pr-6 xl:pr-0">
-              <div class="pt-8 pb-8 md:pt-8 md:pl-6 lg:pl-12">
-                <!-- Page header -->
-                <div class="mb-6 flex h-16 items-center">
-                  <ApplicationMark class="block h-10 w-auto" />
-                  <h1 class="ml-4 pt-2 text-4xl font-normal text-gray-800 dark:text-gray-200">
-                    {{ $page.props.title }}
-                  </h1>
-                </div>
+      <Sidebar />
 
-                <article class="flex xl:space-x-12">
-                  <!-- Main area -->
-                  <div class="min-w-0">
-                    <!-- Mobile hamburger + breadcrumbs -->
-                    <div class="mb-8 flex items-center md:hidden">
-                      <!-- Hamburger button -->
-                      <DocsMenuButton :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
-                      <!-- Breadcrumbs -->
-                      <div class="ml-3 flex min-w-0 items-center whitespace-nowrap text-sm">
-                        <span class="text-gray-600 dark:text-gray-400">Documentation</span>
-                        <svg
-                          class="mx-2 shrink-0 fill-gray-400 dark:fill-gray-500"
-                          width="8"
-                          height="10"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1 2 2.414.586 6.828 5 2.414 9.414 1 8l3-3z" />
-                        </svg>
-                        <span class="truncate font-medium text-gray-800 dark:text-gray-200">Fundamentals</span>
-                      </div>
-                    </div>
-                    <slot />
-
-                    <!-- Page navigation -->
-                    <DocsPageNavigation :prevArticle="prevArticle" :nextArticle="nextArticle" />
-
-                    <!-- Content footer -->
-                    <DocsPageFooter />
-                  </div>
-                </article>
-              </div>
-            </div>
-          </div>
+      <div class="w-full px-4 py-8 bg-white rounded shadow dark:bg-gray-800 lg:ml-4">
+        <div class="flex items-center">
+          <ApplicationMark class="block w-auto h-10" />
+          <h1 class="pt-2 ml-4 text-4xl font-normal text-gray-800 dark:text-gray-200">
+            {{ $page.props.title }}
+          </h1>
         </div>
-      </section>
-    </main>
-  </div>
+
+        <SectionBorder />
+
+        <MobileNavTrigger />
+        <slot />
+
+        <SectionBorder size="sm" class="mt-6" />
+
+        <PageNavigation />
+
+        <PageFooter />
+      </div>
+      <div
+        class="hidden w-full mb-4 bg-white rounded shadow dark:bg-gray-800 dark:text-gray-100 lg:ml-6 lg:block lg:w-4/12">
+        <Toc />
+      </div>
+    </div>
+    <ScrollTop />
+  </main>
 </template>

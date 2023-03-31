@@ -9,6 +9,7 @@ import { ZiggyVue } from 'ziggy'
 import { Ziggy } from '../ziggy.js'
 import { ZoraVue } from 'zora'
 import { Zora } from '../zora.js'
+import ClickOutside from 'vue-click-outside'
 
 //prettier-ignore
 export const serenity = {
@@ -35,6 +36,8 @@ export const serenity = {
     //app.provide('echo', echo)
     app.provide('axios', axios)
     app.provide('_', lodash)
+
+    app.directive('click-outside', ClickOutside)
 
     //window.Pusher = Pusher
 		window.axios = axios

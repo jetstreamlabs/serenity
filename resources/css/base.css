@@ -18,6 +18,10 @@ html {
   @apply bg-opacity-30 backdrop-blur-lg backdrop-filter !important;
 }
 
+.stickyMenu {
+  @apply sticky top-0;
+}
+
 .wrapper {
   @apply mx-auto w-full max-w-full md:px-6 2xl:max-w-screen-2xl;
 }
@@ -39,7 +43,7 @@ html {
 
 html.dark {
   --shiki-color-text: #c8d3f5;
-  --shiki-color-background: #1e293b;
+  --shiki-color-background: #020617;
 
   --shiki-token-constant: #ff966c;
   --shiki-token-string: #c3e88d;

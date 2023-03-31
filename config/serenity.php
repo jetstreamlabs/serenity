@@ -213,17 +213,18 @@ return [
    * The following extensions are enabled by default:
    *
    * League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension
-   * League\CommonMark\Extension\Table\TableExtension
    * Serenity\Markdown\Highlighters\HighlightCodeExtension
    * League\CommonMark\Extension\FrontMatter\FrontMatterExtension
-   * League\CommonMark\Extension\GithubFlavoredMarkdownExtension
    * League\CommonMark\Extension\TableOfContents\TableOfContentsExtension
    * League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension
    *
    * Check the League CommonMark site for more info and configuration options:
    * https://commonmark.thephpleague.com
    */
-  'extensions' => [],
+  'extensions' => [
+    // League\CommonMark\Extension\GithubFlavoredMarkdownExtension::class,
+    // League\CommonMark\Extension\Table\TableExtension::class
+  ],
 
   /**
    * RENDERER CONFIGURATION
@@ -255,7 +256,7 @@ return [
    * This option specifies an array of options for TOC extension.
    */
   'table_of_contents' => [
-    'html_class' => 'table-of-contents',
+    'html_class' => 'lg:hidden toc',
     'position' => 'placeholder',
     'style' => 'bullet',
     'min_heading_level' => 2,
@@ -358,8 +359,8 @@ return [
    * Turn the cache on or off, and set the cache time (minutes) for docs.
    */
   'cache' => [
-    'enabled' => false,
-    'period' => 108000,
+    'enabled' => true,
+    'period' =>  3600, //108000 = 1 month
   ],
 
   /**

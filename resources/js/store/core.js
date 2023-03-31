@@ -4,10 +4,14 @@ export const useCoreStore = defineStore({
   id: 'core',
 
   state: () => ({
-    // something: ''
+    sidebarOpen: false,
   }),
 
   actions: {
+    toggleSidebar(toggle) {
+      this.sidebarOpen = toggle
+    },
+
     fetchSomething() {
       // fetch something from the api
       // this.something = response.data
@@ -15,8 +19,8 @@ export const useCoreStore = defineStore({
   },
 
   getters: {
-    getSomething: (state) => {
-      // return state.something
+    getSidebarOpen: (state) => {
+      return state.sidebarOpen
     },
   },
 })

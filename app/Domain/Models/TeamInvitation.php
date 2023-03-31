@@ -3,8 +3,8 @@
 namespace App\Domain\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Serenity\Database\TeamInvitation as BaseTeamInvitation;
 use Serenity\Serenity;
-use Serenity\TeamInvitation as BaseTeamInvitation;
 
 class TeamInvitation extends BaseTeamInvitation
 {
