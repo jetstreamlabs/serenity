@@ -360,7 +360,7 @@ return [
    */
   'cache' => [
     'enabled' => true,
-    'period' =>  3600, //108000 = 1 month
+    'period' => 3600, //108000 = 1 month
   ],
 
   /**
