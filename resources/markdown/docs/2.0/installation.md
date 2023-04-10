@@ -8,8 +8,6 @@ tags:
 
 [[toc]]
 
----
-
 ## Quis vel iste dicta
 
 Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.
@@ -29,7 +27,12 @@ export default {
 };
 ```
 
+::: doc error
+
+## Note
+
 Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.
+:::
 
 ### Natus aspernatur iste
 

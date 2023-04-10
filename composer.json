@@ -18,18 +18,12 @@
     "laravel/sanctum": "*",
     "laravel/tinker": "*",
     "pusher/pusher-php-server": "^7.2",
-    "serenity/foundation": "@dev",
+    "serenity/foundation": "^2.3",
     "spatie/laravel-query-builder": "^5.2",
     "spiral/roadrunner": "^2.12",
     "symfony/yaml": "^6.2",
     "tightenco/ziggy": "^1.5"
   },
-  "repositories": [
-    {
-      "type": "path",
-      "url": "../foundation"
-    }
-  ],
   "require-dev": {
     "fakerphp/faker": "^1.21",
     "jetstreamlabs/pinte": "^1.0",

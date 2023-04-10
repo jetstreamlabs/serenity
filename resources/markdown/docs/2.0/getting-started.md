@@ -8,8 +8,6 @@ tags:
 
 [[toc]]
 
----
-
 ## Quis vel iste dicta
 
 Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.

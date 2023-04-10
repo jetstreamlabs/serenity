@@ -359,8 +359,8 @@ return [
    * Turn the cache on or off, and set the cache time (minutes) for docs.
    */
   'cache' => [
-    'enabled' => true,
-    'period' => 3600, //108000 = 1 month
+    'enabled' => false,
+    'period' => 1440, //108000 = 1 month
   ],
 
   /**

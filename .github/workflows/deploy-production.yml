@@ -7,6 +7,17 @@ on:
   workflow_dispatch:
 
 jobs:
+  write-version:
+    runs-on: ubuntu-latest
+    name: Write Version to File
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update version
+        uses: brettdorrans/write-version-to-file@master
+        with:
+          filename: '/.VERSION'
+          placeholder: '${VERSION}'
+
   create:
     name: 'Create Next Branch'
     runs-on: ubuntu-latest

@@ -9,11 +9,11 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div class="mb-8 mt-6 sm:mt-0 flex items-center dark:text-gray-100 lg:hidden">
+  <div class="flex items-center mt-6 mb-8 sm:mt-0 lg:mb-0 dark:text-gray-100 lg:hidden">
     <!-- Hamburger button -->
     <MenuButton :sidebarOpen="sidebarOpen" @toggle-sidebar="toggleSidebar" />
     <!-- Breadcrumbs -->
-    <ol class="breadcrumbs ml-2 flex">
+    <ol class="flex ml-2 breadcrumbs">
       <li v-for="(breadcrumb, index) in $page.props.breadcrumbs" :key="index">
         <template v-if="breadcrumb.route === 'last'">
           <li class="last">{{ breadcrumb.text }}</li>

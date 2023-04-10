@@ -17,7 +17,24 @@ module.exports = {
         sans: ['Poppins', ...defaultTheme.fontFamily.sans],
         ui: 'Inter',
       },
-
+      typography: {
+        DEFAULT: {
+          css: {
+            'h1': {
+              'margin-top': 0
+            },
+            'h2': {
+              'margin-top': 0
+            },
+            'h3': {
+              'margin-top': 0
+            },
+            'h4': {
+              'margin-top': 0
+            }
+          }
+        }
+      },
       colors: {
         blue: {
           DEFAULT: '#00B4E2',

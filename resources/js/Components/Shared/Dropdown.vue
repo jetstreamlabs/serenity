@@ -4,7 +4,7 @@ const props = defineProps({
     default: 'right',
   },
   width: {
-    default: '48',
+    default: '64',
   },
   contentClasses: {
     default: () => ['py-1', 'bg-white', 'dark:bg-gray-700'],
@@ -22,9 +22,44 @@ const closeOnEscape = (e) => {
 onMounted(() => document.addEventListener('keydown', closeOnEscape))
 onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
 
+const someClass = computed(() => {
+  return {
+    20: 'w-5',
+    24: 'w-6',
+    28: 'w-7',
+    32: 'w-8',
+    36: 'w-9',
+    40: 'w-10',
+    44: 'w-11',
+    48: 'w-12',
+    56: 'w-14',
+    64: 'w-16',
+    80: 'w-20',
+    96: 'w-24',
+    112: 'w-28',
+    128: 'w-32',
+    144: 'w-36',
+    160: 'w-40',
+    176: 'w-44',
+    192: 'w-48',
+    208: 'w-52',
+    224: 'w-56',
+    240: 'w-60',
+    256: 'w-64',
+    288: 'w-72',
+    320: 'w-80',
+    384: 'w-96',
+  }[props.width.toString()]
+})
+
 const widthClass = computed(() => {
   return {
+    20: 'w-20',
+    32: 'w-32',
+    36: 'w-9',
     48: 'w-48',
+    64: 'w-64',
+    96: 'w-96',
   }[props.width.toString()]
 })
 
@@ -62,7 +97,7 @@ const alignmentClasses = computed(() => {
         style="display: none"
         @click="open = false">
         <div
-          class="py-1 mt-2 bg-white rounded-md shadow-lg w-60 ring-1 ring-black ring-opacity-5 dark:bg-gray-800 dark:ring-gray-700"
+          class="py-1 mt-2 bg-white w-full max-w-fit rounded-md shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 dark:ring-gray-700"
           :class="contentClasses">
           <slot name="content"></slot>
         </div>

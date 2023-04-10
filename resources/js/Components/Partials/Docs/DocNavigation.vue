@@ -104,51 +104,7 @@ const closeVersion = () => {
       <div class="flex items-center px-4 py-6 sm:px-6 lg:px-8">
         <!-- Version dropdown -->
         <div class="relative ml-3">
-          <div>
-            <button
-              v-click-outside="closeVersion"
-              @click.prevent="versionOpen = !versionOpen"
-              class="flex items-center justify-center w-auto h-8 font-medium text-gray-600 cursor-pointer hover:text-gray-700 focus:text-gray-700 focus:outline-none dark:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-300"
-              id="version-menu"
-              aria-label="Version menu"
-              aria-haspopup="true">
-              v{{ $page.props.currentVersion }}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-auto h-4 ml-2 stroke-current"
-                viewBox="0 0 20 20"
-                fill="currentColor">
-                <path
-                  fill-rule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd" />
-              </svg>
-            </button>
-          </div>
-          <transition
-            enter-active-class="transition duration-100 ease-out"
-            enter-class="transform scale-95 opacity-0"
-            enter-to-class="transform scale-100 opacity-100"
-            leave-active-class="transition duration-75 ease-in"
-            leave-class="transform scale-100 opacity-100"
-            leave-to-class="transform scale-95 opacity-0">
-            <div v-show="versionOpen" class="absolute right-0 w-auto mt-2 origin-top-right rounded-md shadow-lg">
-              <div
-                class="py-1 bg-white rounded-md shadow-xs dark:bg-gray-800 dark:text-gray-200"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="user-menu">
-                <div v-for="version in $page.props.versions" :key="version">
-                  <Link
-                    :href="route('docs.show', { version: version, page: $page.props.currentSection })"
-                    class="block px-4 py-2 text-sm text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600"
-                    role="menuitem">
-                    {{ version }}
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </transition>
+          <VersionMenu />
         </div>
         <!-- Github button -->
         <a
