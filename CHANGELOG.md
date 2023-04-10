@@ -1,5 +1,19 @@
 # Serenity Changelog
 
+## [2.3.1](https://github.com/jetstreamlabs/serenity/compare/v2.3.0...v2.3.1) (2023-04-10)
+
+
+### Code Refactoring
+
+* class renaming for foundation ([312d360](https://github.com/jetstreamlabs/serenity/commit/312d360800026d3871c51404ee86a509bb78825c))
+* updates for docs, update temp demo docs ([be4c6b6](https://github.com/jetstreamlabs/serenity/commit/be4c6b6aed173bac4e8040134aad0042b31db2ea))
+
+
+### Maintenance
+
+* continue docs theme work ([945b315](https://github.com/jetstreamlabs/serenity/commit/945b3159e6e31c4f0ebed0c96153b27abed1ab07))
+* **style:** pinte style changes ([2ddd53a](https://github.com/jetstreamlabs/serenity/commit/2ddd53a448282c35c898840fa79e680223747e82))
+
 # [2.3.0](https://github.com/jetstreamlabs/serenity/compare/v2.2.5...v2.3.0) (2023-03-29)
 
 
