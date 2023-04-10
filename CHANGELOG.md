@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [2.3.2](https://github.com/jetstreamlabs/serenity/compare/v2.3.1...v2.3.2) (2023-04-10)
+
+
+### Code Refactoring
+
+* update version action, dev deps ([f9f10fc](https://github.com/jetstreamlabs/serenity/commit/f9f10fcab145163f834a97a7401e2efc3bfe504a))
+
 ## [2.3.1](https://github.com/jetstreamlabs/serenity/compare/v2.3.0...v2.3.1) (2023-04-10)
 
 
