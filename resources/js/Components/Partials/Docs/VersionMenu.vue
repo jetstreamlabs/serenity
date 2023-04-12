@@ -1,7 +1,9 @@
 <script setup>
 const page = usePage().props.currentSection
 
-const switchVersion = (version) => {
+const props = defineProps(['sticky'])
+
+const switchVersion = version => {
   router.get(useRoutes('docs.show', { version: version, page: page }))
 }
 </script>
@@ -16,7 +18,7 @@ const switchVersion = (version) => {
           :class="[
             sticky
               ? 'bg-transparent hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-200'
-              : 'bg-white hover:bg-gray-50 focus:bg-gray-50 active:bg-gray-50',
+              : 'bg-white hover:bg-gray-50 focus:bg-gray-50 active:bg-gray-50'
           ]">
           v{{ $page.props.currentVersion }}
           <IconOutlineSelector class="-mr-0.5 ml-2 h-4 w-4" />

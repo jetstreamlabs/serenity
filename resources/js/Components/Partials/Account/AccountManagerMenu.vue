@@ -23,19 +23,27 @@ const logout = () => {
             class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition hover:text-gray-700 focus:outline-none">
             {{ $page.props.user.name }}
 
-            <IconOutlineChevronDown class="ml-2 -mr-0.5 h-4 w-4" />
+            <IconOutlineChevronDown class="-mr-0.5 ml-2 h-4 w-4" />
           </button>
         </span>
       </template>
 
       <template #content>
         <!-- Account Management -->
-        <div class="block px-4 py-2 text-xs text-gray-400">{{ __('Manage Account') }}</div>
-        <DropdownLink :href="route('settings.show')"> {{ __('Account') }} </DropdownLink>
-        <DropdownLink :href="route('profile.show')" v-if="$page.props.serenity.canUpdateProfileInformation">
+        <div class="block px-4 py-2 text-xs text-gray-400">
+          {{ __('Manage Account') }}
+        </div>
+        <DropdownLink :href="route('settings.show')">
+          {{ __('Account') }}
+        </DropdownLink>
+        <DropdownLink
+          :href="route('profile.show')"
+          v-if="$page.props.serenity.canUpdateProfileInformation">
           {{ __('Profile') }}
         </DropdownLink>
-        <DropdownLink :href="route('api-tokens.index')" v-if="$page.props.serenity.hasApiFeatures">
+        <DropdownLink
+          :href="route('api-tokens.index')"
+          v-if="$page.props.serenity.hasApiFeatures">
           {{ __('API Tokens') }}
         </DropdownLink>
 

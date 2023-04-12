@@ -4,7 +4,8 @@ const props = defineProps({ title: String })
 <template>
   <Head :title="title" />
 
-  <div class="beams min-h-screen bg-gray-200 dark:bg-gray-900 dark:text-gray-100">
+  <div
+    class="beams min-h-screen bg-gray-200 dark:bg-gray-900 dark:text-gray-100">
     <GuestHeader />
 
     <main>

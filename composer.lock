@@ -4116,16 +4116,16 @@
         },
         {
             "name": "serenity/foundation",
-            "version": "v2.3.2",
+            "version": "v2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jetstreamlabs/foundation.git",
-                "reference": "d423e67c54e6c8b23371e5230f00ba474fb6b91e"
+                "reference": "73691084ff6b4cf4d4f69e9d8311b027e5b312cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/d423e67c54e6c8b23371e5230f00ba474fb6b91e",
-                "reference": "d423e67c54e6c8b23371e5230f00ba474fb6b91e",
+                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/73691084ff6b4cf4d4f69e9d8311b027e5b312cf",
+                "reference": "73691084ff6b4cf4d4f69e9d8311b027e5b312cf",
                 "shasum": ""
             },
             "require": {
@@ -4190,7 +4190,7 @@
                 "issues": "https://github.com/jetstreamlabs/foundation/issues",
                 "source": "https://github.com/jetstreamlabs/foundation"
             },
-            "time": "2023-04-10T20:26:28+00:00"
+            "time": "2023-04-11T05:55:19+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -10114,16 +10114,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "6.0.0",
+            "version": "6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "b6f3694c6386c7959915a0037652e0c40f6f69cc"
+                "reference": "43c751b41d74f96cbbd4e07b7aec9675651e2951"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/b6f3694c6386c7959915a0037652e0c40f6f69cc",
-                "reference": "b6f3694c6386c7959915a0037652e0c40f6f69cc",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/43c751b41d74f96cbbd4e07b7aec9675651e2951",
+                "reference": "43c751b41d74f96cbbd4e07b7aec9675651e2951",
                 "shasum": ""
             },
             "require": {
@@ -10165,7 +10165,8 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
-                "source": "https://github.com/sebastianbergmann/environment/tree/6.0.0"
+                "security": "https://github.com/sebastianbergmann/environment/security/policy",
+                "source": "https://github.com/sebastianbergmann/environment/tree/6.0.1"
             },
             "funding": [
                 {
@@ -10173,7 +10174,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-03T07:03:04+00:00"
+            "time": "2023-04-11T05:39:26+00:00"
         },
         {
             "name": "sebastian/exporter",

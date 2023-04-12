@@ -8,15 +8,15 @@ const pages = import.meta.glob('../pages/**/*.vue')
 export default async function createSerenityApp({ appName }) {
   return createInertiaApp({
     progress: {
-      color: '#00b4e2',
+      color: '#00b4e2'
     },
-    title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`../pages/${name}.vue`, pages),
+    title: title => `${title} - ${appName}`,
+    resolve: name => resolvePageComponent(`../pages/${name}.vue`, pages),
     setup({ el, App, props, plugin }) {
       return createApp({ render: () => h(App, props) })
         .use(plugin)
         .use(serenity)
         .mount(el)
-    },
+    }
   })
 }

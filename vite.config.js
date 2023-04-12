@@ -22,26 +22,26 @@ export default defineConfig(({ command }) => {
       laravel({
         input: 'resources/js/app.js',
         ssr: 'resources/js/ssr.js',
-        refresh: true,
+        refresh: true
       }),
       Vue({
         include: [/\.vue$/, /\.md$/],
         template: {
           transformAssetUrls: {
             base: null,
-            includeAbsolute: false,
-          },
-        },
+            includeAbsolute: false
+          }
+        }
       }),
       Icons({
         compiler: 'vue3',
-        autoInstall: true,
+        autoInstall: true
       }),
       AutoImport({
         include: [
           /\.vue$/,
           /\.vue\?vue/, // .vue
-          /\.md$/, // .md
+          /\.md$/ // .md
         ],
         imports: [
           'vue',
@@ -50,10 +50,10 @@ export default defineConfig(({ command }) => {
           {
             '@inertiajs/vue3': ['router', 'useForm', 'usePage', 'useRemember'],
             composable: ['useTrans', 'useRoutes', 'useDayjs'],
-            store: ['useCoreStore', 'useDocStore'],
-          },
+            store: ['useCoreStore', 'useDocStore']
+          }
         ],
-        dts: 'auto-imports.d.ts',
+        dts: 'auto-imports.d.ts'
       }),
       Components({
         dirs: ['resources/js/components'],
@@ -64,22 +64,22 @@ export default defineConfig(({ command }) => {
             enabledCollections: ['heroicons-outline', 'heroicons-solid'],
             alias: {
               outline: 'heroicons-outline',
-              solid: 'heroicons-solid',
-            },
-          }),
+              solid: 'heroicons-solid'
+            }
+          })
         ],
-        dts: 'components.d.ts',
-      }),
+        dts: 'components.d.ts'
+      })
     ],
     ssr: {
-      noExternal: ['@inertiajs/server'],
+      noExternal: ['@inertiajs/server']
     },
     optimizeDeps: {
       include: ['vue', 'vuex', '@inertiajs/vue3', '@headlessui/vue', 'axios'],
       esbuildOptions: {
-        target: 'es2020',
-        plugins: [esbuildCommonjs(['shiki'])],
-      },
+        target: 'esnext',
+        plugins: [esbuildCommonjs(['shiki'])]
+      }
     },
     resolve: {
       alias: {
@@ -88,38 +88,41 @@ export default defineConfig(({ command }) => {
         '@/Docs': resolve(__dirname, 'resources/markdown'),
         ziggy: resolve(__dirname, 'vendor/tightenco/ziggy/dist/vue.es.js'),
         zora: resolve(__dirname, 'vendor/jetstreamlabs/zora/dist/vue.js'),
-        'zora-js': resolve(__dirname, 'vendor/jetstreamlabs/zora/dist/index.js'),
+        'zora-js': resolve(
+          __dirname,
+          'vendor/jetstreamlabs/zora/dist/index.js'
+        ),
         tableTranslations: resolve(__dirname, 'resources/js/translations.js'),
         composable: resolve(__dirname, 'resources/js/composable/index.js'),
-        store: resolve(__dirname, 'resources/js/store/index.js'),
-      },
+        store: resolve(__dirname, 'resources/js/store/index.js')
+      }
     },
-    server: command === 'serve' ? makeServer(command) : null,
+    server: command === 'serve' ? makeServer() : null
   }
 })
 
-export const makeServer = (command) => {
+export const makeServer = () => {
   if (env.VITE_HTTPS == 'true') {
     const certPath = resolve(homedir(), env.VITE_CERTPATH)
 
     return {
       https: {
         key: fs.readFileSync(resolve(certPath, `${env.VITE_DOMAIN}.key`)),
-        cert: fs.readFileSync(resolve(certPath, `${env.VITE_DOMAIN}.crt`)),
+        cert: fs.readFileSync(resolve(certPath, `${env.VITE_DOMAIN}.crt`))
       },
-      host: env.VITE_DOMAIN,
+      host: env.VITE_DOMAIN
     }
   } else {
     return {
       https: false,
       server: {
         hmr: {
-          host: '0.0.0.0',
+          host: '0.0.0.0'
         },
         watch: {
-          usePolling: true,
-        },
-      },
+          usePolling: true
+        }
+      }
     }
   }
 }

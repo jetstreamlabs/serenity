@@ -1,7 +1,3 @@
-<script setup>
-//
-</script>
-
 <template>
   <Head :title="$page.props.title">
     <meta head-key="description" :content="$page.props.description" />
@@ -11,16 +7,19 @@
   <MainNavigation v-if="$page.props.user" />
   <DocNavigation v-else />
 
-  <main class="z-0 flex py-6 overflow-y-scroll focus:outline-none" tabindex="0">
-    <div class="flex flex-col items-start justify-start px-6 lg:flex-row lg:justify-between">
+  <main class="z-0 flex overflow-y-scroll py-6 focus:outline-none" tabindex="0">
+    <div
+      class="flex flex-col items-start justify-start px-6 lg:flex-row lg:justify-between">
       <MobileSidebar />
 
       <Sidebar />
 
-      <div class="w-full px-4 py-8 bg-white rounded shadow dark:bg-gray-800 lg:ml-4">
+      <div
+        class="w-full rounded bg-white px-4 py-8 shadow dark:bg-gray-800 lg:ml-4">
         <div class="flex items-center">
-          <ApplicationMark class="block w-auto h-10" />
-          <h1 class="pt-2 ml-4 text-4xl font-normal text-gray-800 dark:text-gray-200">
+          <ApplicationMark class="block h-10 w-auto" />
+          <h1
+            class="ml-4 pt-2 text-4xl font-normal text-gray-800 dark:text-gray-200">
             {{ $page.props.title }}
           </h1>
         </div>
@@ -37,7 +36,7 @@
         <PageFooter />
       </div>
       <div
-        class="hidden w-full mb-4 bg-white rounded shadow dark:bg-gray-800 dark:text-gray-100 lg:ml-6 lg:block lg:w-4/12">
+        class="mb-4 hidden w-full rounded bg-white shadow dark:bg-gray-800 dark:text-gray-100 lg:ml-6 lg:block lg:w-4/12">
         <Toc />
       </div>
     </div>
