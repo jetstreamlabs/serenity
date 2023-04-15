@@ -43,7 +43,7 @@
     }
   },
   "dependencies": {
-    "@inertiajs/vue3": "^1.0.2",
+    "@inertiajs/vue3": "^1.0.3",
     "@popperjs/core": "^2.11.6",
     "@vue/server-renderer": "^3.2.47",
     "dayjs": "^1.11.7",
