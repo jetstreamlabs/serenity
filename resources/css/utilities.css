@@ -48,3 +48,7 @@
     }
   }
 }
+
+img.not-found-logo {
+  @apply mx-auto mt-12 h-48 w-auto !important;
+}

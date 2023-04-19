@@ -9,6 +9,7 @@ module.exports = {
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
     './resources/js/**/*.vue',
+    './resources/markdown/**/*.md'
   ],
   darkMode: 'class',
   theme: {

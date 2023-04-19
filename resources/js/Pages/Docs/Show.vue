@@ -1,8 +1,5 @@
-<script setup>
-//
-</script>
 <template>
-  <DocsLayout>
+  <DocLayout>
     <PageContent :content="$page.props.content" />
-  </DocsLayout>
+  </DocLayout>
 </template>

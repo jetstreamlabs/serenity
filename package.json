@@ -6,7 +6,7 @@
     "build": "npm run build",
     "prod": "npm run build:assets && vite build && vite build --ssr",
     "ssr": "vite build --ssr",
-    "start": "node public/ssr/ssr.mjs",
+    "start": "php zen inertia:start-ssr",
     "kill": "kill -9 $(lsof -ti:3000)",
     "fix": "./vendor/bin/pinte --dirty",
     "pinte": "./vendor/bin/pinte",

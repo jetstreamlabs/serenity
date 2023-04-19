@@ -349,7 +349,6 @@ return [
     'default' => '2.0',
     'published' => [
       '2.0',
-      '1.0',
     ],
   ],
 
@@ -359,8 +358,8 @@ return [
    * Turn the cache on or off, and set the cache time (minutes) for docs.
    */
   'cache' => [
-    'enabled' => false,
-    'period' => 1440, //108000 = 1 month
+    'enabled' => env('DOCS_CACHE', true),
+    'period' => env('DOCS_CACHE_TIME', 108000), //108000 = 1 month
   ],
 
   /**
