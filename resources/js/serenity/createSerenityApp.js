@@ -1,4 +1,4 @@
-import { createApp, h } from 'vue'
+import { createSSRApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { serenity } from './plugin.js'
@@ -13,7 +13,7 @@ export default async function createSerenityApp({ appName }) {
     title: title => `${title} - ${appName}`,
     resolve: name => resolvePageComponent(`../pages/${name}.vue`, pages),
     setup({ el, App, props, plugin }) {
-      return createApp({ render: () => h(App, props) })
+      return createSSRApp({ render: () => h(App, props) })
         .use(plugin)
         .use(serenity)
         .mount(el)
