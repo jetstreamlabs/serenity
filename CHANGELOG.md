@@ -1,5 +1,28 @@
 # Serenity Changelog
 
+## [2.3.3](https://github.com/jetstreamlabs/serenity/compare/v2.3.2...v2.3.3) (2023-04-22)
+
+
+### Code Refactoring
+
+* handle 409 on prod only — styles ([94f8d55](https://github.com/jetstreamlabs/serenity/commit/94f8d552d96de821abba3f87dec50c685ca3c4da))
+* updates for dashboard and docs ([38bef7e](https://github.com/jetstreamlabs/serenity/commit/38bef7ee9db25e8878ebf0496e750b4ceed27f33))
+
+
+* Merge branch 'develop' ([1a60d53](https://github.com/jetstreamlabs/serenity/commit/1a60d534da7ac51e956e03193f19ece420a70fe6))
+
+
+### Maintenance
+
+* **release:** 2.3.2 [skip ci] ([41c986f](https://github.com/jetstreamlabs/serenity/commit/41c986fd6c5031c3fac5a7798a5592c4b1dbbc28))
+* remove version file action, doesn’t work as expected ([fc886b8](https://github.com/jetstreamlabs/serenity/commit/fc886b83d226693ade63a9d7d0c12eec78c4f92d))
+* style fixes ([35712d4](https://github.com/jetstreamlabs/serenity/commit/35712d464177e27006caf288ae92e26893c52764))
+
+
+### Task Commit
+
+* dev-deps from dp-bot ([4ca6e11](https://github.com/jetstreamlabs/serenity/commit/4ca6e11b40d5c448a4aba7adcfc2a4a987af0f2c))
+
 ## [2.3.2](https://github.com/jetstreamlabs/serenity/compare/v2.3.1...v2.3.2) (2023-04-10)
 
 
