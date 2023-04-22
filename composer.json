@@ -19,7 +19,7 @@
     "pusher/pusher-php-server": "^7.2",
     "serenity/foundation": "^2.3.5",
     "spatie/laravel-query-builder": "^5.2",
-    "spiral/roadrunner": "^2023.1.1",
+    "spiral/roadrunner": "^2.12.3",
     "symfony/yaml": "^6.2",
     "tightenco/ziggy": "^1.5"
   },
