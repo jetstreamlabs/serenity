@@ -2,117 +2,13 @@ name: 'Deploy to Sandbox'
 
 on:
   push:
-    branches: [develop]
-  pull_request:
-    branches: [develop]
+    branches: [sandbox]
 
   workflow_dispatch:
 
 jobs:
-  create:
-    name: 'Create Sandbox Branch'
-    runs-on: ubuntu-latest
-
-    if: github.event_name != 'pull_request'
-    steps:
-      - name: 'Create Branch'
-        uses: peterjgrainger/action-create-branch@v2.4.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.VERAN }}
-        with:
-          branch: sandbox
-          sha: ${{ github.sha }}
-
-  tests:
-    runs-on: ubuntu-latest
-    needs: [create]
-
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        php: [8.1, 8.2]
-
-    name: PHP ${{ matrix.os }} ${{ matrix.php }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: sandbox
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-          coverage: none
-
-      - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-interaction --no-progress
-
-      - name: Copy environment file
-        run: cp .env.example .env
-
-      - name: Generate app key
-        run: php zen key:generate
-
-      - name: Setup Node
-        uses: actions/setup-node@v3.6.0
-        with:
-          node-version: 'lts/*'
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build assets
-        run: npm run prod
-
-      - name: Execute tests
-        run: php zen test
-
-  build:
-    name: 'Build Sandbox'
-    needs: [tests, create]
-    runs-on: ubuntu-latest
-
-    if: github.event_name != 'pull_request'
-    steps:
-      - name: 'Checkout Sandbox'
-        uses: actions/checkout@v3
-        with:
-          ref: sandbox
-
-      - name: Generate .env File
-        run: cp .env.sandbox .env
-
-      - name: Install PHP
-        uses: shivammathur/setup-php@master
-        with:
-          php-version: '8.1'
-
-      - name: Install Composer Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-      - name: Install Node
-        uses: actions/setup-node@v3.6.0
-        with:
-          node-version: 'lts/*'
-
-      - run: npm install
-      - run: npm run prod --force
-
-      - name: Commit Assets to Sandbox
-        uses: EndBug/add-and-commit@v9
-        with:
-          default_author: github_actor
-          message: 'chore(deploy): deploy develop repo to sandbox'
-          add: '-f public/'
-          push: '-f origin sandbox'
-
   deploy:
     name: Deploy to Laravel Forge
-    needs: [build, tests, create]
     runs-on: ubuntu-latest
 
     if: github.event_name != 'pull_request'
@@ -124,7 +20,7 @@ jobs:
 
   remove:
     name: Remove Sandbox Branch
-    needs: [deploy, build, tests, create]
+    needs: [deploy]
     runs-on: ubuntu-latest
 
     if: github.event_name != 'pull_request'
