@@ -9,7 +9,6 @@ on:
 jobs:
   deploy:
     name: Deploy to Laravel Forge
-    needs: [build, create]
     runs-on: ubuntu-latest
 
     steps:
