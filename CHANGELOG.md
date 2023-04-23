@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [2.3.5](https://github.com/jetstreamlabs/serenity/compare/v2.3.4...v2.3.5) (2023-04-23)
+
+
+### Bug Fixes
+
+* broken workflow file ([e8b1b19](https://github.com/jetstreamlabs/serenity/commit/e8b1b191b252f4826f98f15ea1369db0b307139e))
+
 ## [2.3.4](https://github.com/jetstreamlabs/serenity/compare/v2.3.3...v2.3.4) (2023-04-23)
 
 
