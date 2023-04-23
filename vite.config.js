@@ -12,6 +12,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers'
+import { hash } from './resources/js/makeHash.js'
 
 const env = expandDotenv.expand(dotenv.config()).parsed
 
@@ -71,6 +72,15 @@ export default defineConfig(({ command }) => {
         dts: 'components.d.ts'
       })
     ],
+    build: {
+      rollupOptions: {
+        output: {
+          entryFileNames: `[name].` + hash + `.js`,
+          chunkFileNames: `[name].` + hash + `.js`,
+          assetFileNames: `[name].` + hash + `.[ext]`
+        }
+      }
+    },
     ssr: {
       noExternal: ['@inertiajs/server']
     },
