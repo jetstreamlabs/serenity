@@ -1,5 +1,29 @@
 # Serenity Changelog
 
+## [2.3.4](https://github.com/jetstreamlabs/serenity/compare/v2.3.3...v2.3.4) (2023-04-23)
+
+
+### Bug Fixes
+
+* remove dirs to fix casing issue on git ([d0cfe26](https://github.com/jetstreamlabs/serenity/commit/d0cfe26587c943d4ba5b46d79b6375e4ec9aa5a7))
+* replace dirs with lower cased ([b5ffc12](https://github.com/jetstreamlabs/serenity/commit/b5ffc1234e3c003ef6ddf5257db56c01f28069ac))
+
+
+### Code Refactoring
+
+* add hashing for cache busting in prod ([f03a85d](https://github.com/jetstreamlabs/serenity/commit/f03a85dc550fbb43a18cd1ff07e61fcb87079d50))
+* add inertia config, change to ssr app ([53d0a1a](https://github.com/jetstreamlabs/serenity/commit/53d0a1ab6e25df02d8e92b094465de204d602135))
+* adjust build, doc title ([f147a8a](https://github.com/jetstreamlabs/serenity/commit/f147a8a5908ec326af5c3f583905090c1021150e))
+* deployment scripts ([126ef24](https://github.com/jetstreamlabs/serenity/commit/126ef24850da5a7f52405a97d9945fe9bcfc83f4))
+* update deps ([c62b4db](https://github.com/jetstreamlabs/serenity/commit/c62b4db9cfd62dd51288e64c33849f625221745a))
+* update workflow to remove git build ([3a90597](https://github.com/jetstreamlabs/serenity/commit/3a905974fed06e4ef80754b49f2dc34d5537c55d))
+
+
+### Maintenance
+
+* **deps:** bump spiral/roadrunner from 2.12.3 to 2023.1.1 ([d937a7c](https://github.com/jetstreamlabs/serenity/commit/d937a7c5ba52286119f66358e052fd0c8d43f87d))
+* update production workflow ([140f2b1](https://github.com/jetstreamlabs/serenity/commit/140f2b1a94319aa120925094de2a550af8e6aab9))
+
 ## [2.3.3](https://github.com/jetstreamlabs/serenity/compare/v2.3.2...v2.3.3) (2023-04-22)
 
 
