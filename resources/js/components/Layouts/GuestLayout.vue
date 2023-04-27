@@ -9,9 +9,10 @@ const props = defineProps({ title: String })
     <GuestHeader />
 
     <main>
-      <slot></slot>
+      <slot />
     </main>
 
     <GuestFooter />
+    <Notification />
   </div>
 </template>

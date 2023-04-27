@@ -8,8 +8,9 @@ use Serenity\Foundation\Action;
 
 class IndexAction extends Action
 {
-  public function __construct(protected IndexResponder $responder)
-  {
+  public function __construct(
+      protected IndexResponder $responder
+    ) {
     $this->with('Dashboard');
   }
 

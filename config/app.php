@@ -194,7 +194,7 @@ return [
     App\Domain\Providers\AuthServiceProvider::class,
     App\Domain\Providers\SerenityServiceProvider::class,
     App\Domain\Providers\ContractMappingServiceProvider::class,
-    // App\Domain\Providers\BroadcastServiceProvider::class,
+    App\Domain\Providers\BroadcastServiceProvider::class,
     App\Domain\Providers\EventServiceProvider::class,
     App\Domain\Providers\RouteServiceProvider::class,
 

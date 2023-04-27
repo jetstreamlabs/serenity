@@ -4,6 +4,7 @@ namespace App\Domain\Middleware;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -44,6 +45,9 @@ class HandleInertiaRequests extends Middleware
           'status' => request()->session()->get('status'),
         ];
       },
+      'canLogin' => Route::has('login'),
+      'canRegister' => Route::has('register'),
+      'copyright' => '&copy; '.date('Y').'. Jetstream Labs, LLC.',
     ]);
   }
 }

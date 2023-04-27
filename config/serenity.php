@@ -69,6 +69,33 @@ return [
   'email' => 'email',
 
   /**
+   * SALUTATIONS
+   *
+   * These values dictate the hello and goodbye messages for your
+   * Serenity application. At the point the messages are generated, the
+   * user's first name is available so it's encouraged to pass it in
+   * your messages either in the title or message.
+   *
+   * Styles available: success, info, error, status, warning
+   *
+   * If you don't want one or both of the messages simple set them to
+   * null like so:
+   *
+   * 'hello' => null,
+   * 'goodbye' => null,
+   */
+  'hello' => [
+    'title' => 'Hey %name%',
+    'message' => "Welcome back, it's good to see you.",
+    'style' => 'info',
+  ],
+  'goodbye' => [
+    'title' => 'Later %name%',
+    'message' => 'We hope to see you back again soon.',
+    'style' => 'info',
+  ],
+
+  /**
    * HOME PATH
    *
    * Here you may configure the path where users will get redirected during

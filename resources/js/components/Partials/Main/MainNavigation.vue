@@ -7,7 +7,7 @@ onBeforeMount(() => {
 })
 
 const stickyHeader = ref(false)
-console.log(usePage().url)
+
 const handleScroll = () => {
   if (window.pageYOffset > 0) {
     stickyHeader.value = true

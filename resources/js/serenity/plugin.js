@@ -19,27 +19,37 @@ export const serenity = {
 
     const pinia = createPinia()
 
-    // const echo = new Echo({
-    //   broadcaster: 'pusher',
-    //   key: import.meta.env.VITE_PUSHER_APP_KEY,
-    //   wsHost: import.meta.env.VITE_PUSHER_HOST,
-    //   wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
-    //   wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
-    //   forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
-    //   cluster: '',
-    //   enabledTransports: ['ws', 'wss'],
-    //   encrypted: true,
-    //   disableStats: true,
-    // })
+    const echo = new Echo({
+      broadcaster: 'pusher',
+      key: import.meta.env.VITE_PUSHER_APP_KEY,
+      wsHost: import.meta.env.VITE_PUSHER_HOST,
+      wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
+      wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
+      forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
+      cluster: '',
+      enabledTransports: ['ws', 'wss'],
+      encrypted: true,
+      disableStats: true,
+    })
+
+    const is_null = (obj) => {
+      return !obj && typeof obj === 'object'
+    }
+
+    const isObject = (obj) => {
+      return obj === Object(obj)
+    }
 
     app.provide('emitter', mitt())
-    //app.provide('echo', echo)
+    app.provide('echo', echo)
     app.provide('axios', axios)
     app.provide('_', lodash)
+    app.provide('isObject', isObject)
+    app.provide('is_null', is_null)
 
     app.directive('click-outside', ClickOutside)
 
-    //window.Pusher = Pusher
+    window.Pusher = Pusher
 		window.axios = axios
     window._ = lodash
 

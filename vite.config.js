@@ -72,20 +72,27 @@ export default defineConfig(({ command }) => {
         dts: 'components.d.ts'
       })
     ],
-    build: {
-      rollupOptions: {
-        output: {
-          entryFileNames: `[name].` + hash + `.js`,
-          chunkFileNames: `[name].` + hash + `.js`,
-          assetFileNames: `[name].` + hash + `.[ext]`
-        }
-      }
-    },
+    // build: {
+    //   rollupOptions: {
+    //     output: {
+    //       entryFileNames: `[name].js?v=${hash}`,
+    //       chunkFileNames: `[name].js?v=${hash}`,
+    //       assetFileNames: `[name].[ext]?v=${hash}`
+    //     }
+    //   }
+    // },
     ssr: {
       noExternal: ['@inertiajs/server']
     },
     optimizeDeps: {
-      include: ['vue', 'vuex', '@inertiajs/vue3', '@headlessui/vue', 'axios'],
+      include: [
+        'vue',
+        'vuex',
+        'pinia',
+        '@inertiajs/vue3',
+        '@headlessui/vue',
+        'axios'
+      ],
       esbuildOptions: {
         target: 'esnext',
         plugins: [esbuildCommonjs(['shiki'])]
