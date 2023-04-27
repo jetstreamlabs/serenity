@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [2.3.6](https://github.com/jetstreamlabs/serenity/compare/v2.3.5...v2.3.6) (2023-04-27)
+
+
+### Code Refactoring
+
+* updates for notification system ([e57f4ec](https://github.com/jetstreamlabs/serenity/commit/e57f4ec2023f80834a8f4050a7ff49829be179f5))
+
 ## [2.3.5](https://github.com/jetstreamlabs/serenity/compare/v2.3.4...v2.3.5) (2023-04-23)
 
 
