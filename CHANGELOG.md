@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [2.4.1](https://github.com/jetstreamlabs/serenity/compare/v2.4.0...v2.4.1) (2023-05-03)
+
+
+### Code Refactoring
+
+* bg color for code on welcome ([b920341](https://github.com/jetstreamlabs/serenity/commit/b92034170418f09b58706923d36ab501c6d19c52))
+
 # [2.4.0](https://github.com/jetstreamlabs/serenity/compare/v2.3.6...v2.4.0) (2023-05-03)
 
 
