@@ -113,7 +113,7 @@ const features = [
                         </div>
                       </div>
                     </div>
-                    <div class="bg-[#020617] p-4">
+                    <div class="bg-[#222436] p-4 dark:bg-[#020617]">
                       <HomeCode />
                     </div>
                   </div>
