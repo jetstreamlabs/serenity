@@ -1,8 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "npm run build:assets && vite && npm run octane",
-    "thin": "npm run build:assets && vite",
+    "dev": "npm run build:assets && vite",
     "build": "npm run build",
     "prod": "npm run build:assets && vite build --force && vite build --ssr --force",
     "ssr": "vite build --ssr",
@@ -11,7 +10,6 @@
     "fix": "./vendor/bin/pinte --dirty",
     "pinte": "./vendor/bin/pinte",
     "build:assets": "php zen ziggy:generate && php zen zora:generate",
-    "octane": "php zen octane:start --watch",
     "queue:start": "pm2 start horizon.json",
     "tests": "php ./vendor/bin/pest",
     "coverage": "XDEBUG_MODE=coverage php zen test --coverage --min=80",

@@ -15,13 +15,22 @@ export const serenityssr = {
 		axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 		axios.defaults.withCredentials = true
 
+    const pinia = createPinia()
+
+    const is_null = (obj) => {
+      return !obj && typeof obj === 'object'
+    }
+
+    const isObject = (obj) => {
+      return obj === Object(obj)
+    }
+
 	  app.provide('emitter', mitt())
     app.provide('dayjs', dayjs)
-    app.provide('echo', echo)
     app.provide('axios', axios)
     app.provide('_', lodash)
-
-		const pinia = createPinia()
+    app.provide('isObject', isObject)
+    app.provide('is_null', is_null)
 
     app.use(ZiggyVue, Ziggy)
     app.use(ZoraVue, Zora)

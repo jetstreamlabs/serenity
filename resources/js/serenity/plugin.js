@@ -1,6 +1,7 @@
 import { createPinia } from 'pinia'
 import { Head, Link } from '@inertiajs/vue3'
 import mitt from 'mitt'
+import dayjs from 'dayjs'
 import axios from 'axios'
 import lodash from 'lodash'
 import Pusher from 'pusher-js'
@@ -41,6 +42,7 @@ export const serenity = {
     }
 
     app.provide('emitter', mitt())
+    app.provide('dayjs', dayjs)
     app.provide('echo', echo)
     app.provide('axios', axios)
     app.provide('_', lodash)

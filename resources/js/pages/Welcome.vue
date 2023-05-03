@@ -134,8 +134,11 @@ const features = [
     <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-16">
       <div class="mx-auto max-w-3xl text-center">
         <h2
-          class="text-3xl font-bold tracking-tight text-blue-800 dark:text-white sm:text-4xl">
-          {{ __('Laravel Transformed!') }}
+          class="text-3xl font-bold leading-8 tracking-tight text-blue-800 dark:text-white sm:text-4xl">
+          {{ __('Laravel') }}
+          <span class="uppercase text-orange-500">{{
+            __('Transformed!')
+          }}</span>
         </h2>
         <p
           class="mx-auto mt-4 max-w-xl text-lg text-blue-800 dark:text-gray-200">

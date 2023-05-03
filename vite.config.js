@@ -223,13 +223,11 @@ export default defineConfig(({ command }) => {
         'axios'
       ],
       esbuildOptions: {
-        target: 'esnext',
-        plugins: [esbuildCommonjs(['shiki'])]
+        target: 'esnext'
       }
     },
     resolve: {
       alias: {
-        vue: resolve(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
         '@/storage': resolve(__dirname, 'storage/app/public'),
         '@/Docs': resolve(__dirname, 'resources/markdown'),
         ziggy: resolve(__dirname, 'vendor/tightenco/ziggy/dist/vue.es.js'),
