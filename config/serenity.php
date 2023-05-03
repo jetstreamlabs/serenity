@@ -359,7 +359,7 @@ return [
    */
   'docs' => [
     'route' => '/docs',
-    'path' => resource_path('markdown/docs'),
+    'path' => resource_path('js/pages/Docs'),
     'landing' => 'getting-started',
     'github' => 'jetstreamlabs/serenity', // Github package path
     'twitter' => 'serenityphp', // Twitter username

@@ -3,8 +3,8 @@ const props = defineProps({
   maxWidth: {
     required: false,
     type: String,
-    default: 'sm:max-w-md',
-  },
+    default: 'sm:max-w-md'
+  }
 })
 
 const maxWidthClass = computed(() => {
@@ -14,12 +14,12 @@ const maxWidthClass = computed(() => {
     lg: 'sm:max-w-lg',
     xl: 'sm:max-w-xl',
     fit: 'sm:max-w-fit',
-    '2xl': 'sm:max-w-2xl',
+    '2xl': 'sm:max-w-2xl'
   }[props.maxWidth]
 })
 </script>
 <template>
-  <div class="flex flex-col items-center pt-6 sm:justify-center sm:pt-0">
+  <div class="mb-20 flex flex-col items-center pt-6 sm:justify-center sm:pt-0">
     <div>
       <slot name="logo" cls="w-24" />
     </div>

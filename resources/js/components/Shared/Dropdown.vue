@@ -1,19 +1,19 @@
 <script setup>
 const props = defineProps({
   align: {
-    default: 'right',
+    default: 'right'
   },
   width: {
-    default: '64',
+    default: '64'
   },
   contentClasses: {
-    default: () => ['py-1', 'bg-white', 'dark:bg-gray-700'],
-  },
+    default: () => ['py-1', 'bg-white', 'dark:bg-gray-700']
+  }
 })
 
 let open = ref(false)
 
-const closeOnEscape = (e) => {
+const closeOnEscape = e => {
   if (open.value && e.key === 'Escape') {
     open.value = false
   }
@@ -48,7 +48,7 @@ const someClass = computed(() => {
     256: 'w-64',
     288: 'w-72',
     320: 'w-80',
-    384: 'w-96',
+    384: 'w-96'
   }[props.width.toString()]
 })
 
@@ -59,7 +59,7 @@ const widthClass = computed(() => {
     36: 'w-9',
     48: 'w-48',
     64: 'w-64',
-    96: 'w-96',
+    96: 'w-96'
   }[props.width.toString()]
 })
 
@@ -97,7 +97,7 @@ const alignmentClasses = computed(() => {
         style="display: none"
         @click="open = false">
         <div
-          class="py-1 mt-2 bg-white w-full max-w-fit rounded-md shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 dark:ring-gray-700"
+          class="mt-2 w-full rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 dark:ring-gray-700"
           :class="contentClasses">
           <slot name="content"></slot>
         </div>

@@ -8,7 +8,7 @@ tags:
 
 [[toc]]
 
-## Prerequisites
+## Prerequisites {.doc-heading}
 
 Serenity is not for beginners, and as such, we won't be explaining how to install or configure dependencies or set up your development environment.
 
@@ -21,7 +21,7 @@ Serenity requires the following:
 
 Serenity is built and tested on MacOS Ventura 13.3.1 running Laravel Valet 3.3.2
 
-## Installation
+## Installation {.doc-heading}
 
 The most direct way to install Serenity is to install the Serenity installer to your system globally via composer.
 

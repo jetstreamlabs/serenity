@@ -10,12 +10,13 @@ status.value = usePage().props.title == 'Page Not Found' ? 404 : 200
 
   <MainNavigation v-if="$page.props.user" />
   <DocNavigation v-else />
-  <MobileSidebar />
+
   <main class="mt-4 grid grid-cols-12 gap-4 px-4 pb-8">
     <aside
       class="sticky top-0 col-span-2 hidden min-h-screen bg-gray-100 dark:bg-gray-900 lg:block">
       <Sidebar />
     </aside>
+    <MobileCanvas />
     <div
       class="col-span-12 rounded bg-white px-4 py-6 shadow dark:bg-gray-800 lg:col-span-7">
       <div class="flex items-center">
@@ -27,7 +28,9 @@ status.value = usePage().props.title == 'Page Not Found' ? 404 : 200
       <SectionBorder />
       <MobileNavTrigger />
 
-      <slot />
+      <div class="docs docs-slate dark:docs-invert docs-headings:font-normal">
+        <slot />
+      </div>
 
       <template v-if="status !== 404">
         <SectionBorder size="sm" class="mt-6" />
@@ -40,4 +43,5 @@ status.value = usePage().props.title == 'Page Not Found' ? 404 : 200
       <Toc />
     </div>
   </main>
+  <ScrollTop />
 </template>

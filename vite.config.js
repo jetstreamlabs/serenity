@@ -12,7 +12,13 @@ import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers'
-import { hash } from './resources/js/makeHash.js'
+import Markdown from 'vite-plugin-vue-markdown'
+import anchor from 'markdown-it-anchor'
+import MarkdownItContainer from 'markdown-it-container'
+import MarkdownItAttrs from 'markdown-it-attrs'
+import { tocPlugin } from '@mdit-vue/plugin-toc'
+import { componentPlugin } from '@mdit-vue/plugin-component'
+import Shiki from 'markdown-it-shiki'
 
 const env = expandDotenv.expand(dotenv.config()).parsed
 
@@ -33,6 +39,138 @@ export default defineConfig(({ command }) => {
             includeAbsolute: false
           }
         }
+      }),
+      Markdown({
+        markdownItOptions: {
+          html: false,
+          xhtmlOut: true,
+          linkify: true,
+          typographer: true
+        },
+        markdownItSetup(md) {
+          md.use(MarkdownItAttrs)
+          md.use(anchor, {
+            permalink: anchor.permalink.ariaHidden({
+              placement: 'before'
+            }),
+            permalinkSymbol: '#',
+            level: [2, 3]
+          })
+          md.use(MarkdownItContainer, 'note', {
+            validate: function (params) {
+              return params.trim().match(/^note\s+(.*)$/)
+            },
+            render: function (tokens, idx) {
+              var m = tokens[idx].info.trim().match(/^note\s+(.*)$/)
+
+              if (tokens[idx].nesting === 1) {
+                // opening tag
+                return (
+                  '<div class="custom-block note">\n' +
+                  '  <h4>' +
+                  md.utils.escapeHtml(m[1]).toUpperCase() +
+                  '</h4>\n'
+                )
+              } else {
+                // closing tag
+                return '</div>\n'
+              }
+            }
+          })
+          md.use(MarkdownItContainer, 'info', {
+            validate: function (params) {
+              return params.trim().match(/^info\s+(.*)$/)
+            },
+            render: function (tokens, idx) {
+              var m = tokens[idx].info.trim().match(/^info\s+(.*)$/)
+
+              if (tokens[idx].nesting === 1) {
+                // opening tag
+                return (
+                  '<div class="custom-block info">\n' +
+                  '  <h4>' +
+                  md.utils.escapeHtml(m[1]).toUpperCase() +
+                  '</h4>\n'
+                )
+              } else {
+                // closing tag
+                return '</div>\n'
+              }
+            }
+          })
+          md.use(MarkdownItContainer, 'warning', {
+            validate: function (params) {
+              return params.trim().match(/^warning\s+(.*)$/)
+            },
+            render: function (tokens, idx) {
+              var m = tokens[idx].info.trim().match(/^warning\s+(.*)$/)
+
+              if (tokens[idx].nesting === 1) {
+                // opening tag
+                return (
+                  '<div class="custom-block warning">\n' +
+                  '  <h4>' +
+                  md.utils.escapeHtml(m[1]).toUpperCase() +
+                  '</h4>\n'
+                )
+              } else {
+                // closing tag
+                return '</div>\n'
+              }
+            }
+          })
+          md.use(MarkdownItContainer, 'tip', {
+            validate: function (params) {
+              return params.trim().match(/^tip\s+(.*)$/)
+            },
+            render: function (tokens, idx) {
+              var m = tokens[idx].info.trim().match(/^tip\s+(.*)$/)
+
+              if (tokens[idx].nesting === 1) {
+                // opening tag
+                return (
+                  '<div class="custom-block tip">\n' +
+                  '  <h4>' +
+                  md.utils.escapeHtml(m[1]).toUpperCase() +
+                  '</h4>\n'
+                )
+              } else {
+                // closing tag
+                return '</div>\n'
+              }
+            }
+          })
+          md.use(MarkdownItContainer, 'danger', {
+            validate: function (params) {
+              return params.trim().match(/^danger\s+(.*)$/)
+            },
+            render: function (tokens, idx) {
+              var m = tokens[idx].info.trim().match(/^danger\s+(.*)$/)
+
+              if (tokens[idx].nesting === 1) {
+                // opening tag
+                return (
+                  '<div class="custom-block danger">\n' +
+                  '  <h4>' +
+                  md.utils.escapeHtml(m[1]).toUpperCase() +
+                  '</h4>\n'
+                )
+              } else {
+                // closing tag
+                return '</div>\n'
+              }
+            }
+          })
+          md.use(tocPlugin, {
+            containerTag: 'ul',
+            containerClass: 'lg:hidden toc'
+          })
+          md.use(componentPlugin)
+          md.use(Shiki, {
+            theme: 'css-variables'
+          })
+        },
+        wrapperClasses: ''
       }),
       Icons({
         compiler: 'vue3',
@@ -72,15 +210,6 @@ export default defineConfig(({ command }) => {
         dts: 'components.d.ts'
       })
     ],
-    // build: {
-    //   rollupOptions: {
-    //     output: {
-    //       entryFileNames: `[name].js?v=${hash}`,
-    //       chunkFileNames: `[name].js?v=${hash}`,
-    //       assetFileNames: `[name].[ext]?v=${hash}`
-    //     }
-    //   }
-    // },
     ssr: {
       noExternal: ['@inertiajs/server']
     },

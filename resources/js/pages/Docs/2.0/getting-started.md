@@ -8,13 +8,13 @@ tags:
 
 [[toc]]
 
-## Introduction
+## Introduction {.doc-heading}
 
 Thanks for your interest in Serenity, we think you'll be pleasantly surprised by how easy it can be to build Enterprise level applications for the web and desktop, with the Serenity framework.
 
 We've taken great care to craft an application framework that combines the simplicity of working with Laravel, with a more strict domain driven approach that helps ease the developer decision tree, but still provides a fast, simple approach to rapidly build applications.
 
-## Benefits
+## Benefits {.doc-heading}
 
 The benefits of Serenity are far-reaching and you can read more about them in Core Concepts and under the Usage page for individual features.
 
@@ -33,7 +33,7 @@ The benefits of Serenity are far-reaching and you can read more about them in Co
 
 Before we get going, we need to acknowledge those deveopers and companies whose Open Source contributions have made Serenity possible, and without whom it simply wouldn't exist.
 
-## Acknowledgments
+## Acknowledgments {.doc-heading}
 
 - Taylor Otwell and the Laravel Team
 - Jonathan Reinink (InertiaJS)

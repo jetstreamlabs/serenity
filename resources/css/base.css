@@ -19,8 +19,8 @@ html {
   @apply bg-opacity-30 backdrop-blur-lg backdrop-filter !important;
 }
 
-.stickyMenu {
-  @apply sticky top-0;
+.stickyGuestHeader {
+  @apply border-none shadow-md transition-all duration-200;
 }
 
 .wrapper {

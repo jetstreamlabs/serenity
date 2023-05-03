@@ -43,7 +43,7 @@ const handleScroll = () => {
             <NavLink
               :href="route('docs.home')"
               class="my-px"
-              :active="route().current('docs.home')">
+              :active="route().current().startsWith('docs')">
               {{ __('Documentation') }}
             </NavLink>
           </div>
@@ -71,11 +71,11 @@ const handleScroll = () => {
             v-if="$page.props.canLogin"
             class="hidden px-6 py-4 lg:flex lg:items-center lg:justify-end">
             <template v-if="!$page.props.user">
-              <Link
+              <NavLink
                 :href="route('login')"
-                class="text-sm text-gray-600 hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white">
+                :active="route().current('login')">
                 {{ __('Login') }}
-              </Link>
+              </NavLink>
               <Link
                 :href="route('register')"
                 class="border-orange bg-orange ml-4 inline-flex w-full items-center justify-center rounded-full border-2 px-4 py-1.5 text-center text-sm font-medium text-white duration-200 hover:bg-transparent hover:text-orange-600 focus:outline-none focus-visible:outline-white focus-visible:ring-white dark:border-white dark:bg-white dark:text-gray-700 dark:hover:bg-transparent dark:hover:text-white lg:w-auto">

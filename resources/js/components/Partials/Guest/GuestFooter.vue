@@ -1,9 +1,25 @@
 <template>
   <footer
-    class="mx-auto mt-16 flex w-9/12 flex-col items-center justify-center space-y-2 px-0 text-sm sm:flex-row sm:justify-between sm:space-y-0">
-    <div class="text-gray-500 dark:text-gray-400" v-html="$page.props.copyright" />
-    <div class="text-gray-500 dark:text-gray-400">
-      Serenity v{{ $page.props.serenityVersion }} (PHP v{{ $page.props.phpVersion }})
+    class="flex flex-col items-center justify-center bg-transparent px-6 py-12 text-sm sm:flex-row sm:justify-between sm:space-y-0">
+    <div class="space-x-4 text-gray-400 dark:text-gray-300">
+      <Link
+        :href="route('terms.show')"
+        class="hover:text-gray-600 dark:hover:text-gray-100">
+        {{ __('Terms of Service') }}
+      </Link>
+      <Link
+        :href="route('policy.show')"
+        class="hover:text-gray-600 dark:hover:text-gray-100">
+        {{ __('Privacy Policy') }}
+      </Link>
+    </div>
+    <div class="space-x-4 text-gray-400 dark:text-gray-300">
+      <span v-html="$page.props.copyright"></span>
+      <span>
+        Serenity v{{ $page.props.serenityVersion }} (PHP v{{
+          $page.props.phpVersion
+        }})
+      </span>
     </div>
   </footer>
 </template>

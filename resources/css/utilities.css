@@ -1,50 +1,67 @@
 /* Add any utilities here  */
 
-.doc {
-  @apply my-10 rounded-md border border-gray-400/60 bg-gray-300/30 px-4 py-1 text-sm text-gray-800 shadow-lg dark:text-gray-200;
+.custom-block {
+  @apply my-10 rounded-md border px-4 py-1 shadow-lg;
 
-  h1,
-  h2 {
-    @apply -mx-4 -my-1 rounded-t-md bg-gray-700 px-4 py-1 text-base font-semibold uppercase text-white;
+  h4 {
+    @apply pt-2 text-base font-semibold uppercase;
   }
 
   p {
-    @apply mb-1 mt-3;
+    @apply my-1 text-[0.9rem] leading-6;
+  }
+
+  &.note {
+    @apply border-gray-300 bg-gray-50 text-gray-800 dark:bg-gray-200;
+
+    h4 {
+      @apply text-gray-800;
+    }
   }
 
   &.warning {
-    @apply border-yellow-700/20 bg-yellow-200/30 text-yellow-800 dark:text-gray-200;
+    @apply border-yellow-300 bg-yellow-50 text-yellow-800 dark:bg-yellow-100;
 
-    h1,
-    h2 {
-      @apply bg-yellow-600;
+    h4 {
+      @apply text-yellow-800;
     }
   }
 
   &.info {
-    @apply border-sky-700/20 bg-sky-200/30 text-sky-800 dark:text-gray-200;
+    @apply border-sky-700 bg-sky-50 text-sky-800 dark:bg-sky-100;
 
-    h1,
-    h2 {
-      @apply bg-sky-700  dark:bg-sky-900;
+    h4 {
+      @apply text-sky-800;
     }
   }
 
-  &.success {
-    @apply border-emerald-700/20 bg-emerald-200/30 text-emerald-800 dark:text-gray-200;
+  &.tip {
+    @apply border-emerald-300 bg-emerald-50/50 text-emerald-800 dark:bg-emerald-50;
 
-    h1,
-    h2 {
-      @apply bg-emerald-700 dark:bg-emerald-900;
+    h4 {
+      @apply text-emerald-800;
     }
   }
 
-  &.error {
-    @apply border-red-700/20 bg-red-200/30 text-red-800 dark:text-gray-200;
+  &.danger {
+    @apply border-red-300 bg-red-50/50 text-red-800 dark:bg-red-50;
 
-    h1,
-    h2 {
-      @apply bg-red-700 dark:bg-red-900;
+    h4 {
+      @apply text-red-800;
+    }
+  }
+}
+
+.doc-heading {
+  @apply scroll-mt-[75px] lg:scroll-mt-[175px];
+
+  .header-anchor {
+    @apply ml-[-1.5em] px-[0.23em] py-0 no-underline opacity-0;
+  }
+
+  &:hover {
+    .header-anchor {
+      @apply ml-0 text-orange-500 opacity-100 transition-all;
     }
   }
 }

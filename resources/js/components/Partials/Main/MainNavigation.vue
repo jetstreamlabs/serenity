@@ -17,14 +17,6 @@ const handleScroll = () => {
 }
 </script>
 <template>
-  <Teleport to="body">
-    <SearchModal
-      id="search-modal"
-      searchId="search"
-      :modalOpen="searchModalOpen"
-      @open-modal="searchModalOpen = true"
-      @close-modal="searchModalOpen = false" />
-  </Teleport>
   <nav
     class="sticky top-0 z-50 bg-white dark:bg-gray-800"
     :class="{ stickyHeader: stickyHeader }">
@@ -117,4 +109,12 @@ const handleScroll = () => {
     <DocHeaderbar v-if="$page.url.startsWith('/docs')" />
     <MainHeaderbar v-else />
   </nav>
+  <Teleport to="body">
+    <SearchModal
+      id="search-modal"
+      searchId="search"
+      :modalOpen="searchModalOpen"
+      @open-modal="searchModalOpen = true"
+      @close-modal="searchModalOpen = false" />
+  </Teleport>
 </template>

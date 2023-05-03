@@ -17,7 +17,7 @@
     "laravel/sanctum": "^3.2.1",
     "laravel/tinker": "^2.8.1",
     "pusher/pusher-php-server": "^7.2",
-    "serenity/foundation": "^2.3.5",
+    "serenity/foundation": "^2.4.0",
     "spatie/laravel-query-builder": "^5.2",
     "spiral/roadrunner": "^2.12.3",
     "symfony/yaml": "^6.2",
