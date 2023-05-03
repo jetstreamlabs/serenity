@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+# [2.4.0](https://github.com/jetstreamlabs/serenity/compare/v2.3.6...v2.4.0) (2023-05-03)
+
+
+### Features
+
+* docs and design ([07f1366](https://github.com/jetstreamlabs/serenity/commit/07f136611c15e11632f7377b2b28c2cad28da333))
+
 ## [2.3.6](https://github.com/jetstreamlabs/serenity/compare/v2.3.5...v2.3.6) (2023-04-27)
 
 
