@@ -6,15 +6,14 @@ const { isSupported, copy, copied } = useClipboard()
 const props = defineProps({
   copytext: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 })
 </script>
 <template>
   <div
     v-if="isSupported"
     class="flex items-center justify-between rounded bg-gray-100 px-4 py-2 font-mono text-sm text-gray-500">
-    <!-- {{ $page.props.serenity.flash.app }} -->
     <span>{{ copytext }}</span>
     <IconOutlineClipboard
       v-if="!copied"

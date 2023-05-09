@@ -14,12 +14,14 @@
   <link rel="mask-icon" href="{{ asset('/storage/favicon/safari-pinned-tab.svg') }}" color="#00b4e2">
 
   <link rel="preconnect" href="https://fonts.bunny.net">
-  <link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+  <link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet" />
 
   @vite(['resources/js/app.js'])
   @inertiaHead
 </head>
 <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
   @inertia
+
+  <div id="teleported"></div>
 </body>
 </html>

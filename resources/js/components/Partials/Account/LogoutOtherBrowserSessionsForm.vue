@@ -45,7 +45,6 @@ defineExpose({ password })
         }}
       </div>
 
-      <!-- Other Browser Sessions -->
       <div class="mt-5 space-y-6" v-if="props.sessions.length > 0">
         <div class="flex items-center" v-for="(session, i) in props.sessions" :key="i">
           <div>
@@ -78,7 +77,6 @@ defineExpose({ password })
         <ActionMessage :on="form.recentlySuccessful" class="ml-3"> {{ __('Done.') }}</ActionMessage>
       </div>
 
-      <!-- Log Out Other Devices Confirmation Modal -->
       <DialogModal :show="confirmingLogout" @close="closeModal">
         <template #title>{{ __('Log Out Other Browser Sessions') }}</template>
 

@@ -1,7 +1,7 @@
 /* Add any utilities here  */
 
 .custom-block {
-  @apply my-10 rounded-md border px-4 py-1 shadow-lg;
+  @apply my-10 rounded-md border-2 bg-gray-100 px-4 py-1 shadow-lg dark:bg-gray-700;
 
   h4 {
     @apply pt-2 text-base font-semibold uppercase;
@@ -12,42 +12,42 @@
   }
 
   &.note {
-    @apply border-gray-300 bg-gray-50 text-gray-800 dark:bg-gray-200;
+    @apply border-gray-500 text-gray-600 dark:border-gray-400  dark:text-gray-400;
 
     h4 {
-      @apply text-gray-800;
+      @apply text-gray-500 dark:text-gray-400;
     }
   }
 
   &.warning {
-    @apply border-yellow-300 bg-yellow-50 text-yellow-800 dark:bg-yellow-100;
+    @apply border-orange-600 text-orange-600 dark:border-orange-500 dark:text-orange-500;
 
     h4 {
-      @apply text-yellow-800;
+      @apply text-orange-600 dark:text-orange-500;
     }
   }
 
   &.info {
-    @apply border-sky-700 bg-sky-50 text-sky-800 dark:bg-sky-100;
+    @apply border-blue-600  text-blue-600 dark:border-blue-500 dark:text-blue-500;
 
     h4 {
-      @apply text-sky-800;
+      @apply text-blue-600 dark:text-blue-500;
     }
   }
 
   &.tip {
-    @apply border-emerald-300 bg-emerald-50/50 text-emerald-800 dark:bg-emerald-50;
+    @apply border-emerald-600 text-emerald-600 dark:border-emerald-500 dark:text-emerald-500;
 
     h4 {
-      @apply text-emerald-800;
+      @apply text-emerald-600 dark:text-emerald-500;
     }
   }
 
   &.danger {
-    @apply border-red-300 bg-red-50/50 text-red-800 dark:bg-red-50;
+    @apply border-red-500 text-red-500;
 
     h4 {
-      @apply text-red-800;
+      @apply text-red-500;
     }
   }
 }

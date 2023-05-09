@@ -53,7 +53,6 @@ const deleteApiToken = () => {
 
 <template>
   <div>
-    <!-- Generate API Token -->
     <FormSection @submitted="createApiToken">
       <template #title>{{ __('Create API Token') }}</template>
 
@@ -62,14 +61,12 @@ const deleteApiToken = () => {
       </template>
 
       <template #form>
-        <!-- Token Name -->
         <div class="col-span-6 sm:col-span-4">
           <Label for="name" :value="__('Name')" />
           <Input id="name" type="text" class="mt-1 block w-full" v-model="createApiTokenForm.name" autofocus />
           <InputError :message="createApiTokenForm.errors.name" class="mt-2" />
         </div>
 
-        <!-- Token Permissions -->
         <div class="col-span-6" v-if="availablePermissions.length > 0">
           <Label for="permissions" :value="__('Permissions')" />
 
@@ -96,7 +93,6 @@ const deleteApiToken = () => {
     <div v-if="tokens.length > 0">
       <SectionBorder />
 
-      <!-- Manage API Tokens -->
       <div class="mt-10 sm:mt-0">
         <ActionSection>
           <template #title>{{ __('Manage API Tokens') }}</template>
@@ -105,7 +101,6 @@ const deleteApiToken = () => {
             {{ __('You may delete any of your existing tokens if they are no longer needed.') }}
           </template>
 
-          <!-- API Token List -->
           <template #content>
             <div class="space-y-6">
               <div class="flex items-center justify-between" v-for="token in tokens" :key="token.id">
@@ -136,7 +131,6 @@ const deleteApiToken = () => {
       </div>
     </div>
 
-    <!-- Token Value Modal -->
     <DialogModal :show="displayingToken" @close="displayingToken = false">
       <template #title>{{ __('API Token') }}</template>
 
@@ -159,7 +153,6 @@ const deleteApiToken = () => {
       </template>
     </DialogModal>
 
-    <!-- API Token Permissions Modal -->
     <DialogModal :show="managingPermissionsFor" @close="managingPermissionsFor = null">
       <template #title>{{ __('API Token Permissions') }}</template>
 
@@ -189,7 +182,6 @@ const deleteApiToken = () => {
       </template>
     </DialogModal>
 
-    <!-- Delete Token Confirmation Modal -->
     <ConfirmationModal :show="apiTokenBeingDeleted" @close="apiTokenBeingDeleted = null">
       <template #title>{{ __('Delete API Token') }}</template>
 

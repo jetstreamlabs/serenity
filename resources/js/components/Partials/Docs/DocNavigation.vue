@@ -2,7 +2,7 @@
 const showingNavigationDropdown = ref(false)
 const searchModalOpen = ref(false)
 
-onBeforeMount(() => {
+onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
 
@@ -15,23 +15,22 @@ const handleScroll = () => {
     stickyHeader.value = false
   }
 }
+
+const isDocs = computed(() => useRoutes().current().startsWith('docs'))
 </script>
 <template>
   <nav
     class="sticky top-0 z-50 bg-white dark:bg-gray-800"
     :class="{ stickyHeader: stickyHeader }">
-    <!-- Primary Navigation Menu -->
     <div class="px-6">
       <div class="flex h-16 justify-center md:justify-between">
         <div class="flex w-full items-center">
-          <!-- Logo -->
           <div class="flex shrink-0 items-center">
-            <Link :href="route('home')">
+            <Link :href="route('home')" aria-name="Home">
               <ApplicationMark class="block h-9 w-auto" />
             </Link>
           </div>
 
-          <!-- Navigation Links -->
           <div class="hidden space-x-8 sm:flex lg:-my-px lg:ml-10">
             <NavLink
               v-if="$page.props.user"
@@ -40,10 +39,7 @@ const handleScroll = () => {
               {{ __('Dashboard') }}
             </NavLink>
 
-            <NavLink
-              :href="route('docs.home')"
-              class="my-px"
-              :active="route().current().startsWith('docs')">
+            <NavLink :href="route('docs.home')" class="my-px" :active="isDocs">
               {{ __('Documentation') }}
             </NavLink>
           </div>
@@ -86,7 +82,6 @@ const handleScroll = () => {
           </div>
         </div>
 
-        <!-- Hamburger -->
         <div class="-mr-2 flex items-center sm:hidden">
           <button
             @click="showingNavigationDropdown = !showingNavigationDropdown"
@@ -108,11 +103,10 @@ const handleScroll = () => {
       </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
     <GuestResponsiveNavMenu :show="showingNavigationDropdown" />
     <DocHeaderbar :stickyHeader="stickyHeader" />
   </nav>
-  <Teleport to="body">
+  <Teleport to="#teleported">
     <SearchModal
       id="search-modal"
       searchId="search"

@@ -69,19 +69,16 @@ defineExpose({ photo, photoPreview })
     </template>
 
     <template #form>
-      <!-- Profile Photo -->
       <div class="col-span-6 sm:col-span-4" v-if="$page.props.serenity.managesProfilePhotos">
-        <!-- Profile Photo File Input -->
+
         <input type="file" class="hidden" ref="photo" @change="updatePhotoPreview" />
 
         <Label for="photo" :value="__('Photo')" />
 
-        <!-- Current Profile Photo -->
         <div class="mt-2" v-show="!photoPreview">
           <img :src="props.user.profile_photo_url" :alt="user.name" class="object-cover w-20 h-20 rounded-full" />
         </div>
 
-        <!-- New Profile Photo Preview -->
         <div class="mt-2" v-show="photoPreview">
           <span
             class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-full"
@@ -100,14 +97,12 @@ defineExpose({ photo, photoPreview })
         <InputError :message="form.errors.photo" class="mt-2" />
       </div>
 
-      <!-- First Name -->
       <div class="col-span-6 sm:col-span-4">
         <Label for="name" :value="__('Name')" req />
         <Input id="name" type="text" class="block w-full mt-1" v-model="form.name" autocomplete="name" />
         <InputError :message="form.errors.name" class="mt-2" />
       </div>
 
-      <!-- Email -->
       <div class="col-span-6 sm:col-span-4">
         <Label for="email" :value="__('Email')" req />
         <Input id="email" type="email" class="block w-full mt-1" v-model="form.email" />

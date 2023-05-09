@@ -7,7 +7,8 @@ const toggleDark = useToggle(isDark)
   <button
     type="button"
     @click="toggleDark()"
-    class="rounded-lg p-2.5 text-sm text-gray-500 hover:text-orange-500 focus:outline-none focus:ring-0 dark:text-gray-400 dark:hover:text-orange-500">
+    class="rounded-lg p-2.5 text-sm text-gray-500 hover:text-orange-500 focus:outline-none focus:ring-0 dark:text-gray-400 dark:hover:text-orange-500"
+    :aria-label="__('Theme Switcher')">
     <svg
       v-if="isDark"
       class="h-5 w-5"

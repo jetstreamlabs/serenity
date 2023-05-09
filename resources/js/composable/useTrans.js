@@ -1,4 +1,4 @@
-import { trans } from 'zora-js'
+import { trans } from 'zora'
 import { Zora } from '../zora.js'
 
 export default function useTrans(key, replace) {

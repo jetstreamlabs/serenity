@@ -1,7 +1,6 @@
 <template>
   <div
     class="items-center justify-between space-y-6 pt-8 sm:flex sm:space-x-4 sm:space-y-0">
-    <!-- Prev link -->
     <div
       v-if="$page.props.prevPage"
       class="flex-col items-start sm:flex sm:w-1/2">
@@ -25,7 +24,6 @@
         </div>
       </div>
     </div>
-    <!-- Next link -->
     <div
       v-if="$page.props.nextPage"
       class="ml-auto flex-col items-end sm:flex sm:w-1/2">

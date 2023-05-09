@@ -3,14 +3,14 @@ import expandDotenv from 'dotenv-expand'
 import { homedir } from 'os'
 import fs from 'fs'
 import { resolve } from 'path'
-import { defineConfig } from 'vite'
+import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import laravel from 'laravel-vite-plugin'
 import Vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers'
 import Markdown from 'vite-plugin-vue-markdown'
 import anchor from 'markdown-it-anchor'
@@ -19,6 +19,7 @@ import MarkdownItAttrs from 'markdown-it-attrs'
 import { tocPlugin } from '@mdit-vue/plugin-toc'
 import { componentPlugin } from '@mdit-vue/plugin-component'
 import Shiki from 'markdown-it-shiki'
+import { hash } from './resources/js/makeHash.js'
 
 const env = expandDotenv.expand(dotenv.config()).parsed
 
@@ -26,6 +27,7 @@ export default defineConfig(({ command }) => {
   return {
     plugins: [
       viteCommonjs(),
+      splitVendorChunkPlugin(),
       laravel({
         input: 'resources/js/app.js',
         ssr: 'resources/js/ssr.js',
@@ -188,7 +190,7 @@ export default defineConfig(({ command }) => {
           '@vueuse/core',
           {
             '@inertiajs/vue3': ['router', 'useForm', 'usePage', 'useRemember'],
-            composable: ['useTrans', 'useRoutes', 'useDayjs'],
+            composable: ['useTrans', 'useRoutes', 'useDayjs', 'useClientOnly'],
             store: ['useCoreStore', 'useDocStore']
           }
         ],
@@ -213,6 +215,13 @@ export default defineConfig(({ command }) => {
     ssr: {
       noExternal: ['@inertiajs/server']
     },
+    // build: {
+    //   rollupOptions: {
+    //     output: {
+    //       assetFileNames: '[name][hash].[ext]'
+    //     }
+    //   }
+    // },
     optimizeDeps: {
       include: [
         'vue',
@@ -229,13 +238,9 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias: {
         '@/storage': resolve(__dirname, 'storage/app/public'),
-        '@/Docs': resolve(__dirname, 'resources/markdown'),
         ziggy: resolve(__dirname, 'vendor/tightenco/ziggy/dist/vue.es.js'),
-        zora: resolve(__dirname, 'vendor/jetstreamlabs/zora/dist/vue.js'),
-        'zora-js': resolve(
-          __dirname,
-          'vendor/jetstreamlabs/zora/dist/index.js'
-        ),
+        zora: resolve(__dirname, 'vendor/jetstreamlabs/zora/dist/index.js'),
+        flowbite: resolve(__dirname, 'node_modules/flowbite/lib/esm/index.js'),
         tableTranslations: resolve(__dirname, 'resources/js/translations.js'),
         composable: resolve(__dirname, 'resources/js/composable/index.js'),
         store: resolve(__dirname, 'resources/js/store/index.js')

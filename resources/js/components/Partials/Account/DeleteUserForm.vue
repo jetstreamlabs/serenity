@@ -3,7 +3,7 @@ const confirmingUserDeletion = ref(false)
 const password = ref()
 
 const form = useForm({
-  password: '',
+  password: ''
 })
 
 const confirmUserDeletion = () => {
@@ -16,7 +16,7 @@ const deleteUser = () => {
     preserveScroll: true,
     onSuccess: () => closeModal(),
     onError: () => password.value.input.focus(),
-    onFinish: () => form.reset(),
+    onFinish: () => form.reset()
   })
 }
 
@@ -32,7 +32,9 @@ defineExpose({ password })
   <ActionSection>
     <template #title>{{ __('Delete Account') }}</template>
 
-    <template #description>{{ __('Permanently delete your account.') }}</template>
+    <template #description>{{
+      __('Permanently delete your account.')
+    }}</template>
 
     <template #content>
       <div class="max-w-xl text-sm text-gray-600">
@@ -44,10 +46,11 @@ defineExpose({ password })
       </div>
 
       <div class="mt-5">
-        <DangerButton @click="confirmUserDeletion">{{ __('Delete Account') }}</DangerButton>
+        <DangerButton @click="confirmUserDeletion">{{
+          __('Delete Account')
+        }}</DangerButton>
       </div>
 
-      <!-- Delete Account Confirmation Modal -->
       <DialogModal :show="confirmingUserDeletion" @close="closeModal">
         <template #title>{{ __('Delete Account') }}</template>
 

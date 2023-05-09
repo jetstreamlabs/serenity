@@ -29,7 +29,6 @@ const logout = () => {
       </template>
 
       <template #content>
-        <!-- Account Management -->
         <div class="block px-4 py-2 text-xs text-gray-400">
           {{ __('Manage Account') }}
         </div>
@@ -49,7 +48,6 @@ const logout = () => {
 
         <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
-        <!-- Authentication -->
         <form @submit.prevent="logout">
           <DropdownLink as="button"> {{ __('Logout') }} </DropdownLink>
         </form>

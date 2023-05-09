@@ -6,7 +6,6 @@
       {{ translations.no_results_found }}
     </p>
 
-    <!-- simple and mobile -->
     <div v-if="hasData" class="flex justify-between flex-1" :class="{ 'sm:hidden': hasLinks }">
       <component
         :is="previousPageUrl ? 'a' : 'div'"
@@ -53,7 +52,6 @@
       </component>
     </div>
 
-    <!-- full pagination -->
     <div v-if="hasData && hasLinks" class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
       <div class="flex flex-row items-center flex-grow space-x-4">
         <PerPageSelector dusk="per-page-full" :value="perPage" :options="perPageOptions" :on-change="onPerPageChange" />

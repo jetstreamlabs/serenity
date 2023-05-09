@@ -12,7 +12,7 @@ const clickHandler = ({ target }) => {
 }
 
 // close if the esc key is pressed
-const keyHandler = (event) => {
+const keyHandler = event => {
   if (props.modalOpen && event.key === 'Escape') emit('close-modal')
   if (!props.modalOpen && event.metaKey && event.key == 'k') {
     event.preventDefault()
@@ -32,15 +32,14 @@ onUnmounted(() => {
 
 watch(
   () => props.modalOpen,
-  (open) => {
+  open => {
     open && nextTick(() => searchInput.value.focus())
   }
 )
 </script>
 
 <template>
-  <!-- Modal backdrop -->
-  <transition
+  <Transition
     enter-active-class="transition duration-200 ease-out"
     enter-from-class="opacity-0"
     enter-to-class="opacity-100"
@@ -51,9 +50,9 @@ watch(
       v-show="modalOpen"
       class="fixed inset-0 z-50 bg-gray-900 bg-opacity-20 transition-opacity"
       aria-hidden="true"></div>
-  </transition>
-  <!-- Modal dialog -->
-  <transition
+  </Transition>
+
+  <Transition
     enter-active-class="transition duration-200 ease-in-out"
     enter-from-class="opacity-0 trangray-y-4"
     enter-to-class="opacity-100 trangray-y-0"
@@ -69,12 +68,12 @@ watch(
       <div
         ref="modalContent"
         class="max-h-full w-full max-w-2xl overflow-auto rounded bg-white shadow-lg dark:bg-gray-800">
-        <!-- Search form -->
         <form class="border-b border-gray-200 dark:border-gray-700">
           <div class="flex items-center">
             <label :for="searchId">
               <span class="sr-only">Search</span>
-              <IconOutlineSearch class="ml-4 h-4 w-4 shrink-0 fill-gray-500 dark:fill-gray-400" />
+              <IconOutlineSearch
+                class="ml-4 h-4 w-4 shrink-0 fill-gray-500 dark:fill-gray-400" />
             </label>
             <input
               :id="searchId"
@@ -85,9 +84,11 @@ watch(
           </div>
         </form>
         <div class="space-y-4 px-2 py-4">
-          <!-- Popular -->
           <div>
-            <div class="mb-2 px-2 text-sm font-medium text-gray-500 dark:text-gray-400">Popular</div>
+            <div
+              class="mb-2 px-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+              Popular
+            </div>
             <ul>
               <li>
                 <Link
@@ -159,9 +160,11 @@ watch(
               </li>
             </ul>
           </div>
-          <!-- Actions -->
+
           <div>
-            <div class="mb-2 px-2 text-sm font-medium text-gray-500">Actions</div>
+            <div class="mb-2 px-2 text-sm font-medium text-gray-500">
+              Actions
+            </div>
             <ul>
               <li>
                 <Link
@@ -202,5 +205,5 @@ watch(
         </div>
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>

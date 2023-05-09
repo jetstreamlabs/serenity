@@ -2,7 +2,7 @@
 const showingNavigationDropdown = ref(false)
 const searchModalOpen = ref(false)
 
-onBeforeMount(() => {
+onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
 
@@ -20,18 +20,15 @@ const handleScroll = () => {
   <nav
     class="sticky top-0 z-50 bg-white dark:bg-gray-800"
     :class="{ stickyHeader: stickyHeader }">
-    <!-- Primary Navigation Menu -->
     <div class="px-6">
       <div class="flex h-16 justify-between">
         <div class="flex w-full items-center">
-          <!-- Logo -->
           <div class="flex shrink-0 items-center">
-            <Link :href="route('dashboard')">
+            <Link :href="route('dashboard')" aria-name="Dashboard">
               <ApplicationMark class="block h-9 w-auto" />
             </Link>
           </div>
 
-          <!-- Navigation Links -->
           <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
             <NavLink
               :href="route('dashboard')"
@@ -72,17 +69,14 @@ const handleScroll = () => {
           </div>
         </div>
         <div class="ml-6 hidden md:ml-0 md:flex md:shrink-0 md:items-center">
-          <!-- Team Manager Menu -->
           <TeamManagerMenu :sticky="stickyHeader" />
 
-          <!-- Settings Dropdown -->
           <AccountManagerMenu />
           <div class="ml-3">
             <ThemeSwitcher />
           </div>
         </div>
 
-        <!-- Hamburger -->
         <div class="-mr-2 flex items-center lg:hidden">
           <button
             @click="showingNavigationDropdown = !showingNavigationDropdown"
@@ -104,12 +98,11 @@ const handleScroll = () => {
       </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
     <ResponsiveNavMenu :show="showingNavigationDropdown" />
     <DocHeaderbar v-if="$page.url.startsWith('/docs')" />
     <MainHeaderbar v-else />
   </nav>
-  <Teleport to="body">
+  <Teleport to="#teleported">
     <SearchModal
       id="search-modal"
       searchId="search"

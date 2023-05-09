@@ -11,7 +11,7 @@
     "php": "^8.1",
     "guzzlehttp/guzzle": "^7.5",
     "inertiajs/inertia-laravel": "^0.6.9",
-    "jetstreamlabs/zora": "^3.2",
+    "jetstreamlabs/zora": "^4.0",
     "laravel/framework": "^10.0",
     "laravel/octane": "^1.5.3",
     "laravel/sanctum": "^3.2.1",

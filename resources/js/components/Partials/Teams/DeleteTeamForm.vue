@@ -10,7 +10,7 @@ const confirmTeamDeletion = () => {
 
 const deleteTeam = () => {
   form.delete(useRoutes('teams.destroy', { team: props.team.id }), {
-    errorBag: 'deleteTeam',
+    errorBag: 'deleteTeam'
   })
 }
 </script>
@@ -19,7 +19,9 @@ const deleteTeam = () => {
   <ActionSection>
     <template #title> {{ __('Delete Team') }} </template>
 
-    <template #description> {{ __('Permanently delete this team.') }} </template>
+    <template #description>
+      {{ __('Permanently delete this team.') }}
+    </template>
 
     <template #content>
       <div class="max-w-xl text-sm text-gray-700 dark:text-gray-500">
@@ -31,11 +33,14 @@ const deleteTeam = () => {
       </div>
 
       <div class="mt-5">
-        <DangerButton @click="confirmTeamDeletion"> {{ __('Delete Team') }} </DangerButton>
+        <DangerButton @click="confirmTeamDeletion">
+          {{ __('Delete Team') }}
+        </DangerButton>
       </div>
 
-      <!-- Delete Team Confirmation Modal -->
-      <ConfirmationModal :show="confirmingTeamDeletion" @close="confirmingTeamDeletion = false">
+      <ConfirmationModal
+        :show="confirmingTeamDeletion"
+        @close="confirmingTeamDeletion = false">
         <template #title> {{ __('Delete Team') }} </template>
 
         <template #content>

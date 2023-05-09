@@ -38,6 +38,7 @@ declare module '@vue/runtime-core' {
     DocsModal: typeof import('./resources/js/components/Shared/DocsModal.vue')['default']
     Dropdown: typeof import('./resources/js/components/Shared/Dropdown.vue')['default']
     DropdownLink: typeof import('./resources/js/components/Shared/DropdownLink.vue')['default']
+    FDropdown: typeof import('./resources/js/components/Flowbite/FDropdown.vue')['default']
     FormCard: typeof import('./resources/js/components/Shared/FormCard.vue')['default']
     FormSection: typeof import('./resources/js/components/Shared/FormSection.vue')['default']
     GuestFooter: typeof import('./resources/js/components/Partials/Guest/GuestFooter.vue')['default']

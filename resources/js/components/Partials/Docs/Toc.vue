@@ -1,10 +1,14 @@
+<script setup>
+const { isClient } = useClientOnly()
+</script>
 <template>
   <div
     id="toc"
+    v-if="isClient"
     class="rounded bg-white px-4 pt-4 shadow dark:bg-gray-800 dark:text-gray-100">
     <h2
-      class="mb-3 text-sm font-semibold uppercase text-gray-800 dark:text-gray-100">
-      On This Page
+      class="mb-3 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400">
+      {{ __('On This Page') }}
     </h2>
     <ul
       v-if="$page.props.toc && $page.props.toc.length > 0"
@@ -19,7 +23,7 @@
     </ul>
     <ul v-else>
       <li class="py-3 text-sm text-gray-600 dark:text-gray-300">
-        Nothing Yet ...
+        {{ __('Nothing Yet ...') }}
       </li>
     </ul>
   </div>

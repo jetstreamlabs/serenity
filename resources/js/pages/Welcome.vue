@@ -45,7 +45,16 @@ const features = [
 ]
 </script>
 <template>
-  <Head :title="__('Welcome')" />
+  <Head :title="__('Welcome')">
+    <meta
+      head-key="description"
+      name="description"
+      :content="
+        __(
+          'Is your application ready to move to the Enterprise level? If so, you need separation, speed and Domain Driven Design. Meet Serenity, your new coding Zen!'
+        )
+      " />
+  </Head>
 
   <GuestHeader />
   <div class="-mt-[65px] bg-white dark:bg-gray-800">

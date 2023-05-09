@@ -6,14 +6,16 @@ const toggleSidebar = () => {
   sidebarOpen.value = !sidebarOpen.value
   emitter.emit('toggle-sidebar', sidebarOpen.value)
 }
+const { isClient } = useClientOnly()
 </script>
 
 <template>
-  <div class="flex items-center mt-6 mb-8 sm:mt-0 lg:mb-0 dark:text-gray-100 lg:hidden">
-    <!-- Hamburger button -->
+  <div
+    v-if="isClient"
+    class="mb-8 mt-6 flex items-center dark:text-gray-100 sm:mt-0 lg:mb-0 lg:hidden">
     <MenuButton :sidebarOpen="sidebarOpen" @toggle-sidebar="toggleSidebar" />
-    <!-- Breadcrumbs -->
-    <ol class="flex ml-2 breadcrumbs">
+
+    <ol class="breadcrumbs ml-2 flex">
       <li v-for="(breadcrumb, index) in $page.props.breadcrumbs" :key="index">
         <template v-if="breadcrumb.route === 'last'">
           <li class="last">{{ breadcrumb.text }}</li>

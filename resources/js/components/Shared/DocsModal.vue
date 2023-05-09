@@ -27,8 +27,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <!-- Modal backdrop -->
-  <transition
+  <Transition
     enter-active-class="transition duration-200 ease-out"
     enter-from-class="opacity-0"
     enter-to-class="opacity-100"
@@ -37,12 +36,11 @@ onUnmounted(() => {
     leave-to-class="opacity-0">
     <div
       v-show="modalOpen"
-      class="fixed inset-0 z-50 transition-opacity bg-gray-900 bg-opacity-20"
+      class="fixed inset-0 z-50 bg-gray-900 bg-opacity-20 transition-opacity"
       aria-hidden="true"></div>
-  </transition>
+  </Transition>
 
-  <!-- Modal dialog -->
-  <transition
+  <Transition
     enter-active-class="transition duration-200 ease-out"
     enter-from-class="scale-95 opacity-0"
     enter-to-class="scale-100 opacity-100"
@@ -52,13 +50,15 @@ onUnmounted(() => {
     <div
       v-show="modalOpen"
       :id="id"
-      class="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-hidden sm:px-6"
+      class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden px-4 sm:px-6"
       role="dialog"
       aria-modal="true"
       :aria-labelledby="ariaLabel">
-      <div class="w-full max-w-4xl max-h-full overflow-auto bg-white dark:bg-gray-900" ref="modalContent">
+      <div
+        class="max-h-full w-full max-w-4xl overflow-auto bg-white dark:bg-gray-900"
+        ref="modalContent">
         <slot />
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>

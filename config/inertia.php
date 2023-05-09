@@ -39,6 +39,7 @@ return [
       'ts',
       'tsx',
       'vue',
+      'md',
     ],
   ],
 ];

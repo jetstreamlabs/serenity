@@ -9,7 +9,8 @@ module.exports = {
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
     './resources/js/**/*.vue',
-    './resources/markdown/**/*.md'
+    './resources/markdown/**/*.md',
+    './node_modules/flowbite/**/*.js'
   ],
   darkMode: 'class',
   theme: {
@@ -85,6 +86,7 @@ module.exports = {
     require('@tailwindcss/typography')({
       className: 'docs',
     }),
-    require('@tailwindcss/aspect-ratio')
+    require('@tailwindcss/aspect-ratio'),
+    require('flowbite/plugin')
   ],
 }

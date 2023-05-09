@@ -80,7 +80,6 @@ const alignmentClasses = computed(() => {
       <slot name="trigger"></slot>
     </div>
 
-    <!-- Full Screen Dropdown Overlay -->
     <div v-show="open" class="fixed inset-0 z-40" @click="open = false"></div>
 
     <Transition

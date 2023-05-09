@@ -1,4 +1,4 @@
-import { useSSRContext, mergeProps, openBlock, createElementBlock, createElementVNode, computed, onMounted, onUnmounted, toRefs, watch, unref, withCtx, createVNode, renderSlot, ref, useSlots, createTextVNode, toDisplayString, createBlock, Fragment, renderList, createCommentVNode, inject, nextTick, resolveComponent, withModifiers, onBeforeMount, withDirectives, vShow, withKeys, createSlots, createSSRApp, h as h$1 } from "vue";
+import { useSSRContext, mergeProps, openBlock, createElementBlock, createElementVNode, computed, onMounted, onUnmounted, toRefs, watch, unref, withCtx, createVNode, renderSlot, ref, useSlots, createTextVNode, toDisplayString, createBlock, Fragment, renderList, createCommentVNode, inject, nextTick, resolveComponent, withModifiers, withDirectives, vShow, withKeys, createSlots, createSSRApp, h as h$1 } from "vue";
 import { ssrRenderAttrs, ssrRenderSlot, ssrRenderTeleport, ssrRenderStyle, ssrRenderClass, ssrRenderComponent, ssrLooseContain, ssrGetDynamicModelProps, ssrInterpolate, ssrRenderAttr, ssrRenderList } from "vue/server-renderer";
 import { useForm, usePage, router, Head, Link, createInertiaApp } from "@inertiajs/vue3";
 import _ from "lodash";
@@ -10,8 +10,6 @@ import { renderToString } from "@vue/server-renderer";
 import { createPinia, defineStore } from "pinia";
 import mitt from "mitt";
 import axios$1 from "axios";
-import "pusher-js";
-import Echo from "laravel-echo";
 const _sfc_main$1q = {
   __name: "DangerButton",
   __ssrInlineRender: true,
@@ -117,7 +115,7 @@ const _sfc_main$1p = {
           _push2(`<!---->`);
         }
         _push2(`</div></div>`);
-      }, "body", false, _parent);
+      }, "#teleported", false, _parent);
     };
   }
 };
@@ -303,7 +301,7 @@ const _export_sfc = (sfc, props) => {
   return target;
 };
 const _sfc_main$1l = {};
-function _sfc_ssrRender$d(_ctx, _push, _parent, _attrs) {
+function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs) {
   _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex justify-between md:col-span-1" }, _attrs))}><div class="px-4 sm:px-0"><h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">`);
   ssrRenderSlot(_ctx.$slots, "title", {}, null, _push, _parent);
   _push(`</h3><p class="mt-1 text-sm text-gray-600 dark:text-gray-300">`);
@@ -318,10 +316,10 @@ _sfc_main$1l.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/SectionTitle.vue");
   return _sfc_setup$1l ? _sfc_setup$1l(props, ctx) : void 0;
 };
-const __unplugin_components_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["ssrRender", _sfc_ssrRender$d]]);
+const __unplugin_components_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["ssrRender", _sfc_ssrRender$b]]);
 const _sfc_main$1k = {};
-function _sfc_ssrRender$c(_ctx, _push, _parent, _attrs) {
-  const _component_SectionTitle = __unplugin_components_0$5;
+function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs) {
+  const _component_SectionTitle = __unplugin_components_0$4;
   _push(`<div${ssrRenderAttrs(mergeProps({ class: "md:grid md:grid-cols-3 md:gap-6" }, _attrs))}>`);
   _push(ssrRenderComponent(_component_SectionTitle, null, {
     title: withCtx((_2, _push2, _parent2, _scopeId) => {
@@ -354,7 +352,7 @@ _sfc_main$1k.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ActionSection.vue");
   return _sfc_setup$1k ? _sfc_setup$1k(props, ctx) : void 0;
 };
-const __unplugin_components_8$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1k, [["ssrRender", _sfc_ssrRender$c]]);
+const __unplugin_components_8$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1k, [["ssrRender", _sfc_ssrRender$a]]);
 const _sfc_main$1j = {
   __name: "SectionBorder",
   __ssrInlineRender: true,
@@ -581,7 +579,7 @@ const _sfc_main$1c = {
       return !!slots.actions;
     });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_SectionTitle = __unplugin_components_0$5;
+      const _component_SectionTitle = __unplugin_components_0$4;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "md:grid md:grid-cols-3 md:gap-6" }, _attrs))}>`);
       _push(ssrRenderComponent(_component_SectionTitle, null, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
@@ -630,8 +628,37 @@ _sfc_main$1c.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/FormSection.vue");
   return _sfc_setup$1c ? _sfc_setup$1c(props, ctx) : void 0;
 };
-const trans = (key, replace, Zora2) => {
+const trans$1 = (key, replace, Zora2) => {
   const locale = window.locale;
+  let translation = null;
+  try {
+    translation = key.split(".").reduce((t4, i2) => t4[i2] || null, Zora2.translations[locale].php);
+    if (translation) {
+      return checkForVariables$1(translation, replace);
+    }
+  } catch (e2) {
+  }
+  try {
+    translation = Zora2.translations[locale]["json"][key];
+    if (translation) {
+      return checkForVariables$1(translation, replace);
+    }
+  } catch (e2) {
+  }
+  return checkForVariables$1(key, replace);
+};
+const checkForVariables$1 = (translation, replace) => {
+  let translated = null;
+  if (typeof replace === "undefined") {
+    return translation;
+  }
+  _.forEach(replace, (value, key) => {
+    translated = translation.toString().replace(":" + key, value);
+  });
+  return translated;
+};
+const trans = (key, replace, Zora2) => {
+  const locale = process.env.LOCALE;
   let translation = null;
   try {
     translation = key.split(".").reduce((t4, i2) => t4[i2] || null, Zora2.translations[locale].php);
@@ -655,16 +682,24 @@ const checkForVariables = (translation, replace) => {
     return translation;
   }
   _.forEach(replace, (value, key) => {
-    translated = translation.replace(":" + key, value);
+    translated = translation.toString().replace(":" + key, value);
   });
   return translated;
+};
+const ZoraSSR = {
+  install: (v2, options) => v2.mixin({
+    methods: {
+      __: (key, replace, config = options) => trans(key, replace, config),
+      trans: (key, replace, config = options) => trans(key, replace, config)
+    }
+  })
 };
 const Zora = { translations: { "en": { "php": { "auth": { "failed": "These credentials do not match our records.", "password": "The provided password is incorrect.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "pagination": { "previous": "&laquo; Previous", "next": "Next &raquo;" }, "passwords": { "reset": "Your password has been reset!", "sent": "We have emailed your password reset link!", "throttled": "Please wait before retrying.", "token": "This password reset token is invalid.", "user": "We can't find a user with that email address." }, "validation": { "accepted": "The :attribute must be accepted.", "accepted_if": "The :attribute must be accepted when :other is :value.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute must only contain letters.", "alpha_dash": "The :attribute must only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute must only contain letters and numbers.", "array": "The :attribute must be an array.", "ascii": "The :attribute field must only contain single-byte alphanumeric characters and symbols.", "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "array": "The :attribute must have between :min and :max items.", "file": "The :attribute must be between :min and :max kilobytes.", "numeric": "The :attribute must be between :min and :max.", "string": "The :attribute must be between :min and :max characters." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "current_password": "The password is incorrect.", "date": "The :attribute is not a valid date.", "date_equals": "The :attribute must be a date equal to :date.", "date_format": "The :attribute does not match the format :format.", "decimal": "The :attribute field must have :decimal decimal places.", "declined": "The :attribute must be declined.", "declined_if": "The :attribute must be declined when :other is :value.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "doesnt_end_with": "The :attribute field must not end with one of the following: :values.", "doesnt_start_with": "The :attribute field must not start with one of the following: :values.", "email": "The :attribute must be a valid email address.", "ends_with": "The :attribute must end with one of the following: :values.", "enum": "The selected :attribute is invalid.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "array": "The :attribute must have more than :value items.", "file": "The :attribute must be greater than :value kilobytes.", "numeric": "The :attribute must be greater than :value.", "string": "The :attribute must be greater than :value characters." }, "gte": { "array": "The :attribute must have :value items or more.", "file": "The :attribute must be greater than or equal to :value kilobytes.", "numeric": "The :attribute must be greater than or equal to :value.", "string": "The :attribute must be greater than or equal to :value characters." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "json": "The :attribute must be a valid JSON string.", "lowercase": "The :attribute field must be lowercase.", "lt": { "array": "The :attribute must have less than :value items.", "file": "The :attribute must be less than :value kilobytes.", "numeric": "The :attribute must be less than :value.", "string": "The :attribute must be less than :value characters." }, "lte": { "array": "The :attribute must not have more than :value items.", "file": "The :attribute must be less than or equal to :value kilobytes.", "numeric": "The :attribute must be less than or equal to :value.", "string": "The :attribute must be less than or equal to :value characters." }, "mac_address": "The :attribute must be a valid MAC address.", "max": { "array": "The :attribute must not have more than :max items.", "file": "The :attribute must not be greater than :max kilobytes.", "numeric": "The :attribute must not be greater than :max.", "string": "The :attribute must not be greater than :max characters." }, "max_digits": "The :attribute field must not have more than :max digits.", "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "array": "The :attribute must have at least :min items.", "file": "The :attribute must be at least :min kilobytes.", "numeric": "The :attribute must be at least :min.", "string": "The :attribute must be at least :min characters." }, "min_digits": "The :attribute field must have at least :min digits.", "missing": "The :attribute field must be missing.", "missing_if": "The :attribute field must be missing when :other is :value.", "missing_unless": "The :attribute field must be missing unless :other is :value.", "missing_with": "The :attribute field must be missing when :values is present.", "missing_with_all": "The :attribute field must be missing when :values are present.", "multiple_of": "The :attribute must be a multiple of :value.", "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "password": "The password is incorrect.", "present": "The :attribute field must be present.", "prohibited": "The :attribute field is prohibited.", "prohibited_if": "The :attribute field is prohibited when :other is :value.", "prohibited_unless": "The :attribute field is prohibited unless :other is in :values.", "prohibits": "The :attribute field prohibits :other from being present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_array_keys": "The :attribute field must contain entries for: :values.", "required_if": "The :attribute field is required when :other is :value.", "required_if_accepted": "The :attribute field is required when :other is accepted.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values are present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "array": "The :attribute must contain :size items.", "file": "The :attribute must be :size kilobytes.", "numeric": "The :attribute must be :size.", "string": "The :attribute must be :size characters." }, "starts_with": "The :attribute must start with one of the following: :values.", "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid timezone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "uppercase": "The :attribute field must be uppercase.", "url": "The :attribute must be a valid URL.", "ulid": "The :attribute field must be a valid ULID.", "uuid": "The :attribute must be a valid UUID.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "attributes": [] } }, "json": { "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.", "The :attribute must contain at least one number.": "The :attribute must contain at least one number.", "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.", "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.", "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute." } } } };
 if (typeof window !== "undefined" && typeof window.Zora !== "undefined") {
   Object.assign(Zora.routes, window.Zora.routes);
 }
 function useTrans(key, replace) {
-  return trans(key, replace, Zora);
+  return trans$1(key, replace, Zora);
 }
 const Ziggy$1 = { "url": "https://serenity.test", "port": null, "defaults": {}, "routes": { "sanctum.csrf-cookie": { "uri": "sanctum/csrf-cookie", "methods": ["GET", "HEAD"] }, "login": { "uri": "login", "methods": ["GET", "HEAD"] }, "login.store": { "uri": "login", "methods": ["POST"] }, "logout": { "uri": "logout", "methods": ["POST"] }, "password.request": { "uri": "forgot-password", "methods": ["GET", "HEAD"] }, "password.reset": { "uri": "reset-password/{token}", "methods": ["GET", "HEAD"] }, "password.email": { "uri": "forgot-password", "methods": ["POST"] }, "password.update": { "uri": "reset-password", "methods": ["POST"] }, "register": { "uri": "register", "methods": ["GET", "HEAD"] }, "register.store": { "uri": "register", "methods": ["POST"] }, "verification.notice": { "uri": "email/verify/prompt", "methods": ["GET", "HEAD"] }, "verification.verify": { "uri": "email/verify/{id}/{hash}", "methods": ["GET", "HEAD"] }, "verification.send": { "uri": "email/verify/store", "methods": ["POST"] }, "user-profile-information.update": { "uri": "user/profile/update", "methods": ["PUT"] }, "user-password.update": { "uri": "user/password", "methods": ["PUT"] }, "password.create": { "uri": "user/password/confirm", "methods": ["GET", "HEAD"] }, "password.confirmation": { "uri": "user/password/status", "methods": ["GET", "HEAD"] }, "password.confirm": { "uri": "user/password/confirm", "methods": ["POST"] }, "two-factor.login": { "uri": "two-factor-challenge", "methods": ["GET", "HEAD"] }, "two-factor.challenge": { "uri": "two-factor-challenge", "methods": ["POST"] }, "two-factor.enable": { "uri": "user/two-factor-authentication", "methods": ["POST"] }, "two-factor.confirm": { "uri": "user/confirmed-two-factor-authentication", "methods": ["POST"] }, "two-factor.disable": { "uri": "user/two-factor-authentication", "methods": ["DELETE"] }, "two-factor.qr-code": { "uri": "user/two-factor-qr-code", "methods": ["GET", "HEAD"] }, "two-factor.secret-key": { "uri": "user/two-factor-secret-key", "methods": ["GET", "HEAD"] }, "two-factor.recovery-codes": { "uri": "user/two-factor-recovery-codes", "methods": ["GET", "HEAD"] }, "two-factor.store": { "uri": "user/two-factor-recovery-codes", "methods": ["POST"] }, "terms.show": { "uri": "terms-of-service", "methods": ["GET", "HEAD"] }, "policy.show": { "uri": "privacy-policy", "methods": ["GET", "HEAD"] }, "profile.show": { "uri": "user/profile", "methods": ["GET", "HEAD"] }, "settings.show": { "uri": "user/settings", "methods": ["GET", "HEAD"] }, "other-browser-sessions.destroy": { "uri": "user/browsers/delete", "methods": ["DELETE"] }, "current-user-photo.destroy": { "uri": "user/profile-photo", "methods": ["DELETE"] }, "current-user.destroy": { "uri": "user", "methods": ["DELETE"] }, "api-tokens.index": { "uri": "user/api-tokens", "methods": ["GET", "HEAD"] }, "api-tokens.store": { "uri": "user/api-tokens", "methods": ["POST"] }, "api-tokens.update": { "uri": "user/api-tokens/{token}", "methods": ["PUT"] }, "api-tokens.destroy": { "uri": "user/api-tokens/{token}", "methods": ["DELETE"] }, "teams.create": { "uri": "teams/create", "methods": ["GET", "HEAD"] }, "teams.store": { "uri": "teams", "methods": ["POST"] }, "teams.show": { "uri": "teams/{team}", "methods": ["GET", "HEAD"] }, "teams.update": { "uri": "teams/{team}", "methods": ["PUT"] }, "teams.destroy": { "uri": "teams/{team}", "methods": ["DELETE"] }, "current-team.update": { "uri": "current-team", "methods": ["PUT"] }, "team-members.store": { "uri": "teams/{team}/members", "methods": ["POST"] }, "team-members.update": { "uri": "teams/{team}/members/{user}", "methods": ["PUT"] }, "team-members.destroy": { "uri": "teams/{team}/members/{user}", "methods": ["DELETE"] }, "team-invitations.accept": { "uri": "teams/invitations/{invitation}", "methods": ["GET", "HEAD"] }, "team-invitations.destroy": { "uri": "teams/invitations/{invitation}", "methods": ["DELETE"] }, "docs.home": { "uri": "docs", "methods": ["GET", "HEAD"] }, "docs.show": { "uri": "docs/{version}/{page?}", "methods": ["GET", "HEAD"], "wheres": { "page": "(.*)" } }, "ignition.healthCheck": { "uri": "_ignition/health-check", "methods": ["GET", "HEAD"] }, "ignition.executeSolution": { "uri": "_ignition/execute-solution", "methods": ["POST"] }, "ignition.updateConfig": { "uri": "_ignition/update-config", "methods": ["POST"] }, "home": { "uri": "/", "methods": ["GET", "HEAD"] }, "dashboard": { "uri": "dashboard", "methods": ["GET", "HEAD"] } } };
 if (typeof window !== "undefined" && typeof window.Ziggy !== "undefined") {
@@ -675,6 +710,17 @@ function useRoutes(name, params) {
 }
 function useDayjs() {
   return dayjs();
+}
+function useClientOnly() {
+  const isClient = ref(false);
+  onMounted(() => {
+    if (typeof window !== "undefined") {
+      isClient.value = true;
+    }
+  });
+  return {
+    isClient
+  };
 }
 const _sfc_main$1b = {
   __name: "ApiTokenManager",
@@ -1270,7 +1316,7 @@ const _hoisted_3$i = [
 function render$i(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$i, _hoisted_3$i);
 }
-const __unplugin_components_0$4 = { name: "heroicons-outline-code", render: render$i };
+const __unplugin_components_0$3 = { name: "heroicons-outline-code", render: render$i };
 const _sfc_main$1a = {
   __name: "NotifyStatus",
   __ssrInlineRender: true,
@@ -1292,7 +1338,7 @@ const _sfc_main$1a = {
       message.value = usePage().props.flash.status;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_IconOutlineCode = __unplugin_components_0$4;
+      const _component_IconOutlineCode = __unplugin_components_0$3;
       const _component_IconOutlineXMark = __unplugin_components_1$6;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5" }, _attrs))}><div class="bg-violet-400 p-4 dark:bg-violet-500"><div class="flex items-start"><div class="flex-shrink-0">`);
       _push(ssrRenderComponent(_component_IconOutlineCode, {
@@ -1333,7 +1379,7 @@ const _hoisted_3$h = [
 function render$h(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$h, _hoisted_3$h);
 }
-const __unplugin_components_0$3 = { name: "heroicons-outline-information-circle", render: render$h };
+const __unplugin_components_0$2 = { name: "heroicons-outline-information-circle", render: render$h };
 const _sfc_main$19 = {
   __name: "NotifyInfo",
   __ssrInlineRender: true,
@@ -1355,7 +1401,7 @@ const _sfc_main$19 = {
       message.value = usePage().props.flash.info;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_IconOutlineInformationCircle = __unplugin_components_0$3;
+      const _component_IconOutlineInformationCircle = __unplugin_components_0$2;
       const _component_IconOutlineXMark = __unplugin_components_1$6;
       if (__props.show) {
         _push(`<div${ssrRenderAttrs(mergeProps({ class: "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5" }, _attrs))}><div class="bg-blue-400 p-4 dark:bg-blue-500"><div class="flex items-start"><div class="flex-shrink-0">`);
@@ -1400,7 +1446,7 @@ const _hoisted_3$g = [
 function render$g(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$g, _hoisted_3$g);
 }
-const __unplugin_components_0$2 = { name: "heroicons-outline-exclamation-circle", render: render$g };
+const __unplugin_components_0$1 = { name: "heroicons-outline-exclamation-circle", render: render$g };
 const _sfc_main$18 = {
   __name: "NotifyWarning",
   __ssrInlineRender: true,
@@ -1422,7 +1468,7 @@ const _sfc_main$18 = {
       message.value = usePage().props.flash.warning;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_IconOutlineExclamationCircle = __unplugin_components_0$2;
+      const _component_IconOutlineExclamationCircle = __unplugin_components_0$1;
       const _component_IconOutlineXMark = __unplugin_components_1$6;
       if (__props.show) {
         _push(`<div${ssrRenderAttrs(mergeProps({ class: "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5" }, _attrs))}><div class="bg-yellow-400 p-4 dark:bg-yellow-500"><div class="flex items-start"><div class="flex-shrink-0">`);
@@ -1629,7 +1675,7 @@ const _sfc_main$15 = {
     }
   }
 };
-function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_NotifySuccess = _sfc_main$16;
   const _component_NotifyError = _sfc_main$17;
   const _component_NotifyWarning = _sfc_main$18;
@@ -1675,7 +1721,7 @@ _sfc_main$15.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Notification.vue");
   return _sfc_setup$15 ? _sfc_setup$15(props, ctx) : void 0;
 };
-const __unplugin_components_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["ssrRender", _sfc_ssrRender$b]]);
+const __unplugin_components_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["ssrRender", _sfc_ssrRender$9]]);
 const _sfc_main$14 = {
   __name: "MainFooter",
   __ssrInlineRender: true,
@@ -1753,7 +1799,7 @@ const _sfc_main$13 = {
       const _component_Link = resolveComponent("Link");
       _push(`<!--[--><div style="${ssrRenderStyle(__props.modalOpen ? null : { display: "none" })}" class="fixed inset-0 z-50 bg-gray-900 bg-opacity-20 transition-opacity" aria-hidden="true"></div><div style="${ssrRenderStyle(__props.modalOpen ? null : { display: "none" })}"${ssrRenderAttr("id", __props.id)} class="fixed inset-0 top-20 z-50 mb-4 flex items-start justify-center overflow-hidden px-4 sm:px-6 md:top-28" role="dialog" aria-modal="true"><div class="max-h-full w-full max-w-2xl overflow-auto rounded bg-white shadow-lg dark:bg-gray-800"><form class="border-b border-gray-200 dark:border-gray-700"><div class="flex items-center"><label${ssrRenderAttr("for", __props.searchId)}><span class="sr-only">Search</span>`);
       _push(ssrRenderComponent(_component_IconOutlineSearch, { class: "ml-4 h-4 w-4 shrink-0 fill-gray-500 dark:fill-gray-400" }, null, _parent));
-      _push(`</label><input${ssrRenderAttr("id", __props.searchId)} class="w-full appearance-none border-0 bg-white py-3 pl-2 pr-4 text-sm placeholder-gray-400 focus:ring-transparent dark:bg-gray-800 dark:placeholder:text-gray-500" type="search" placeholder="Search ..."></div></form><div class="space-y-4 px-2 py-4"><div><div class="mb-2 px-2 text-sm font-medium text-gray-500 dark:text-gray-400">Popular</div><ul><li>`);
+      _push(`</label><input${ssrRenderAttr("id", __props.searchId)} class="w-full appearance-none border-0 bg-white py-3 pl-2 pr-4 text-sm placeholder-gray-400 focus:ring-transparent dark:bg-gray-800 dark:placeholder:text-gray-500" type="search" placeholder="Search ..."></div></form><div class="space-y-4 px-2 py-4"><div><div class="mb-2 px-2 text-sm font-medium text-gray-500 dark:text-gray-400"> Popular </div><ul><li>`);
       _push(ssrRenderComponent(_component_Link, {
         class: "flex items-center rounded px-2 py-1 text-sm leading-6 text-gray-800 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700",
         href: "#0",
@@ -1857,7 +1903,7 @@ const _sfc_main$13 = {
         }),
         _: 1
       }, _parent));
-      _push(`</li></ul></div><div><div class="mb-2 px-2 text-sm font-medium text-gray-500">Actions</div><ul><li>`);
+      _push(`</li></ul></div><div><div class="mb-2 px-2 text-sm font-medium text-gray-500"> Actions </div><ul><li>`);
       _push(ssrRenderComponent(_component_Link, {
         class: "flex items-center rounded px-2 py-1 text-sm leading-6 text-gray-800 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700",
         href: "#0",
@@ -1919,44 +1965,53 @@ _sfc_main$13.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/SearchModal.vue");
   return _sfc_setup$13 ? _sfc_setup$13(props, ctx) : void 0;
 };
-const _sfc_main$12 = {};
-function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs) {
-  const _component_Link = resolveComponent("Link");
-  _push(`<nav${ssrRenderAttrs(mergeProps({ class: "w-full" }, _attrs))}><ol class="breadcrumbs flex"><!--[-->`);
-  ssrRenderList(_ctx.$page.props.breadcrumbs, (breadcrumb, index) => {
-    _push(`<li>`);
-    if (breadcrumb.route === "last") {
-      _push(`<li class="last">${ssrInterpolate(breadcrumb.text)}</li>`);
-    } else {
-      _push(ssrRenderComponent(_component_Link, {
-        href: breadcrumb.route
-      }, {
-        default: withCtx((_2, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`${ssrInterpolate(breadcrumb.text)}`);
+const _sfc_main$12 = {
+  __name: "Breadcrumbs",
+  __ssrInlineRender: true,
+  setup(__props) {
+    const { isClient } = useClientOnly();
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_Link = resolveComponent("Link");
+      if (unref(isClient)) {
+        _push(`<nav${ssrRenderAttrs(mergeProps({ class: "w-full" }, _attrs))}><ol class="breadcrumbs flex"><!--[-->`);
+        ssrRenderList(_ctx.$page.props.breadcrumbs, (breadcrumb, index) => {
+          _push(`<li>`);
+          if (breadcrumb.route === "last") {
+            _push(`<li class="last">${ssrInterpolate(breadcrumb.text)}</li>`);
           } else {
-            return [
-              createTextVNode(toDisplayString(breadcrumb.text), 1)
-            ];
+            _push(ssrRenderComponent(_component_Link, {
+              href: breadcrumb.route
+            }, {
+              default: withCtx((_2, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  _push2(`${ssrInterpolate(breadcrumb.text)}`);
+                } else {
+                  return [
+                    createTextVNode(toDisplayString(breadcrumb.text), 1)
+                  ];
+                }
+              }),
+              _: 2
+            }, _parent));
           }
-        }),
-        _: 2
-      }, _parent));
-    }
-    _push(`</li>`);
-  });
-  _push(`<!--]--></ol></nav>`);
-}
+          _push(`</li>`);
+        });
+        _push(`<!--]--></ol></nav>`);
+      } else {
+        _push(`<!---->`);
+      }
+    };
+  }
+};
 const _sfc_setup$12 = _sfc_main$12.setup;
 _sfc_main$12.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Breadcrumbs.vue");
   return _sfc_setup$12 ? _sfc_setup$12(props, ctx) : void 0;
 };
-const __unplugin_components_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["ssrRender", _sfc_ssrRender$a]]);
 const _sfc_main$11 = {};
-function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs) {
-  const _component_Breadcrumbs = __unplugin_components_0$1;
+function _sfc_ssrRender$8(_ctx, _push, _parent, _attrs) {
+  const _component_Breadcrumbs = _sfc_main$12;
   _push(`<header${ssrRenderAttrs(mergeProps({ class: "transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 lg:block" }, _attrs))}><div class="mx-auto w-full px-4 py-6 lg:px-8">`);
   _push(ssrRenderComponent(_component_Breadcrumbs, null, null, _parent));
   _push(`</div></header>`);
@@ -1967,7 +2022,7 @@ _sfc_main$11.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Main/MainHeaderbar.vue");
   return _sfc_setup$11 ? _sfc_setup$11(props, ctx) : void 0;
 };
-const __unplugin_components_9$1 = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["ssrRender", _sfc_ssrRender$9]]);
+const __unplugin_components_9 = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["ssrRender", _sfc_ssrRender$8]]);
 const _hoisted_1$d = {
   viewBox: "0 0 24 24",
   width: "1.2em",
@@ -2269,7 +2324,7 @@ const _sfc_main$Z = {
   __ssrInlineRender: true,
   setup(__props) {
     const stickyHeader = ref(false);
-    onBeforeMount(() => {
+    onMounted(() => {
       window.addEventListener("scroll", handleScroll);
     });
     const handleScroll = () => {
@@ -2280,7 +2335,7 @@ const _sfc_main$Z = {
       }
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Breadcrumbs = __unplugin_components_0$1;
+      const _component_Breadcrumbs = _sfc_main$12;
       const _component_VersionMenu = _sfc_main$_;
       _push(`<header${ssrRenderAttrs(mergeProps({ class: "transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 md:flex md:items-center md:justify-between" }, _attrs))}><div class="mx-auto w-full px-4 py-6 sm:px-6 lg:px-8">`);
       _push(ssrRenderComponent(_component_Breadcrumbs, null, null, _parent));
@@ -2573,7 +2628,8 @@ const _sfc_main$W = {
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<button${ssrRenderAttrs(mergeProps({
         type: "button",
-        class: "rounded-lg p-2.5 text-sm text-gray-500 hover:text-orange-500 focus:outline-none focus:ring-0 dark:text-gray-400 dark:hover:text-orange-500"
+        class: "rounded-lg p-2.5 text-sm text-gray-500 hover:text-orange-500 focus:outline-none focus:ring-0 dark:text-gray-400 dark:hover:text-orange-500",
+        "aria-label": _ctx.__("Theme Switcher")
       }, _attrs))}>`);
       if (unref(isDark)) {
         _push(`<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`);
@@ -2815,20 +2871,20 @@ const _sfc_main$U = {
             if (_push2) {
               _push2(`<span class="inline-flex rounded-md"${_scopeId}><button type="button" class="${ssrRenderClass([[
                 __props.sticky ? "bg-transparent hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-200" : "bg-white hover:bg-gray-50 focus:bg-gray-50 active:bg-gray-50"
-              ], "inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition border border-transparent rounded-md hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:active:bg-gray-900"])}"${_scopeId}>${ssrInterpolate(_ctx.$page.props.user.current_team.name)} `);
-              _push2(ssrRenderComponent(_component_IconOutlineSelector, { class: "ml-2 -mr-0.5 h-4 w-4" }, null, _parent2, _scopeId));
+              ], "inline-flex items-center rounded-md border border-transparent px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:active:bg-gray-900"])}"${_scopeId}>${ssrInterpolate(_ctx.$page.props.user.current_team.name)} `);
+              _push2(ssrRenderComponent(_component_IconOutlineSelector, { class: "-mr-0.5 ml-2 h-4 w-4" }, null, _parent2, _scopeId));
               _push2(`</button></span>`);
             } else {
               return [
                 createVNode("span", { class: "inline-flex rounded-md" }, [
                   createVNode("button", {
                     type: "button",
-                    class: ["inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition border border-transparent rounded-md hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:active:bg-gray-900", [
+                    class: ["inline-flex items-center rounded-md border border-transparent px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:active:bg-gray-900", [
                       __props.sticky ? "bg-transparent hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-200" : "bg-white hover:bg-gray-50 focus:bg-gray-50 active:bg-gray-50"
                     ]]
                   }, [
                     createTextVNode(toDisplayString(_ctx.$page.props.user.current_team.name) + " ", 1),
-                    createVNode(_component_IconOutlineSelector, { class: "ml-2 -mr-0.5 h-4 w-4" })
+                    createVNode(_component_IconOutlineSelector, { class: "-mr-0.5 ml-2 h-4 w-4" })
                   ], 2)
                 ])
               ];
@@ -2879,7 +2935,7 @@ const _sfc_main$U = {
                       if (_push3) {
                         _push3(`<div class="flex items-center"${_scopeId2}>`);
                         if (team.id == _ctx.$page.props.user.current_team_id) {
-                          _push3(ssrRenderComponent(_component_IconOutlineBadgeCheck, { class: "w-5 h-5 mr-2 text-green-400" }, null, _parent3, _scopeId2));
+                          _push3(ssrRenderComponent(_component_IconOutlineBadgeCheck, { class: "mr-2 h-5 w-5 text-green-400" }, null, _parent3, _scopeId2));
                         } else {
                           _push3(`<!---->`);
                         }
@@ -2889,7 +2945,7 @@ const _sfc_main$U = {
                           createVNode("div", { class: "flex items-center" }, [
                             team.id == _ctx.$page.props.user.current_team_id ? (openBlock(), createBlock(_component_IconOutlineBadgeCheck, {
                               key: 0,
-                              class: "w-5 h-5 mr-2 text-green-400"
+                              class: "mr-2 h-5 w-5 text-green-400"
                             })) : createCommentVNode("", true),
                             createVNode("div", null, toDisplayString(team.name), 1)
                           ])
@@ -2939,7 +2995,7 @@ const _sfc_main$U = {
                             createVNode("div", { class: "flex items-center" }, [
                               team.id == _ctx.$page.props.user.current_team_id ? (openBlock(), createBlock(_component_IconOutlineBadgeCheck, {
                                 key: 0,
-                                class: "w-5 h-5 mr-2 text-green-400"
+                                class: "mr-2 h-5 w-5 text-green-400"
                               })) : createCommentVNode("", true),
                               createVNode("div", null, toDisplayString(team.name), 1)
                             ])
@@ -3005,7 +3061,7 @@ _sfc_main$T.setup = (props, ctx) => {
   return _sfc_setup$T ? _sfc_setup$T(props, ctx) : void 0;
 };
 const _sfc_main$S = {};
-function _sfc_ssrRender$8(_ctx, _push, _parent, _attrs) {
+function _sfc_ssrRender$7(_ctx, _push, _parent, _attrs) {
   _push(`<svg${ssrRenderAttrs(mergeProps({ xmlns: "http://www.w3.org/2000/svg" }, _ctx.$attrs, {
     "xml:space": "preserve",
     "fill-rule": "evenodd",
@@ -3021,14 +3077,14 @@ _sfc_main$S.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ApplicationMark.vue");
   return _sfc_setup$S ? _sfc_setup$S(props, ctx) : void 0;
 };
-const __unplugin_components_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["ssrRender", _sfc_ssrRender$8]]);
+const __unplugin_components_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["ssrRender", _sfc_ssrRender$7]]);
 const _sfc_main$R = {
   __name: "MainNavigation",
   __ssrInlineRender: true,
   setup(__props) {
     const showingNavigationDropdown = ref(false);
     const searchModalOpen = ref(false);
-    onBeforeMount(() => {
+    onMounted(() => {
       window.addEventListener("scroll", handleScroll);
     });
     const stickyHeader = ref(false);
@@ -3050,11 +3106,12 @@ const _sfc_main$R = {
       const _component_IconOutlineX = __unplugin_components_5$1;
       const _component_ResponsiveNavMenu = _sfc_main$X;
       const _component_DocHeaderbar = _sfc_main$Z;
-      const _component_MainHeaderbar = __unplugin_components_9$1;
+      const _component_MainHeaderbar = __unplugin_components_9;
       const _component_SearchModal = _sfc_main$13;
       _push(`<!--[--><nav class="${ssrRenderClass([{ stickyHeader: unref(stickyHeader) }, "sticky top-0 z-50 bg-white dark:bg-gray-800"])}"><div class="px-6"><div class="flex h-16 justify-between"><div class="flex w-full items-center"><div class="flex shrink-0 items-center">`);
       _push(ssrRenderComponent(_component_Link, {
-        href: _ctx.route("dashboard")
+        href: _ctx.route("dashboard"),
+        "aria-name": "Dashboard"
       }, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -3132,7 +3189,7 @@ const _sfc_main$R = {
           onOpenModal: ($event) => searchModalOpen.value = true,
           onCloseModal: ($event) => searchModalOpen.value = false
         }, null, _parent));
-      }, "body", false, _parent);
+      }, "#teleported", false, _parent);
       _push(`<!--]-->`);
     };
   }
@@ -3356,7 +3413,7 @@ _sfc_main$M.setup = (props, ctx) => {
   return _sfc_setup$M ? _sfc_setup$M(props, ctx) : void 0;
 };
 const _sfc_main$L = {};
-function _sfc_ssrRender$7(_ctx, _push, _parent, _attrs) {
+function _sfc_ssrRender$6(_ctx, _push, _parent, _attrs) {
   const _component_Link = resolveComponent("Link");
   _push(`<footer${ssrRenderAttrs(mergeProps({ class: "flex flex-col items-center justify-center bg-transparent px-6 py-12 text-sm sm:flex-row sm:justify-between sm:space-y-0" }, _attrs))}><div class="space-x-4 text-gray-400 dark:text-gray-300">`);
   _push(ssrRenderComponent(_component_Link, {
@@ -3397,7 +3454,7 @@ _sfc_main$L.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Guest/GuestFooter.vue");
   return _sfc_setup$L ? _sfc_setup$L(props, ctx) : void 0;
 };
-const __unplugin_components_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["ssrRender", _sfc_ssrRender$7]]);
+const __unplugin_components_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["ssrRender", _sfc_ssrRender$6]]);
 const _sfc_main$K = {
   __name: "GuestResponsiveNavMenu",
   __ssrInlineRender: true,
@@ -3412,7 +3469,7 @@ const _sfc_main$K = {
       const _component_ResponsiveNavLink = _sfc_main$Y;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: [{ block: __props.show, hidden: !__props.show }, "sm:hidden"]
-      }, _attrs))}><div class="pt-2 pb-3 pl-6 pr-4 space-y-1">`);
+      }, _attrs))}><div class="space-y-1 pb-3 pl-6 pr-4 pt-2">`);
       if (_ctx.$page.props.user) {
         _push(ssrRenderComponent(_component_ResponsiveNavLink, {
           href: _ctx.route("dashboard"),
@@ -3449,12 +3506,12 @@ const _sfc_main$K = {
       }, _parent));
       _push(`</div>`);
       if (!_ctx.$page.props.user) {
-        _push(`<div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">`);
+        _push(`<div class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600">`);
         if (_ctx.$page.props.canLogin) {
           _push(`<div class="px-6 py-4 sm:flex sm:items-center sm:justify-end">`);
           _push(ssrRenderComponent(_component_ResponsiveNavLink, {
             href: _ctx.route("login"),
-            class: "text-sm text-gray-600 cursor-pointer hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white"
+            class: "cursor-pointer text-sm text-gray-600 hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white"
           }, {
             default: withCtx((_2, _push2, _parent2, _scopeId) => {
               if (_push2) {
@@ -3470,7 +3527,7 @@ const _sfc_main$K = {
           if (_ctx.$page.props.canRegister) {
             _push(ssrRenderComponent(_component_ResponsiveNavLink, {
               href: _ctx.route("register"),
-              class: "text-sm text-gray-600 cursor-pointer hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white"
+              class: "cursor-pointer text-sm text-gray-600 hover:text-gray-900 focus:outline-none dark:text-gray-400 dark:hover:text-white"
             }, {
               default: withCtx((_2, _push2, _parent2, _scopeId) => {
                 if (_push2) {
@@ -3509,10 +3566,10 @@ const _sfc_main$J = {
   __ssrInlineRender: true,
   setup(__props) {
     const showingNavigationDropdown = ref(false);
-    onBeforeMount(() => {
+    const stickyHeader = ref(false);
+    onMounted(() => {
       window.addEventListener("scroll", handleScroll);
     });
-    const stickyHeader = ref(false);
     const handleScroll = () => {
       if (window.pageYOffset > 0) {
         stickyHeader.value = true;
@@ -3520,6 +3577,7 @@ const _sfc_main$J = {
         stickyHeader.value = false;
       }
     };
+    const isDocs = computed(() => useRoutes().current().startsWith("/docs"));
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Link = resolveComponent("Link");
       const _component_ApplicationMark = __unplugin_components_4$1;
@@ -3534,7 +3592,8 @@ const _sfc_main$J = {
         class: ["sticky top-0 z-50 min-w-full border-b border-gray-100 bg-white bg-opacity-5 backdrop-blur-lg backdrop-filter dark:border-gray-900 dark:bg-gray-800 dark:bg-opacity-5 dark:backdrop-blur-lg dark:backdrop-filter", { stickyGuestHeader: unref(stickyHeader) }]
       }, _attrs))}><div class="px-6"><div class="flex h-16 justify-between"><div class="flex"><div class="flex shrink-0 items-center">`);
       _push(ssrRenderComponent(_component_Link, {
-        href: _ctx.route("home")
+        href: _ctx.route("home"),
+        "aria-label": _ctx.__("Home")
       }, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -3551,7 +3610,8 @@ const _sfc_main$J = {
       if (_ctx.$page.props.user) {
         _push(ssrRenderComponent(_component_NavLink, {
           href: _ctx.route("dashboard"),
-          active: _ctx.route().current("dashboard")
+          active: _ctx.route().current("dashboard"),
+          "aria-label": _ctx.__("Dashboard")
         }, {
           default: withCtx((_2, _push2, _parent2, _scopeId) => {
             if (_push2) {
@@ -3569,7 +3629,8 @@ const _sfc_main$J = {
       }
       _push(ssrRenderComponent(_component_NavLink, {
         href: _ctx.route("docs.home"),
-        active: _ctx.route().current().startsWith("/docs")
+        active: unref(isDocs),
+        "aria-label": _ctx.__("Documentation")
       }, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -5629,7 +5690,7 @@ function render$4(_ctx, _cache) {
 }
 const __unplugin_components_2$2 = { name: "heroicons-outline-book-open", render: render$4 };
 const _sfc_main$A = {};
-function _sfc_ssrRender$6(_ctx, _push, _parent, _attrs) {
+function _sfc_ssrRender$5(_ctx, _push, _parent, _attrs) {
   _push(`<svg${ssrRenderAttrs(mergeProps({
     xmlns: "http://www.w3.org/2000/svg",
     fill: "currentColor"
@@ -5648,9 +5709,9 @@ _sfc_main$A.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ApplicationLogo.vue");
   return _sfc_setup$A ? _sfc_setup$A(props, ctx) : void 0;
 };
-const __unplugin_components_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["ssrRender", _sfc_ssrRender$6]]);
+const __unplugin_components_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["ssrRender", _sfc_ssrRender$5]]);
 const _sfc_main$z = {};
-function _sfc_ssrRender$5(_ctx, _push, _parent, _attrs) {
+function _sfc_ssrRender$4(_ctx, _push, _parent, _attrs) {
   const _component_MainLayout = _sfc_main$P;
   const _component_ApplicationLogo = __unplugin_components_1$2;
   const _component_IconOutlineBookOpen = __unplugin_components_2$2;
@@ -5801,7 +5862,7 @@ _sfc_main$z.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Dashboard.vue");
   return _sfc_setup$z ? _sfc_setup$z(props, ctx) : void 0;
 };
-const Dashboard = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["ssrRender", _sfc_ssrRender$5]]);
+const Dashboard = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["ssrRender", _sfc_ssrRender$4]]);
 const __vite_glob_0_8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Dashboard
@@ -5824,7 +5885,7 @@ const _sfc_main$y = {
 <span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}">    elit</span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-keyword)" })}">:</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-constant)" })}">true</span></span>
 <span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}">  }</span></span>
 <span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}">}</span></span>
-<span class="line"></span></code></pre><p>Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.</p><h3 class="doc-heading" id="natus-aspernatur-iste" tabindex="-1"><a class="header-anchor" href="#natus-aspernatur-iste" aria-hidden="true">#</a> Natus aspernatur iste</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><p>Voluptas beatae omnis omnis voluptas. Cum architecto ab sit ad eaque quas quia distinctio. Molestiae aperiam qui quis deleniti soluta quia qui. Dolores nostrum blanditiis libero optio id. Mollitia ad et asperiores quas saepe alias.</p><hr><h2 class="doc-heading" id="quos-porro-ut-molestiae" tabindex="-1"><a class="header-anchor" href="#quos-porro-ut-molestiae" aria-hidden="true">#</a> Quos porro ut molestiae</h2><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.</p><h3 class="doc-heading" id="voluptatem-quas-possimus" tabindex="-1"><a class="header-anchor" href="#voluptatem-quas-possimus" aria-hidden="true">#</a> Voluptatem quas possimus</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><p>Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.</p><h3 class="doc-heading" id="id-vitae-minima" tabindex="-1"><a class="header-anchor" href="#id-vitae-minima" aria-hidden="true">#</a> Id vitae minima</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><p>Voluptas beatae omnis omnis voluptas. Cum architecto ab sit ad eaque quas quia distinctio. Molestiae aperiam qui quis deleniti soluta quia qui. Dolores nostrum blanditiis libero optio id. Mollitia ad et asperiores quas saepe alias.</p><hr><h2 class="doc-heading" id="vitae-laborum-maiores" tabindex="-1"><a class="header-anchor" href="#vitae-laborum-maiores" aria-hidden="true">#</a> Vitae laborum maiores</h2><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.</p><h3 class="doc-heading" id="corporis-exercitationem" tabindex="-1"><a class="header-anchor" href="#corporis-exercitationem" aria-hidden="true">#</a> Corporis exercitationem</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><div class="custom-block info"><h4>ARCHITECTO</h4><p>Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.</p></div><h3 class="doc-heading" id="reprehenderit-magni" tabindex="-1"><a class="header-anchor" href="#reprehenderit-magni" aria-hidden="true">#</a> Reprehenderit magni</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><p>Voluptas beatae omnis omnis voluptas. Cum architecto ab sit ad eaque quas quia distinctio. Molestiae aperiam qui quis deleniti soluta quia qui. Dolores nostrum blanditiis libero optio id. Mollitia ad et asperiores quas saepe alias.</p></div>`);
+<span class="line"></span></code></pre><p>Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.</p><h3 class="doc-heading" id="natus-aspernatur-iste" tabindex="-1"><a class="header-anchor" href="#natus-aspernatur-iste" aria-hidden="true">#</a> Natus aspernatur iste</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><p>Voluptas beatae omnis omnis voluptas. Cum architecto ab sit ad eaque quas quia distinctio. Molestiae aperiam qui quis deleniti soluta quia qui. Dolores nostrum blanditiis libero optio id. Mollitia ad et asperiores quas saepe alias.</p><hr><h2 class="doc-heading" id="quos-porro-ut-molestiae" tabindex="-1"><a class="header-anchor" href="#quos-porro-ut-molestiae" aria-hidden="true">#</a> Quos porro ut molestiae</h2><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.</p><h3 class="doc-heading" id="voluptatem-quas-possimus" tabindex="-1"><a class="header-anchor" href="#voluptatem-quas-possimus" aria-hidden="true">#</a> Voluptatem quas possimus</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><p>Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.</p><h3 class="doc-heading" id="id-vitae-minima" tabindex="-1"><a class="header-anchor" href="#id-vitae-minima" aria-hidden="true">#</a> Id vitae minima</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><p>Voluptas beatae omnis omnis voluptas. Cum architecto ab sit ad eaque quas quia distinctio. Molestiae aperiam qui quis deleniti soluta quia qui. Dolores nostrum blanditiis libero optio id. Mollitia ad et asperiores quas saepe alias.</p><hr><h2 class="doc-heading" id="vitae-laborum-maiores" tabindex="-1"><a class="header-anchor" href="#vitae-laborum-maiores" aria-hidden="true">#</a> Vitae laborum maiores</h2><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.</p><h3 class="doc-heading" id="corporis-exercitationem" tabindex="-1"><a class="header-anchor" href="#corporis-exercitationem" aria-hidden="true">#</a> Corporis exercitationem</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><div class="custom-block note"><h4>ARCHITECTO</h4><p>Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.</p></div><h3 class="doc-heading" id="reprehenderit-magni" tabindex="-1"><a class="header-anchor" href="#reprehenderit-magni" aria-hidden="true">#</a> Reprehenderit magni</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><p>Voluptas beatae omnis omnis voluptas. Cum architecto ab sit ad eaque quas quia distinctio. Molestiae aperiam qui quis deleniti soluta quia qui. Dolores nostrum blanditiis libero optio id. Mollitia ad et asperiores quas saepe alias.</p></div>`);
     };
   }
 };
@@ -5975,7 +6036,7 @@ const __vite_glob_0_14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   default: _sfc_main$t
 }, Symbol.toStringTag, { value: "Module" }));
 const _sfc_main$s = {};
-function _sfc_ssrRender$4(_ctx, _push, _parent, _attrs) {
+function _sfc_ssrRender$3(_ctx, _push, _parent, _attrs) {
   const _component_Link = resolveComponent("Link");
   _push(ssrRenderComponent(_component_Link, mergeProps({
     href: _ctx.route("home")
@@ -6048,7 +6109,7 @@ _sfc_main$s.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/AuthenticationCardLogo.vue");
   return _sfc_setup$s ? _sfc_setup$s(props, ctx) : void 0;
 };
-const __unplugin_components_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["ssrRender", _sfc_ssrRender$4]]);
+const __unplugin_components_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["ssrRender", _sfc_ssrRender$3]]);
 const _sfc_main$r = {
   __name: "PrivacyPolicy",
   __ssrInlineRender: true,
@@ -8370,7 +8431,7 @@ _sfc_main$i.setup = (props, ctx) => {
   return _sfc_setup$i ? _sfc_setup$i(props, ctx) : void 0;
 };
 const _sfc_main$h = {};
-function _sfc_ssrRender$3(_ctx, _push, _parent, _attrs) {
+function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs) {
   const _component_MainLayout = _sfc_main$P;
   const _component_create_team_form = _sfc_main$i;
   _push(ssrRenderComponent(_component_MainLayout, mergeProps({
@@ -8409,7 +8470,7 @@ _sfc_main$h.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Teams/Create.vue");
   return _sfc_setup$h ? _sfc_setup$h(props, ctx) : void 0;
 };
-const Create = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["ssrRender", _sfc_ssrRender$3]]);
+const Create = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["ssrRender", _sfc_ssrRender$2]]);
 const __vite_glob_0_18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Create
@@ -8654,27 +8715,41 @@ const _sfc_main$f = {
       currentlyManagingRole.value = true;
     };
     const updateRole = () => {
-      updateRoleForm.put(useRoutes("team-members.update", [props.team.id, managingRoleFor.value]), {
-        preserveScroll: true,
-        onSuccess: () => currentlyManagingRole.value = false
-      });
+      updateRoleForm.put(
+        useRoutes("team-members.update", [props.team.id, managingRoleFor.value]),
+        {
+          preserveScroll: true,
+          onSuccess: () => currentlyManagingRole.value = false
+        }
+      );
     };
     const confirmLeavingTeam = () => {
       confirmingLeavingTeam.value = true;
     };
     const leaveTeam = () => {
-      leaveTeamForm.delete(useRoutes("team-members.destroy", [props.team.id, usePage().props.value.user]));
+      leaveTeamForm.delete(
+        useRoutes("team-members.destroy", [
+          props.team.id,
+          usePage().props.value.user
+        ])
+      );
     };
     const confirmTeamMemberRemoval = (teamMember) => {
       teamMemberBeingRemoved.value = teamMember;
     };
     const removeTeamMember = () => {
-      removeTeamMemberForm.delete(useRoutes("team-members.destroy", [props.team.id, teamMemberBeingRemoved.value]), {
-        errorBag: "removeTeamMember",
-        preserveScroll: true,
-        preserveState: true,
-        onSuccess: () => teamMemberBeingRemoved.value = null
-      });
+      removeTeamMemberForm.delete(
+        useRoutes("team-members.destroy", [
+          props.team.id,
+          teamMemberBeingRemoved.value
+        ]),
+        {
+          errorBag: "removeTeamMember",
+          preserveScroll: true,
+          preserveState: true,
+          onSuccess: () => teamMemberBeingRemoved.value = null
+        }
+      );
     };
     const displayableRole = (role) => {
       return availableRoles.value.find((r2) => r2.key === role).name;
@@ -8709,16 +8784,22 @@ const _sfc_main$f = {
           }),
           description: withCtx((_2, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`${ssrInterpolate(_ctx.__("Add a new team member to your team, allowing them to collaborate with you."))}`);
+              _push2(`${ssrInterpolate(_ctx.__(
+                "Add a new team member to your team, allowing them to collaborate with you."
+              ))}`);
             } else {
               return [
-                createTextVNode(toDisplayString(_ctx.__("Add a new team member to your team, allowing them to collaborate with you.")), 1)
+                createTextVNode(toDisplayString(_ctx.__(
+                  "Add a new team member to your team, allowing them to collaborate with you."
+                )), 1)
               ];
             }
           }),
           form: withCtx((_2, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="col-span-6"${_scopeId}><div class="max-w-xl text-sm text-gray-700 dark:text-gray-500"${_scopeId}>${ssrInterpolate(_ctx.__("Please provide the email address of the person you would like to add to this team."))}</div></div><div class="col-span-6 sm:col-span-4"${_scopeId}>`);
+              _push2(`<div class="col-span-6"${_scopeId}><div class="max-w-xl text-sm text-gray-700 dark:text-gray-500"${_scopeId}>${ssrInterpolate(_ctx.__(
+                "Please provide the email address of the person you would like to add to this team."
+              ))}</div></div><div class="col-span-6 sm:col-span-4"${_scopeId}>`);
               _push2(ssrRenderComponent(_component_Label, {
                 for: "email",
                 value: "Email"
@@ -8726,7 +8807,7 @@ const _sfc_main$f = {
               _push2(ssrRenderComponent(_component_Input, {
                 id: "email",
                 type: "email",
-                class: "block w-full mt-1",
+                class: "mt-1 block w-full",
                 modelValue: unref(addTeamMemberForm).email,
                 "onUpdate:modelValue": ($event) => unref(addTeamMemberForm).email = $event
               }, null, _parent2, _scopeId));
@@ -8745,18 +8826,22 @@ const _sfc_main$f = {
                   message: unref(addTeamMemberForm).errors.role,
                   class: "mt-2"
                 }, null, _parent2, _scopeId));
-                _push2(`<div class="relative z-0 mt-1 border-2 border-gray-200 rounded-lg cursor-pointer dark:border-gray-600"${_scopeId}><!--[-->`);
+                _push2(`<div class="relative z-0 mt-1 cursor-pointer rounded-lg border-2 border-gray-200 dark:border-gray-600"${_scopeId}><!--[-->`);
                 ssrRenderList(unref(availableRoles), (role, i2) => {
                   _push2(`<button type="button" class="${ssrRenderClass([{
                     "rounded-t-none border-t-2 border-gray-200 dark:border-gray-600": i2 > 0,
                     "rounded-b-none": i2 != Object.keys(unref(availableRoles)).length - 1
-                  }, "relative inline-flex w-full px-4 py-3 rounded-lg focus:border-contrast-300 focus:ring-contrast-200 focus:z-10 focus:outline-none focus:ring"])}"${_scopeId}><div class="${ssrRenderClass({ "opacity-50": unref(addTeamMemberForm).role && unref(addTeamMemberForm).role != role.key })}"${_scopeId}><div class="flex items-center"${_scopeId}><div class="${ssrRenderClass([{ "font-semibold": unref(addTeamMemberForm).role == role.key }, "text-sm text-gray-700 dark:text-gray-500"])}"${_scopeId}>${ssrInterpolate(role.name)}</div>`);
+                  }, "focus:border-contrast-300 focus:ring-contrast-200 relative inline-flex w-full rounded-lg px-4 py-3 focus:z-10 focus:outline-none focus:ring"])}"${_scopeId}><div class="${ssrRenderClass({
+                    "opacity-50": unref(addTeamMemberForm).role && unref(addTeamMemberForm).role != role.key
+                  })}"${_scopeId}><div class="flex items-center"${_scopeId}><div class="${ssrRenderClass([{
+                    "font-semibold": unref(addTeamMemberForm).role == role.key
+                  }, "text-sm text-gray-700 dark:text-gray-500"])}"${_scopeId}>${ssrInterpolate(role.name)}</div>`);
                   if (unref(addTeamMemberForm).role == role.key) {
-                    _push2(ssrRenderComponent(_component_IconOutlineCheckCircle, { class: "w-5 h-5 ml-2 text-green-400" }, null, _parent2, _scopeId));
+                    _push2(ssrRenderComponent(_component_IconOutlineCheckCircle, { class: "ml-2 h-5 w-5 text-green-400" }, null, _parent2, _scopeId));
                   } else {
                     _push2(`<!---->`);
                   }
-                  _push2(`</div><div class="mt-2 text-xs text-left text-gray-700 dark:text-gray-500"${_scopeId}>${ssrInterpolate(role.description)}</div></div></button>`);
+                  _push2(`</div><div class="mt-2 text-left text-xs text-gray-700 dark:text-gray-500"${_scopeId}>${ssrInterpolate(role.description)}</div></div></button>`);
                 });
                 _push2(`<!--]--></div></div>`);
               } else {
@@ -8765,7 +8850,9 @@ const _sfc_main$f = {
             } else {
               return [
                 createVNode("div", { class: "col-span-6" }, [
-                  createVNode("div", { class: "max-w-xl text-sm text-gray-700 dark:text-gray-500" }, toDisplayString(_ctx.__("Please provide the email address of the person you would like to add to this team.")), 1)
+                  createVNode("div", { class: "max-w-xl text-sm text-gray-700 dark:text-gray-500" }, toDisplayString(_ctx.__(
+                    "Please provide the email address of the person you would like to add to this team."
+                  )), 1)
                 ]),
                 createVNode("div", { class: "col-span-6 sm:col-span-4" }, [
                   createVNode(_component_Label, {
@@ -8775,7 +8862,7 @@ const _sfc_main$f = {
                   createVNode(_component_Input, {
                     id: "email",
                     type: "email",
-                    class: "block w-full mt-1",
+                    class: "mt-1 block w-full",
                     modelValue: unref(addTeamMemberForm).email,
                     "onUpdate:modelValue": ($event) => unref(addTeamMemberForm).email = $event
                   }, null, 8, ["modelValue", "onUpdate:modelValue"]),
@@ -8796,11 +8883,11 @@ const _sfc_main$f = {
                     message: unref(addTeamMemberForm).errors.role,
                     class: "mt-2"
                   }, null, 8, ["message"]),
-                  createVNode("div", { class: "relative z-0 mt-1 border-2 border-gray-200 rounded-lg cursor-pointer dark:border-gray-600" }, [
+                  createVNode("div", { class: "relative z-0 mt-1 cursor-pointer rounded-lg border-2 border-gray-200 dark:border-gray-600" }, [
                     (openBlock(true), createBlock(Fragment, null, renderList(unref(availableRoles), (role, i2) => {
                       return openBlock(), createBlock("button", {
                         type: "button",
-                        class: ["relative inline-flex w-full px-4 py-3 rounded-lg focus:border-contrast-300 focus:ring-contrast-200 focus:z-10 focus:outline-none focus:ring", {
+                        class: ["focus:border-contrast-300 focus:ring-contrast-200 relative inline-flex w-full rounded-lg px-4 py-3 focus:z-10 focus:outline-none focus:ring", {
                           "rounded-t-none border-t-2 border-gray-200 dark:border-gray-600": i2 > 0,
                           "rounded-b-none": i2 != Object.keys(unref(availableRoles)).length - 1
                         }],
@@ -8808,18 +8895,22 @@ const _sfc_main$f = {
                         key: role.key
                       }, [
                         createVNode("div", {
-                          class: { "opacity-50": unref(addTeamMemberForm).role && unref(addTeamMemberForm).role != role.key }
+                          class: {
+                            "opacity-50": unref(addTeamMemberForm).role && unref(addTeamMemberForm).role != role.key
+                          }
                         }, [
                           createVNode("div", { class: "flex items-center" }, [
                             createVNode("div", {
-                              class: ["text-sm text-gray-700 dark:text-gray-500", { "font-semibold": unref(addTeamMemberForm).role == role.key }]
+                              class: ["text-sm text-gray-700 dark:text-gray-500", {
+                                "font-semibold": unref(addTeamMemberForm).role == role.key
+                              }]
                             }, toDisplayString(role.name), 3),
                             unref(addTeamMemberForm).role == role.key ? (openBlock(), createBlock(_component_IconOutlineCheckCircle, {
                               key: 0,
-                              class: "w-5 h-5 ml-2 text-green-400"
+                              class: "ml-2 h-5 w-5 text-green-400"
                             })) : createCommentVNode("", true)
                           ]),
-                          createVNode("div", { class: "mt-2 text-xs text-left text-gray-700 dark:text-gray-500" }, toDisplayString(role.description), 1)
+                          createVNode("div", { class: "mt-2 text-left text-xs text-gray-700 dark:text-gray-500" }, toDisplayString(role.description), 1)
                         ], 2)
                       ], 10, ["onClick"]);
                     }), 128))
@@ -8921,7 +9012,7 @@ const _sfc_main$f = {
               ssrRenderList(unref(team).team_invitations, (invitation) => {
                 _push2(`<div class="flex items-center justify-between"${_scopeId}><div class="text-gray-700 dark:text-gray-500"${_scopeId}>${ssrInterpolate(invitation.email)}</div><div class="flex items-center"${_scopeId}>`);
                 if (unref(userPermissions).canRemoveTeamMembers) {
-                  _push2(`<button class="ml-6 font-medium text-red-500 cursor-pointer focus:outline-none"${_scopeId}>${ssrInterpolate(_ctx.__("Cancel"))}</button>`);
+                  _push2(`<button class="ml-6 cursor-pointer font-medium text-red-500 focus:outline-none"${_scopeId}>${ssrInterpolate(_ctx.__("Cancel"))}</button>`);
                 } else {
                   _push2(`<!---->`);
                 }
@@ -8940,7 +9031,7 @@ const _sfc_main$f = {
                       createVNode("div", { class: "flex items-center" }, [
                         unref(userPermissions).canRemoveTeamMembers ? (openBlock(), createBlock("button", {
                           key: 0,
-                          class: "ml-6 font-medium text-red-500 cursor-pointer focus:outline-none",
+                          class: "ml-6 cursor-pointer font-medium text-red-500 focus:outline-none",
                           onClick: ($event) => cancelTeamInvitation(invitation)
                         }, toDisplayString(_ctx.__("Cancel")), 9, ["onClick"])) : createCommentVNode("", true)
                       ])
@@ -8982,7 +9073,7 @@ const _sfc_main$f = {
             if (_push2) {
               _push2(`<div class="space-y-6"${_scopeId}><!--[-->`);
               ssrRenderList(unref(team).users, (user) => {
-                _push2(`<div class="flex items-center justify-between"${_scopeId}><div class="flex items-center"${_scopeId}><img class="w-8 h-8 rounded-full"${ssrRenderAttr("src", user.profile_photo_url)}${ssrRenderAttr("alt", user.name)}${_scopeId}><div class="ml-4"${_scopeId}>${ssrInterpolate(user.name)}</div></div><div class="flex items-center"${_scopeId}>`);
+                _push2(`<div class="flex items-center justify-between"${_scopeId}><div class="flex items-center"${_scopeId}><img class="h-8 w-8 rounded-full"${ssrRenderAttr("src", user.profile_photo_url)}${ssrRenderAttr("alt", user.name)}${_scopeId}><div class="ml-4"${_scopeId}>${ssrInterpolate(user.name)}</div></div><div class="flex items-center"${_scopeId}>`);
                 if (unref(userPermissions).canAddTeamMembers && unref(availableRoles).length) {
                   _push2(`<button class="ml-2 text-sm text-gray-400 underline"${_scopeId}>${ssrInterpolate(displayableRole(user.membership.role))}</button>`);
                 } else if (unref(availableRoles).length) {
@@ -8991,12 +9082,12 @@ const _sfc_main$f = {
                   _push2(`<!---->`);
                 }
                 if (_ctx.$page.props.user.id === user.id) {
-                  _push2(`<button class="ml-6 text-sm text-red-500 cursor-pointer"${_scopeId}>${ssrInterpolate(_ctx.__("Leave"))}</button>`);
+                  _push2(`<button class="ml-6 cursor-pointer text-sm text-red-500"${_scopeId}>${ssrInterpolate(_ctx.__("Leave"))}</button>`);
                 } else {
                   _push2(`<!---->`);
                 }
                 if (unref(userPermissions).canRemoveTeamMembers) {
-                  _push2(`<button class="ml-6 text-sm text-red-500 cursor-pointer"${_scopeId}>${ssrInterpolate(_ctx.__("Remove"))}</button>`);
+                  _push2(`<button class="ml-6 cursor-pointer text-sm text-red-500"${_scopeId}>${ssrInterpolate(_ctx.__("Remove"))}</button>`);
                 } else {
                   _push2(`<!---->`);
                 }
@@ -9013,7 +9104,7 @@ const _sfc_main$f = {
                     }, [
                       createVNode("div", { class: "flex items-center" }, [
                         createVNode("img", {
-                          class: "w-8 h-8 rounded-full",
+                          class: "h-8 w-8 rounded-full",
                           src: user.profile_photo_url,
                           alt: user.name
                         }, null, 8, ["src", "alt"]),
@@ -9030,12 +9121,12 @@ const _sfc_main$f = {
                         }, toDisplayString(displayableRole(user.membership.role)), 1)) : createCommentVNode("", true),
                         _ctx.$page.props.user.id === user.id ? (openBlock(), createBlock("button", {
                           key: 2,
-                          class: "ml-6 text-sm text-red-500 cursor-pointer",
+                          class: "ml-6 cursor-pointer text-sm text-red-500",
                           onClick: confirmLeavingTeam
                         }, toDisplayString(_ctx.__("Leave")), 1)) : createCommentVNode("", true),
                         unref(userPermissions).canRemoveTeamMembers ? (openBlock(), createBlock("button", {
                           key: 3,
-                          class: "ml-6 text-sm text-red-500 cursor-pointer",
+                          class: "ml-6 cursor-pointer text-sm text-red-500",
                           onClick: ($event) => confirmTeamMemberRemoval(user)
                         }, toDisplayString(_ctx.__("Remove")), 9, ["onClick"])) : createCommentVNode("", true)
                       ])
@@ -9067,14 +9158,18 @@ const _sfc_main$f = {
         content: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (unref(managingRoleFor)) {
-              _push2(`<div${_scopeId}><div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer dark:border-gray-600"${_scopeId}><!--[-->`);
+              _push2(`<div${_scopeId}><div class="relative z-0 mt-1 cursor-pointer rounded-lg border border-gray-200 dark:border-gray-600"${_scopeId}><!--[-->`);
               ssrRenderList(unref(availableRoles), (role, i2) => {
                 _push2(`<button type="button" class="${ssrRenderClass([{
                   "rounded-t-none border-t border-gray-200 dark:border-gray-600": i2 > 0,
                   "rounded-b-none": i2 !== Object.keys(unref(availableRoles)).length - 1
-                }, "relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200"])}"${_scopeId}><div class="${ssrRenderClass({ "opacity-50": unref(updateRoleForm).role && unref(updateRoleForm).role !== role.key })}"${_scopeId}><div class="flex items-center"${_scopeId}><div class="${ssrRenderClass([{ "font-semibold": unref(updateRoleForm).role === role.key }, "text-sm text-gray-700 dark:text-gray-500"])}"${_scopeId}>${ssrInterpolate(role.name)}</div>`);
+                }, "relative inline-flex w-full rounded-lg px-4 py-3 focus:z-10 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200"])}"${_scopeId}><div class="${ssrRenderClass({
+                  "opacity-50": unref(updateRoleForm).role && unref(updateRoleForm).role !== role.key
+                })}"${_scopeId}><div class="flex items-center"${_scopeId}><div class="${ssrRenderClass([{
+                  "font-semibold": unref(updateRoleForm).role === role.key
+                }, "text-sm text-gray-700 dark:text-gray-500"])}"${_scopeId}>${ssrInterpolate(role.name)}</div>`);
                 if (unref(updateRoleForm).role === role.key) {
-                  _push2(ssrRenderComponent(_component_IconOutlineCheckCircle, { class: "w-5 h-5 ml-2 text-green-400" }, null, _parent2, _scopeId));
+                  _push2(ssrRenderComponent(_component_IconOutlineCheckCircle, { class: "ml-2 h-5 w-5 text-green-400" }, null, _parent2, _scopeId));
                 } else {
                   _push2(`<!---->`);
                 }
@@ -9087,11 +9182,11 @@ const _sfc_main$f = {
           } else {
             return [
               unref(managingRoleFor) ? (openBlock(), createBlock("div", { key: 0 }, [
-                createVNode("div", { class: "relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer dark:border-gray-600" }, [
+                createVNode("div", { class: "relative z-0 mt-1 cursor-pointer rounded-lg border border-gray-200 dark:border-gray-600" }, [
                   (openBlock(true), createBlock(Fragment, null, renderList(unref(availableRoles), (role, i2) => {
                     return openBlock(), createBlock("button", {
                       type: "button",
-                      class: ["relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200", {
+                      class: ["relative inline-flex w-full rounded-lg px-4 py-3 focus:z-10 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200", {
                         "rounded-t-none border-t border-gray-200 dark:border-gray-600": i2 > 0,
                         "rounded-b-none": i2 !== Object.keys(unref(availableRoles)).length - 1
                       }],
@@ -9099,15 +9194,19 @@ const _sfc_main$f = {
                       key: role.key
                     }, [
                       createVNode("div", {
-                        class: { "opacity-50": unref(updateRoleForm).role && unref(updateRoleForm).role !== role.key }
+                        class: {
+                          "opacity-50": unref(updateRoleForm).role && unref(updateRoleForm).role !== role.key
+                        }
                       }, [
                         createVNode("div", { class: "flex items-center" }, [
                           createVNode("div", {
-                            class: ["text-sm text-gray-700 dark:text-gray-500", { "font-semibold": unref(updateRoleForm).role === role.key }]
+                            class: ["text-sm text-gray-700 dark:text-gray-500", {
+                              "font-semibold": unref(updateRoleForm).role === role.key
+                            }]
                           }, toDisplayString(role.name), 3),
                           unref(updateRoleForm).role === role.key ? (openBlock(), createBlock(_component_IconOutlineCheckCircle, {
                             key: 0,
-                            class: "w-5 h-5 ml-2 text-green-400"
+                            class: "ml-2 h-5 w-5 text-green-400"
                           })) : createCommentVNode("", true)
                         ]),
                         createVNode("div", { class: "mt-2 text-xs text-gray-700 dark:text-gray-500" }, toDisplayString(role.description), 1)
@@ -9763,7 +9862,29 @@ const _sfc_main$a = {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_component_Head, {
         title: _ctx.__("Welcome")
-      }, null, _parent));
+      }, {
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<meta head-key="description" name="description"${ssrRenderAttr(
+              "content",
+              _ctx.__(
+                "Is your application ready to move to the Enterprise level? If so, you need separation, speed and Domain Driven Design. Meet Serenity, your new coding Zen!"
+              )
+            )}${_scopeId}>`);
+          } else {
+            return [
+              createVNode("meta", {
+                "head-key": "description",
+                name: "description",
+                content: _ctx.__(
+                  "Is your application ready to move to the Enterprise level? If so, you need separation, speed and Domain Driven Design. Meet Serenity, your new coding Zen!"
+                )
+              }, null, 8, ["content"])
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
       _push(ssrRenderComponent(_component_GuestHeader, null, null, _parent));
       _push(`<div class="-mt-[65px] bg-white dark:bg-gray-800"><div class="relative isolate overflow-hidden bg-gradient-to-b from-blue-50/20"><div class="mx-auto max-w-7xl pb-12 pt-4 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:pb-20 lg:pt-32"><div class="px-6 lg:px-0 lg:pt-4"><div class="mx-auto max-w-2xl pt-[90px] lg:pt-0"><div class="max-w-lg">`);
       _push(ssrRenderComponent(_component_ApplicationLogo, { class: "h-40 fill-gray-700 dark:fill-gray-100 sm:h-48" }, null, _parent));
@@ -10216,31 +10337,11 @@ const C = { install: (t4, e2) => {
   }(t5, r3, n2, o2);
   t4.mixin({ methods: { route: r2 } }), parseInt(t4.version) > 2 && t4.provide("route", r2);
 } };
-const ZoraVue = {
-  install: (v2, options) => v2.mixin({
-    methods: {
-      __: (key, replace, config = options) => trans(key, replace, config),
-      trans: (key, replace, config = options) => trans(key, replace, config)
-    }
-  })
-};
-const serenityssr = {
+const ssrPlugin = {
   install(app) {
     axios$1.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
     axios$1.defaults.withCredentials = true;
     const pinia = createPinia();
-    const echo = new Echo({
-      broadcaster: "pusher",
-      key: "334413d2-4fd9-4939-81fd-b1ae9e19f0c7",
-      wsHost: "jetwire.cloud",
-      wsPort: "443",
-      wssPort: "443",
-      forceTLS: true,
-      cluster: "",
-      enabledTransports: ["ws", "wss"],
-      encrypted: true,
-      disableStats: true
-    });
     const is_null = (obj) => {
       return !obj && typeof obj === "object";
     };
@@ -10249,13 +10350,9 @@ const serenityssr = {
     };
     app.provide("emitter", mitt());
     app.provide("dayjs", dayjs);
-    app.provide("echo", echo);
     app.provide("axios", axios$1);
-    app.provide("_", _);
     app.provide("isObject", isObject);
     app.provide("is_null", is_null);
-    app.use(C, Ziggy$1);
-    app.use(ZoraVue, Zora);
     app.use(pinia);
     app.component("Head", Head);
     app.component("Link", Link);
@@ -10313,30 +10410,39 @@ _sfc_main$9.setup = (props, ctx) => {
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
 const __unplugin_components_10 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-dbd85cd6"]]);
-const _sfc_main$8 = {};
-function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs) {
-  _push(`<div${ssrRenderAttrs(mergeProps({
-    id: "toc",
-    class: "rounded bg-white px-4 pt-4 shadow dark:bg-gray-800 dark:text-gray-100"
-  }, _attrs))}><h2 class="mb-3 text-sm font-semibold uppercase text-gray-800 dark:text-gray-100"> On This Page </h2>`);
-  if (_ctx.$page.props.toc && _ctx.$page.props.toc.length > 0) {
-    _push(`<ul class="divide-y divide-dashed divide-gray-200 dark:divide-gray-600"><!--[-->`);
-    ssrRenderList(_ctx.$page.props.toc, (link, i2) => {
-      _push(`<li class="py-3"><a${ssrRenderAttr("href", link.href)} class="ml-1 text-sm text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">${ssrInterpolate(link.text)}</a></li>`);
-    });
-    _push(`<!--]--></ul>`);
-  } else {
-    _push(`<ul><li class="py-3 text-sm text-gray-600 dark:text-gray-300"> Nothing Yet ... </li></ul>`);
+const _sfc_main$8 = {
+  __name: "Toc",
+  __ssrInlineRender: true,
+  setup(__props) {
+    const { isClient } = useClientOnly();
+    return (_ctx, _push, _parent, _attrs) => {
+      if (unref(isClient)) {
+        _push(`<div${ssrRenderAttrs(mergeProps({
+          id: "toc",
+          class: "rounded bg-white px-4 pt-4 shadow dark:bg-gray-800 dark:text-gray-100"
+        }, _attrs))}><h2 class="mb-3 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400">${ssrInterpolate(_ctx.__("On This Page"))}</h2>`);
+        if (_ctx.$page.props.toc && _ctx.$page.props.toc.length > 0) {
+          _push(`<ul class="divide-y divide-dashed divide-gray-200 dark:divide-gray-600"><!--[-->`);
+          ssrRenderList(_ctx.$page.props.toc, (link, i2) => {
+            _push(`<li class="py-3"><a${ssrRenderAttr("href", link.href)} class="ml-1 text-sm text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">${ssrInterpolate(link.text)}</a></li>`);
+          });
+          _push(`<!--]--></ul>`);
+        } else {
+          _push(`<ul><li class="py-3 text-sm text-gray-600 dark:text-gray-300">${ssrInterpolate(_ctx.__("Nothing Yet ..."))}</li></ul>`);
+        }
+        _push(`</div>`);
+      } else {
+        _push(`<!---->`);
+      }
+    };
   }
-  _push(`</div>`);
-}
+};
 const _sfc_setup$8 = _sfc_main$8.setup;
 _sfc_main$8.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/Toc.vue");
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
-const __unplugin_components_9 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["ssrRender", _sfc_ssrRender$2]]);
 const _sfc_main$7 = {};
 function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
   _push(`<footer${ssrRenderAttrs(mergeProps({ class: "mt-8 border-t border-gray-200 pt-8 dark:border-gray-600" }, _attrs))}><div class="flex flex-col items-center justify-center md:flex-row md:justify-between"><div class="mb-4 md:mb-0"><div class="flex shrink-0 flex-col items-center md:flex-row"><div class="ml-4 text-sm text-gray-500">${_ctx.$page.props.copyright}</div></div></div></div></footer>`);
@@ -10497,38 +10603,43 @@ const _sfc_main$4 = {
       sidebarOpen.value = !sidebarOpen.value;
       emitter.emit("toggle-sidebar", sidebarOpen.value);
     };
+    const { isClient } = useClientOnly();
     return (_ctx, _push, _parent, _attrs) => {
       const _component_MenuButton = _sfc_main$5;
       const _component_Link = resolveComponent("Link");
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex items-center mt-6 mb-8 sm:mt-0 lg:mb-0 dark:text-gray-100 lg:hidden" }, _attrs))}>`);
-      _push(ssrRenderComponent(_component_MenuButton, {
-        sidebarOpen: unref(sidebarOpen),
-        onToggleSidebar: toggleSidebar
-      }, null, _parent));
-      _push(`<ol class="flex ml-2 breadcrumbs"><!--[-->`);
-      ssrRenderList(_ctx.$page.props.breadcrumbs, (breadcrumb, index) => {
-        _push(`<li>`);
-        if (breadcrumb.route === "last") {
-          _push(`<li class="last">${ssrInterpolate(breadcrumb.text)}</li>`);
-        } else {
-          _push(ssrRenderComponent(_component_Link, {
-            href: breadcrumb.route
-          }, {
-            default: withCtx((_2, _push2, _parent2, _scopeId) => {
-              if (_push2) {
-                _push2(`${ssrInterpolate(breadcrumb.text)}`);
-              } else {
-                return [
-                  createTextVNode(toDisplayString(breadcrumb.text), 1)
-                ];
-              }
-            }),
-            _: 2
-          }, _parent));
-        }
-        _push(`</li>`);
-      });
-      _push(`<!--]--></ol></div>`);
+      if (unref(isClient)) {
+        _push(`<div${ssrRenderAttrs(mergeProps({ class: "mb-8 mt-6 flex items-center dark:text-gray-100 sm:mt-0 lg:mb-0 lg:hidden" }, _attrs))}>`);
+        _push(ssrRenderComponent(_component_MenuButton, {
+          sidebarOpen: unref(sidebarOpen),
+          onToggleSidebar: toggleSidebar
+        }, null, _parent));
+        _push(`<ol class="breadcrumbs ml-2 flex"><!--[-->`);
+        ssrRenderList(_ctx.$page.props.breadcrumbs, (breadcrumb, index) => {
+          _push(`<li>`);
+          if (breadcrumb.route === "last") {
+            _push(`<li class="last">${ssrInterpolate(breadcrumb.text)}</li>`);
+          } else {
+            _push(ssrRenderComponent(_component_Link, {
+              href: breadcrumb.route
+            }, {
+              default: withCtx((_2, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  _push2(`${ssrInterpolate(breadcrumb.text)}`);
+                } else {
+                  return [
+                    createTextVNode(toDisplayString(breadcrumb.text), 1)
+                  ];
+                }
+              }),
+              _: 2
+            }, _parent));
+          }
+          _push(`</li>`);
+        });
+        _push(`<!--]--></ol></div>`);
+      } else {
+        _push(`<!---->`);
+      }
     };
   }
 };
@@ -10664,7 +10775,7 @@ const _sfc_main$1 = {
   setup(__props) {
     const showingNavigationDropdown = ref(false);
     const searchModalOpen = ref(false);
-    onBeforeMount(() => {
+    onMounted(() => {
       window.addEventListener("scroll", handleScroll);
     });
     const stickyHeader = ref(false);
@@ -10675,6 +10786,7 @@ const _sfc_main$1 = {
         stickyHeader.value = false;
       }
     };
+    const isDocs = computed(() => useRoutes().current().startsWith("/docs"));
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Link = resolveComponent("Link");
       const _component_ApplicationMark = __unplugin_components_4$1;
@@ -10688,7 +10800,8 @@ const _sfc_main$1 = {
       const _component_SearchModal = _sfc_main$13;
       _push(`<!--[--><nav class="${ssrRenderClass([{ stickyHeader: unref(stickyHeader) }, "sticky top-0 z-50 bg-white dark:bg-gray-800"])}"><div class="px-6"><div class="flex h-16 justify-center md:justify-between"><div class="flex w-full items-center"><div class="flex shrink-0 items-center">`);
       _push(ssrRenderComponent(_component_Link, {
-        href: _ctx.route("home")
+        href: _ctx.route("home"),
+        "aria-name": "Home"
       }, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -10724,7 +10837,7 @@ const _sfc_main$1 = {
       _push(ssrRenderComponent(_component_NavLink, {
         href: _ctx.route("docs.home"),
         class: "my-px",
-        active: _ctx.route().current().startsWith("docs")
+        active: unref(isDocs)
       }, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -10808,7 +10921,7 @@ const _sfc_main$1 = {
           onOpenModal: ($event) => searchModalOpen.value = true,
           onCloseModal: ($event) => searchModalOpen.value = false
         }, null, _parent));
-      }, "body", false, _parent);
+      }, "#teleported", false, _parent);
       _push(`<!--]-->`);
     };
   }
@@ -10836,7 +10949,7 @@ const _sfc_main = {
       const _component_MobileNavTrigger = _sfc_main$4;
       const _component_PageNavigation = __unplugin_components_7;
       const _component_PageFooter = __unplugin_components_8;
-      const _component_Toc = __unplugin_components_9;
+      const _component_Toc = _sfc_main$8;
       const _component_ScrollTop = __unplugin_components_10;
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_component_Head, {
@@ -10910,20 +11023,20 @@ createServer(
     title: (title2) => `${title2} - ${appName}`,
     page,
     render: renderToString,
-    resolve: (name) => {
-      if (name.startsWith("Docs/")) {
-        let page2 = pages[`./pages/${name}.md`];
-        page2.default.layout = _sfc_main;
-        return page2;
-      } else {
-        let page2 = resolvePageComponent(`./pages/${name}.vue`, pages);
-        return page2;
+    resolve: async (name) => {
+      let component;
+      try {
+        component = await resolvePageComponent(`./pages/${name}.vue`, pages);
+      } catch (e2) {
+        component = await resolvePageComponent(`./pages/${name}.md`, pages);
+        component.default.layout = _sfc_main;
       }
+      return component;
     },
     setup({ App, props, plugin }) {
       return createSSRApp({
         render: () => h$1(App, props)
-      }).use(plugin).use(serenityssr);
+      }).use(plugin).use(ssrPlugin).use(ZoraSSR, Zora).use(C, Ziggy$1);
     }
   }),
   "13520"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "afc37b071ad64fd66c7b69799d9029cb",
+    "content-hash": "2cec02b1c6501f34c5346fdd0d0b4e96",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1428,16 +1428,16 @@
         },
         {
             "name": "jetstreamlabs/zora",
-            "version": "v3.2.7",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jetstreamlabs/zora.git",
-                "reference": "66b4eff71bc804c05050222dcb565c7150379c8f"
+                "reference": "ded5e25177e878f6726830c93bcb98f72fa702b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jetstreamlabs/zora/zipball/66b4eff71bc804c05050222dcb565c7150379c8f",
-                "reference": "66b4eff71bc804c05050222dcb565c7150379c8f",
+                "url": "https://api.github.com/repos/jetstreamlabs/zora/zipball/ded5e25177e878f6726830c93bcb98f72fa702b9",
+                "reference": "ded5e25177e878f6726830c93bcb98f72fa702b9",
                 "shasum": ""
             },
             "require": {
@@ -1473,9 +1473,9 @@
             "description": "Add your Laravel language translations to your asset pipeline for use in Javascript packages like Vue or React.",
             "support": {
                 "issues": "https://github.com/jetstreamlabs/zora/issues",
-                "source": "https://github.com/jetstreamlabs/zora/tree/v3.2.7"
+                "source": "https://github.com/jetstreamlabs/zora/tree/v4.0.0"
             },
-            "time": "2023-03-09T11:29:14+00:00"
+            "time": "2023-05-05T06:48:06+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",

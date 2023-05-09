@@ -87,9 +87,7 @@ onUnmounted(() => {
           </div>
         </div>
       </Transition>
-      <div class="w-14 flex-shrink-0">
-        <!-- Dummy element to force sidebar to shrink to fit close icon -->
-      </div>
+      <div class="w-14 flex-shrink-0"></div>
     </div>
   </Transition>
 </template>

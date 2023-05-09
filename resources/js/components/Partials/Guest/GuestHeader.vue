@@ -1,11 +1,11 @@
 <script setup>
 const showingNavigationDropdown = ref(false)
 
-onBeforeMount(() => {
+const stickyHeader = ref(false)
+
+onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
-
-const stickyHeader = ref(false)
 
 const handleScroll = () => {
   if (window.pageYOffset > 0) {
@@ -14,34 +14,35 @@ const handleScroll = () => {
     stickyHeader.value = false
   }
 }
+
+const isDocs = computed(() => useRoutes().current().startsWith('/docs'))
 </script>
 <template>
   <nav
     class="sticky top-0 z-50 min-w-full border-b border-gray-100 bg-white bg-opacity-5 backdrop-blur-lg backdrop-filter dark:border-gray-900 dark:bg-gray-800 dark:bg-opacity-5 dark:backdrop-blur-lg dark:backdrop-filter"
     :class="{ stickyGuestHeader: stickyHeader }">
-    <!-- Primary Navigation Menu -->
     <div class="px-6">
       <div class="flex h-16 justify-between">
         <div class="flex">
-          <!-- Logo -->
           <div class="flex shrink-0 items-center">
-            <Link :href="route('home')">
+            <Link :href="route('home')" :aria-label="__('Home')">
               <ApplicationMark class="block h-9 w-auto" />
             </Link>
           </div>
 
-          <!-- Navigation Links -->
           <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
             <NavLink
               v-if="$page.props.user"
               :href="route('dashboard')"
-              :active="route().current('dashboard')">
+              :active="route().current('dashboard')"
+              :aria-label="__('Dashboard')">
               {{ __('Dashboard') }}
             </NavLink>
 
             <NavLink
               :href="route('docs.home')"
-              :active="route().current().startsWith('/docs')">
+              :active="isDocs"
+              :aria-label="__('Documentation')">
               {{ __('Documentation') }}
             </NavLink>
           </div>
@@ -70,7 +71,6 @@ const handleScroll = () => {
           </div>
         </div>
 
-        <!-- Hamburger -->
         <div class="-mr-2 flex items-center sm:hidden">
           <button
             @click="showingNavigationDropdown = !showingNavigationDropdown"
@@ -92,7 +92,6 @@ const handleScroll = () => {
       </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
     <GuestResponsiveNavMenu :show="showingNavigationDropdown" />
   </nav>
 </template>

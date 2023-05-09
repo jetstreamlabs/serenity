@@ -18,6 +18,9 @@ export const serenity = {
 		axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
     axios.defaults.withCredentials = true
 
+    app.config.globalProperties.window = window
+    app.config.globalProperties.document = document
+
     const pinia = createPinia()
 
     const echo = new Echo({

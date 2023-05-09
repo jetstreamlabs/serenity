@@ -25,7 +25,6 @@ const logout = () => {
       </ResponsiveNavLink>
     </div>
 
-    <!-- Responsive Settings Options -->
     <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
       <div class="flex items-center px-4">
         <div v-if="$page.props.serenity.managesProfilePhotos" class="mr-3 shrink-0">
@@ -53,18 +52,15 @@ const logout = () => {
           {{ __('API Tokens') }}
         </ResponsiveNavLink>
 
-        <!-- Authentication -->
         <form method="POST" @submit.prevent="logout">
           <ResponsiveNavLink as="button">{{ __('Logout') }}</ResponsiveNavLink>
         </form>
 
-        <!-- Team Management -->
         <template v-if="$page.props.serenity.hasTeamFeatures">
           <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
           <div class="block py-2 pr-4 text-xs text-gray-400">{{ __('Manage Teams') }}</div>
 
-          <!-- Team Settings -->
           <ResponsiveNavLink
             :href="route('teams.show', $page.props.user.current_team)"
             :active="route().current('teams.show')">
@@ -80,7 +76,6 @@ const logout = () => {
 
           <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
-          <!-- Team Switcher -->
           <div class="block py-2 pr-4 text-xs text-gray-400">{{ __('Switch Teams') }}</div>
 
           <template v-for="team in $page.props.user.all_teams" :key="team.id">

@@ -1,6 +1,4 @@
 <script setup>
-import { usePage } from '@inertiajs/vue3'
-
 const navigation = usePage().props.sidebar
 
 const currentPage = computed(() => usePage().props.currentSection)
