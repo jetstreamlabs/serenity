@@ -1,5 +1,30 @@
 # Serenity Changelog
 
+# [2.5.0](https://github.com/jetstreamlabs/serenity/compare/v2.4.1...v2.5.0) (2023-05-09)
+
+
+### Code Refactoring
+
+* attempt to fix ssr issues 1 ([e419fc0](https://github.com/jetstreamlabs/serenity/commit/e419fc0489bd975aeba0d84ac94a84294526ea4c))
+
+
+### Features
+
+* updates for ssr and many core tweaks ([c3528e7](https://github.com/jetstreamlabs/serenity/commit/c3528e7c098df37eda102231d5463ed06051e47d))
+
+
+### Maintenance
+
+* **deps-dev:** bump @commitlint/config-conventional ([0c4f7f6](https://github.com/jetstreamlabs/serenity/commit/0c4f7f6e1a56617f939f5efe78a393911a0299be))
+* **deps-dev:** bump eslint from 8.39.0 to 8.40.0 ([1ce496b](https://github.com/jetstreamlabs/serenity/commit/1ce496bb74a10f43ef095cf18e9507ffa9188bf7))
+* **deps-dev:** bump markdown-it-shiki from 0.8.1 to 0.9.0 ([4dd53db](https://github.com/jetstreamlabs/serenity/commit/4dd53db69dca253b0dbe2a8148da7382a5414d9a))
+* **deps-dev:** bump spatie/laravel-ignition from 2.1.0 to 2.1.1 ([e068aec](https://github.com/jetstreamlabs/serenity/commit/e068aec7448254cabde1a3d5dcdf4f2b649e233e))
+* **deps-dev:** bump vite-plugin-vue-markdown from 0.22.6 to 0.23.3 ([9f45f31](https://github.com/jetstreamlabs/serenity/commit/9f45f31639919a8dbb8a9de324d3d47a3030cc18))
+* **deps-dev:** bump vite-plugin-vue-markdown from 0.23.3 to 0.23.4 ([b87ea73](https://github.com/jetstreamlabs/serenity/commit/b87ea73ae5b43bb175b11aac96a76d2d87d0e9ff))
+* **deps-dev:** bump ziggy-js from 1.5.1 to 1.5.2 ([3b15207](https://github.com/jetstreamlabs/serenity/commit/3b152077e24b82210d738287a5d59f40eb092dad))
+* **deps:** bump tightenco/ziggy from 1.5.1 to 1.5.2 ([f60860b](https://github.com/jetstreamlabs/serenity/commit/f60860b10fc8bc5088a95531633409ba278b5c85))
+* remove post:prod run ([ff0cc1b](https://github.com/jetstreamlabs/serenity/commit/ff0cc1b9fea927314e20ce848a46bbc1c9b9bfcc))
+
 ## [2.4.1](https://github.com/jetstreamlabs/serenity/compare/v2.4.0...v2.4.1) (2023-05-03)
 
 
