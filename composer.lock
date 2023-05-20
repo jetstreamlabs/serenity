@@ -1576,16 +1576,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.9.0",
+            "version": "v10.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "35078125f61ef0b125edf524de934f108d4b47fd"
+                "reference": "21a5b6d9b669f32c10cc8ba776511b5f62599fea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/35078125f61ef0b125edf524de934f108d4b47fd",
-                "reference": "35078125f61ef0b125edf524de934f108d4b47fd",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/21a5b6d9b669f32c10cc8ba776511b5f62599fea",
+                "reference": "21a5b6d9b669f32c10cc8ba776511b5f62599fea",
                 "shasum": ""
             },
             "require": {
@@ -1772,20 +1772,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-04-25T13:47:18+00:00"
+            "time": "2023-05-16T13:59:23+00:00"
         },
         {
             "name": "laravel/octane",
-            "version": "v1.5.4",
+            "version": "v1.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/octane.git",
-                "reference": "6758daaee123302123842ec2d2b3ff02ae9410f6"
+                "reference": "065310f5baec40c61b68eeb8058b041079c3453e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/octane/zipball/6758daaee123302123842ec2d2b3ff02ae9410f6",
-                "reference": "6758daaee123302123842ec2d2b3ff02ae9410f6",
+                "url": "https://api.github.com/repos/laravel/octane/zipball/065310f5baec40c61b68eeb8058b041079c3453e",
+                "reference": "065310f5baec40c61b68eeb8058b041079c3453e",
                 "shasum": ""
             },
             "require": {
@@ -1853,7 +1853,7 @@
                 "issues": "https://github.com/laravel/octane/issues",
                 "source": "https://github.com/laravel/octane"
             },
-            "time": "2023-04-18T18:07:14+00:00"
+            "time": "2023-05-16T06:47:34+00:00"
         },
         {
             "name": "laravel/sanctum",
