@@ -505,10 +505,10 @@ const _sfc_main$1e = {
     }
   },
   emits: ["update:modelValue"],
-  setup(__props, { expose, emit }) {
+  setup(__props, { expose: __expose, emit }) {
     const props = __props;
     const input = ref();
-    expose({ input });
+    __expose({ input });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<input${ssrRenderAttrs(mergeProps({
         class: ["form-input border-2", [props.static ? "cursor-not-allowed bg-gray-200 focus:border-gray-300 focus:ring-0 dark:bg-gray-400" : ""]],
@@ -5145,7 +5145,7 @@ const __vite_glob_0_5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.def
 const _sfc_main$C = {
   __name: "TwoFactorChallenge",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const recovery = ref(false);
     const recovery_code = ref();
     const code = ref();
@@ -5168,7 +5168,7 @@ const _sfc_main$C = {
     const submit = () => {
       form.post(useRoutes("two-factor.login"));
     };
-    expose({ code, recovery_code });
+    __expose({ code, recovery_code });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_GuestLayout = _sfc_main$I;
       const _component_AuthenticationCard = _sfc_main$M;
@@ -5873,9 +5873,9 @@ const tags$2 = ["core", "concepts", "action-domain-responder", "adr"];
 const _sfc_main$y = {
   __name: "action-domain-responder",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const frontmatter = { "title": "Action Domain Responder", "description": "Quasi sapiente voluptates aut minima non doloribus similique quisquam. In quo expedita ipsum nostrum corrupti incidunt. Et aut eligendi ea perferendis.", "tags": ["core", "concepts", "action-domain-responder", "adr"] };
-    expose({ frontmatter });
+    __expose({ frontmatter });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(_attrs)}><ul class="lg:hidden toc"><ul><li><a href="#quis-vel-iste-dicta">Quis vel iste dicta</a><ul><li><a href="#et-pariatur-ab-quas">Et pariatur ab quas</a></li><li><a href="#natus-aspernatur-iste">Natus aspernatur iste</a></li></ul></li><li><a href="#quos-porro-ut-molestiae">Quos porro ut molestiae</a><ul><li><a href="#voluptatem-quas-possimus">Voluptatem quas possimus</a></li><li><a href="#id-vitae-minima">Id vitae minima</a></li></ul></li><li><a href="#vitae-laborum-maiores">Vitae laborum maiores</a><ul><li><a href="#corporis-exercitationem">Corporis exercitationem</a></li><li><a href="#reprehenderit-magni">Reprehenderit magni</a></li></ul></li></ul></ul><h2 class="doc-heading" id="quis-vel-iste-dicta" tabindex="-1"><a class="header-anchor" href="#quis-vel-iste-dicta" aria-hidden="true">#</a> Quis vel iste dicta</h2><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.</p><h3 class="doc-heading" id="et-pariatur-ab-quas" tabindex="-1"><a class="header-anchor" href="#et-pariatur-ab-quas" aria-hidden="true">#</a> Et pariatur ab quas</h3><p>Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.</p><pre class="shiki css-variables" style="${ssrRenderStyle({ "background-color": "var(--shiki-color-background)" })}" tabindex="0"><code class="language-js"><span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-token-comment)" })}">/** </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-keyword)" })}">@type</span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-comment)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-function)" })}">{import(&#39;@tailwindlabs/lorem&#39;).ipsum}</span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-comment)" })}"> */</span></span>
 <span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-token-keyword)" })}">export</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-keyword)" })}">default</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> {</span></span>
@@ -5908,9 +5908,9 @@ const tags$1 = ["introduction", "getting started"];
 const _sfc_main$x = {
   __name: "getting-started",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const frontmatter = { "title": "Getting Started", "description": "Thanks for your interest in Serenity, we think you'll be pleasantly surprised by how easy it can be to build Enterprise level applications for the web and desktop with the Serenity framework.", "tags": ["introduction", "getting started"] };
-    expose({ frontmatter });
+    __expose({ frontmatter });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(_attrs)}><ul class="lg:hidden toc"><ul><li><a href="#introduction">Introduction</a></li><li><a href="#benefits">Benefits</a></li><li><a href="#acknowledgments">Acknowledgments</a></li></ul></ul><h2 class="doc-heading" id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction" aria-hidden="true">#</a> Introduction</h2><p>Thanks for your interest in Serenity, we think you’ll be pleasantly surprised by how easy it can be to build Enterprise level applications for the web and desktop, with the Serenity framework.</p><p>We’ve taken great care to craft an application framework that combines the simplicity of working with Laravel, with a more strict domain driven approach that helps ease the developer decision tree, but still provides a fast, simple approach to rapidly build applications.</p><h2 class="doc-heading" id="benefits" tabindex="-1"><a class="header-anchor" href="#benefits" aria-hidden="true">#</a> Benefits</h2><p>The benefits of Serenity are far-reaching and you can read more about them in Core Concepts and under the Usage page for individual features.</p><ul><li>Built on the VITAL Stack (Vue, Inertia, Tailwind, ADR, Laravel)</li><li>Snowflake Primary Database IDs</li><li>Built in Documentation Platform</li><li>Built in Design System</li><li>Consistant Namespacing</li><li>Customizable Auto Routing</li><li>Teams, API, Two Factor Authorization by default</li><li>Generators Galore</li><li>NativePHP for PHP Desktop Applications</li><li>Docker and Kubernetes Ready</li><li>Super Powered with Laravel Octane</li><li>SaaS Ready with Stripe Integration</li></ul><p>Before we get going, we need to acknowledge those deveopers and companies whose Open Source contributions have made Serenity possible, and without whom it simply wouldn’t exist.</p><h2 class="doc-heading" id="acknowledgments" tabindex="-1"><a class="header-anchor" href="#acknowledgments" aria-hidden="true">#</a> Acknowledgments</h2><ul><li>Taylor Otwell and the Laravel Team</li><li>Jonathan Reinink (InertiaJS)</li><li>Adam Wathan (TailwindCSS)</li><li>The entire team at Spatie</li><li>Graham Chapman (Laravel Markdown)</li><li>Marcel Pociot (NativePHP)</li><li>Aaron Francis</li><li>Jeffrey Way</li></ul></div>`);
     };
@@ -5935,9 +5935,9 @@ const tags = ["introduction", "installation"];
 const _sfc_main$w = {
   __name: "installation",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const frontmatter = { "title": "Installation", "description": "Quasi sapiente voluptates aut minima non doloribus similique quisquam. In quo expedita ipsum nostrum corrupti incidunt. Et aut eligendi ea perferendis.", "tags": ["introduction", "installation"] };
-    expose({ frontmatter });
+    __expose({ frontmatter });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(_attrs)}><ul class="lg:hidden toc"><ul><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#installation">Installation</a></li></ul></ul><h2 class="doc-heading" id="prerequisites" tabindex="-1"><a class="header-anchor" href="#prerequisites" aria-hidden="true">#</a> Prerequisites</h2><p>Serenity is not for beginners, and as such, we won’t be explaining how to install or configure dependencies or set up your development environment.</p><p>Serenity requires the following:</p><ul><li>Composer</li><li>Node/NPM</li><li>MySQL or PostGres Database</li><li>PHP &gt; 8.1 Webserver</li></ul><p>Serenity is built and tested on MacOS Ventura 13.3.1 running Laravel Valet 3.3.2</p><h2 class="doc-heading" id="installation" tabindex="-1"><a class="header-anchor" href="#installation" aria-hidden="true">#</a> Installation</h2><p>The most direct way to install Serenity is to install the Serenity installer to your system globally via composer.</p><pre class="shiki css-variables" style="${ssrRenderStyle({ "background-color": "var(--shiki-color-background)" })}" tabindex="0"><code class="language-bash"><span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-token-function)" })}">$</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-string)" })}">composer</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-string)" })}">require</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-string)" })}">--global</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-string)" })}">serenity/installer</span></span>
 <span class="line"></span></code></pre><p>Once you have the installer, you can create a new installation of the framework by calling the installer and specifying a directory name:</p><pre class="shiki css-variables" style="${ssrRenderStyle({ "background-color": "var(--shiki-color-background)" })}" tabindex="0"><code class="language-bash"><span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-token-function)" })}">$</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-string)" })}">serenity</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-string)" })}">new</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> [myapp, </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-string)" })}">blog,</span><span style="${ssrRenderStyle({ "color": "var(--shiki-color-text)" })}"> </span><span style="${ssrRenderStyle({ "color": "var(--shiki-token-string)" })}">etc]</span></span>
@@ -5962,9 +5962,9 @@ const __vite_glob_0_11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 const _sfc_main$v = {
   __name: "404",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const frontmatter = {};
-    expose({ frontmatter });
+    __expose({ frontmatter });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(_attrs)}><p>&lt;script setup&gt; import ApplicationMark from ‘@/components/Shared/ApplicationMark.vue’ &lt;/script&gt;</p><h1>Whoops!</h1><p>&lt;ApplicationMark class=“h-auto w-44” /&gt;</p><p>Sorry, that page doesn’t seem to exist yet.</p></div>`);
     };
@@ -5983,9 +5983,9 @@ const __vite_glob_0_12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 const _sfc_main$u = {
   __name: "Policy",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const frontmatter = {};
-    expose({ frontmatter });
+    __expose({ frontmatter });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(_attrs)}><h1>Privacy Policy</h1><p>Edit this file to define the privacy policy for your application.</p><p>Let’s see if we can get some shiki going on.</p><pre class="shiki css-variables" style="${ssrRenderStyle({ "background-color": "var(--shiki-color-background)" })}" tabindex="0"><code class="language-php"><span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-token-comment)" })}">/**</span></span>
 <span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-token-comment)" })}"> * Redirect response for Vue components.</span></span>
@@ -6017,9 +6017,9 @@ const __vite_glob_0_13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 const _sfc_main$t = {
   __name: "Terms",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const frontmatter = {};
-    expose({ frontmatter });
+    __expose({ frontmatter });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(_attrs)}><h1>Terms of Service</h1><p>Edit this file to define the terms of service for your application.</p></div>`);
     };
@@ -6168,7 +6168,7 @@ const _sfc_main$q = {
   __name: "UpdateProfileInformationForm",
   __ssrInlineRender: true,
   props: ["user"],
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const props = __props;
     const photo = ref(null);
     const form = useForm({
@@ -6215,7 +6215,7 @@ const _sfc_main$q = {
         photo.value = null;
       }
     };
-    expose({ photo, photoPreview });
+    __expose({ photo, photoPreview });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_FormSection = _sfc_main$1c;
       const _component_Label = _sfc_main$1d;
@@ -6552,7 +6552,7 @@ const __vite_glob_0_16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 const _sfc_main$o = {
   __name: "DeleteUserForm",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const confirmingUserDeletion = ref(false);
     const password = ref();
     const form = useForm({
@@ -6574,7 +6574,7 @@ const _sfc_main$o = {
       confirmingUserDeletion.value = false;
       form.reset();
     };
-    expose({ password });
+    __expose({ password });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_ActionSection = __unplugin_components_8$1;
       const _component_DangerButton = _sfc_main$1q;
@@ -6848,7 +6848,7 @@ const _sfc_main$n = {
   __name: "LogoutOtherBrowserSessionsForm",
   __ssrInlineRender: true,
   props: ["sessions"],
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const props = __props;
     const confirmingLogout = ref(false);
     const password = ref();
@@ -6871,7 +6871,7 @@ const _sfc_main$n = {
       confirmingLogout.value = false;
       form.reset();
     };
-    expose({ password });
+    __expose({ password });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_ActionSection = __unplugin_components_8$1;
       const _component_IconOutlineDesktopComputer = __unplugin_components_1;
@@ -7198,7 +7198,7 @@ const _sfc_main$m = {
     }
   },
   emits: ["confirmed"],
-  setup(__props, { expose, emit }) {
+  setup(__props, { expose: __expose, emit }) {
     const props = __props;
     const confirmingPassword = ref(false);
     const password = ref();
@@ -7226,7 +7226,7 @@ const _sfc_main$m = {
       form.password = "";
       form.error = "";
     };
-    expose({ password });
+    __expose({ password });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_DialogModal = _sfc_main$1m;
       const _component_Input = _sfc_main$1e;
@@ -7948,7 +7948,7 @@ _sfc_main$l.setup = (props, ctx) => {
 const _sfc_main$k = {
   __name: "UpdatePasswordForm",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const current_password = ref();
     const password = ref();
     const form = useForm({
@@ -7973,7 +7973,7 @@ const _sfc_main$k = {
         }
       });
     };
-    expose({ password, current_password });
+    __expose({ password, current_password });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_FormSection = _sfc_main$1c;
       const _component_Label = _sfc_main$1d;
@@ -9785,9 +9785,9 @@ const __unplugin_components_2 = { name: "heroicons-outline-check", render: rende
 const _sfc_main$b = {
   __name: "HomeCode",
   __ssrInlineRender: true,
-  setup(__props, { expose }) {
+  setup(__props, { expose: __expose }) {
     const frontmatter = {};
-    expose({ frontmatter });
+    __expose({ frontmatter });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(_attrs)}><pre class="shiki css-variables" style="${ssrRenderStyle({ "background-color": "var(--shiki-color-background)" })}" tabindex="0"><code class="language-php"><span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-token-comment)" })}">/**</span></span>
 <span class="line"><span style="${ssrRenderStyle({ "color": "var(--shiki-token-comment)" })}"> * Create a new registered user.</span></span>
@@ -9991,11 +9991,11 @@ var e = String.prototype.replace, r = /%20/g, n = { default: "RFC3986", formatte
   for (var t4 = [], e2 = 0; e2 < 256; ++e2)
     t4.push("%" + ((e2 < 16 ? "0" : "") + e2.toString(16)).toUpperCase());
   return t4;
-}(), a = function(t4, e2) {
+}(), s = function(t4, e2) {
   for (var r2 = e2 && e2.plainObjects ? /* @__PURE__ */ Object.create(null) : {}, n2 = 0; n2 < t4.length; ++n2)
     void 0 !== t4[n2] && (r2[n2] = t4[n2]);
   return r2;
-}, s = { arrayToObject: a, assign: function(t4, e2) {
+}, a = { arrayToObject: s, assign: function(t4, e2) {
   return Object.keys(e2).reduce(function(t5, r2) {
     return t5[r2] = e2[r2], t5;
   }, t4);
@@ -10003,8 +10003,8 @@ var e = String.prototype.replace, r = /%20/g, n = { default: "RFC3986", formatte
   return [].concat(t4, e2);
 }, compact: function(t4) {
   for (var e2 = [{ obj: { o: t4 }, prop: "o" }], r2 = [], n2 = 0; n2 < e2.length; ++n2)
-    for (var o2 = e2[n2], u2 = o2.obj[o2.prop], a2 = Object.keys(u2), s2 = 0; s2 < a2.length; ++s2) {
-      var f2 = a2[s2], c2 = u2[f2];
+    for (var o2 = e2[n2], u2 = o2.obj[o2.prop], s2 = Object.keys(u2), a2 = 0; a2 < s2.length; ++a2) {
+      var f2 = s2[a2], c2 = u2[f2];
       "object" == typeof c2 && null !== c2 && -1 === r2.indexOf(c2) && (e2.push({ obj: u2, prop: f2 }), r2.push(c2));
     }
   return function(t5) {
@@ -10029,16 +10029,16 @@ var e = String.prototype.replace, r = /%20/g, n = { default: "RFC3986", formatte
 }, encode: function(t4, e2, r2, o2, i2) {
   if (0 === t4.length)
     return t4;
-  var a2 = t4;
-  if ("symbol" == typeof t4 ? a2 = Symbol.prototype.toString.call(t4) : "string" != typeof t4 && (a2 = String(t4)), "iso-8859-1" === r2)
-    return escape(a2).replace(/%u[0-9a-f]{4}/gi, function(t5) {
+  var s2 = t4;
+  if ("symbol" == typeof t4 ? s2 = Symbol.prototype.toString.call(t4) : "string" != typeof t4 && (s2 = String(t4)), "iso-8859-1" === r2)
+    return escape(s2).replace(/%u[0-9a-f]{4}/gi, function(t5) {
       return "%26%23" + parseInt(t5.slice(2), 16) + "%3B";
     });
-  for (var s2 = "", f2 = 0; f2 < a2.length; ++f2) {
-    var c2 = a2.charCodeAt(f2);
-    45 === c2 || 46 === c2 || 95 === c2 || 126 === c2 || c2 >= 48 && c2 <= 57 || c2 >= 65 && c2 <= 90 || c2 >= 97 && c2 <= 122 || i2 === n.RFC1738 && (40 === c2 || 41 === c2) ? s2 += a2.charAt(f2) : c2 < 128 ? s2 += u[c2] : c2 < 2048 ? s2 += u[192 | c2 >> 6] + u[128 | 63 & c2] : c2 < 55296 || c2 >= 57344 ? s2 += u[224 | c2 >> 12] + u[128 | c2 >> 6 & 63] + u[128 | 63 & c2] : (c2 = 65536 + ((1023 & c2) << 10 | 1023 & a2.charCodeAt(f2 += 1)), s2 += u[240 | c2 >> 18] + u[128 | c2 >> 12 & 63] + u[128 | c2 >> 6 & 63] + u[128 | 63 & c2]);
+  for (var a2 = "", f2 = 0; f2 < s2.length; ++f2) {
+    var c2 = s2.charCodeAt(f2);
+    45 === c2 || 46 === c2 || 95 === c2 || 126 === c2 || c2 >= 48 && c2 <= 57 || c2 >= 65 && c2 <= 90 || c2 >= 97 && c2 <= 122 || i2 === n.RFC1738 && (40 === c2 || 41 === c2) ? a2 += s2.charAt(f2) : c2 < 128 ? a2 += u[c2] : c2 < 2048 ? a2 += u[192 | c2 >> 6] + u[128 | 63 & c2] : c2 < 55296 || c2 >= 57344 ? a2 += u[224 | c2 >> 12] + u[128 | c2 >> 6 & 63] + u[128 | 63 & c2] : (c2 = 65536 + ((1023 & c2) << 10 | 1023 & s2.charCodeAt(f2 += 1)), a2 += u[240 | c2 >> 18] + u[128 | c2 >> 12 & 63] + u[128 | c2 >> 6 & 63] + u[128 | 63 & c2]);
   }
-  return s2;
+  return a2;
 }, isBuffer: function(t4) {
   return !(!t4 || "object" != typeof t4 || !(t4.constructor && t4.constructor.isBuffer && t4.constructor.isBuffer(t4)));
 }, isRegExp: function(t4) {
@@ -10066,7 +10066,7 @@ var e = String.prototype.replace, r = /%20/g, n = { default: "RFC3986", formatte
   if (!e2 || "object" != typeof e2)
     return [e2].concat(r2);
   var u2 = e2;
-  return i(e2) && !i(r2) && (u2 = a(e2, n2)), i(e2) && i(r2) ? (r2.forEach(function(r3, i2) {
+  return i(e2) && !i(r2) && (u2 = s(e2, n2)), i(e2) && i(r2) ? (r2.forEach(function(r3, i2) {
     if (o.call(e2, i2)) {
       var u3 = e2[i2];
       u3 && "object" == typeof u3 && r3 && "object" == typeof r3 ? e2[i2] = t2(u3, r3, n2) : e2.push(r3);
@@ -10084,49 +10084,49 @@ var e = String.prototype.replace, r = /%20/g, n = { default: "RFC3986", formatte
   return t4;
 } }, l = Array.isArray, p = String.prototype.split, h = Array.prototype.push, y = function(t4, e2) {
   h.apply(t4, l(e2) ? e2 : [e2]);
-}, d = Date.prototype.toISOString, b = n.default, v = { addQueryPrefix: false, allowDots: false, charset: "utf-8", charsetSentinel: false, delimiter: "&", encode: true, encoder: s.encode, encodeValuesOnly: false, format: b, formatter: n.formatters[b], indices: false, serializeDate: function(t4) {
+}, d = Date.prototype.toISOString, b = n.default, m = { addQueryPrefix: false, allowDots: false, charset: "utf-8", charsetSentinel: false, delimiter: "&", encode: true, encoder: a.encode, encodeValuesOnly: false, format: b, formatter: n.formatters[b], indices: false, serializeDate: function(t4) {
   return d.call(t4);
-}, skipNulls: false, strictNullHandling: false }, m = function t3(e2, r2, n2, o2, i2, u2, a2, f2, c2, h2, d2, b2, m2, g2) {
+}, skipNulls: false, strictNullHandling: false }, v = function t3(e2, r2, n2, o2, i2, u2, s2, f2, c2, h2, d2, b2, v2, g2) {
   var j2, w2 = e2;
-  if ("function" == typeof a2 ? w2 = a2(r2, w2) : w2 instanceof Date ? w2 = h2(w2) : "comma" === n2 && l(w2) && (w2 = s.maybeMap(w2, function(t4) {
+  if ("function" == typeof s2 ? w2 = s2(r2, w2) : w2 instanceof Date ? w2 = h2(w2) : "comma" === n2 && l(w2) && (w2 = a.maybeMap(w2, function(t4) {
     return t4 instanceof Date ? h2(t4) : t4;
   })), null === w2) {
     if (o2)
-      return u2 && !m2 ? u2(r2, v.encoder, g2, "key", d2) : r2;
+      return u2 && !v2 ? u2(r2, m.encoder, g2, "key", d2) : r2;
     w2 = "";
   }
-  if ("string" == typeof (j2 = w2) || "number" == typeof j2 || "boolean" == typeof j2 || "symbol" == typeof j2 || "bigint" == typeof j2 || s.isBuffer(w2)) {
+  if ("string" == typeof (j2 = w2) || "number" == typeof j2 || "boolean" == typeof j2 || "symbol" == typeof j2 || "bigint" == typeof j2 || a.isBuffer(w2)) {
     if (u2) {
-      var O2 = m2 ? r2 : u2(r2, v.encoder, g2, "key", d2);
-      if ("comma" === n2 && m2) {
+      var O2 = v2 ? r2 : u2(r2, m.encoder, g2, "key", d2);
+      if ("comma" === n2 && v2) {
         for (var $2 = p.call(String(w2), ","), E2 = "", S2 = 0; S2 < $2.length; ++S2)
-          E2 += (0 === S2 ? "" : ",") + b2(u2($2[S2], v.encoder, g2, "value", d2));
+          E2 += (0 === S2 ? "" : ",") + b2(u2($2[S2], m.encoder, g2, "value", d2));
         return [b2(O2) + "=" + E2];
       }
-      return [b2(O2) + "=" + b2(u2(w2, v.encoder, g2, "value", d2))];
+      return [b2(O2) + "=" + b2(u2(w2, m.encoder, g2, "value", d2))];
     }
     return [b2(r2) + "=" + b2(String(w2))];
   }
-  var R2, x2 = [];
+  var R2, C2 = [];
   if (void 0 === w2)
-    return x2;
+    return C2;
   if ("comma" === n2 && l(w2))
     R2 = [{ value: w2.length > 0 ? w2.join(",") || null : void 0 }];
-  else if (l(a2))
-    R2 = a2;
+  else if (l(s2))
+    R2 = s2;
   else {
-    var C2 = Object.keys(w2);
-    R2 = f2 ? C2.sort(f2) : C2;
+    var x2 = Object.keys(w2);
+    R2 = f2 ? x2.sort(f2) : x2;
   }
   for (var N = 0; N < R2.length; ++N) {
     var k = R2[N], T = "object" == typeof k && void 0 !== k.value ? k.value : w2[k];
     if (!i2 || null !== T) {
       var _2 = l(w2) ? "function" == typeof n2 ? n2(r2, k) : r2 : r2 + (c2 ? "." + k : "[" + k + "]");
-      y(x2, t3(T, _2, n2, o2, i2, u2, a2, f2, c2, h2, d2, b2, m2, g2));
+      y(C2, t3(T, _2, n2, o2, i2, u2, s2, f2, c2, h2, d2, b2, v2, g2));
     }
   }
-  return x2;
-}, g = Object.prototype.hasOwnProperty, j = Array.isArray, w = { allowDots: false, allowPrototypes: false, arrayLimit: 20, charset: "utf-8", charsetSentinel: false, comma: false, decoder: s.decode, delimiter: "&", depth: 5, ignoreQueryPrefix: false, interpretNumericEntities: false, parameterLimit: 1e3, parseArrays: true, plainObjects: false, strictNullHandling: false }, O = function(t4) {
+  return C2;
+}, g = Object.prototype.hasOwnProperty, j = Array.isArray, w = { allowDots: false, allowPrototypes: false, arrayLimit: 20, charset: "utf-8", charsetSentinel: false, comma: false, decoder: a.decode, delimiter: "&", depth: 5, ignoreQueryPrefix: false, interpretNumericEntities: false, parameterLimit: 1e3, parseArrays: true, plainObjects: false, strictNullHandling: false }, O = function(t4) {
   return t4.replace(/&#(\d+);/g, function(t5, e2) {
     return String.fromCharCode(parseInt(e2, 10));
   });
@@ -10134,31 +10134,31 @@ var e = String.prototype.replace, r = /%20/g, n = { default: "RFC3986", formatte
   return t4 && "string" == typeof t4 && e2.comma && t4.indexOf(",") > -1 ? t4.split(",") : t4;
 }, E = function(t4, e2, r2, n2) {
   if (t4) {
-    var o2 = r2.allowDots ? t4.replace(/\.([^.[]+)/g, "[$1]") : t4, i2 = /(\[[^[\]]*])/g, u2 = r2.depth > 0 && /(\[[^[\]]*])/.exec(o2), a2 = u2 ? o2.slice(0, u2.index) : o2, s2 = [];
-    if (a2) {
-      if (!r2.plainObjects && g.call(Object.prototype, a2) && !r2.allowPrototypes)
+    var o2 = r2.allowDots ? t4.replace(/\.([^.[]+)/g, "[$1]") : t4, i2 = /(\[[^[\]]*])/g, u2 = r2.depth > 0 && /(\[[^[\]]*])/.exec(o2), s2 = u2 ? o2.slice(0, u2.index) : o2, a2 = [];
+    if (s2) {
+      if (!r2.plainObjects && g.call(Object.prototype, s2) && !r2.allowPrototypes)
         return;
-      s2.push(a2);
+      a2.push(s2);
     }
     for (var f2 = 0; r2.depth > 0 && null !== (u2 = i2.exec(o2)) && f2 < r2.depth; ) {
       if (f2 += 1, !r2.plainObjects && g.call(Object.prototype, u2[1].slice(1, -1)) && !r2.allowPrototypes)
         return;
-      s2.push(u2[1]);
+      a2.push(u2[1]);
     }
-    return u2 && s2.push("[" + o2.slice(u2.index) + "]"), function(t5, e3, r3, n3) {
+    return u2 && a2.push("[" + o2.slice(u2.index) + "]"), function(t5, e3, r3, n3) {
       for (var o3 = n3 ? e3 : $(e3, r3), i3 = t5.length - 1; i3 >= 0; --i3) {
-        var u3, a3 = t5[i3];
-        if ("[]" === a3 && r3.parseArrays)
+        var u3, s3 = t5[i3];
+        if ("[]" === s3 && r3.parseArrays)
           u3 = [].concat(o3);
         else {
           u3 = r3.plainObjects ? /* @__PURE__ */ Object.create(null) : {};
-          var s3 = "[" === a3.charAt(0) && "]" === a3.charAt(a3.length - 1) ? a3.slice(1, -1) : a3, f3 = parseInt(s3, 10);
-          r3.parseArrays || "" !== s3 ? !isNaN(f3) && a3 !== s3 && String(f3) === s3 && f3 >= 0 && r3.parseArrays && f3 <= r3.arrayLimit ? (u3 = [])[f3] = o3 : "__proto__" !== s3 && (u3[s3] = o3) : u3 = { 0: o3 };
+          var a3 = "[" === s3.charAt(0) && "]" === s3.charAt(s3.length - 1) ? s3.slice(1, -1) : s3, f3 = parseInt(a3, 10);
+          r3.parseArrays || "" !== a3 ? !isNaN(f3) && s3 !== a3 && String(f3) === a3 && f3 >= 0 && r3.parseArrays && f3 <= r3.arrayLimit ? (u3 = [])[f3] = o3 : "__proto__" !== a3 && (u3[a3] = o3) : u3 = { 0: o3 };
         }
         o3 = u3;
       }
       return o3;
-    }(s2, e2, r2, n2);
+    }(a2, e2, r2, n2);
   }
 }, S = function(t4, e2) {
   var r2 = function(t5) {
@@ -10168,7 +10168,7 @@ var e = String.prototype.replace, r = /%20/g, n = { default: "RFC3986", formatte
       throw new TypeError("Decoder has to be a function.");
     if (void 0 !== t5.charset && "utf-8" !== t5.charset && "iso-8859-1" !== t5.charset)
       throw new TypeError("The charset option must be either utf-8, iso-8859-1, or undefined");
-    return { allowDots: void 0 === t5.allowDots ? w.allowDots : !!t5.allowDots, allowPrototypes: "boolean" == typeof t5.allowPrototypes ? t5.allowPrototypes : w.allowPrototypes, arrayLimit: "number" == typeof t5.arrayLimit ? t5.arrayLimit : w.arrayLimit, charset: void 0 === t5.charset ? w.charset : t5.charset, charsetSentinel: "boolean" == typeof t5.charsetSentinel ? t5.charsetSentinel : w.charsetSentinel, comma: "boolean" == typeof t5.comma ? t5.comma : w.comma, decoder: "function" == typeof t5.decoder ? t5.decoder : w.decoder, delimiter: "string" == typeof t5.delimiter || s.isRegExp(t5.delimiter) ? t5.delimiter : w.delimiter, depth: "number" == typeof t5.depth || false === t5.depth ? +t5.depth : w.depth, ignoreQueryPrefix: true === t5.ignoreQueryPrefix, interpretNumericEntities: "boolean" == typeof t5.interpretNumericEntities ? t5.interpretNumericEntities : w.interpretNumericEntities, parameterLimit: "number" == typeof t5.parameterLimit ? t5.parameterLimit : w.parameterLimit, parseArrays: false !== t5.parseArrays, plainObjects: "boolean" == typeof t5.plainObjects ? t5.plainObjects : w.plainObjects, strictNullHandling: "boolean" == typeof t5.strictNullHandling ? t5.strictNullHandling : w.strictNullHandling };
+    return { allowDots: void 0 === t5.allowDots ? w.allowDots : !!t5.allowDots, allowPrototypes: "boolean" == typeof t5.allowPrototypes ? t5.allowPrototypes : w.allowPrototypes, arrayLimit: "number" == typeof t5.arrayLimit ? t5.arrayLimit : w.arrayLimit, charset: void 0 === t5.charset ? w.charset : t5.charset, charsetSentinel: "boolean" == typeof t5.charsetSentinel ? t5.charsetSentinel : w.charsetSentinel, comma: "boolean" == typeof t5.comma ? t5.comma : w.comma, decoder: "function" == typeof t5.decoder ? t5.decoder : w.decoder, delimiter: "string" == typeof t5.delimiter || a.isRegExp(t5.delimiter) ? t5.delimiter : w.delimiter, depth: "number" == typeof t5.depth || false === t5.depth ? +t5.depth : w.depth, ignoreQueryPrefix: true === t5.ignoreQueryPrefix, interpretNumericEntities: "boolean" == typeof t5.interpretNumericEntities ? t5.interpretNumericEntities : w.interpretNumericEntities, parameterLimit: "number" == typeof t5.parameterLimit ? t5.parameterLimit : w.parameterLimit, parseArrays: false !== t5.parseArrays, plainObjects: "boolean" == typeof t5.plainObjects ? t5.plainObjects : w.plainObjects, strictNullHandling: "boolean" == typeof t5.strictNullHandling ? t5.strictNullHandling : w.strictNullHandling };
   }(e2);
   if ("" === t4 || null == t4)
     return r2.plainObjects ? /* @__PURE__ */ Object.create(null) : {};
@@ -10179,17 +10179,17 @@ var e = String.prototype.replace, r = /%20/g, n = { default: "RFC3986", formatte
         0 === o3[r3].indexOf("utf8=") && ("utf8=%E2%9C%93" === o3[r3] ? u3 = "utf-8" : "utf8=%26%2310003%3B" === o3[r3] && (u3 = "iso-8859-1"), i3 = r3, r3 = o3.length);
     for (r3 = 0; r3 < o3.length; ++r3)
       if (r3 !== i3) {
-        var a3, f3, c2 = o3[r3], l2 = c2.indexOf("]="), p2 = -1 === l2 ? c2.indexOf("=") : l2 + 1;
-        -1 === p2 ? (a3 = e3.decoder(c2, w.decoder, u3, "key"), f3 = e3.strictNullHandling ? null : "") : (a3 = e3.decoder(c2.slice(0, p2), w.decoder, u3, "key"), f3 = s.maybeMap($(c2.slice(p2 + 1), e3), function(t6) {
+        var s3, f3, c2 = o3[r3], l2 = c2.indexOf("]="), p2 = -1 === l2 ? c2.indexOf("=") : l2 + 1;
+        -1 === p2 ? (s3 = e3.decoder(c2, w.decoder, u3, "key"), f3 = e3.strictNullHandling ? null : "") : (s3 = e3.decoder(c2.slice(0, p2), w.decoder, u3, "key"), f3 = a.maybeMap($(c2.slice(p2 + 1), e3), function(t6) {
           return e3.decoder(t6, w.decoder, u3, "value");
-        })), f3 && e3.interpretNumericEntities && "iso-8859-1" === u3 && (f3 = O(f3)), c2.indexOf("[]=") > -1 && (f3 = j(f3) ? [f3] : f3), n3[a3] = g.call(n3, a3) ? s.combine(n3[a3], f3) : f3;
+        })), f3 && e3.interpretNumericEntities && "iso-8859-1" === u3 && (f3 = O(f3)), c2.indexOf("[]=") > -1 && (f3 = j(f3) ? [f3] : f3), n3[s3] = g.call(n3, s3) ? a.combine(n3[s3], f3) : f3;
       }
     return n3;
   }(t4, r2) : t4, o2 = r2.plainObjects ? /* @__PURE__ */ Object.create(null) : {}, i2 = Object.keys(n2), u2 = 0; u2 < i2.length; ++u2) {
-    var a2 = i2[u2], f2 = E(a2, n2[a2], r2, "string" == typeof t4);
-    o2 = s.merge(o2, f2, r2);
+    var s2 = i2[u2], f2 = E(s2, n2[s2], r2, "string" == typeof t4);
+    o2 = a.merge(o2, f2, r2);
   }
-  return s.compact(o2);
+  return a.compact(o2);
 };
 class R {
   constructor(t4, e2, r2) {
@@ -10197,7 +10197,10 @@ class R {
     this.name = t4, this.definition = e2, this.bindings = null != (n2 = e2.bindings) ? n2 : {}, this.wheres = null != (o2 = e2.wheres) ? o2 : {}, this.config = r2;
   }
   get template() {
-    return `${this.config.absolute ? this.definition.domain ? `${this.config.url.match(/^\w+:\/\//)[0]}${this.definition.domain}${this.config.port ? `:${this.config.port}` : ""}` : this.config.url : ""}/${this.definition.uri}`.replace(/\/+$/, "");
+    return `${this.origin}/${this.definition.uri}`.replace(/\/+$/, "");
+  }
+  get origin() {
+    return this.config.absolute ? this.definition.domain ? `${this.config.url.match(/^\w+:\/\//)[0]}${this.definition.domain}${this.config.port ? `:${this.config.port}` : ""}` : this.config.url : "";
   }
   get parameterSegments() {
     var t4, e2;
@@ -10211,23 +10214,28 @@ class R {
       const i2 = `(?<${r3}>${(null == (o3 = this.wheres[r3]) ? void 0 : o3.replace(/(^\^)|(\$$)/g, "")) || "[^/?]+"})`;
       return n3 ? `(${e3}${i2})?` : `${e3}${i2}`;
     }).replace(/^\w+:\/\//, ""), [r2, n2] = t4.replace(/^\w+:\/\//, "").split("?"), o2 = new RegExp(`^${e2}/?$`).exec(r2);
-    return !!o2 && { params: o2.groups, query: S(n2) };
+    if (o2) {
+      for (const t5 in o2.groups)
+        o2.groups[t5] = "string" == typeof o2.groups[t5] ? decodeURIComponent(o2.groups[t5]) : o2.groups[t5];
+      return { params: o2.groups, query: S(n2) };
+    }
+    return false;
   }
   compile(t4) {
     const e2 = this.parameterSegments;
     return e2.length ? this.template.replace(/{([^}?]+)(\??)}/g, (r2, n2, o2) => {
-      var i2, u2, a2;
+      var i2, u2, s2;
       if (!o2 && [null, void 0].includes(t4[n2]))
         throw new Error(`Ziggy error: '${n2}' parameter is required for route '${this.name}'.`);
       if (e2[e2.length - 1].name === n2 && ".*" === this.wheres[n2])
-        return encodeURIComponent(null != (a2 = t4[n2]) ? a2 : "").replace(/%2F/g, "/");
+        return encodeURIComponent(null != (s2 = t4[n2]) ? s2 : "").replace(/%2F/g, "/");
       if (this.wheres[n2] && !new RegExp(`^${o2 ? `(${this.wheres[n2]})?` : this.wheres[n2]}$`).test(null != (i2 = t4[n2]) ? i2 : ""))
         throw new Error(`Ziggy error: '${n2}' parameter does not match required format '${this.wheres[n2]}' for route '${this.name}'.`);
       return encodeURIComponent(null != (u2 = t4[n2]) ? u2 : "");
-    }).replace(/\/+$/, "") : this.template;
+    }).replace(`${this.origin}//`, `${this.origin}/`).replace(/\/+$/, "") : this.template;
   }
 }
-class x extends String {
+class C extends String {
   constructor(e2, r2, n2 = true, o2) {
     if (super(), this.t = null != o2 ? o2 : "undefined" != typeof Ziggy ? Ziggy : null == globalThis ? void 0 : globalThis.Ziggy, this.t = t({}, this.t, { absolute: n2 }), e2) {
       if (!this.t.routes[e2])
@@ -10240,10 +10248,10 @@ class x extends String {
     return this.i.compile(this.u) + function(t4, e3) {
       var r2, o2 = t4, i2 = function(t5) {
         if (!t5)
-          return v;
+          return m;
         if (null != t5.encoder && "function" != typeof t5.encoder)
           throw new TypeError("Encoder has to be a function.");
-        var e4 = t5.charset || v.charset;
+        var e4 = t5.charset || m.charset;
         if (void 0 !== t5.charset && "utf-8" !== t5.charset && "iso-8859-1" !== t5.charset)
           throw new TypeError("The charset option must be either utf-8, iso-8859-1, or undefined");
         var r3 = n.default;
@@ -10252,30 +10260,30 @@ class x extends String {
             throw new TypeError("Unknown format option provided.");
           r3 = t5.format;
         }
-        var o3 = n.formatters[r3], i3 = v.filter;
-        return ("function" == typeof t5.filter || l(t5.filter)) && (i3 = t5.filter), { addQueryPrefix: "boolean" == typeof t5.addQueryPrefix ? t5.addQueryPrefix : v.addQueryPrefix, allowDots: void 0 === t5.allowDots ? v.allowDots : !!t5.allowDots, charset: e4, charsetSentinel: "boolean" == typeof t5.charsetSentinel ? t5.charsetSentinel : v.charsetSentinel, delimiter: void 0 === t5.delimiter ? v.delimiter : t5.delimiter, encode: "boolean" == typeof t5.encode ? t5.encode : v.encode, encoder: "function" == typeof t5.encoder ? t5.encoder : v.encoder, encodeValuesOnly: "boolean" == typeof t5.encodeValuesOnly ? t5.encodeValuesOnly : v.encodeValuesOnly, filter: i3, format: r3, formatter: o3, serializeDate: "function" == typeof t5.serializeDate ? t5.serializeDate : v.serializeDate, skipNulls: "boolean" == typeof t5.skipNulls ? t5.skipNulls : v.skipNulls, sort: "function" == typeof t5.sort ? t5.sort : null, strictNullHandling: "boolean" == typeof t5.strictNullHandling ? t5.strictNullHandling : v.strictNullHandling };
+        var o3 = n.formatters[r3], i3 = m.filter;
+        return ("function" == typeof t5.filter || l(t5.filter)) && (i3 = t5.filter), { addQueryPrefix: "boolean" == typeof t5.addQueryPrefix ? t5.addQueryPrefix : m.addQueryPrefix, allowDots: void 0 === t5.allowDots ? m.allowDots : !!t5.allowDots, charset: e4, charsetSentinel: "boolean" == typeof t5.charsetSentinel ? t5.charsetSentinel : m.charsetSentinel, delimiter: void 0 === t5.delimiter ? m.delimiter : t5.delimiter, encode: "boolean" == typeof t5.encode ? t5.encode : m.encode, encoder: "function" == typeof t5.encoder ? t5.encoder : m.encoder, encodeValuesOnly: "boolean" == typeof t5.encodeValuesOnly ? t5.encodeValuesOnly : m.encodeValuesOnly, filter: i3, format: r3, formatter: o3, serializeDate: "function" == typeof t5.serializeDate ? t5.serializeDate : m.serializeDate, skipNulls: "boolean" == typeof t5.skipNulls ? t5.skipNulls : m.skipNulls, sort: "function" == typeof t5.sort ? t5.sort : null, strictNullHandling: "boolean" == typeof t5.strictNullHandling ? t5.strictNullHandling : m.strictNullHandling };
       }(e3);
       "function" == typeof i2.filter ? o2 = (0, i2.filter)("", o2) : l(i2.filter) && (r2 = i2.filter);
       var u2 = [];
       if ("object" != typeof o2 || null === o2)
         return "";
-      var a2 = c[e3 && e3.arrayFormat in c ? e3.arrayFormat : e3 && "indices" in e3 ? e3.indices ? "indices" : "repeat" : "indices"];
+      var s2 = c[e3 && e3.arrayFormat in c ? e3.arrayFormat : e3 && "indices" in e3 ? e3.indices ? "indices" : "repeat" : "indices"];
       r2 || (r2 = Object.keys(o2)), i2.sort && r2.sort(i2.sort);
-      for (var s2 = 0; s2 < r2.length; ++s2) {
-        var p2 = r2[s2];
-        i2.skipNulls && null === o2[p2] || y(u2, m(o2[p2], p2, a2, i2.strictNullHandling, i2.skipNulls, i2.encode ? i2.encoder : null, i2.filter, i2.sort, i2.allowDots, i2.serializeDate, i2.format, i2.formatter, i2.encodeValuesOnly, i2.charset));
+      for (var a2 = 0; a2 < r2.length; ++a2) {
+        var p2 = r2[a2];
+        i2.skipNulls && null === o2[p2] || y(u2, v(o2[p2], p2, s2, i2.strictNullHandling, i2.skipNulls, i2.encode ? i2.encoder : null, i2.filter, i2.sort, i2.allowDots, i2.serializeDate, i2.format, i2.formatter, i2.encodeValuesOnly, i2.charset));
       }
       var h2 = u2.join(i2.delimiter), d2 = true === i2.addQueryPrefix ? "?" : "";
       return i2.charsetSentinel && (d2 += "iso-8859-1" === i2.charset ? "utf8=%26%2310003%3B&" : "utf8=%E2%9C%93&"), h2.length > 0 ? d2 + h2 : "";
     }(t({}, e2, this.u._query), { addQueryPrefix: true, arrayFormat: "indices", encodeValuesOnly: true, skipNulls: true, encoder: (t4, e3) => "boolean" == typeof t4 ? Number(t4) : e3(t4) });
   }
   p(e2) {
-    e2 ? this.t.absolute && e2.startsWith("/") && (e2 = this.h().host + e2) : e2 = this.v();
+    e2 ? this.t.absolute && e2.startsWith("/") && (e2 = this.h().host + e2) : e2 = this.m();
     let r2 = {};
     const [n2, o2] = Object.entries(this.t.routes).find(([t4, n3]) => r2 = new R(t4, n3, this.t).matchesUrl(e2)) || [void 0, void 0];
     return t({ name: n2 }, r2, { route: o2 });
   }
-  v() {
+  m() {
     const { host: t4, pathname: e2, search: r2 } = this.h();
     return (this.t.absolute ? t4 + e2 : e2.replace(this.t.url.replace(/^\w*:\/\/[^/]+/, ""), "").replace(/^\/+/, "/")) + r2;
   }
@@ -10283,18 +10291,18 @@ class x extends String {
     const { name: n2, params: o2, query: i2, route: u2 } = this.p();
     if (!e2)
       return n2;
-    const a2 = new RegExp(`^${e2.replace(/\./g, "\\.").replace(/\*/g, ".*")}$`).test(n2);
-    if ([null, void 0].includes(r2) || !a2)
-      return a2;
-    const s2 = new R(n2, u2, this.t);
-    r2 = this.l(r2, s2);
+    const s2 = new RegExp(`^${e2.replace(/\./g, "\\.").replace(/\*/g, ".*")}$`).test(n2);
+    if ([null, void 0].includes(r2) || !s2)
+      return s2;
+    const a2 = new R(n2, u2, this.t);
+    r2 = this.l(r2, a2);
     const f2 = t({}, o2, i2);
     return !(!Object.values(r2).every((t4) => !t4) || Object.values(f2).some((t4) => void 0 !== t4)) || Object.entries(r2).every(([t4, e3]) => f2[t4] == e3);
   }
   h() {
     var t4, e2, r2, n2, o2, i2;
-    const { host: u2 = "", pathname: a2 = "", search: s2 = "" } = "undefined" != typeof window ? window.location : {};
-    return { host: null != (t4 = null == (e2 = this.t.location) ? void 0 : e2.host) ? t4 : u2, pathname: null != (r2 = null == (n2 = this.t.location) ? void 0 : n2.pathname) ? r2 : a2, search: null != (o2 = null == (i2 = this.t.location) ? void 0 : i2.search) ? o2 : s2 };
+    const { host: u2 = "", pathname: s2 = "", search: a2 = "" } = "undefined" != typeof window ? window.location : {};
+    return { host: null != (t4 = null == (e2 = this.t.location) ? void 0 : e2.host) ? t4 : u2, pathname: null != (r2 = null == (n2 = this.t.location) ? void 0 : n2.pathname) ? r2 : s2, search: null != (o2 = null == (i2 = this.t.location) ? void 0 : i2.search) ? o2 : a2 };
   }
   get params() {
     const { params: e2, query: r2 } = this.p();
@@ -10306,9 +10314,9 @@ class x extends String {
   l(e2 = {}, r2 = this.i) {
     null != e2 || (e2 = {}), e2 = ["string", "number"].includes(typeof e2) ? [e2] : e2;
     const n2 = r2.parameterSegments.filter(({ name: t4 }) => !this.t.defaults[t4]);
-    return Array.isArray(e2) ? e2 = e2.reduce((e3, r3, o2) => t({}, e3, n2[o2] ? { [n2[o2].name]: r3 } : "object" == typeof r3 ? r3 : { [r3]: "" }), {}) : 1 !== n2.length || e2[n2[0].name] || !e2.hasOwnProperty(Object.values(r2.bindings)[0]) && !e2.hasOwnProperty("id") || (e2 = { [n2[0].name]: e2 }), t({}, this.m(r2), this.g(e2, r2));
+    return Array.isArray(e2) ? e2 = e2.reduce((e3, r3, o2) => t({}, e3, n2[o2] ? { [n2[o2].name]: r3 } : "object" == typeof r3 ? r3 : { [r3]: "" }), {}) : 1 !== n2.length || e2[n2[0].name] || !e2.hasOwnProperty(Object.values(r2.bindings)[0]) && !e2.hasOwnProperty("id") || (e2 = { [n2[0].name]: e2 }), t({}, this.v(r2), this.g(e2, r2));
   }
-  m(e2) {
+  v(e2) {
     return e2.parameterSegments.filter(({ name: t4 }) => this.t.defaults[t4]).reduce((e3, { name: r2 }, n2) => t({}, e3, { [r2]: this.t.defaults[r2] }), {});
   }
   g(e2, { bindings: r2, parameterSegments: n2 }) {
@@ -10330,9 +10338,9 @@ class x extends String {
     return this.has(t4);
   }
 }
-const C = { install: (t4, e2) => {
+const x = { install: (t4, e2) => {
   const r2 = (t5, r3, n2, o2 = e2) => function(t6, e3, r4, n3) {
-    const o3 = new x(t6, e3, r4, n3);
+    const o3 = new C(t6, e3, r4, n3);
     return t6 ? o3.toString() : o3;
   }(t5, r3, n2, o2);
   t4.mixin({ methods: { route: r2 } }), parseInt(t4.version) > 2 && t4.provide("route", r2);
@@ -10786,7 +10794,7 @@ const _sfc_main$1 = {
         stickyHeader.value = false;
       }
     };
-    const isDocs = computed(() => useRoutes().current().startsWith("/docs"));
+    const isDocs = computed(() => useRoutes().current().startsWith("docs"));
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Link = resolveComponent("Link");
       const _component_ApplicationMark = __unplugin_components_4$1;
@@ -11036,7 +11044,7 @@ createServer(
     setup({ App, props, plugin }) {
       return createSSRApp({
         render: () => h$1(App, props)
-      }).use(plugin).use(ssrPlugin).use(ZoraSSR, Zora).use(C, Ziggy$1);
+      }).use(plugin).use(ssrPlugin).use(ZoraSSR, Zora).use(x, Ziggy$1);
     }
   }),
   "13520"
