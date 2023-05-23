@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [2.5.1](https://github.com/jetstreamlabs/serenity/compare/v2.5.0...v2.5.1) (2023-05-23)
+
+
+### Task Commit
+
+* dependencies ([be4a315](https://github.com/jetstreamlabs/serenity/commit/be4a315a80079c455f99ebed7092bc7e8801eca4))
+
 # [2.5.0](https://github.com/jetstreamlabs/serenity/compare/v2.4.1...v2.5.0) (2023-05-09)
 
 
