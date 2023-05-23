@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/jetstreamlabs/.github/main/img/logo.svg" style="height:300px;margin:0 auto" alt="Serenity" />
-</p>
+![Serenity](https://github.com/jetstreamlabs/.github/blob/a2028bb9acdf8f2cfd2e68b85650d6084d84197a/img/serenity-header.png)
 
 ## Serenity
 
