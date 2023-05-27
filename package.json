@@ -80,7 +80,7 @@
     "flowbite": "^1.6.5",
     "husky": "^8.0.3",
     "laravel-echo": "^1.15.0",
-    "laravel-vite-plugin": "^0.7.4",
+    "laravel-vite-plugin": "^0.7.8",
     "lodash": "^4.17.21",
     "markdown-it-anchor": "^8.6.7",
     "markdown-it-attrs": "^4.1.6",
