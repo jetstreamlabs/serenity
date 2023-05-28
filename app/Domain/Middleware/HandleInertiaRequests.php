@@ -21,11 +21,13 @@ class HandleInertiaRequests extends Middleware
    */
   public function version(Request $request): string|null
   {
-    if (App::environment('production')) {
-      return parent::version($request);
-    }
+    // if (App::environment('production')) {
+    //   return parent::version($request);
+    // }
 
-    return null;
+    // return null;
+
+    return parent::version($request);
   }
 
   /**
