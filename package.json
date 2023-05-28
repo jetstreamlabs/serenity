@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "npm run build:assets && vite",
     "build": "vite build",
-    "prod": "npm run build:assets && vite build && vite build --ssr && npm run post:prod",
+    "prod": "npm run build:assets && vite build && vite build --ssr",
     "ssr": "vite build --ssr",
     "start": "php zen inertia:start-ssr",
     "kill": "kill -9 $(lsof -ti:3000)",
