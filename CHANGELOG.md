@@ -1,5 +1,33 @@
 # Serenity Changelog
 
+## [2.5.2](https://github.com/jetstreamlabs/serenity/compare/v2.5.1...v2.5.2) (2023-05-28)
+
+
+### Bug Fixes
+
+* remove post-prod command from prod ([445c458](https://github.com/jetstreamlabs/serenity/commit/445c4588ad912471c5ca75b5dce0cd4cbcef0a34))
+
+
+* Merge branch 'develop' ([9e5f90a](https://github.com/jetstreamlabs/serenity/commit/9e5f90a4592573175fefb9a42d0da8bc39640ac6))
+
+
+### Maintenance
+
+* **deps-dev:** bump @commitlint/cli from 17.6.1 to 17.6.3 ([c37d7f1](https://github.com/jetstreamlabs/serenity/commit/c37d7f1d39ce5a2d6cea7970e2d4f290c991fa6c))
+* **deps-dev:** bump @vitejs/plugin-vue from 4.2.1 to 4.2.3 ([e00b6c2](https://github.com/jetstreamlabs/serenity/commit/e00b6c2a9c1286f0b2024f2026828e40fbacb39f))
+* **deps-dev:** bump laravel-vite-plugin from 0.7.7 to 0.7.8 ([d865304](https://github.com/jetstreamlabs/serenity/commit/d865304edde133b8e299af4c33edf3ef628318a8))
+* **deps-dev:** bump prettier-plugin-tailwindcss from 0.2.8 to 0.3.0 ([9808409](https://github.com/jetstreamlabs/serenity/commit/9808409dd1b6d70615020885351659cac7d85af3))
+* **deps-dev:** bump spatie/laravel-ignition from 2.1.2 to 2.1.3 ([5384f41](https://github.com/jetstreamlabs/serenity/commit/5384f412a80d1ae3676d3062a64490b4697a2f93))
+* **deps-dev:** bump unplugin-auto-import from 0.15.3 to 0.16.2 ([b33cdbb](https://github.com/jetstreamlabs/serenity/commit/b33cdbb32ce52169f90dc1761a74757057bf77f7))
+* **deps-dev:** bump vite from 4.3.8 to 4.3.9 ([fa677cd](https://github.com/jetstreamlabs/serenity/commit/fa677cd8904406cd12e96f4ece7a0d225c8f0d4f))
+* **deps-dev:** dependencies —dpbot ([c6a11d3](https://github.com/jetstreamlabs/serenity/commit/c6a11d30b88d3874160950f158c08dced6054d6a))
+* **deps:** bump @popperjs/core from 2.11.7 to 2.11.8 ([accc437](https://github.com/jetstreamlabs/serenity/commit/accc437df14fec6f26db3959519b60d1e029bbe6))
+* **deps:** bump @vue/server-renderer from 3.2.47 to 3.3.4 ([d3802be](https://github.com/jetstreamlabs/serenity/commit/d3802be56489626a65473e76f88fb8ee1b3be726))
+* **deps:** bump laravel/framework from 10.11.0 to 10.12.0 ([464c125](https://github.com/jetstreamlabs/serenity/commit/464c12587038e59a68076f59f3ec27b70a0d3a8f))
+* **release:** 2.5.1 [skip ci] ([c58a9b4](https://github.com/jetstreamlabs/serenity/commit/c58a9b45034581bd0b1958a4f41855d4c943b5f2))
+* update readme ([510d990](https://github.com/jetstreamlabs/serenity/commit/510d99052bdcb6a449f09fe258f3c983eed7e967))
+* update readme img link ([56502f4](https://github.com/jetstreamlabs/serenity/commit/56502f46cd92f3be063b9b825abac1a3607c621d))
+
 ## [2.5.1](https://github.com/jetstreamlabs/serenity/compare/v2.5.0...v2.5.1) (2023-05-23)
 
 
