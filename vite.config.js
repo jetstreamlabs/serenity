@@ -1,9 +1,7 @@
-import dotenv from 'dotenv'
-import expandDotenv from 'dotenv-expand'
 import { homedir } from 'os'
 import fs from 'fs'
 import { resolve } from 'path'
-import { defineConfig, splitVendorChunkPlugin } from 'vite'
+import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import laravel from 'laravel-vite-plugin'
 import Vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
@@ -19,11 +17,12 @@ import MarkdownItAttrs from 'markdown-it-attrs'
 import { tocPlugin } from '@mdit-vue/plugin-toc'
 import { componentPlugin } from '@mdit-vue/plugin-component'
 import Shiki from 'markdown-it-shiki'
-import { hash } from './resources/js/makeHash.js'
 
-const env = expandDotenv.expand(dotenv.config()).parsed
+let env
 
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
+  env = loadEnv(mode, process.cwd(), '')
+
   return {
     plugins: [
       viteCommonjs(),
@@ -215,13 +214,6 @@ export default defineConfig(({ command }) => {
     ssr: {
       noExternal: ['@inertiajs/server']
     },
-    // build: {
-    //   rollupOptions: {
-    //     output: {
-    //       assetFileNames: '[name][hash].[ext]'
-    //     }
-    //   }
-    // },
     optimizeDeps: {
       include: [
         'vue',
