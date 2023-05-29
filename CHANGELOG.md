@@ -1,5 +1,12 @@
 # Serenity Changelog
 
+## [2.5.3](https://github.com/jetstreamlabs/serenity/compare/v2.5.2...v2.5.3) (2023-05-29)
+
+
+### Code Refactoring
+
+* update vite config, update example.env ([ebab9c6](https://github.com/jetstreamlabs/serenity/commit/ebab9c61fd670da40b03cf12d7bb8c35265515f2))
+
 ## [2.5.2](https://github.com/jetstreamlabs/serenity/compare/v2.5.1...v2.5.2) (2023-05-28)
 
 
