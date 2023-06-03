@@ -45,7 +45,7 @@
     "@inertiajs/vue3": "^1.0.6",
     "@popperjs/core": "^2.11.8",
     "@vue/server-renderer": "^3.3.4",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.8",
     "lodash-es": "^4.17.21",
     "mitt": "^3.0.0",
     "qs": "^6.11.1",
