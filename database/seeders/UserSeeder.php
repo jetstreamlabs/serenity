@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Domain\Models\Team;
 use App\Domain\Models\User;
-use App\Domain\Operations\CreateNewUser;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 

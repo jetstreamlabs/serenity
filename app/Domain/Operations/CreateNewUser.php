@@ -3,7 +3,6 @@
 namespace App\Domain\Operations;
 
 use App\Domain\Concerns\PasswordValidationRules;
-use App\Domain\Models\Role;
 use App\Domain\Models\Team;
 use App\Domain\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +11,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Serenity\Contracts\CreatesNewUsers;
 use Serenity\Serenity;
-use Spatie\Permission\PermissionRegistrar;
 
 class CreateNewUser implements CreatesNewUsers
 {

@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Domain\Models\Permission;
 use App\Domain\Models\Role;
 use App\Domain\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\PermissionRegistrar;
 
