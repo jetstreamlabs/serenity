@@ -29,7 +29,13 @@ class User extends Authenticatable
    * @var array<int, string>
    */
   protected $fillable = [
-    'name', 'email', 'password',
+    'username',
+    'fname',
+    'lname',
+    'email',
+    'password',
+    'active',
+    'last_active_at',
   ];
 
   /**
@@ -52,7 +58,7 @@ class User extends Authenticatable
   protected $casts = [
     'email_verified_at' => 'datetime:Y-m-d H:i:s',
     'two_factor_confirmed_at' => 'datetime:Y-m-d H:i:s',
-    'last_login' => 'datetime:Y-m-d H:i:s',
+    'last_active_at' => 'datetime:Y-m-d H:i:s',
     'created_at' => 'datetime:Y-m-d H:i:s',
     'updated_at' => 'datetime:Y-m-d H:i:s',
     'deleted_at' => 'datetime:Y-m-d H:i:s',
@@ -67,11 +73,6 @@ class User extends Authenticatable
     'profile_photo_url',
   ];
 
-  /**
-   * Create a new factory instance.
-   *
-   * @return \Illuminate\Database\Eloquent\Factories\Factory
-   */
   protected static function newFactory(): Factory
   {
     return UserFactory::new();

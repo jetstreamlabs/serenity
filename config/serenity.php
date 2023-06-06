@@ -65,7 +65,7 @@ return [
    * requests to have a field named 'email'. If the application uses
    * another name for the field you may define it below as needed.
    */
-  'username' => 'email',
+  'username' => 'username',
   'email' => 'email',
 
   /**

@@ -9,8 +9,7 @@ module.exports = {
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
     './resources/js/**/*.vue',
-    './resources/markdown/**/*.md',
-    './node_modules/flowbite/**/*.js'
+    './resources/markdown/**/*.md'
   ],
   darkMode: 'class',
   theme: {
@@ -77,7 +76,16 @@ module.exports = {
           800: '#71390A',
           900: '#3D1F05',
         },
+        primary: colors.blue,
+        secondary: colors.fuchsia,
         gray: colors.slate,
+        warning: colors.amber,
+        danger: colors.red,
+        success: colors.emerald,
+        info: colors.sky
+      },
+      screens: {
+        '3xl': '1800px'
       }
     },
   },
@@ -86,7 +94,6 @@ module.exports = {
     require('@tailwindcss/typography')({
       className: 'docs',
     }),
-    require('@tailwindcss/aspect-ratio'),
-    require('flowbite/plugin')
+    require('@tailwindcss/aspect-ratio')
   ],
 }

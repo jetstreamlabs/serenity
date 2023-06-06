@@ -8,6 +8,7 @@ use App\Domain\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Serenity\Contracts\CreatesNewUsers;
 use Serenity\Serenity;
 
@@ -23,7 +24,7 @@ class CreateNewUser implements CreatesNewUsers
   public function create(array $input): User
   {
     Validator::make($input, [
-      'name' => ['required', 'string', 'max:255'],
+      'username' => ['required', 'string', 'max:255', 'unique:users'],
       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
       'password' => $this->passwordRules(),
       'terms' => Serenity::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
@@ -31,8 +32,8 @@ class CreateNewUser implements CreatesNewUsers
 
     return DB::transaction(function () use ($input) {
       return tap(User::create([
-        'name' => $input['name'],
-        'email' => $input['email'],
+        'username' => $input['username'],
+        'email' => Str::lower($input['email']),
         'password' => Hash::make($input['password']),
       ]), function (User $user) {
         $this->createTeam($user);
@@ -47,7 +48,7 @@ class CreateNewUser implements CreatesNewUsers
   {
     $user->ownedTeams()->save(Team::forceCreate([
       'user_id' => $user->id,
-      'name' => explode(' ', $user->name, 2)[0]."'s Team",
+      'name' => $user->username."'s Team",
       'personal_team' => true,
     ]));
   }

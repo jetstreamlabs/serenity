@@ -14,7 +14,7 @@ status.value = usePage().props.title == 'Page Not Found' ? 404 : 200
   <main class="mt-4 grid grid-cols-12 gap-4 px-4 pb-8">
     <aside
       class="sticky top-0 col-span-2 hidden min-h-screen bg-gray-100 dark:bg-gray-900 lg:block">
-      <Sidebar />
+      <DocSidebar />
     </aside>
     <MobileCanvas />
     <div

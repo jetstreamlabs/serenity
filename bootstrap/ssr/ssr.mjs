@@ -1,16 +1,21 @@
-import { useSSRContext, mergeProps, openBlock, createElementBlock, createElementVNode, computed, onMounted, onUnmounted, toRefs, watch, unref, withCtx, createVNode, renderSlot, ref, useSlots, createTextVNode, toDisplayString, createBlock, Fragment, renderList, createCommentVNode, inject, nextTick, resolveComponent, withModifiers, withDirectives, vShow, withKeys, createSlots, createSSRApp, h as h$1 } from "vue";
-import { ssrRenderAttrs, ssrRenderSlot, ssrRenderTeleport, ssrRenderStyle, ssrRenderClass, ssrRenderComponent, ssrLooseContain, ssrGetDynamicModelProps, ssrInterpolate, ssrRenderAttr, ssrRenderList } from "vue/server-renderer";
+import { useSSRContext, mergeProps, openBlock, createElementBlock, createElementVNode, computed, onMounted, onUnmounted, toRefs, watch, unref, withCtx, createVNode, renderSlot, ref, useSlots, createTextVNode, toDisplayString, createBlock, Fragment, renderList, createCommentVNode, inject, nextTick, resolveComponent, withModifiers, defineComponent, resolveDirective, withDirectives, vShow, withKeys, createSlots, createSSRApp, h as h$1 } from "vue";
+import { ssrRenderAttrs, ssrRenderSlot, ssrRenderTeleport, ssrRenderStyle, ssrRenderClass, ssrRenderComponent, ssrLooseContain, ssrGetDynamicModelProps, ssrInterpolate, ssrRenderAttr, ssrRenderList, ssrGetDirectiveProps } from "vue/server-renderer";
 import { useForm, usePage, router, Head, Link, createInertiaApp } from "@inertiajs/vue3";
 import _ from "lodash";
 import route from "ziggy-js";
 import dayjs from "dayjs";
+import { useToast } from "@brackets/vue-toastification";
+import "lodash/debounce.js";
+import "lodash/pick.js";
+import "lodash/pickBy.js";
 import { useDark, useToggle } from "@vueuse/core";
+import "laravel-vue-i18n";
 import createServer from "@inertiajs/vue3/server";
 import { renderToString } from "@vue/server-renderer";
 import { createPinia, defineStore } from "pinia";
 import mitt from "mitt";
 import axios$1 from "axios";
-const _sfc_main$1q = {
+const _sfc_main$1r = {
   __name: "DangerButton",
   __ssrInlineRender: true,
   props: {
@@ -31,11 +36,11 @@ const _sfc_main$1q = {
     };
   }
 };
-const _sfc_setup$1q = _sfc_main$1q.setup;
-_sfc_main$1q.setup = (props, ctx) => {
+const _sfc_setup$1r = _sfc_main$1r.setup;
+_sfc_main$1r.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/DangerButton.vue");
-  return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
+  return _sfc_setup$1r ? _sfc_setup$1r(props, ctx) : void 0;
 };
 const _hoisted_1$k = {
   viewBox: "0 0 24 24",
@@ -57,7 +62,7 @@ function render$k(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$k, _hoisted_3$k);
 }
 const __unplugin_components_1$7 = { name: "heroicons-outline-exclamation", render: render$k };
-const _sfc_main$1p = {
+const _sfc_main$1q = {
   __name: "Modal",
   __ssrInlineRender: true,
   props: {
@@ -119,13 +124,13 @@ const _sfc_main$1p = {
     };
   }
 };
-const _sfc_setup$1p = _sfc_main$1p.setup;
-_sfc_main$1p.setup = (props, ctx) => {
+const _sfc_setup$1q = _sfc_main$1q.setup;
+_sfc_main$1q.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Modal.vue");
-  return _sfc_setup$1p ? _sfc_setup$1p(props, ctx) : void 0;
+  return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
 };
-const _sfc_main$1o = {
+const _sfc_main$1p = {
   __name: "ConfirmationModal",
   __ssrInlineRender: true,
   props: {
@@ -147,7 +152,7 @@ const _sfc_main$1o = {
       emit("close");
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Modal = _sfc_main$1p;
+      const _component_Modal = _sfc_main$1q;
       const _component_IconOutlineExclamation = __unplugin_components_1$7;
       _push(ssrRenderComponent(_component_Modal, mergeProps({
         show: unref(show),
@@ -194,13 +199,13 @@ const _sfc_main$1o = {
     };
   }
 };
-const _sfc_setup$1o = _sfc_main$1o.setup;
-_sfc_main$1o.setup = (props, ctx) => {
+const _sfc_setup$1p = _sfc_main$1p.setup;
+_sfc_main$1p.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ConfirmationModal.vue");
-  return _sfc_setup$1o ? _sfc_setup$1o(props, ctx) : void 0;
+  return _sfc_setup$1p ? _sfc_setup$1p(props, ctx) : void 0;
 };
-const _sfc_main$1n = {
+const _sfc_main$1o = {
   __name: "SecondaryButton",
   __ssrInlineRender: true,
   props: {
@@ -222,13 +227,13 @@ const _sfc_main$1n = {
     };
   }
 };
-const _sfc_setup$1n = _sfc_main$1n.setup;
-_sfc_main$1n.setup = (props, ctx) => {
+const _sfc_setup$1o = _sfc_main$1o.setup;
+_sfc_main$1o.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/SecondaryButton.vue");
-  return _sfc_setup$1n ? _sfc_setup$1n(props, ctx) : void 0;
+  return _sfc_setup$1o ? _sfc_setup$1o(props, ctx) : void 0;
 };
-const _sfc_main$1m = {
+const _sfc_main$1n = {
   __name: "DialogModal",
   __ssrInlineRender: true,
   props: {
@@ -250,7 +255,7 @@ const _sfc_main$1m = {
       emit("close");
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Modal = _sfc_main$1p;
+      const _component_Modal = _sfc_main$1q;
       _push(ssrRenderComponent(_component_Modal, mergeProps({
         show: unref(show),
         "max-width": unref(maxWidth),
@@ -287,11 +292,11 @@ const _sfc_main$1m = {
     };
   }
 };
-const _sfc_setup$1m = _sfc_main$1m.setup;
-_sfc_main$1m.setup = (props, ctx) => {
+const _sfc_setup$1n = _sfc_main$1n.setup;
+_sfc_main$1n.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/DialogModal.vue");
-  return _sfc_setup$1m ? _sfc_setup$1m(props, ctx) : void 0;
+  return _sfc_setup$1n ? _sfc_setup$1n(props, ctx) : void 0;
 };
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -300,7 +305,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_main$1l = {};
+const _sfc_main$1m = {};
 function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs) {
   _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex justify-between md:col-span-1" }, _attrs))}><div class="px-4 sm:px-0"><h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">`);
   ssrRenderSlot(_ctx.$slots, "title", {}, null, _push, _parent);
@@ -310,14 +315,14 @@ function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs) {
   ssrRenderSlot(_ctx.$slots, "aside", {}, null, _push, _parent);
   _push(`</div></div>`);
 }
-const _sfc_setup$1l = _sfc_main$1l.setup;
-_sfc_main$1l.setup = (props, ctx) => {
+const _sfc_setup$1m = _sfc_main$1m.setup;
+_sfc_main$1m.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/SectionTitle.vue");
-  return _sfc_setup$1l ? _sfc_setup$1l(props, ctx) : void 0;
+  return _sfc_setup$1m ? _sfc_setup$1m(props, ctx) : void 0;
 };
-const __unplugin_components_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["ssrRender", _sfc_ssrRender$b]]);
-const _sfc_main$1k = {};
+const __unplugin_components_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$1m, [["ssrRender", _sfc_ssrRender$b]]);
+const _sfc_main$1l = {};
 function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs) {
   const _component_SectionTitle = __unplugin_components_0$4;
   _push(`<div${ssrRenderAttrs(mergeProps({ class: "md:grid md:grid-cols-3 md:gap-6" }, _attrs))}>`);
@@ -346,14 +351,14 @@ function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs) {
   ssrRenderSlot(_ctx.$slots, "content", {}, null, _push, _parent);
   _push(`</div></div></div>`);
 }
-const _sfc_setup$1k = _sfc_main$1k.setup;
-_sfc_main$1k.setup = (props, ctx) => {
+const _sfc_setup$1l = _sfc_main$1l.setup;
+_sfc_main$1l.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ActionSection.vue");
-  return _sfc_setup$1k ? _sfc_setup$1k(props, ctx) : void 0;
+  return _sfc_setup$1l ? _sfc_setup$1l(props, ctx) : void 0;
 };
-const __unplugin_components_8$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1k, [["ssrRender", _sfc_ssrRender$a]]);
-const _sfc_main$1j = {
+const __unplugin_components_8$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["ssrRender", _sfc_ssrRender$a]]);
+const _sfc_main$1k = {
   __name: "SectionBorder",
   __ssrInlineRender: true,
   props: {
@@ -378,13 +383,13 @@ const _sfc_main$1j = {
     };
   }
 };
-const _sfc_setup$1j = _sfc_main$1j.setup;
-_sfc_main$1j.setup = (props, ctx) => {
+const _sfc_setup$1k = _sfc_main$1k.setup;
+_sfc_main$1k.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/SectionBorder.vue");
-  return _sfc_setup$1j ? _sfc_setup$1j(props, ctx) : void 0;
+  return _sfc_setup$1k ? _sfc_setup$1k(props, ctx) : void 0;
 };
-const _sfc_main$1i = {
+const _sfc_main$1j = {
   __name: "Button",
   __ssrInlineRender: true,
   props: {
@@ -405,13 +410,13 @@ const _sfc_main$1i = {
     };
   }
 };
-const _sfc_setup$1i = _sfc_main$1i.setup;
-_sfc_main$1i.setup = (props, ctx) => {
+const _sfc_setup$1j = _sfc_main$1j.setup;
+_sfc_main$1j.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Button.vue");
-  return _sfc_setup$1i ? _sfc_setup$1i(props, ctx) : void 0;
+  return _sfc_setup$1j ? _sfc_setup$1j(props, ctx) : void 0;
 };
-const _sfc_main$1h = {
+const _sfc_main$1i = {
   __name: "ActionMessage",
   __ssrInlineRender: true,
   props: ["on"],
@@ -424,13 +429,13 @@ const _sfc_main$1h = {
     };
   }
 };
-const _sfc_setup$1h = _sfc_main$1h.setup;
-_sfc_main$1h.setup = (props, ctx) => {
+const _sfc_setup$1i = _sfc_main$1i.setup;
+_sfc_main$1i.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ActionMessage.vue");
-  return _sfc_setup$1h ? _sfc_setup$1h(props, ctx) : void 0;
+  return _sfc_setup$1i ? _sfc_setup$1i(props, ctx) : void 0;
 };
-const _sfc_main$1g = {
+const _sfc_main$1h = {
   __name: "Checkbox",
   __ssrInlineRender: true,
   props: {
@@ -464,13 +469,13 @@ const _sfc_main$1g = {
     };
   }
 };
-const _sfc_setup$1g = _sfc_main$1g.setup;
-_sfc_main$1g.setup = (props, ctx) => {
+const _sfc_setup$1h = _sfc_main$1h.setup;
+_sfc_main$1h.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Checkbox.vue");
-  return _sfc_setup$1g ? _sfc_setup$1g(props, ctx) : void 0;
+  return _sfc_setup$1h ? _sfc_setup$1h(props, ctx) : void 0;
 };
-const _sfc_main$1f = {
+const _sfc_main$1g = {
   __name: "InputError",
   __ssrInlineRender: true,
   props: ["message"],
@@ -483,13 +488,13 @@ const _sfc_main$1f = {
     };
   }
 };
-const _sfc_setup$1f = _sfc_main$1f.setup;
-_sfc_main$1f.setup = (props, ctx) => {
+const _sfc_setup$1g = _sfc_main$1g.setup;
+_sfc_main$1g.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/InputError.vue");
-  return _sfc_setup$1f ? _sfc_setup$1f(props, ctx) : void 0;
+  return _sfc_setup$1g ? _sfc_setup$1g(props, ctx) : void 0;
 };
-const _sfc_main$1e = {
+const _sfc_main$1f = {
   __name: "Input",
   __ssrInlineRender: true,
   props: {
@@ -520,13 +525,13 @@ const _sfc_main$1e = {
     };
   }
 };
-const _sfc_setup$1e = _sfc_main$1e.setup;
-_sfc_main$1e.setup = (props, ctx) => {
+const _sfc_setup$1f = _sfc_main$1f.setup;
+_sfc_main$1f.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Input.vue");
-  return _sfc_setup$1e ? _sfc_setup$1e(props, ctx) : void 0;
+  return _sfc_setup$1f ? _sfc_setup$1f(props, ctx) : void 0;
 };
-const _sfc_main$1d = {
+const _sfc_main$1e = {
   __name: "Label",
   __ssrInlineRender: true,
   props: {
@@ -555,13 +560,13 @@ const _sfc_main$1d = {
     };
   }
 };
-const _sfc_setup$1d = _sfc_main$1d.setup;
-_sfc_main$1d.setup = (props, ctx) => {
+const _sfc_setup$1e = _sfc_main$1e.setup;
+_sfc_main$1e.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Label.vue");
-  return _sfc_setup$1d ? _sfc_setup$1d(props, ctx) : void 0;
+  return _sfc_setup$1e ? _sfc_setup$1e(props, ctx) : void 0;
 };
-const _sfc_main$1c = {
+const _sfc_main$1d = {
   __name: "FormSection",
   __ssrInlineRender: true,
   props: {
@@ -622,11 +627,11 @@ const _sfc_main$1c = {
     };
   }
 };
-const _sfc_setup$1c = _sfc_main$1c.setup;
-_sfc_main$1c.setup = (props, ctx) => {
+const _sfc_setup$1d = _sfc_main$1d.setup;
+_sfc_main$1d.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/FormSection.vue");
-  return _sfc_setup$1c ? _sfc_setup$1c(props, ctx) : void 0;
+  return _sfc_setup$1d ? _sfc_setup$1d(props, ctx) : void 0;
 };
 const trans$1 = (key, replace, Zora2) => {
   const locale = window.locale;
@@ -694,14 +699,14 @@ const ZoraSSR = {
     }
   })
 };
-const Zora = { translations: { "en": { "php": { "auth": { "failed": "These credentials do not match our records.", "password": "The provided password is incorrect.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "pagination": { "previous": "&laquo; Previous", "next": "Next &raquo;" }, "passwords": { "reset": "Your password has been reset!", "sent": "We have emailed your password reset link!", "throttled": "Please wait before retrying.", "token": "This password reset token is invalid.", "user": "We can't find a user with that email address." }, "validation": { "accepted": "The :attribute must be accepted.", "accepted_if": "The :attribute must be accepted when :other is :value.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute must only contain letters.", "alpha_dash": "The :attribute must only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute must only contain letters and numbers.", "array": "The :attribute must be an array.", "ascii": "The :attribute field must only contain single-byte alphanumeric characters and symbols.", "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "array": "The :attribute must have between :min and :max items.", "file": "The :attribute must be between :min and :max kilobytes.", "numeric": "The :attribute must be between :min and :max.", "string": "The :attribute must be between :min and :max characters." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "current_password": "The password is incorrect.", "date": "The :attribute is not a valid date.", "date_equals": "The :attribute must be a date equal to :date.", "date_format": "The :attribute does not match the format :format.", "decimal": "The :attribute field must have :decimal decimal places.", "declined": "The :attribute must be declined.", "declined_if": "The :attribute must be declined when :other is :value.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "doesnt_end_with": "The :attribute field must not end with one of the following: :values.", "doesnt_start_with": "The :attribute field must not start with one of the following: :values.", "email": "The :attribute must be a valid email address.", "ends_with": "The :attribute must end with one of the following: :values.", "enum": "The selected :attribute is invalid.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "array": "The :attribute must have more than :value items.", "file": "The :attribute must be greater than :value kilobytes.", "numeric": "The :attribute must be greater than :value.", "string": "The :attribute must be greater than :value characters." }, "gte": { "array": "The :attribute must have :value items or more.", "file": "The :attribute must be greater than or equal to :value kilobytes.", "numeric": "The :attribute must be greater than or equal to :value.", "string": "The :attribute must be greater than or equal to :value characters." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "json": "The :attribute must be a valid JSON string.", "lowercase": "The :attribute field must be lowercase.", "lt": { "array": "The :attribute must have less than :value items.", "file": "The :attribute must be less than :value kilobytes.", "numeric": "The :attribute must be less than :value.", "string": "The :attribute must be less than :value characters." }, "lte": { "array": "The :attribute must not have more than :value items.", "file": "The :attribute must be less than or equal to :value kilobytes.", "numeric": "The :attribute must be less than or equal to :value.", "string": "The :attribute must be less than or equal to :value characters." }, "mac_address": "The :attribute must be a valid MAC address.", "max": { "array": "The :attribute must not have more than :max items.", "file": "The :attribute must not be greater than :max kilobytes.", "numeric": "The :attribute must not be greater than :max.", "string": "The :attribute must not be greater than :max characters." }, "max_digits": "The :attribute field must not have more than :max digits.", "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "array": "The :attribute must have at least :min items.", "file": "The :attribute must be at least :min kilobytes.", "numeric": "The :attribute must be at least :min.", "string": "The :attribute must be at least :min characters." }, "min_digits": "The :attribute field must have at least :min digits.", "missing": "The :attribute field must be missing.", "missing_if": "The :attribute field must be missing when :other is :value.", "missing_unless": "The :attribute field must be missing unless :other is :value.", "missing_with": "The :attribute field must be missing when :values is present.", "missing_with_all": "The :attribute field must be missing when :values are present.", "multiple_of": "The :attribute must be a multiple of :value.", "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "password": "The password is incorrect.", "present": "The :attribute field must be present.", "prohibited": "The :attribute field is prohibited.", "prohibited_if": "The :attribute field is prohibited when :other is :value.", "prohibited_unless": "The :attribute field is prohibited unless :other is in :values.", "prohibits": "The :attribute field prohibits :other from being present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_array_keys": "The :attribute field must contain entries for: :values.", "required_if": "The :attribute field is required when :other is :value.", "required_if_accepted": "The :attribute field is required when :other is accepted.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values are present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "array": "The :attribute must contain :size items.", "file": "The :attribute must be :size kilobytes.", "numeric": "The :attribute must be :size.", "string": "The :attribute must be :size characters." }, "starts_with": "The :attribute must start with one of the following: :values.", "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid timezone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "uppercase": "The :attribute field must be uppercase.", "url": "The :attribute must be a valid URL.", "ulid": "The :attribute field must be a valid ULID.", "uuid": "The :attribute must be a valid UUID.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "attributes": [] } }, "json": { "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.", "The :attribute must contain at least one number.": "The :attribute must contain at least one number.", "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.", "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.", "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute." } } } };
+const Zora = { translations: { "en": { "php": { "auth": { "failed": "These credentials do not match our records.", "password": "The provided password is incorrect.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "pagination": { "previous": "&laquo; Previous", "next": "Next &raquo;" }, "passwords": { "reset": "Your password has been reset!", "sent": "We have emailed your password reset link!", "throttled": "Please wait before retrying.", "token": "This password reset token is invalid.", "user": "We can't find a user with that email address." }, "validation": { "accepted": "The :attribute must be accepted.", "accepted_if": "The :attribute must be accepted when :other is :value.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute must only contain letters.", "alpha_dash": "The :attribute must only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute must only contain letters and numbers.", "array": "The :attribute must be an array.", "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "numeric": "The :attribute must be between :min and :max.", "file": "The :attribute must be between :min and :max kilobytes.", "string": "The :attribute must be between :min and :max characters.", "array": "The :attribute must have between :min and :max items." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "current_password": "The password is incorrect.", "date": "The :attribute is not a valid date.", "date_equals": "The :attribute must be a date equal to :date.", "date_format": "The :attribute does not match the format :format.", "declined": "The :attribute must be declined.", "declined_if": "The :attribute must be declined when :other is :value.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "email": "The :attribute must be a valid email address.", "ends_with": "The :attribute must end with one of the following: :values.", "enum": "The selected :attribute is invalid.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "numeric": "The :attribute must be greater than :value.", "file": "The :attribute must be greater than :value kilobytes.", "string": "The :attribute must be greater than :value characters.", "array": "The :attribute must have more than :value items." }, "gte": { "numeric": "The :attribute must be greater than or equal to :value.", "file": "The :attribute must be greater than or equal to :value kilobytes.", "string": "The :attribute must be greater than or equal to :value characters.", "array": "The :attribute must have :value items or more." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "mac_address": "The :attribute must be a valid MAC address.", "json": "The :attribute must be a valid JSON string.", "lt": { "numeric": "The :attribute must be less than :value.", "file": "The :attribute must be less than :value kilobytes.", "string": "The :attribute must be less than :value characters.", "array": "The :attribute must have less than :value items." }, "lte": { "numeric": "The :attribute must be less than or equal to :value.", "file": "The :attribute must be less than or equal to :value kilobytes.", "string": "The :attribute must be less than or equal to :value characters.", "array": "The :attribute must not have more than :value items." }, "max": { "numeric": "The :attribute must not be greater than :max.", "file": "The :attribute must not be greater than :max kilobytes.", "string": "The :attribute must not be greater than :max characters.", "array": "The :attribute must not have more than :max items." }, "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "numeric": "The :attribute must be at least :min.", "file": "The :attribute must be at least :min kilobytes.", "string": "The :attribute must be at least :min characters.", "array": "The :attribute must have at least :min items." }, "multiple_of": "The :attribute must be a multiple of :value.", "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "password": "The password is incorrect.", "present": "The :attribute field must be present.", "prohibited": "The :attribute field is prohibited.", "prohibited_if": "The :attribute field is prohibited when :other is :value.", "prohibited_unless": "The :attribute field is prohibited unless :other is in :values.", "prohibits": "The :attribute field prohibits :other from being present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_if": "The :attribute field is required when :other is :value.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values are present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "numeric": "The :attribute must be :size.", "file": "The :attribute must be :size kilobytes.", "string": "The :attribute must be :size characters.", "array": "The :attribute must contain :size items." }, "starts_with": "The :attribute must start with one of the following: :values.", "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid timezone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "url": "The :attribute must be a valid URL.", "uuid": "The :attribute must be a valid UUID.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "attributes": [] } }, "json": { "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.", "The :attribute must contain at least one number.": "The :attribute must contain at least one number.", "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.", "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.", "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute." } } } };
 if (typeof window !== "undefined" && typeof window.Zora !== "undefined") {
   Object.assign(Zora.routes, window.Zora.routes);
 }
 function useTrans(key, replace) {
   return trans$1(key, replace, Zora);
 }
-const Ziggy$1 = { "url": "https://serenity.test", "port": null, "defaults": {}, "routes": { "sanctum.csrf-cookie": { "uri": "sanctum/csrf-cookie", "methods": ["GET", "HEAD"] }, "login": { "uri": "login", "methods": ["GET", "HEAD"] }, "login.store": { "uri": "login", "methods": ["POST"] }, "logout": { "uri": "logout", "methods": ["POST"] }, "password.request": { "uri": "forgot-password", "methods": ["GET", "HEAD"] }, "password.reset": { "uri": "reset-password/{token}", "methods": ["GET", "HEAD"] }, "password.email": { "uri": "forgot-password", "methods": ["POST"] }, "password.update": { "uri": "reset-password", "methods": ["POST"] }, "register": { "uri": "register", "methods": ["GET", "HEAD"] }, "register.store": { "uri": "register", "methods": ["POST"] }, "verification.notice": { "uri": "email/verify/prompt", "methods": ["GET", "HEAD"] }, "verification.verify": { "uri": "email/verify/{id}/{hash}", "methods": ["GET", "HEAD"] }, "verification.send": { "uri": "email/verify/store", "methods": ["POST"] }, "user-profile-information.update": { "uri": "user/profile/update", "methods": ["PUT"] }, "user-password.update": { "uri": "user/password", "methods": ["PUT"] }, "password.create": { "uri": "user/password/confirm", "methods": ["GET", "HEAD"] }, "password.confirmation": { "uri": "user/password/status", "methods": ["GET", "HEAD"] }, "password.confirm": { "uri": "user/password/confirm", "methods": ["POST"] }, "two-factor.login": { "uri": "two-factor-challenge", "methods": ["GET", "HEAD"] }, "two-factor.challenge": { "uri": "two-factor-challenge", "methods": ["POST"] }, "two-factor.enable": { "uri": "user/two-factor-authentication", "methods": ["POST"] }, "two-factor.confirm": { "uri": "user/confirmed-two-factor-authentication", "methods": ["POST"] }, "two-factor.disable": { "uri": "user/two-factor-authentication", "methods": ["DELETE"] }, "two-factor.qr-code": { "uri": "user/two-factor-qr-code", "methods": ["GET", "HEAD"] }, "two-factor.secret-key": { "uri": "user/two-factor-secret-key", "methods": ["GET", "HEAD"] }, "two-factor.recovery-codes": { "uri": "user/two-factor-recovery-codes", "methods": ["GET", "HEAD"] }, "two-factor.store": { "uri": "user/two-factor-recovery-codes", "methods": ["POST"] }, "terms.show": { "uri": "terms-of-service", "methods": ["GET", "HEAD"] }, "policy.show": { "uri": "privacy-policy", "methods": ["GET", "HEAD"] }, "profile.show": { "uri": "user/profile", "methods": ["GET", "HEAD"] }, "settings.show": { "uri": "user/settings", "methods": ["GET", "HEAD"] }, "other-browser-sessions.destroy": { "uri": "user/browsers/delete", "methods": ["DELETE"] }, "current-user-photo.destroy": { "uri": "user/profile-photo", "methods": ["DELETE"] }, "current-user.destroy": { "uri": "user", "methods": ["DELETE"] }, "api-tokens.index": { "uri": "user/api-tokens", "methods": ["GET", "HEAD"] }, "api-tokens.store": { "uri": "user/api-tokens", "methods": ["POST"] }, "api-tokens.update": { "uri": "user/api-tokens/{token}", "methods": ["PUT"] }, "api-tokens.destroy": { "uri": "user/api-tokens/{token}", "methods": ["DELETE"] }, "teams.create": { "uri": "teams/create", "methods": ["GET", "HEAD"] }, "teams.store": { "uri": "teams", "methods": ["POST"] }, "teams.show": { "uri": "teams/{team}", "methods": ["GET", "HEAD"] }, "teams.update": { "uri": "teams/{team}", "methods": ["PUT"] }, "teams.destroy": { "uri": "teams/{team}", "methods": ["DELETE"] }, "current-team.update": { "uri": "current-team", "methods": ["PUT"] }, "team-members.store": { "uri": "teams/{team}/members", "methods": ["POST"] }, "team-members.update": { "uri": "teams/{team}/members/{user}", "methods": ["PUT"] }, "team-members.destroy": { "uri": "teams/{team}/members/{user}", "methods": ["DELETE"] }, "team-invitations.accept": { "uri": "teams/invitations/{invitation}", "methods": ["GET", "HEAD"] }, "team-invitations.destroy": { "uri": "teams/invitations/{invitation}", "methods": ["DELETE"] }, "docs.home": { "uri": "docs", "methods": ["GET", "HEAD"] }, "docs.show": { "uri": "docs/{version}/{page?}", "methods": ["GET", "HEAD"], "wheres": { "page": "(.*)" } }, "ignition.healthCheck": { "uri": "_ignition/health-check", "methods": ["GET", "HEAD"] }, "ignition.executeSolution": { "uri": "_ignition/execute-solution", "methods": ["POST"] }, "ignition.updateConfig": { "uri": "_ignition/update-config", "methods": ["POST"] }, "home": { "uri": "/", "methods": ["GET", "HEAD"] }, "dashboard": { "uri": "dashboard", "methods": ["GET", "HEAD"] } } };
+const Ziggy$1 = { "url": "https://serenity.test", "port": null, "defaults": {}, "routes": { "sanctum.csrf-cookie": { "uri": "sanctum/csrf-cookie", "methods": ["GET", "HEAD"] }, "login": { "uri": "login", "methods": ["GET", "HEAD"] }, "login.store": { "uri": "login", "methods": ["POST"] }, "logout": { "uri": "logout", "methods": ["POST"] }, "password.request": { "uri": "forgot-password", "methods": ["GET", "HEAD"] }, "password.reset": { "uri": "reset-password/{token}", "methods": ["GET", "HEAD"] }, "password.email": { "uri": "forgot-password", "methods": ["POST"] }, "password.update": { "uri": "reset-password", "methods": ["POST"] }, "register": { "uri": "register", "methods": ["GET", "HEAD"] }, "register.store": { "uri": "register", "methods": ["POST"] }, "verification.notice": { "uri": "email/verify/prompt", "methods": ["GET", "HEAD"] }, "verification.verify": { "uri": "email/verify/{id}/{hash}", "methods": ["GET", "HEAD"] }, "verification.send": { "uri": "email/verify/store", "methods": ["POST"] }, "user-profile-information.update": { "uri": "user/profile/update", "methods": ["PUT"] }, "user-password.update": { "uri": "user/password", "methods": ["PUT"] }, "password.create": { "uri": "user/password/confirm", "methods": ["GET", "HEAD"] }, "password.confirmation": { "uri": "user/password/status", "methods": ["GET", "HEAD"] }, "password.confirm": { "uri": "user/password/confirm", "methods": ["POST"] }, "two-factor.login": { "uri": "two-factor-challenge", "methods": ["GET", "HEAD"] }, "two-factor.challenge": { "uri": "two-factor-challenge", "methods": ["POST"] }, "two-factor.enable": { "uri": "user/two-factor-authentication", "methods": ["POST"] }, "two-factor.confirm": { "uri": "user/confirmed-two-factor-authentication", "methods": ["POST"] }, "two-factor.disable": { "uri": "user/two-factor-authentication", "methods": ["DELETE"] }, "two-factor.qr-code": { "uri": "user/two-factor-qr-code", "methods": ["GET", "HEAD"] }, "two-factor.secret-key": { "uri": "user/two-factor-secret-key", "methods": ["GET", "HEAD"] }, "two-factor.recovery-codes": { "uri": "user/two-factor-recovery-codes", "methods": ["GET", "HEAD"] }, "two-factor.store": { "uri": "user/two-factor-recovery-codes", "methods": ["POST"] }, "terms.show": { "uri": "terms-of-service", "methods": ["GET", "HEAD"] }, "policy.show": { "uri": "privacy-policy", "methods": ["GET", "HEAD"] }, "profile.show": { "uri": "user/profile", "methods": ["GET", "HEAD"] }, "settings.show": { "uri": "user/settings", "methods": ["GET", "HEAD"] }, "other-browser-sessions.destroy": { "uri": "user/browsers/delete", "methods": ["DELETE"] }, "current-user-photo.destroy": { "uri": "user/profile-photo", "methods": ["DELETE"] }, "current-user.destroy": { "uri": "user", "methods": ["DELETE"] }, "api-tokens.index": { "uri": "user/api-tokens", "methods": ["GET", "HEAD"] }, "api-tokens.store": { "uri": "user/api-tokens", "methods": ["POST"] }, "api-tokens.update": { "uri": "user/api-tokens/{token}", "methods": ["PUT"] }, "api-tokens.destroy": { "uri": "user/api-tokens/{token}", "methods": ["DELETE"] }, "teams.create": { "uri": "teams/create", "methods": ["GET", "HEAD"] }, "teams.store": { "uri": "teams", "methods": ["POST"] }, "teams.show": { "uri": "teams/{team}", "methods": ["GET", "HEAD"] }, "teams.update": { "uri": "teams/{team}", "methods": ["PUT"] }, "teams.destroy": { "uri": "teams/{team}", "methods": ["DELETE"] }, "current-team.update": { "uri": "current-team", "methods": ["PUT"] }, "team-members.store": { "uri": "teams/{team}/members", "methods": ["POST"] }, "team-members.update": { "uri": "teams/{team}/members/{user}", "methods": ["PUT"] }, "team-members.destroy": { "uri": "teams/{team}/members/{user}", "methods": ["DELETE"] }, "team-invitations.accept": { "uri": "teams/invitations/{invitation}", "methods": ["GET", "HEAD"] }, "team-invitations.destroy": { "uri": "teams/invitations/{invitation}", "methods": ["DELETE"] }, "docs.home": { "uri": "docs", "methods": ["GET", "HEAD"] }, "docs.show": { "uri": "docs/{version}/{page?}", "methods": ["GET", "HEAD"], "wheres": { "page": "(.*)" } }, "ignition.healthCheck": { "uri": "_ignition/health-check", "methods": ["GET", "HEAD"] }, "ignition.executeSolution": { "uri": "_ignition/execute-solution", "methods": ["POST"] }, "ignition.updateConfig": { "uri": "_ignition/update-config", "methods": ["POST"] }, "home": { "uri": "/", "methods": ["GET", "HEAD"] }, "dashboard": { "uri": "dashboard", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.upload": { "uri": "admin/unassigned-media/upload", "methods": ["GET", "HEAD"] }, "admin.unassigned-media": { "uri": "admin/unassigned-media", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.authorize": { "uri": "admin/unassigned-media/authorize", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.authorize-for-user": { "uri": "admin/unassigned-media/authorize-for-user", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.authorize-resource": { "uri": "admin/unassigned-media/authorize-resource", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.dispatch-sync": { "uri": "admin/unassigned-media/dispatch-sync", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.validate-with": { "uri": "admin/unassigned-media/validate-with", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.validate": { "uri": "admin/unassigned-media/validate", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.validate-with-bag": { "uri": "admin/unassigned-media/validate-with-bag", "methods": ["GET", "HEAD"] }, "admin.dashboard": { "uri": "admin/dashboard", "methods": ["GET", "HEAD"] }, "admin.file-upload.upload": { "uri": "admin/file-upload/upload", "methods": ["GET", "HEAD"] }, "admin.file-upload.authorize": { "uri": "admin/file-upload/authorize", "methods": ["GET", "HEAD"] }, "admin.file-upload.authorize-for-user": { "uri": "admin/file-upload/authorize-for-user", "methods": ["GET", "HEAD"] }, "admin.file-upload.authorize-resource": { "uri": "admin/file-upload/authorize-resource", "methods": ["GET", "HEAD"] }, "admin.file-upload.dispatch-sync": { "uri": "admin/file-upload/dispatch-sync", "methods": ["GET", "HEAD"] }, "admin.file-upload.validate-with": { "uri": "admin/file-upload/validate-with", "methods": ["GET", "HEAD"] }, "admin.file-upload.validate": { "uri": "admin/file-upload/validate", "methods": ["GET", "HEAD"] }, "admin.file-upload.validate-with-bag": { "uri": "admin/file-upload/validate-with-bag", "methods": ["GET", "HEAD"] }, "admin.tags": { "uri": "admin/tags", "methods": ["GET", "HEAD"] }, "admin.settings.settings": { "uri": "admin/settings/settings", "methods": ["GET", "HEAD"] }, "admin.roles.role": { "uri": "admin/roles/role/{role}", "methods": ["GET", "HEAD"], "bindings": { "role": "id" } }, "admin.roles.role.edit": { "uri": "admin/roles/role/edit/{role}", "methods": ["GET", "HEAD"], "bindings": { "role": "id" } }, "admin.user.user-profile.edit": { "uri": "admin/user/user-profile/edit", "methods": ["GET", "HEAD"] }, "admin.user.user-profile": { "uri": "admin/user/user-profile", "methods": ["GET", "HEAD"] }, "admin.user.user": { "uri": "admin/user/user/{user}", "methods": ["GET", "HEAD"], "bindings": { "user": "id" } }, "admin.user.user.create": { "uri": "admin/user/user/create", "methods": ["GET", "HEAD"] }, "admin.user.user.edit": { "uri": "admin/user/user/edit", "methods": ["GET", "HEAD"] }, "admin.user.user.resend-email-verification-notification": { "uri": "admin/user/user/resend-email-verification-notification", "methods": ["GET", "HEAD"] }, "admin.user.user.bulk-destroy": { "uri": "admin/user/user/bulk-destroy", "methods": ["GET", "HEAD"] }, "admin.user.user.bulk-deactivate": { "uri": "admin/user/user/bulk-deactivate", "methods": ["GET", "HEAD"] }, "admin.user.user.bulk-activate": { "uri": "admin/user/user/bulk-activate", "methods": ["GET", "HEAD"] }, "admin.user.user.impersonal-login": { "uri": "admin/user/user/impersonal-login", "methods": ["GET", "HEAD"] }, "admin.user.user-password.edit": { "uri": "admin/user/user-password/edit", "methods": ["GET", "HEAD"] }, "admin.user.user-password": { "uri": "admin/user/user-password", "methods": ["GET", "HEAD"] }, "admin.user.user-invitation.invite-user": { "uri": "admin/user/user-invitation/invite-user", "methods": ["GET", "HEAD"] }, "admin.user.user-invitation.create-invite-acceptation-user": { "uri": "admin/user/user-invitation/create-invite-acceptation-user", "methods": ["GET", "HEAD"] }, "admin.user.user-invitation.store-invite-acceptation-user": { "uri": "admin/user/user-invitation/store-invite-acceptation-user", "methods": ["GET", "HEAD"] }, "admin.user.user-invitation.send-invitation": { "uri": "admin/user/user-invitation/send-invitation", "methods": ["GET", "HEAD"] }, "admin.permissions.permission": { "uri": "admin/permissions/permission", "methods": ["GET", "HEAD"] }, "admin.translations.translations": { "uri": "admin/translations/translations/{translation}", "methods": ["GET", "HEAD"], "bindings": { "translation": "id" } }, "admin.translations.translations.rescan": { "uri": "admin/translations/translations/rescan", "methods": ["GET", "HEAD"] }, "admin.translations.translations.publish": { "uri": "admin/translations/translations/publish", "methods": ["GET", "HEAD"] }, "admin.translations.translations.export": { "uri": "admin/translations/translations/export", "methods": ["GET", "HEAD"] }, "admin.translations.translations.import": { "uri": "admin/translations/translations/import", "methods": ["GET", "HEAD"] }, "admin.translations.translations.import-resolved-conflicts": { "uri": "admin/translations/translations/import-resolved-conflicts", "methods": ["GET", "HEAD"] }, "admin.media.media": { "uri": "admin/media/media", "methods": ["GET", "HEAD"] }, "admin.media.media.images": { "uri": "admin/media/media/images", "methods": ["GET", "HEAD"] }, "admin.media.media.files": { "uri": "admin/media/media/files", "methods": ["GET", "HEAD"] }, "admin.media.media.update-media": { "uri": "admin/media/media/update-media/{media}", "methods": ["GET", "HEAD"], "bindings": { "media": "id" } } } };
 if (typeof window !== "undefined" && typeof window.Ziggy !== "undefined") {
   Object.assign(Ziggy$1.routes, window.Ziggy.routes);
 }
@@ -722,7 +727,7 @@ function useClientOnly() {
     isClient
   };
 }
-const _sfc_main$1b = {
+const _sfc_main$1c = {
   __name: "ApiTokenManager",
   __ssrInlineRender: true,
   props: ["tokens", "availablePermissions", "defaultPermissions"],
@@ -771,19 +776,19 @@ const _sfc_main$1b = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1c;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_InputError = _sfc_main$1f;
-      const _component_Checkbox = _sfc_main$1g;
-      const _component_ActionMessage = _sfc_main$1h;
-      const _component_Button = _sfc_main$1i;
-      const _component_SectionBorder = _sfc_main$1j;
+      const _component_FormSection = _sfc_main$1d;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_InputError = _sfc_main$1g;
+      const _component_Checkbox = _sfc_main$1h;
+      const _component_ActionMessage = _sfc_main$1i;
+      const _component_Button = _sfc_main$1j;
+      const _component_SectionBorder = _sfc_main$1k;
       const _component_ActionSection = __unplugin_components_8$1;
-      const _component_DialogModal = _sfc_main$1m;
-      const _component_SecondaryButton = _sfc_main$1n;
-      const _component_ConfirmationModal = _sfc_main$1o;
-      const _component_DangerButton = _sfc_main$1q;
+      const _component_DialogModal = _sfc_main$1n;
+      const _component_SecondaryButton = _sfc_main$1o;
+      const _component_ConfirmationModal = _sfc_main$1p;
+      const _component_DangerButton = _sfc_main$1r;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
       _push(ssrRenderComponent(_component_FormSection, { onSubmitted: createApiToken }, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
@@ -1271,11 +1276,11 @@ const _sfc_main$1b = {
     };
   }
 };
-const _sfc_setup$1b = _sfc_main$1b.setup;
-_sfc_main$1b.setup = (props, ctx) => {
+const _sfc_setup$1c = _sfc_main$1c.setup;
+_sfc_main$1c.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Api/ApiTokenManager.vue");
-  return _sfc_setup$1b ? _sfc_setup$1b(props, ctx) : void 0;
+  return _sfc_setup$1c ? _sfc_setup$1c(props, ctx) : void 0;
 };
 const _hoisted_1$j = {
   viewBox: "0 0 24 24",
@@ -1317,7 +1322,7 @@ function render$i(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$i, _hoisted_3$i);
 }
 const __unplugin_components_0$3 = { name: "heroicons-outline-code", render: render$i };
-const _sfc_main$1a = {
+const _sfc_main$1b = {
   __name: "NotifyStatus",
   __ssrInlineRender: true,
   props: {
@@ -1354,11 +1359,11 @@ const _sfc_main$1a = {
     };
   }
 };
-const _sfc_setup$1a = _sfc_main$1a.setup;
-_sfc_main$1a.setup = (props, ctx) => {
+const _sfc_setup$1b = _sfc_main$1b.setup;
+_sfc_main$1b.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifyStatus.vue");
-  return _sfc_setup$1a ? _sfc_setup$1a(props, ctx) : void 0;
+  return _sfc_setup$1b ? _sfc_setup$1b(props, ctx) : void 0;
 };
 const _hoisted_1$h = {
   viewBox: "0 0 24 24",
@@ -1380,7 +1385,7 @@ function render$h(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$h, _hoisted_3$h);
 }
 const __unplugin_components_0$2 = { name: "heroicons-outline-information-circle", render: render$h };
-const _sfc_main$19 = {
+const _sfc_main$1a = {
   __name: "NotifyInfo",
   __ssrInlineRender: true,
   props: {
@@ -1421,11 +1426,11 @@ const _sfc_main$19 = {
     };
   }
 };
-const _sfc_setup$19 = _sfc_main$19.setup;
-_sfc_main$19.setup = (props, ctx) => {
+const _sfc_setup$1a = _sfc_main$1a.setup;
+_sfc_main$1a.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifyInfo.vue");
-  return _sfc_setup$19 ? _sfc_setup$19(props, ctx) : void 0;
+  return _sfc_setup$1a ? _sfc_setup$1a(props, ctx) : void 0;
 };
 const _hoisted_1$g = {
   viewBox: "0 0 24 24",
@@ -1447,7 +1452,7 @@ function render$g(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$g, _hoisted_3$g);
 }
 const __unplugin_components_0$1 = { name: "heroicons-outline-exclamation-circle", render: render$g };
-const _sfc_main$18 = {
+const _sfc_main$19 = {
   __name: "NotifyWarning",
   __ssrInlineRender: true,
   props: {
@@ -1488,13 +1493,13 @@ const _sfc_main$18 = {
     };
   }
 };
-const _sfc_setup$18 = _sfc_main$18.setup;
-_sfc_main$18.setup = (props, ctx) => {
+const _sfc_setup$19 = _sfc_main$19.setup;
+_sfc_main$19.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifyWarning.vue");
-  return _sfc_setup$18 ? _sfc_setup$18(props, ctx) : void 0;
+  return _sfc_setup$19 ? _sfc_setup$19(props, ctx) : void 0;
 };
-const _sfc_main$17 = {
+const _sfc_main$18 = {
   __name: "NotifyError",
   __ssrInlineRender: true,
   props: {
@@ -1535,11 +1540,11 @@ const _sfc_main$17 = {
     };
   }
 };
-const _sfc_setup$17 = _sfc_main$17.setup;
-_sfc_main$17.setup = (props, ctx) => {
+const _sfc_setup$18 = _sfc_main$18.setup;
+_sfc_main$18.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifyError.vue");
-  return _sfc_setup$17 ? _sfc_setup$17(props, ctx) : void 0;
+  return _sfc_setup$18 ? _sfc_setup$18(props, ctx) : void 0;
 };
 const _hoisted_1$f = {
   viewBox: "0 0 24 24",
@@ -1561,7 +1566,7 @@ function render$f(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$f, _hoisted_3$f);
 }
 const __unplugin_components_5$2 = { name: "heroicons-outline-check-circle", render: render$f };
-const _sfc_main$16 = {
+const _sfc_main$17 = {
   __name: "NotifySuccess",
   __ssrInlineRender: true,
   props: {
@@ -1602,13 +1607,13 @@ const _sfc_main$16 = {
     };
   }
 };
-const _sfc_setup$16 = _sfc_main$16.setup;
-_sfc_main$16.setup = (props, ctx) => {
+const _sfc_setup$17 = _sfc_main$17.setup;
+_sfc_main$17.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifySuccess.vue");
-  return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
+  return _sfc_setup$17 ? _sfc_setup$17(props, ctx) : void 0;
 };
-const _sfc_main$15 = {
+const _sfc_main$16 = {
   data() {
     return {
       minimum: 4e3,
@@ -1676,11 +1681,11 @@ const _sfc_main$15 = {
   }
 };
 function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  const _component_NotifySuccess = _sfc_main$16;
-  const _component_NotifyError = _sfc_main$17;
-  const _component_NotifyWarning = _sfc_main$18;
-  const _component_NotifyInfo = _sfc_main$19;
-  const _component_NotifyStatus = _sfc_main$1a;
+  const _component_NotifySuccess = _sfc_main$17;
+  const _component_NotifyError = _sfc_main$18;
+  const _component_NotifyWarning = _sfc_main$19;
+  const _component_NotifyInfo = _sfc_main$1a;
+  const _component_NotifyStatus = _sfc_main$1b;
   _push(`<div${ssrRenderAttrs(mergeProps({
     "aria-live": "assertive",
     class: "pointer-events-none fixed inset-0 z-50 flex items-end px-4 py-6 sm:items-start sm:p-6"
@@ -1715,14 +1720,14 @@ function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
   }
   _push(`</div></div>`);
 }
-const _sfc_setup$15 = _sfc_main$15.setup;
-_sfc_main$15.setup = (props, ctx) => {
+const _sfc_setup$16 = _sfc_main$16.setup;
+_sfc_main$16.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Notification.vue");
-  return _sfc_setup$15 ? _sfc_setup$15(props, ctx) : void 0;
+  return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
 };
-const __unplugin_components_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["ssrRender", _sfc_ssrRender$9]]);
-const _sfc_main$14 = {
+const __unplugin_components_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["ssrRender", _sfc_ssrRender$9]]);
+const _sfc_main$15 = {
   __name: "MainFooter",
   __ssrInlineRender: true,
   setup(__props) {
@@ -1732,11 +1737,11 @@ const _sfc_main$14 = {
     };
   }
 };
-const _sfc_setup$14 = _sfc_main$14.setup;
-_sfc_main$14.setup = (props, ctx) => {
+const _sfc_setup$15 = _sfc_main$15.setup;
+_sfc_main$15.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Main/MainFooter.vue");
-  return _sfc_setup$14 ? _sfc_setup$14(props, ctx) : void 0;
+  return _sfc_setup$15 ? _sfc_setup$15(props, ctx) : void 0;
 };
 const _hoisted_1$e = {
   viewBox: "0 0 24 24",
@@ -1758,7 +1763,7 @@ function render$e(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$e, _hoisted_3$e);
 }
 const __unplugin_components_2$3 = { name: "heroicons-outline-search", render: render$e };
-const _sfc_main$13 = {
+const _sfc_main$14 = {
   __name: "SearchModal",
   __ssrInlineRender: true,
   props: ["id", "searchId", "modalOpen"],
@@ -1959,13 +1964,13 @@ const _sfc_main$13 = {
     };
   }
 };
-const _sfc_setup$13 = _sfc_main$13.setup;
-_sfc_main$13.setup = (props, ctx) => {
+const _sfc_setup$14 = _sfc_main$14.setup;
+_sfc_main$14.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/SearchModal.vue");
-  return _sfc_setup$13 ? _sfc_setup$13(props, ctx) : void 0;
+  return _sfc_setup$14 ? _sfc_setup$14(props, ctx) : void 0;
 };
-const _sfc_main$12 = {
+const _sfc_main$13 = {
   __name: "Breadcrumbs",
   __ssrInlineRender: true,
   setup(__props) {
@@ -2003,26 +2008,26 @@ const _sfc_main$12 = {
     };
   }
 };
-const _sfc_setup$12 = _sfc_main$12.setup;
-_sfc_main$12.setup = (props, ctx) => {
+const _sfc_setup$13 = _sfc_main$13.setup;
+_sfc_main$13.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Breadcrumbs.vue");
-  return _sfc_setup$12 ? _sfc_setup$12(props, ctx) : void 0;
+  return _sfc_setup$13 ? _sfc_setup$13(props, ctx) : void 0;
 };
-const _sfc_main$11 = {};
+const _sfc_main$12 = {};
 function _sfc_ssrRender$8(_ctx, _push, _parent, _attrs) {
-  const _component_Breadcrumbs = _sfc_main$12;
+  const _component_Breadcrumbs = _sfc_main$13;
   _push(`<header${ssrRenderAttrs(mergeProps({ class: "transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 lg:block" }, _attrs))}><div class="mx-auto w-full px-4 py-6 lg:px-8">`);
   _push(ssrRenderComponent(_component_Breadcrumbs, null, null, _parent));
   _push(`</div></header>`);
 }
-const _sfc_setup$11 = _sfc_main$11.setup;
-_sfc_main$11.setup = (props, ctx) => {
+const _sfc_setup$12 = _sfc_main$12.setup;
+_sfc_main$12.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Main/MainHeaderbar.vue");
-  return _sfc_setup$11 ? _sfc_setup$11(props, ctx) : void 0;
+  return _sfc_setup$12 ? _sfc_setup$12(props, ctx) : void 0;
 };
-const __unplugin_components_9 = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["ssrRender", _sfc_ssrRender$8]]);
+const __unplugin_components_9 = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["ssrRender", _sfc_ssrRender$8]]);
 const _hoisted_1$d = {
   viewBox: "0 0 24 24",
   width: "1.2em",
@@ -2043,7 +2048,7 @@ function render$d(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$d, _hoisted_3$d);
 }
 const __unplugin_components_3$1 = { name: "heroicons-outline-badge-check", render: render$d };
-const _sfc_main$10 = {
+const _sfc_main$11 = {
   __name: "DropdownLink",
   __ssrInlineRender: true,
   props: ["href", "as"],
@@ -2082,11 +2087,11 @@ const _sfc_main$10 = {
     };
   }
 };
-const _sfc_setup$10 = _sfc_main$10.setup;
-_sfc_main$10.setup = (props, ctx) => {
+const _sfc_setup$11 = _sfc_main$11.setup;
+_sfc_main$11.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/DropdownLink.vue");
-  return _sfc_setup$10 ? _sfc_setup$10(props, ctx) : void 0;
+  return _sfc_setup$11 ? _sfc_setup$11(props, ctx) : void 0;
 };
 const _hoisted_1$c = {
   viewBox: "0 0 24 24",
@@ -2108,7 +2113,7 @@ function render$c(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$c, _hoisted_3$c);
 }
 const __unplugin_components_1$5 = { name: "heroicons-outline-selector", render: render$c };
-const _sfc_main$$ = {
+const _sfc_main$10 = {
   __name: "Dropdown",
   __ssrInlineRender: true,
   props: {
@@ -2192,13 +2197,13 @@ const _sfc_main$$ = {
     };
   }
 };
-const _sfc_setup$$ = _sfc_main$$.setup;
-_sfc_main$$.setup = (props, ctx) => {
+const _sfc_setup$10 = _sfc_main$10.setup;
+_sfc_main$10.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Dropdown.vue");
-  return _sfc_setup$$ ? _sfc_setup$$(props, ctx) : void 0;
+  return _sfc_setup$10 ? _sfc_setup$10(props, ctx) : void 0;
 };
-const _sfc_main$_ = {
+const _sfc_main$$ = {
   __name: "VersionMenu",
   __ssrInlineRender: true,
   props: ["sticky"],
@@ -2208,9 +2213,9 @@ const _sfc_main$_ = {
       router.get(useRoutes("docs.show", { version, page }));
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Dropdown = _sfc_main$$;
+      const _component_Dropdown = _sfc_main$10;
       const _component_IconOutlineSelector = __unplugin_components_1$5;
-      const _component_DropdownLink = _sfc_main$10;
+      const _component_DropdownLink = _sfc_main$11;
       const _component_IconOutlineBadgeCheck = __unplugin_components_3$1;
       if (_ctx.$page.props.versions) {
         _push(ssrRenderComponent(_component_Dropdown, mergeProps({
@@ -2313,13 +2318,13 @@ const _sfc_main$_ = {
     };
   }
 };
-const _sfc_setup$_ = _sfc_main$_.setup;
-_sfc_main$_.setup = (props, ctx) => {
+const _sfc_setup$$ = _sfc_main$$.setup;
+_sfc_main$$.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/VersionMenu.vue");
-  return _sfc_setup$_ ? _sfc_setup$_(props, ctx) : void 0;
+  return _sfc_setup$$ ? _sfc_setup$$(props, ctx) : void 0;
 };
-const _sfc_main$Z = {
+const _sfc_main$_ = {
   __name: "DocHeaderbar",
   __ssrInlineRender: true,
   setup(__props) {
@@ -2335,8 +2340,8 @@ const _sfc_main$Z = {
       }
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Breadcrumbs = _sfc_main$12;
-      const _component_VersionMenu = _sfc_main$_;
+      const _component_Breadcrumbs = _sfc_main$13;
+      const _component_VersionMenu = _sfc_main$$;
       _push(`<header${ssrRenderAttrs(mergeProps({ class: "transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 md:flex md:items-center md:justify-between" }, _attrs))}><div class="mx-auto w-full px-4 py-6 sm:px-6 lg:px-8">`);
       _push(ssrRenderComponent(_component_Breadcrumbs, null, null, _parent));
       _push(`</div><div class="flex items-center px-4 py-6 sm:px-6 lg:px-8"><div class="relative ml-3">`);
@@ -2345,13 +2350,13 @@ const _sfc_main$Z = {
     };
   }
 };
-const _sfc_setup$Z = _sfc_main$Z.setup;
-_sfc_main$Z.setup = (props, ctx) => {
+const _sfc_setup$_ = _sfc_main$_.setup;
+_sfc_main$_.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/DocHeaderbar.vue");
-  return _sfc_setup$Z ? _sfc_setup$Z(props, ctx) : void 0;
+  return _sfc_setup$_ ? _sfc_setup$_(props, ctx) : void 0;
 };
-const _sfc_main$Y = {
+const _sfc_main$Z = {
   __name: "ResponsiveNavLink",
   __ssrInlineRender: true,
   props: {
@@ -2392,13 +2397,13 @@ const _sfc_main$Y = {
     };
   }
 };
-const _sfc_setup$Y = _sfc_main$Y.setup;
-_sfc_main$Y.setup = (props, ctx) => {
+const _sfc_setup$Z = _sfc_main$Z.setup;
+_sfc_main$Z.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ResponsiveNavLink.vue");
-  return _sfc_setup$Y ? _sfc_setup$Y(props, ctx) : void 0;
+  return _sfc_setup$Z ? _sfc_setup$Z(props, ctx) : void 0;
 };
-const _sfc_main$X = {
+const _sfc_main$Y = {
   __name: "ResponsiveNavMenu",
   __ssrInlineRender: true,
   props: {
@@ -2409,7 +2414,7 @@ const _sfc_main$X = {
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_ResponsiveNavLink = _sfc_main$Y;
+      const _component_ResponsiveNavLink = _sfc_main$Z;
       const _component_IconOutlineBadgeCheck = __unplugin_components_3$1;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: [{ block: __props.show, hidden: !__props.show }, "lg:hidden"]
@@ -2573,11 +2578,11 @@ const _sfc_main$X = {
     };
   }
 };
-const _sfc_setup$X = _sfc_main$X.setup;
-_sfc_main$X.setup = (props, ctx) => {
+const _sfc_setup$Y = _sfc_main$Y.setup;
+_sfc_main$Y.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Main/ResponsiveNavMenu.vue");
-  return _sfc_setup$X ? _sfc_setup$X(props, ctx) : void 0;
+  return _sfc_setup$Y ? _sfc_setup$Y(props, ctx) : void 0;
 };
 const _hoisted_1$b = {
   viewBox: "0 0 24 24",
@@ -2619,7 +2624,7 @@ function render$a(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$a, _hoisted_3$a);
 }
 const __unplugin_components_4$2 = { name: "heroicons-outline-menu", render: render$a };
-const _sfc_main$W = {
+const _sfc_main$X = {
   __name: "ThemeSwitcher",
   __ssrInlineRender: true,
   setup(__props) {
@@ -2640,11 +2645,11 @@ const _sfc_main$W = {
     };
   }
 };
-const _sfc_setup$W = _sfc_main$W.setup;
-_sfc_main$W.setup = (props, ctx) => {
+const _sfc_setup$X = _sfc_main$X.setup;
+_sfc_main$X.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ThemeSwitcher.vue");
-  return _sfc_setup$W ? _sfc_setup$W(props, ctx) : void 0;
+  return _sfc_setup$X ? _sfc_setup$X(props, ctx) : void 0;
 };
 const _hoisted_1$9 = {
   viewBox: "0 0 24 24",
@@ -2666,7 +2671,7 @@ function render$9(_ctx, _cache) {
   return openBlock(), createElementBlock("svg", _hoisted_1$9, _hoisted_3$9);
 }
 const __unplugin_components_1$4 = { name: "heroicons-outline-chevron-down", render: render$9 };
-const _sfc_main$V = {
+const _sfc_main$W = {
   __name: "AccountManagerMenu",
   __ssrInlineRender: true,
   setup(__props) {
@@ -2674,9 +2679,9 @@ const _sfc_main$V = {
       router.post(useRoutes("logout"));
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Dropdown = _sfc_main$$;
+      const _component_Dropdown = _sfc_main$10;
       const _component_IconOutlineChevronDown = __unplugin_components_1$4;
-      const _component_DropdownLink = _sfc_main$10;
+      const _component_DropdownLink = _sfc_main$11;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "relative ml-3" }, _attrs))}>`);
       _push(ssrRenderComponent(_component_Dropdown, {
         align: "right",
@@ -2833,13 +2838,13 @@ const _sfc_main$V = {
     };
   }
 };
-const _sfc_setup$V = _sfc_main$V.setup;
-_sfc_main$V.setup = (props, ctx) => {
+const _sfc_setup$W = _sfc_main$W.setup;
+_sfc_main$W.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Account/AccountManagerMenu.vue");
-  return _sfc_setup$V ? _sfc_setup$V(props, ctx) : void 0;
+  return _sfc_setup$W ? _sfc_setup$W(props, ctx) : void 0;
 };
-const _sfc_main$U = {
+const _sfc_main$V = {
   __name: "TeamManagerMenu",
   __ssrInlineRender: true,
   props: {
@@ -2857,9 +2862,9 @@ const _sfc_main$U = {
       );
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Dropdown = _sfc_main$$;
+      const _component_Dropdown = _sfc_main$10;
       const _component_IconOutlineSelector = __unplugin_components_1$5;
-      const _component_DropdownLink = _sfc_main$10;
+      const _component_DropdownLink = _sfc_main$11;
       const _component_IconOutlineBadgeCheck = __unplugin_components_3$1;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "relative ml-3" }, _attrs))}>`);
       if (_ctx.$page.props.serenity.hasTeamFeatures) {
@@ -3018,13 +3023,13 @@ const _sfc_main$U = {
     };
   }
 };
-const _sfc_setup$U = _sfc_main$U.setup;
-_sfc_main$U.setup = (props, ctx) => {
+const _sfc_setup$V = _sfc_main$V.setup;
+_sfc_main$V.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Teams/TeamManagerMenu.vue");
-  return _sfc_setup$U ? _sfc_setup$U(props, ctx) : void 0;
+  return _sfc_setup$V ? _sfc_setup$V(props, ctx) : void 0;
 };
-const _sfc_main$T = {
+const _sfc_main$U = {
   __name: "NavLink",
   __ssrInlineRender: true,
   props: ["href", "active"],
@@ -3054,13 +3059,13 @@ const _sfc_main$T = {
     };
   }
 };
-const _sfc_setup$T = _sfc_main$T.setup;
-_sfc_main$T.setup = (props, ctx) => {
+const _sfc_setup$U = _sfc_main$U.setup;
+_sfc_main$U.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/NavLink.vue");
-  return _sfc_setup$T ? _sfc_setup$T(props, ctx) : void 0;
+  return _sfc_setup$U ? _sfc_setup$U(props, ctx) : void 0;
 };
-const _sfc_main$S = {};
+const _sfc_main$T = {};
 function _sfc_ssrRender$7(_ctx, _push, _parent, _attrs) {
   _push(`<svg${ssrRenderAttrs(mergeProps({ xmlns: "http://www.w3.org/2000/svg" }, _ctx.$attrs, {
     "xml:space": "preserve",
@@ -3071,14 +3076,14 @@ function _sfc_ssrRender$7(_ctx, _push, _parent, _attrs) {
     viewBox: "0 0 909 749"
   }, _attrs))}><path fill="url(#a)" fill-rule="nonzero" d="M328.6 641.9c-2.4-.8-4.6-1.9-7-2.8l-7-3-7.2-3.5-3.6-1.8-3.6-2a11375.7 11375.7 0 0 0-10.7-6.6 1196.4 1196.4 0 0 1-7.1-5l-3.5-2.6-6.9-5.8c-9-8-17.7-17-25.3-27.2a227.6 227.6 0 0 1-20.7-33.2 380 380 0 0 1-27.5-77c-3.5-13.4-6.6-27-9.7-40.6-1.6-6.8-3.1-13.6-4.8-20.3l-2-7.9c-.8-3.5-1.7-7-2.7-10.4l-3.1-10.6-3.6-11-9.4-29 24.6 8c8.3 2.7 16.4 5.5 24.2 7.8 4 1 7.8 2.2 11.7 3.1l8.7 2.2 11.3 2.8c15.1 3.6 30.3 7 45.2 11 15 3.8 29.6 8 43.6 13 7 2.5 14 5.2 20.6 8.1l5.6 2.5 8.3 3.9a383 383 0 0 1 8 3.9l4 2 2 1c.6.3 1.4.5 1.8 1-1.7 7.3-3.6 14.7-5 21.5l-1.4 7.2a203.4 203.4 0 0 0-.8 68 246.7 246.7 0 0 0 20.2 65c8 17.5 15.7 30.9 21 39.9l3.7 6 2.7 4.2 2.2 3.5-2.8-3-3.5-3.7-4.7-5.2a288.7 288.7 0 0 1-44.4-65.4c-5.2-11-10.2-23.2-14.2-36.9a196 196 0 0 1-7.2-76.2l.3-3.2v-4.5c-.2-.2-.7-.2-1-.3l-1.2-.3-1-.2h-.3l-.3-.2-1.1-.4-2.3-.8c-6.2-2.1-12.6-4.1-19.2-6a613 613 0 0 0-41.6-9.8c-14.6-3-29.7-5.8-45.4-9l-11.8-2.6-3-.7c.1 0 0 0 0 0v.4l.6 2.5a916 916 0 0 1 4.6 21c2.8 14 5.5 27.4 8.3 40.4 5.6 26 12.2 50 21.2 71.7a186.7 186.7 0 0 0 34.8 55.2c14 14.8 30 26.1 46.2 34.4a263 263 0 0 0 45.9 18.4 352.4 352.4 0 0 0 50.7 11.6c4 .6 7.5 1 10.2 1.5l8.5 1-8.6.6-10.3.4h-14.2c-10.7-.2-23.8-1-39-3.2s-32.4-5.9-51-12.7Zm58.8-196.3a185.5 185.5 0 0 1 6-34.5 385.7 385.7 0 0 1 25.3-68 447.4 447.4 0 0 1 18.1-33.8c1.6-2.8 3.4-5.6 5.2-8.3l5.2-8.3a1469.9 1469.9 0 0 0 16.1-25.4l4-6.5 5.7-10c3.7-6.6 7.3-13.8 10.9-20.8l10.6-20.6 11.6 23.1c3.9 7.8 7.6 15.2 11.5 22.2l3 5.2 2.8 4.8 3 5 5.9 10c8 13.4 16 26.5 23.6 39.5a504 504 0 0 1 20.4 38.8 316 316 0 0 1 8.2 19.2l2 4.9a7830.3 7830.3 0 0 1 5.3 14.9l1.2 3.6.6 1.8.4.9c0 .3.2.6.1.8l-12.2 7.3c-2 1.3-3.9 2.4-5.7 3.7l-3.6 2.2a222.4 222.4 0 0 0-34 27.4 215.8 215.8 0 0 0-28.8 36.4 270.8 270.8 0 0 0-18.2 33.4l-1.2 2.5.7-2.7c.4-1.7 1-4.3 2-7.7 2-6.7 5-16.7 10.3-29a203 203 0 0 1 44.8-65.2c3.9-3.8 8-7.6 12.5-11.2l3.2-2.6 1.1-1.1 2.2-2c.1 0 0 0 0-.2v-.2l-.3-.4-.5-.8a33 33 0 0 0-1.7-2.9l-2-4c-3-5.6-6-11.3-9.4-17a622.5 622.5 0 0 0-22.3-35.3c-8.1-12.1-16.9-24.6-25.7-37.8l-6.6-10-3.3-5.2-.2-.3-.2-.1c-.2-.2-.4-.1-.4 0v.4l-.1.2-.4.7-1.5 2.5a612.8 612.8 0 0 1-16.9 26.4 7969 7969 0 0 0-5 7.7l-5 7.7a538.5 538.5 0 0 0-17.7 31 437.5 437.5 0 0 0-27 61.4 196.4 196.4 0 0 0-7.4 29.3 167.1 167.1 0 0 0-2 21.4l-.1 7 .3 6.7.2 3.4c0 1.1.1 2.3.3 3.4l1 6.6c0 1 .2 2.2.4 3.2l.6 3.2 1.3 6.4c.4 2.1 1 4.1 1.5 6.2l1.6 6 2 5.9c5 15.4 11.2 29 17.3 40.7a359 359 0 0 0 24.3 39.7l5.3 7.5 4.5 6.1-5.6-5.1-6.7-6.4a302.9 302.9 0 0 1-31-36 241 241 0 0 1-24-40.2l-3-6-2.5-6.4-2.5-6.5-2.2-6.9-1.1-3.5-1-3.6-1.8-7.3a3707.3 3707.3 0 0 1-1.4-7.6c-.4-2.7-1-5.2-1.2-7.9l-.7-8a177.4 177.4 0 0 1 0-25Zm310.3-69c13.3-3.4 26.8-6.4 40.2-9.5 6.7-1.5 13.4-3 20-4.7l8.5-2.1 10.3-2.8c3.5-1 7-2 10.5-3.2l10.9-3.5 27.4-9-7.8 24.1c-2.7 8-5.4 16-7.6 23.7l-3.2 11.4-2.2 9-2.7 11c-3.6 14.8-7 29.6-10.7 44.2a527.3 527.3 0 0 1-12.6 42.7A344 344 0 0 1 771 528l-2.5 5.8-3.7 8.1a436 436 0 0 1-3.8 8c-1.2 2.6-2.4 5.3-3.7 7.7-7.4-1.8-14.8-3.7-21.7-5.1a10364.7 10364.7 0 0 1-12.8-2.5 196 196 0 0 0-62.4-.4 246 246 0 0 0-65.3 19.5c-17.6 7.9-31 15.4-40.1 20.8l-6 3.5-4.3 2.7-3.5 2.2 3-2.8 3.7-3.5 5.3-4.6a293 293 0 0 1 65.9-43.7 251 251 0 0 1 37-14 202.2 202.2 0 0 1 79.4-6.1h1l.5.1h2.7c.2-.2.3-.8.4-1l.2-1.2.2-1v-.3l.4-1 .8-2.3c2-6.2 4-12.4 5.7-19 3.5-12.9 6.6-26.5 9.5-40.7 3-14.3 5.7-29 8.9-44.4l2.5-11.6.6-2.4-.1-.1h-.7l-1.3.4-20.9 4.6c-13.7 2.8-27 5.4-39.8 8.2a421.4 421.4 0 0 0-71.2 20.6 193.8 193.8 0 0 0-55.4 33.6 173.4 173.4 0 0 0-34.9 45 262.6 262.6 0 0 0-19 45 346.2 346.2 0 0 0-12 50l-1.6 10.1-1.2 8.4-.5-8.5-.2-10.2v-6.6c0-2.3 0-4.8.2-7.4a300 300 0 0 1 3.7-38.5c2.4-15 6.3-32 13.4-50.3a182.6 182.6 0 0 1 33.8-55.4 204 204 0 0 1 60.4-44.3c23.5-11.8 49.5-20 76.1-26.9Zm-348 305a231.9 231.9 0 0 1-83.5-35.2 200.1 200.1 0 0 1-40.8-37.3l-2.7-3.2a2136.5 2136.5 0 0 0-5.1-6.3l-.2-.2-.3.2-.6.3-1.2.6a65.1 65.1 0 0 0-6.7 3.5c-5.7 2.9-11.4 6-17 9.3a570 570 0 0 0-35.2 22.4c-12 8.2-24.4 17-37.6 26a9462 9462 0 0 1-5 3.5l-2.5 1.7-1.2.8-.3.3a1275 1275 0 0 0-6.2 4.9c2.9 1 5.2 2 7.1 2.8l.7.3 3.6 2.1 7.6 4.5 15.2 9.2a726.5 726.5 0 0 0 61.6 34.9c10.6 5 21.5 9.6 32.5 13.3l8.3 2.6 8.4 2.3 8.4 1.8 4.2.7 4.3.7a150.6 150.6 0 0 0 68.2-6 247 247 0 0 0 54.6-26.3c17.5-11 34.4-23.3 51.3-35.8l12.7-9.4 12.9-9.3c4.2-3.1 8.6-6.1 12.9-9.1l13-8.8c17.3-11.5 35-22.1 52.8-31.5 17.9-9.3 36-17.4 54.2-23.8a309.3 309.3 0 0 1 54.5-14 267.7 267.7 0 0 1 100.5 3.1c30 6.8 55.3 18.5 75.8 30.5 10.3 6 19.5 12 27.8 17.8l4.4 3.1a385.2 385.2 0 1 0-741.4-4.2c7.3-4.3 14.6-8.6 21.8-12.6 13-7.4 26-14.3 38.7-20.2a343 343 0 0 1 19.1-8.2c4.7-2 9.1-3.5 13.5-5.1a335 335 0 0 1 6.5-2.3l3.2-1 1.6-.6.8-.3h.7l7.8 13 3.8 6 3.1 4.6a211.6 211.6 0 0 0 34 38.4c15.6 13.7 31.3 23 44.5 30a298 298 0 0 0 31.3 13.8l8.4 3 3 1-3-.5-8.9-1.8Z" transform="translate(-36.4 -136.4)"></path><path fill="#00b4e2" fill-rule="nonzero" d="M887.9 631.4a867.4 867.4 0 0 0-40.5-32.8 520.3 520.3 0 0 0-28.5-16.4c-7-3.6-14.3-7.3-22-10.6-3.9-1.8-8-3.3-12-5l-6.2-2.3a245.6 245.6 0 0 0-62.5-14c-20-1.8-41.3-1.4-62.9 1.8l-8.1 1.4c-2.7.4-5.4 1-8.2 1.6-2.7.5-5.4 1.3-8.1 1.9-2.8.7-5.5 1.2-8.2 2l-8.3 2.4c-2.7.7-5.4 1.7-8.2 2.6-5.5 1.6-11 3.7-16.4 5.7-11 4.3-21.7 8.7-32 13.7-5.3 2.4-10.3 5-15.4 7.5-5 2.7-10 5.2-15 8a920.3 920.3 0 0 0-55.6 33.5c-17.5 11.2-34 22.5-50.1 32.4-16 10-31.6 18.6-46.3 25.4a252.7 252.7 0 0 1-41 15c-6.3 1.4-12 2.9-17.5 3.6l-4 .6-2 .3-1.8.2-7.1.6-3.3.3H288c-3.4.2-6.3-.1-8.7-.3l-7-.5 7-.5c2.4-.2 5.2-.3 8.6-.9l5.4-.7 3-.5 3.2-.6 6.8-1.5 1.8-.4 1.8-.5 3.8-1.1c5.1-1.3 10.5-3.4 16.4-5.4a269.9 269.9 0 0 0 37.7-18.5 506.6 506.6 0 0 0 42.7-28.3c15-10.8 30.6-23.1 47.8-35.6 17.1-12.4 35.6-25 55.7-36.7 5-3 10.2-5.8 15.4-8.7 5.2-2.8 10.5-5.7 16-8.3a393.1 393.1 0 0 1 33.8-14.7 315 315 0 0 1 71-18 272 272 0 0 1 70.2 0c10.8 1.6 21 1.6 30.6 3.7 8.2 1.9 19.4 3.3 37 8.6 20.7 6.3 41 16.6 45.9 19a330.8 330.8 0 0 1 32.4 19.4l11 7.2-9.8-8.8c-6.5-5.7-16-14.2-28.7-24.8-5.3-4.4-11.1-9-17.5-14l-12.9-7.7c-8.5-5-18-10.2-28.2-15.2a290 290 0 0 0-33.6-14A248.8 248.8 0 0 0 617 494a286 286 0 0 0-48.6 14.1 409 409 0 0 0-49.2 23c-16.4 8.8-32.8 19-49.3 30l-12.3 8.3-12.5 8.7-12.5 9-12.7 9.2a711.2 711.2 0 0 1-55 37 277.7 277.7 0 0 1-65.7 29 196 196 0 0 1-44.5 7.3c-15.2.4-30-1-44.3-3.8l-5.3-1.1c-1.8-.4-3.6-.7-5.3-1.3l-10.4-2.8-10-3.4c-3.4-1.2-6.6-2.6-9.8-3.8a312 312 0 0 1-36.4-18 662.2 662.2 0 0 1-62.3-42L56.8 583l-7-5-3.6-2.7-6.5-4.5a299 299 0 0 0-13.2-8.6l-13.7-8.1L0 546.6c8.9 5.2 69.1 56.5 73.9 60 19 14 38.8 30.3 59 47.2 12.2 10.1 123.2 114 228.1 91.7C443.3 728 472 672 584.6 617.8c26-12.5 45.4-22.7 77.3-27.2l35.6-4.8c24.3-3.1 45.3-1 52.3-1 21.3.2 64.5 11.8 73 14.8a202.4 202.4 0 0 1 35.7 17.2c10.8 6.4 19.7 12.7 27.1 17.6l23 15.3s-7.3-6.6-20.7-18.3Z"></path><defs><linearGradient id="a" x1="0" x2="1" y1="0" y2="0" gradientTransform="matrix(227 368 -292 181 262.4 229)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c53030"></stop><stop offset=".4" stop-color="#d14b32"></stop><stop offset="1" stop-color="#ed8936"></stop></linearGradient></defs></svg>`);
 }
-const _sfc_setup$S = _sfc_main$S.setup;
-_sfc_main$S.setup = (props, ctx) => {
+const _sfc_setup$T = _sfc_main$T.setup;
+_sfc_main$T.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ApplicationMark.vue");
-  return _sfc_setup$S ? _sfc_setup$S(props, ctx) : void 0;
+  return _sfc_setup$T ? _sfc_setup$T(props, ctx) : void 0;
 };
-const __unplugin_components_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["ssrRender", _sfc_ssrRender$7]]);
-const _sfc_main$R = {
+const __unplugin_components_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["ssrRender", _sfc_ssrRender$7]]);
+const _sfc_main$S = {
   __name: "MainNavigation",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3098,16 +3103,16 @@ const _sfc_main$R = {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Link = resolveComponent("Link");
       const _component_ApplicationMark = __unplugin_components_4$1;
-      const _component_NavLink = _sfc_main$T;
-      const _component_TeamManagerMenu = _sfc_main$U;
-      const _component_AccountManagerMenu = _sfc_main$V;
-      const _component_ThemeSwitcher = _sfc_main$W;
+      const _component_NavLink = _sfc_main$U;
+      const _component_TeamManagerMenu = _sfc_main$V;
+      const _component_AccountManagerMenu = _sfc_main$W;
+      const _component_ThemeSwitcher = _sfc_main$X;
       const _component_IconOutlineMenu = __unplugin_components_4$2;
       const _component_IconOutlineX = __unplugin_components_5$1;
-      const _component_ResponsiveNavMenu = _sfc_main$X;
-      const _component_DocHeaderbar = _sfc_main$Z;
+      const _component_ResponsiveNavMenu = _sfc_main$Y;
+      const _component_DocHeaderbar = _sfc_main$_;
       const _component_MainHeaderbar = __unplugin_components_9;
-      const _component_SearchModal = _sfc_main$13;
+      const _component_SearchModal = _sfc_main$14;
       _push(`<!--[--><nav class="${ssrRenderClass([{ stickyHeader: unref(stickyHeader) }, "sticky top-0 z-50 bg-white dark:bg-gray-800"])}"><div class="px-6"><div class="flex h-16 justify-between"><div class="flex w-full items-center"><div class="flex shrink-0 items-center">`);
       _push(ssrRenderComponent(_component_Link, {
         href: _ctx.route("dashboard"),
@@ -3194,13 +3199,13 @@ const _sfc_main$R = {
     };
   }
 };
-const _sfc_setup$R = _sfc_main$R.setup;
-_sfc_main$R.setup = (props, ctx) => {
+const _sfc_setup$S = _sfc_main$S.setup;
+_sfc_main$S.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Main/MainNavigation.vue");
-  return _sfc_setup$R ? _sfc_setup$R(props, ctx) : void 0;
+  return _sfc_setup$S ? _sfc_setup$S(props, ctx) : void 0;
 };
-const _sfc_main$Q = {
+const _sfc_main$R = {
   __name: "Banner",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3243,13 +3248,13 @@ const _sfc_main$Q = {
     };
   }
 };
-const _sfc_setup$Q = _sfc_main$Q.setup;
-_sfc_main$Q.setup = (props, ctx) => {
+const _sfc_setup$R = _sfc_main$R.setup;
+_sfc_main$R.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Banner.vue");
-  return _sfc_setup$Q ? _sfc_setup$Q(props, ctx) : void 0;
+  return _sfc_setup$R ? _sfc_setup$R(props, ctx) : void 0;
 };
-const _sfc_main$P = {
+const _sfc_main$Q = {
   __name: "MainLayout",
   __ssrInlineRender: true,
   props: { title: String },
@@ -3258,9 +3263,9 @@ const _sfc_main$P = {
     const title2 = props.title || useTrans(__("Dashboard"));
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Head = resolveComponent("Head");
-      const _component_Banner = _sfc_main$Q;
-      const _component_MainNavigation = _sfc_main$R;
-      const _component_MainFooter = _sfc_main$14;
+      const _component_Banner = _sfc_main$R;
+      const _component_MainNavigation = _sfc_main$S;
+      const _component_MainFooter = _sfc_main$15;
       const _component_Notification = __unplugin_components_3$2;
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_component_Head, { title: unref(title2) }, null, _parent));
@@ -3277,13 +3282,13 @@ const _sfc_main$P = {
     };
   }
 };
-const _sfc_setup$P = _sfc_main$P.setup;
-_sfc_main$P.setup = (props, ctx) => {
+const _sfc_setup$Q = _sfc_main$Q.setup;
+_sfc_main$Q.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Layouts/MainLayout.vue");
-  return _sfc_setup$P ? _sfc_setup$P(props, ctx) : void 0;
+  return _sfc_setup$Q ? _sfc_setup$Q(props, ctx) : void 0;
 };
-const _sfc_main$O = {
+const _sfc_main$P = {
   __name: "Index",
   __ssrInlineRender: true,
   props: [
@@ -3294,8 +3299,8 @@ const _sfc_main$O = {
   setup(__props) {
     const props = __props;
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_MainLayout = _sfc_main$P;
-      const _component_ApiTokenManager = _sfc_main$1b;
+      const _component_MainLayout = _sfc_main$Q;
+      const _component_ApiTokenManager = _sfc_main$1c;
       _push(ssrRenderComponent(_component_MainLayout, mergeProps({
         title: _ctx.__("API Tokens")
       }, _attrs), {
@@ -3336,17 +3341,17 @@ const _sfc_main$O = {
     };
   }
 };
-const _sfc_setup$O = _sfc_main$O.setup;
-_sfc_main$O.setup = (props, ctx) => {
+const _sfc_setup$P = _sfc_main$P.setup;
+_sfc_main$P.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/API/Index.vue");
-  return _sfc_setup$O ? _sfc_setup$O(props, ctx) : void 0;
+  return _sfc_setup$P ? _sfc_setup$P(props, ctx) : void 0;
 };
 const __vite_glob_0_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$O
+  default: _sfc_main$P
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$N = {
+const _sfc_main$O = {
   __name: "ValidationErrors",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3369,13 +3374,13 @@ const _sfc_main$N = {
     };
   }
 };
-const _sfc_setup$N = _sfc_main$N.setup;
-_sfc_main$N.setup = (props, ctx) => {
+const _sfc_setup$O = _sfc_main$O.setup;
+_sfc_main$O.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ValidationErrors.vue");
-  return _sfc_setup$N ? _sfc_setup$N(props, ctx) : void 0;
+  return _sfc_setup$O ? _sfc_setup$O(props, ctx) : void 0;
 };
-const _sfc_main$M = {
+const _sfc_main$N = {
   __name: "AuthenticationCard",
   __ssrInlineRender: true,
   props: {
@@ -3406,13 +3411,13 @@ const _sfc_main$M = {
     };
   }
 };
-const _sfc_setup$M = _sfc_main$M.setup;
-_sfc_main$M.setup = (props, ctx) => {
+const _sfc_setup$N = _sfc_main$N.setup;
+_sfc_main$N.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/AuthenticationCard.vue");
-  return _sfc_setup$M ? _sfc_setup$M(props, ctx) : void 0;
+  return _sfc_setup$N ? _sfc_setup$N(props, ctx) : void 0;
 };
-const _sfc_main$L = {};
+const _sfc_main$M = {};
 function _sfc_ssrRender$6(_ctx, _push, _parent, _attrs) {
   const _component_Link = resolveComponent("Link");
   _push(`<footer${ssrRenderAttrs(mergeProps({ class: "flex flex-col items-center justify-center bg-transparent px-6 py-12 text-sm sm:flex-row sm:justify-between sm:space-y-0" }, _attrs))}><div class="space-x-4 text-gray-400 dark:text-gray-300">`);
@@ -3448,14 +3453,14 @@ function _sfc_ssrRender$6(_ctx, _push, _parent, _attrs) {
   }, _parent));
   _push(`</div><div class="space-x-4 text-gray-400 dark:text-gray-300"><span>${_ctx.$page.props.copyright}</span><span> Serenity v${ssrInterpolate(_ctx.$page.props.serenityVersion)} (PHP v${ssrInterpolate(_ctx.$page.props.phpVersion)}) </span></div></footer>`);
 }
-const _sfc_setup$L = _sfc_main$L.setup;
-_sfc_main$L.setup = (props, ctx) => {
+const _sfc_setup$M = _sfc_main$M.setup;
+_sfc_main$M.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Guest/GuestFooter.vue");
-  return _sfc_setup$L ? _sfc_setup$L(props, ctx) : void 0;
+  return _sfc_setup$M ? _sfc_setup$M(props, ctx) : void 0;
 };
-const __unplugin_components_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["ssrRender", _sfc_ssrRender$6]]);
-const _sfc_main$K = {
+const __unplugin_components_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["ssrRender", _sfc_ssrRender$6]]);
+const _sfc_main$L = {
   __name: "GuestResponsiveNavMenu",
   __ssrInlineRender: true,
   props: {
@@ -3466,7 +3471,7 @@ const _sfc_main$K = {
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_ResponsiveNavLink = _sfc_main$Y;
+      const _component_ResponsiveNavLink = _sfc_main$Z;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: [{ block: __props.show, hidden: !__props.show }, "sm:hidden"]
       }, _attrs))}><div class="space-y-1 pb-3 pl-6 pr-4 pt-2">`);
@@ -3555,13 +3560,13 @@ const _sfc_main$K = {
     };
   }
 };
-const _sfc_setup$K = _sfc_main$K.setup;
-_sfc_main$K.setup = (props, ctx) => {
+const _sfc_setup$L = _sfc_main$L.setup;
+_sfc_main$L.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Guest/GuestResponsiveNavMenu.vue");
-  return _sfc_setup$K ? _sfc_setup$K(props, ctx) : void 0;
+  return _sfc_setup$L ? _sfc_setup$L(props, ctx) : void 0;
 };
-const _sfc_main$J = {
+const _sfc_main$K = {
   __name: "GuestHeader",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3581,13 +3586,13 @@ const _sfc_main$J = {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Link = resolveComponent("Link");
       const _component_ApplicationMark = __unplugin_components_4$1;
-      const _component_NavLink = _sfc_main$T;
-      const _component_TeamManagerMenu = _sfc_main$U;
-      const _component_AccountManagerMenu = _sfc_main$V;
-      const _component_ThemeSwitcher = _sfc_main$W;
+      const _component_NavLink = _sfc_main$U;
+      const _component_TeamManagerMenu = _sfc_main$V;
+      const _component_AccountManagerMenu = _sfc_main$W;
+      const _component_ThemeSwitcher = _sfc_main$X;
       const _component_IconOutlineMenu = __unplugin_components_4$2;
       const _component_IconOutlineX = __unplugin_components_5$1;
-      const _component_GuestResponsiveNavMenu = _sfc_main$K;
+      const _component_GuestResponsiveNavMenu = _sfc_main$L;
       _push(`<nav${ssrRenderAttrs(mergeProps({
         class: ["sticky top-0 z-50 min-w-full border-b border-gray-100 bg-white bg-opacity-5 backdrop-blur-lg backdrop-filter dark:border-gray-900 dark:bg-gray-800 dark:bg-opacity-5 dark:backdrop-blur-lg dark:backdrop-filter", { stickyGuestHeader: unref(stickyHeader) }]
       }, _attrs))}><div class="px-6"><div class="flex h-16 justify-between"><div class="flex"><div class="flex shrink-0 items-center">`);
@@ -3709,20 +3714,20 @@ const _sfc_main$J = {
     };
   }
 };
-const _sfc_setup$J = _sfc_main$J.setup;
-_sfc_main$J.setup = (props, ctx) => {
+const _sfc_setup$K = _sfc_main$K.setup;
+_sfc_main$K.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Guest/GuestHeader.vue");
-  return _sfc_setup$J ? _sfc_setup$J(props, ctx) : void 0;
+  return _sfc_setup$K ? _sfc_setup$K(props, ctx) : void 0;
 };
-const _sfc_main$I = {
+const _sfc_main$J = {
   __name: "GuestLayout",
   __ssrInlineRender: true,
   props: { title: String },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Head = resolveComponent("Head");
-      const _component_GuestHeader = _sfc_main$J;
+      const _component_GuestHeader = _sfc_main$K;
       const _component_GuestFooter = __unplugin_components_1$3;
       const _component_Notification = __unplugin_components_3$2;
       _push(`<!--[-->`);
@@ -3738,13 +3743,13 @@ const _sfc_main$I = {
     };
   }
 };
-const _sfc_setup$I = _sfc_main$I.setup;
-_sfc_main$I.setup = (props, ctx) => {
+const _sfc_setup$J = _sfc_main$J.setup;
+_sfc_main$J.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Layouts/GuestLayout.vue");
-  return _sfc_setup$I ? _sfc_setup$I(props, ctx) : void 0;
+  return _sfc_setup$J ? _sfc_setup$J(props, ctx) : void 0;
 };
-const _sfc_main$H = {
+const _sfc_main$I = {
   __name: "ConfirmPassword",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3758,12 +3763,12 @@ const _sfc_main$H = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$I;
-      const _component_AuthenticationCard = _sfc_main$M;
-      const _component_ValidationErrors = _sfc_main$N;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_Button = _sfc_main$1i;
+      const _component_GuestLayout = _sfc_main$J;
+      const _component_AuthenticationCard = _sfc_main$N;
+      const _component_ValidationErrors = _sfc_main$O;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Secure Area")
       }, _attrs), {
@@ -3894,17 +3899,17 @@ const _sfc_main$H = {
     };
   }
 };
-const _sfc_setup$H = _sfc_main$H.setup;
-_sfc_main$H.setup = (props, ctx) => {
+const _sfc_setup$I = _sfc_main$I.setup;
+_sfc_main$I.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/ConfirmPassword.vue");
-  return _sfc_setup$H ? _sfc_setup$H(props, ctx) : void 0;
+  return _sfc_setup$I ? _sfc_setup$I(props, ctx) : void 0;
 };
 const __vite_glob_0_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$H
+  default: _sfc_main$I
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$G = {
+const _sfc_main$H = {
   __name: "ForgotPassword",
   __ssrInlineRender: true,
   props: {
@@ -3922,12 +3927,12 @@ const _sfc_main$G = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$I;
-      const _component_AuthenticationCard = _sfc_main$M;
-      const _component_ValidationErrors = _sfc_main$N;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_Button = _sfc_main$1i;
+      const _component_GuestLayout = _sfc_main$J;
+      const _component_AuthenticationCard = _sfc_main$N;
+      const _component_ValidationErrors = _sfc_main$O;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Forgot Password")
       }, _attrs), {
@@ -4074,13 +4079,131 @@ const _sfc_main$G = {
     };
   }
 };
+const _sfc_setup$H = _sfc_main$H.setup;
+_sfc_main$H.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/ForgotPassword.vue");
+  return _sfc_setup$H ? _sfc_setup$H(props, ctx) : void 0;
+};
+const __vite_glob_0_2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: _sfc_main$H
+}, Symbol.toStringTag, { value: "Module" }));
+const _sfc_main$G = /* @__PURE__ */ defineComponent({
+  __name: "InviteUser",
+  __ssrInlineRender: true,
+  props: {
+    locales: { default: () => ["en"] },
+    defaultLocale: { default: "en" },
+    email: {}
+  },
+  setup(__props) {
+    const props = __props;
+    const form = useForm({
+      email: props.email,
+      first_name: "",
+      last_name: "",
+      password: "",
+      password_confirmation: "",
+      locale: ""
+    });
+    useToast();
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_Head = resolveComponent("Head");
+      const _component_TextInput = resolveComponent("TextInput");
+      const _component_Multiselect = resolveComponent("Multiselect");
+      const _component_Button = _sfc_main$1j;
+      const _directive_auto_animate = resolveDirective("auto-animate");
+      _push(`<div${ssrRenderAttrs(_attrs)}>`);
+      _push(ssrRenderComponent(_component_Head, {
+        title: _ctx.$t("builder", "Register")
+      }, null, _parent));
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "space-y-3 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10" }, ssrGetDirectiveProps(_ctx, _directive_auto_animate)))}><form class="space-y-6">`);
+      _push(ssrRenderComponent(_component_TextInput, {
+        modelValue: unref(form).first_name,
+        "onUpdate:modelValue": ($event) => unref(form).first_name = $event,
+        name: "first_name",
+        label: _ctx.$t("builder", "First name"),
+        class: "col-span-6 sm:col-span-3",
+        required: true
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_TextInput, {
+        modelValue: unref(form).last_name,
+        "onUpdate:modelValue": ($event) => unref(form).last_name = $event,
+        name: "last_name",
+        label: _ctx.$t("builder", "Last name"),
+        class: "col-span-6 sm:col-span-3",
+        required: true
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_TextInput, {
+        modelValue: unref(form).email,
+        "onUpdate:modelValue": ($event) => unref(form).email = $event,
+        name: "email",
+        label: _ctx.$t("builder", "E-mail"),
+        type: "email",
+        class: "col-span-6 sm:col-span-3",
+        disabled: true
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_TextInput, {
+        modelValue: unref(form).password,
+        "onUpdate:modelValue": ($event) => unref(form).password = $event,
+        name: "password",
+        label: _ctx.$t("builder", "Password"),
+        type: "password",
+        autocomplete: "new-password",
+        class: "col-span-6 sm:col-span-3 sm:col-start-1",
+        required: true
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_TextInput, {
+        modelValue: unref(form).password_confirmation,
+        "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
+        name: "password_confirmation",
+        label: _ctx.$t("builder", "Password confirmation"),
+        type: "password",
+        autocomplete: "new-password",
+        class: "col-span-6 sm:col-span-3 sm:col-start-1",
+        required: true
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_Multiselect, {
+        modelValue: unref(form).locale,
+        "onUpdate:modelValue": ($event) => unref(form).locale = $event,
+        name: "locale",
+        label: _ctx.$t("builder", "Locale"),
+        mode: "single",
+        options: _ctx.locales,
+        "options-value-prop": "key",
+        "options-label": "value",
+        class: "col-span-6 sm:col-span-3 sm:col-start-1",
+        canDeselect: false,
+        required: true
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_Button, {
+        class: "w-full",
+        type: "submit",
+        disabled: unref(form).processing
+      }, {
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`${ssrInterpolate(_ctx.$t("builder", "Save"))}`);
+          } else {
+            return [
+              createTextVNode(toDisplayString(_ctx.$t("builder", "Save")), 1)
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</form></div></div>`);
+    };
+  }
+});
 const _sfc_setup$G = _sfc_main$G.setup;
 _sfc_main$G.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/ForgotPassword.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/InviteUser.vue");
   return _sfc_setup$G ? _sfc_setup$G(props, ctx) : void 0;
 };
-const __vite_glob_0_2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$G
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4093,7 +4216,7 @@ const _sfc_main$F = {
   },
   setup(__props) {
     const form = useForm({
-      email: "",
+      login: "",
       password: "",
       remember: false
     });
@@ -4106,14 +4229,14 @@ const _sfc_main$F = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$I;
-      const _component_AuthenticationCard = _sfc_main$M;
-      const _component_ValidationErrors = _sfc_main$N;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_Checkbox = _sfc_main$1g;
+      const _component_GuestLayout = _sfc_main$J;
+      const _component_AuthenticationCard = _sfc_main$N;
+      const _component_ValidationErrors = _sfc_main$O;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_Checkbox = _sfc_main$1h;
       const _component_Link = resolveComponent("Link");
-      const _component_Button = _sfc_main$1i;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Login")
       }, _attrs), {
@@ -4130,17 +4253,17 @@ const _sfc_main$F = {
                   }
                   _push3(`<form${_scopeId2}><div${_scopeId2}>`);
                   _push3(ssrRenderComponent(_component_Label, {
-                    for: "email",
-                    value: _ctx.__("Email Address"),
+                    for: "login",
+                    value: _ctx.__("Username or Email Address"),
                     req: ""
                   }, null, _parent3, _scopeId2));
                   _push3(ssrRenderComponent(_component_Input, {
-                    id: "email",
+                    id: "login",
                     type: "text",
                     class: "mt-1 block w-full",
-                    modelValue: unref(form).email,
-                    "onUpdate:modelValue": ($event) => unref(form).email = $event,
-                    autocomplete: "email",
+                    modelValue: unref(form).login,
+                    "onUpdate:modelValue": ($event) => unref(form).login = $event,
+                    autocomplete: "login",
                     required: "",
                     autofocus: ""
                   }, null, _parent3, _scopeId2));
@@ -4213,17 +4336,17 @@ const _sfc_main$F = {
                     }, [
                       createVNode("div", null, [
                         createVNode(_component_Label, {
-                          for: "email",
-                          value: _ctx.__("Email Address"),
+                          for: "login",
+                          value: _ctx.__("Username or Email Address"),
                           req: ""
                         }, null, 8, ["value"]),
                         createVNode(_component_Input, {
-                          id: "email",
+                          id: "login",
                           type: "text",
                           class: "mt-1 block w-full",
-                          modelValue: unref(form).email,
-                          "onUpdate:modelValue": ($event) => unref(form).email = $event,
-                          autocomplete: "email",
+                          modelValue: unref(form).login,
+                          "onUpdate:modelValue": ($event) => unref(form).login = $event,
+                          autocomplete: "login",
                           required: "",
                           autofocus: ""
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
@@ -4295,17 +4418,17 @@ const _sfc_main$F = {
                   }, [
                     createVNode("div", null, [
                       createVNode(_component_Label, {
-                        for: "email",
-                        value: _ctx.__("Email Address"),
+                        for: "login",
+                        value: _ctx.__("Username or Email Address"),
                         req: ""
                       }, null, 8, ["value"]),
                       createVNode(_component_Input, {
-                        id: "email",
+                        id: "login",
                         type: "text",
                         class: "mt-1 block w-full",
-                        modelValue: unref(form).email,
-                        "onUpdate:modelValue": ($event) => unref(form).email = $event,
-                        autocomplete: "email",
+                        modelValue: unref(form).login,
+                        "onUpdate:modelValue": ($event) => unref(form).login = $event,
+                        autocomplete: "login",
                         required: "",
                         autofocus: ""
                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
@@ -4375,7 +4498,7 @@ _sfc_main$F.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/Login.vue");
   return _sfc_setup$F ? _sfc_setup$F(props, ctx) : void 0;
 };
-const __vite_glob_0_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$F
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4384,7 +4507,9 @@ const _sfc_main$E = {
   __ssrInlineRender: true,
   setup(__props) {
     const form = useForm({
-      name: "",
+      username: "",
+      fname: "",
+      lname: "",
       email: "",
       password: "",
       password_confirmation: "",
@@ -4397,14 +4522,14 @@ const _sfc_main$E = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$I;
-      const _component_AuthenticationCard = _sfc_main$M;
-      const _component_ValidationErrors = _sfc_main$N;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_Checkbox = _sfc_main$1g;
+      const _component_GuestLayout = _sfc_main$J;
+      const _component_AuthenticationCard = _sfc_main$N;
+      const _component_ValidationErrors = _sfc_main$O;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_Checkbox = _sfc_main$1h;
       const _component_Link = resolveComponent("Link");
-      const _component_Button = _sfc_main$1i;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Register")
       }, _attrs), {
@@ -4416,19 +4541,19 @@ const _sfc_main$E = {
                   _push3(ssrRenderComponent(_component_ValidationErrors, { class: "mb-4" }, null, _parent3, _scopeId2));
                   _push3(`<form${_scopeId2}><div${_scopeId2}>`);
                   _push3(ssrRenderComponent(_component_Label, {
-                    for: "name",
-                    value: _ctx.__("Name"),
+                    for: "username",
+                    value: _ctx.__("Username"),
                     req: ""
                   }, null, _parent3, _scopeId2));
                   _push3(ssrRenderComponent(_component_Input, {
-                    id: "name",
+                    id: "username",
                     type: "text",
-                    class: "block w-full mt-1",
-                    modelValue: unref(form).name,
-                    "onUpdate:modelValue": ($event) => unref(form).name = $event,
+                    class: "mt-1 block w-full",
+                    modelValue: unref(form).username,
+                    "onUpdate:modelValue": ($event) => unref(form).username = $event,
                     required: "",
                     autofocus: "",
-                    autocomplete: "name"
+                    autocomplete: "username"
                   }, null, _parent3, _scopeId2));
                   _push3(`</div><div class="mt-4"${_scopeId2}>`);
                   _push3(ssrRenderComponent(_component_Label, {
@@ -4439,7 +4564,7 @@ const _sfc_main$E = {
                   _push3(ssrRenderComponent(_component_Input, {
                     id: "email",
                     type: "email",
-                    class: "block w-full mt-1",
+                    class: "mt-1 block w-full",
                     modelValue: unref(form).email,
                     "onUpdate:modelValue": ($event) => unref(form).email = $event,
                     required: ""
@@ -4453,7 +4578,7 @@ const _sfc_main$E = {
                   _push3(ssrRenderComponent(_component_Input, {
                     id: "password",
                     type: "password",
-                    class: "block w-full mt-1",
+                    class: "mt-1 block w-full",
                     modelValue: unref(form).password,
                     "onUpdate:modelValue": ($event) => unref(form).password = $event,
                     required: "",
@@ -4468,7 +4593,7 @@ const _sfc_main$E = {
                   _push3(ssrRenderComponent(_component_Input, {
                     id: "password_confirmation",
                     type: "password",
-                    class: "block w-full mt-1",
+                    class: "mt-1 block w-full",
                     modelValue: unref(form).password_confirmation,
                     "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
                     required: "",
@@ -4561,7 +4686,7 @@ const _sfc_main$E = {
                   } else {
                     _push3(`<!---->`);
                   }
-                  _push3(`<div class="flex items-center justify-end mt-4"${_scopeId2}>`);
+                  _push3(`<div class="mt-4 flex items-center justify-end"${_scopeId2}>`);
                   _push3(ssrRenderComponent(_component_Link, {
                     href: _ctx.route("login"),
                     class: "text-sm text-gray-700 underline hover:text-gray-900 dark:text-gray-500"
@@ -4601,19 +4726,19 @@ const _sfc_main$E = {
                     }, [
                       createVNode("div", null, [
                         createVNode(_component_Label, {
-                          for: "name",
-                          value: _ctx.__("Name"),
+                          for: "username",
+                          value: _ctx.__("Username"),
                           req: ""
                         }, null, 8, ["value"]),
                         createVNode(_component_Input, {
-                          id: "name",
+                          id: "username",
                           type: "text",
-                          class: "block w-full mt-1",
-                          modelValue: unref(form).name,
-                          "onUpdate:modelValue": ($event) => unref(form).name = $event,
+                          class: "mt-1 block w-full",
+                          modelValue: unref(form).username,
+                          "onUpdate:modelValue": ($event) => unref(form).username = $event,
                           required: "",
                           autofocus: "",
-                          autocomplete: "name"
+                          autocomplete: "username"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"])
                       ]),
                       createVNode("div", { class: "mt-4" }, [
@@ -4625,7 +4750,7 @@ const _sfc_main$E = {
                         createVNode(_component_Input, {
                           id: "email",
                           type: "email",
-                          class: "block w-full mt-1",
+                          class: "mt-1 block w-full",
                           modelValue: unref(form).email,
                           "onUpdate:modelValue": ($event) => unref(form).email = $event,
                           required: ""
@@ -4640,7 +4765,7 @@ const _sfc_main$E = {
                         createVNode(_component_Input, {
                           id: "password",
                           type: "password",
-                          class: "block w-full mt-1",
+                          class: "mt-1 block w-full",
                           modelValue: unref(form).password,
                           "onUpdate:modelValue": ($event) => unref(form).password = $event,
                           required: "",
@@ -4656,7 +4781,7 @@ const _sfc_main$E = {
                         createVNode(_component_Input, {
                           id: "password_confirmation",
                           type: "password",
-                          class: "block w-full mt-1",
+                          class: "mt-1 block w-full",
                           modelValue: unref(form).password_confirmation,
                           "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
                           required: "",
@@ -4703,7 +4828,7 @@ const _sfc_main$E = {
                           _: 1
                         })
                       ])) : createCommentVNode("", true),
-                      createVNode("div", { class: "flex items-center justify-end mt-4" }, [
+                      createVNode("div", { class: "mt-4 flex items-center justify-end" }, [
                         createVNode(_component_Link, {
                           href: _ctx.route("login"),
                           class: "text-sm text-gray-700 underline hover:text-gray-900 dark:text-gray-500"
@@ -4739,19 +4864,19 @@ const _sfc_main$E = {
                   }, [
                     createVNode("div", null, [
                       createVNode(_component_Label, {
-                        for: "name",
-                        value: _ctx.__("Name"),
+                        for: "username",
+                        value: _ctx.__("Username"),
                         req: ""
                       }, null, 8, ["value"]),
                       createVNode(_component_Input, {
-                        id: "name",
+                        id: "username",
                         type: "text",
-                        class: "block w-full mt-1",
-                        modelValue: unref(form).name,
-                        "onUpdate:modelValue": ($event) => unref(form).name = $event,
+                        class: "mt-1 block w-full",
+                        modelValue: unref(form).username,
+                        "onUpdate:modelValue": ($event) => unref(form).username = $event,
                         required: "",
                         autofocus: "",
-                        autocomplete: "name"
+                        autocomplete: "username"
                       }, null, 8, ["modelValue", "onUpdate:modelValue"])
                     ]),
                     createVNode("div", { class: "mt-4" }, [
@@ -4763,7 +4888,7 @@ const _sfc_main$E = {
                       createVNode(_component_Input, {
                         id: "email",
                         type: "email",
-                        class: "block w-full mt-1",
+                        class: "mt-1 block w-full",
                         modelValue: unref(form).email,
                         "onUpdate:modelValue": ($event) => unref(form).email = $event,
                         required: ""
@@ -4778,7 +4903,7 @@ const _sfc_main$E = {
                       createVNode(_component_Input, {
                         id: "password",
                         type: "password",
-                        class: "block w-full mt-1",
+                        class: "mt-1 block w-full",
                         modelValue: unref(form).password,
                         "onUpdate:modelValue": ($event) => unref(form).password = $event,
                         required: "",
@@ -4794,7 +4919,7 @@ const _sfc_main$E = {
                       createVNode(_component_Input, {
                         id: "password_confirmation",
                         type: "password",
-                        class: "block w-full mt-1",
+                        class: "mt-1 block w-full",
                         modelValue: unref(form).password_confirmation,
                         "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
                         required: "",
@@ -4841,7 +4966,7 @@ const _sfc_main$E = {
                         _: 1
                       })
                     ])) : createCommentVNode("", true),
-                    createVNode("div", { class: "flex items-center justify-end mt-4" }, [
+                    createVNode("div", { class: "mt-4 flex items-center justify-end" }, [
                       createVNode(_component_Link, {
                         href: _ctx.route("login"),
                         class: "text-sm text-gray-700 underline hover:text-gray-900 dark:text-gray-500"
@@ -4879,7 +5004,7 @@ _sfc_main$E.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/Register.vue");
   return _sfc_setup$E ? _sfc_setup$E(props, ctx) : void 0;
 };
-const __vite_glob_0_4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$E
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4905,12 +5030,12 @@ const _sfc_main$D = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$I;
-      const _component_AuthenticationCard = _sfc_main$M;
-      const _component_ValidationErrors = _sfc_main$N;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_Button = _sfc_main$1i;
+      const _component_GuestLayout = _sfc_main$J;
+      const _component_AuthenticationCard = _sfc_main$N;
+      const _component_ValidationErrors = _sfc_main$O;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Reset Password")
       }, _attrs), {
@@ -5138,7 +5263,7 @@ _sfc_main$D.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/ResetPassword.vue");
   return _sfc_setup$D ? _sfc_setup$D(props, ctx) : void 0;
 };
-const __vite_glob_0_5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$D
 }, Symbol.toStringTag, { value: "Module" }));
@@ -5170,12 +5295,12 @@ const _sfc_main$C = {
     };
     __expose({ code, recovery_code });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$I;
-      const _component_AuthenticationCard = _sfc_main$M;
-      const _component_ValidationErrors = _sfc_main$N;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_Button = _sfc_main$1i;
+      const _component_GuestLayout = _sfc_main$J;
+      const _component_AuthenticationCard = _sfc_main$N;
+      const _component_ValidationErrors = _sfc_main$O;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Two-factor Confirmation")
       }, _attrs), {
@@ -5421,7 +5546,7 @@ _sfc_main$C.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/TwoFactorChallenge.vue");
   return _sfc_setup$C ? _sfc_setup$C(props, ctx) : void 0;
 };
-const __vite_glob_0_6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$C
 }, Symbol.toStringTag, { value: "Module" }));
@@ -5439,9 +5564,9 @@ const _sfc_main$B = {
       return props.status === "verification-link-sent";
     });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$I;
-      const _component_AuthenticationCard = _sfc_main$M;
-      const _component_Button = _sfc_main$1i;
+      const _component_GuestLayout = _sfc_main$J;
+      const _component_AuthenticationCard = _sfc_main$N;
+      const _component_Button = _sfc_main$1j;
       const _component_Link = resolveComponent("Link");
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Email Verification")
@@ -5587,7 +5712,7 @@ _sfc_main$B.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/VerifyEmail.vue");
   return _sfc_setup$B ? _sfc_setup$B(props, ctx) : void 0;
 };
-const __vite_glob_0_7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$B
 }, Symbol.toStringTag, { value: "Module" }));
@@ -5712,7 +5837,7 @@ _sfc_main$A.setup = (props, ctx) => {
 const __unplugin_components_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["ssrRender", _sfc_ssrRender$5]]);
 const _sfc_main$z = {};
 function _sfc_ssrRender$4(_ctx, _push, _parent, _attrs) {
-  const _component_MainLayout = _sfc_main$P;
+  const _component_MainLayout = _sfc_main$Q;
   const _component_ApplicationLogo = __unplugin_components_1$2;
   const _component_IconOutlineBookOpen = __unplugin_components_2$2;
   const _component_Link = resolveComponent("Link");
@@ -5863,7 +5988,7 @@ _sfc_main$z.setup = (props, ctx) => {
   return _sfc_setup$z ? _sfc_setup$z(props, ctx) : void 0;
 };
 const Dashboard = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["ssrRender", _sfc_ssrRender$4]]);
-const __vite_glob_0_8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Dashboard
 }, Symbol.toStringTag, { value: "Module" }));
@@ -5895,7 +6020,7 @@ _sfc_main$y.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Docs/2.0/action-domain-responder.md");
   return _sfc_setup$y ? _sfc_setup$y(props, ctx) : void 0;
 };
-const __vite_glob_0_9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$y,
   description: description$2,
@@ -5922,7 +6047,7 @@ _sfc_main$x.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Docs/2.0/getting-started.md");
   return _sfc_setup$x ? _sfc_setup$x(props, ctx) : void 0;
 };
-const __vite_glob_0_10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$x,
   description: description$1,
@@ -5952,7 +6077,7 @@ _sfc_main$w.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Docs/2.0/installation.md");
   return _sfc_setup$w ? _sfc_setup$w(props, ctx) : void 0;
 };
-const __vite_glob_0_11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$w,
   description,
@@ -5976,7 +6101,7 @@ _sfc_main$v.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Docs/404.md");
   return _sfc_setup$v ? _sfc_setup$v(props, ctx) : void 0;
 };
-const __vite_glob_0_12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$v
 }, Symbol.toStringTag, { value: "Module" }));
@@ -6010,7 +6135,7 @@ _sfc_main$u.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Markdown/Policy.md");
   return _sfc_setup$u ? _sfc_setup$u(props, ctx) : void 0;
 };
-const __vite_glob_0_13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$u
 }, Symbol.toStringTag, { value: "Module" }));
@@ -6031,7 +6156,7 @@ _sfc_main$t.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Markdown/Terms.md");
   return _sfc_setup$t ? _sfc_setup$t(props, ctx) : void 0;
 };
-const __vite_glob_0_14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$t
 }, Symbol.toStringTag, { value: "Module" }));
@@ -6115,7 +6240,7 @@ const _sfc_main$r = {
   __ssrInlineRender: true,
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$I;
+      const _component_GuestLayout = _sfc_main$J;
       const _component_Head = resolveComponent("Head");
       const _component_AuthenticationCardLogo = __unplugin_components_1$1;
       _push(ssrRenderComponent(_component_GuestLayout, _attrs, {
@@ -6160,7 +6285,7 @@ _sfc_main$r.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/PrivacyPolicy.vue");
   return _sfc_setup$r ? _sfc_setup$r(props, ctx) : void 0;
 };
-const __vite_glob_0_15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$r
 }, Symbol.toStringTag, { value: "Module" }));
@@ -6217,13 +6342,13 @@ const _sfc_main$q = {
     };
     __expose({ photo, photoPreview });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1c;
-      const _component_Label = _sfc_main$1d;
-      const _component_SecondaryButton = _sfc_main$1n;
-      const _component_InputError = _sfc_main$1f;
-      const _component_Input = _sfc_main$1e;
-      const _component_ActionMessage = _sfc_main$1h;
-      const _component_Button = _sfc_main$1i;
+      const _component_FormSection = _sfc_main$1d;
+      const _component_Label = _sfc_main$1e;
+      const _component_SecondaryButton = _sfc_main$1o;
+      const _component_InputError = _sfc_main$1g;
+      const _component_Input = _sfc_main$1f;
+      const _component_ActionMessage = _sfc_main$1i;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_FormSection, mergeProps({ onSubmitted: updateProfileInformation }, _attrs), {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -6504,7 +6629,7 @@ const _sfc_main$p = {
   props: ["sessions"],
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_MainLayout = _sfc_main$P;
+      const _component_MainLayout = _sfc_main$Q;
       const _component_UpdateProfileInformationForm = _sfc_main$q;
       _push(ssrRenderComponent(_component_MainLayout, mergeProps({
         title: _ctx.__("Profile")
@@ -6545,7 +6670,7 @@ _sfc_main$p.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Profile/Show.vue");
   return _sfc_setup$p ? _sfc_setup$p(props, ctx) : void 0;
 };
-const __vite_glob_0_16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$p
 }, Symbol.toStringTag, { value: "Module" }));
@@ -6577,11 +6702,11 @@ const _sfc_main$o = {
     __expose({ password });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_ActionSection = __unplugin_components_8$1;
-      const _component_DangerButton = _sfc_main$1q;
-      const _component_DialogModal = _sfc_main$1m;
-      const _component_Input = _sfc_main$1e;
-      const _component_InputError = _sfc_main$1f;
-      const _component_SecondaryButton = _sfc_main$1n;
+      const _component_DangerButton = _sfc_main$1r;
+      const _component_DialogModal = _sfc_main$1n;
+      const _component_Input = _sfc_main$1f;
+      const _component_InputError = _sfc_main$1g;
+      const _component_SecondaryButton = _sfc_main$1o;
       _push(ssrRenderComponent(_component_ActionSection, _attrs, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -6876,12 +7001,12 @@ const _sfc_main$n = {
       const _component_ActionSection = __unplugin_components_8$1;
       const _component_IconOutlineDesktopComputer = __unplugin_components_1;
       const _component_IconOutlineDeviceMobile = __unplugin_components_2$1;
-      const _component_Button = _sfc_main$1i;
-      const _component_ActionMessage = _sfc_main$1h;
-      const _component_DialogModal = _sfc_main$1m;
-      const _component_Input = _sfc_main$1e;
-      const _component_InputError = _sfc_main$1f;
-      const _component_SecondaryButton = _sfc_main$1n;
+      const _component_Button = _sfc_main$1j;
+      const _component_ActionMessage = _sfc_main$1i;
+      const _component_DialogModal = _sfc_main$1n;
+      const _component_Input = _sfc_main$1f;
+      const _component_InputError = _sfc_main$1g;
+      const _component_SecondaryButton = _sfc_main$1o;
       _push(ssrRenderComponent(_component_ActionSection, _attrs, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -7228,11 +7353,11 @@ const _sfc_main$m = {
     };
     __expose({ password });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_DialogModal = _sfc_main$1m;
-      const _component_Input = _sfc_main$1e;
-      const _component_InputError = _sfc_main$1f;
-      const _component_SecondaryButton = _sfc_main$1n;
-      const _component_Button = _sfc_main$1i;
+      const _component_DialogModal = _sfc_main$1n;
+      const _component_Input = _sfc_main$1f;
+      const _component_InputError = _sfc_main$1g;
+      const _component_SecondaryButton = _sfc_main$1o;
+      const _component_Button = _sfc_main$1j;
       _push(`<span${ssrRenderAttrs(_attrs)}><span>`);
       ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
       _push(`</span>`);
@@ -7436,13 +7561,13 @@ const _sfc_main$l = {
     };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_ActionSection = __unplugin_components_8$1;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_InputError = _sfc_main$1f;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_InputError = _sfc_main$1g;
       const _component_ConfirmsPassword = _sfc_main$m;
-      const _component_Button = _sfc_main$1i;
-      const _component_SecondaryButton = _sfc_main$1n;
-      const _component_DangerButton = _sfc_main$1q;
+      const _component_Button = _sfc_main$1j;
+      const _component_SecondaryButton = _sfc_main$1o;
+      const _component_DangerButton = _sfc_main$1r;
       _push(ssrRenderComponent(_component_ActionSection, _attrs, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -7975,12 +8100,12 @@ const _sfc_main$k = {
     };
     __expose({ password, current_password });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1c;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_InputError = _sfc_main$1f;
-      const _component_ActionMessage = _sfc_main$1h;
-      const _component_Button = _sfc_main$1i;
+      const _component_FormSection = _sfc_main$1d;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_InputError = _sfc_main$1g;
+      const _component_ActionMessage = _sfc_main$1i;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_FormSection, mergeProps({
         onSubmitted: updatePassword,
         passform: ""
@@ -8203,9 +8328,9 @@ const _sfc_main$j = {
   setup(__props) {
     const props = __props;
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_MainLayout = _sfc_main$P;
+      const _component_MainLayout = _sfc_main$Q;
       const _component_UpdatePasswordForm = _sfc_main$k;
-      const _component_SectionBorder = _sfc_main$1j;
+      const _component_SectionBorder = _sfc_main$1k;
       const _component_TwoFactorAuthenticationForm = _sfc_main$l;
       const _component_LogoutOtherBrowserSessionsForm = _sfc_main$n;
       const _component_DeleteUserForm = _sfc_main$o;
@@ -8287,7 +8412,7 @@ _sfc_main$j.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Settings/Show.vue");
   return _sfc_setup$j ? _sfc_setup$j(props, ctx) : void 0;
 };
-const __vite_glob_0_17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$j
 }, Symbol.toStringTag, { value: "Module" }));
@@ -8305,11 +8430,11 @@ const _sfc_main$i = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1c;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_InputError = _sfc_main$1f;
-      const _component_Button = _sfc_main$1i;
+      const _component_FormSection = _sfc_main$1d;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_InputError = _sfc_main$1g;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_FormSection, mergeProps({ onSubmitted: createTeam }, _attrs), {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -8432,7 +8557,7 @@ _sfc_main$i.setup = (props, ctx) => {
 };
 const _sfc_main$h = {};
 function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs) {
-  const _component_MainLayout = _sfc_main$P;
+  const _component_MainLayout = _sfc_main$Q;
   const _component_create_team_form = _sfc_main$i;
   _push(ssrRenderComponent(_component_MainLayout, mergeProps({
     title: _ctx.__("Create Team")
@@ -8471,7 +8596,7 @@ _sfc_main$h.setup = (props, ctx) => {
   return _sfc_setup$h ? _sfc_setup$h(props, ctx) : void 0;
 };
 const Create = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["ssrRender", _sfc_ssrRender$2]]);
-const __vite_glob_0_18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Create
 }, Symbol.toStringTag, { value: "Module" }));
@@ -8493,9 +8618,9 @@ const _sfc_main$g = {
     };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_ActionSection = __unplugin_components_8$1;
-      const _component_DangerButton = _sfc_main$1q;
-      const _component_ConfirmationModal = _sfc_main$1o;
-      const _component_SecondaryButton = _sfc_main$1n;
+      const _component_DangerButton = _sfc_main$1r;
+      const _component_ConfirmationModal = _sfc_main$1p;
+      const _component_SecondaryButton = _sfc_main$1o;
       _push(ssrRenderComponent(_component_ActionSection, _attrs, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -8755,19 +8880,19 @@ const _sfc_main$f = {
       return availableRoles.value.find((r2) => r2.key === role).name;
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_SectionBorder = _sfc_main$1j;
-      const _component_FormSection = _sfc_main$1c;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_InputError = _sfc_main$1f;
+      const _component_SectionBorder = _sfc_main$1k;
+      const _component_FormSection = _sfc_main$1d;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_InputError = _sfc_main$1g;
       const _component_IconOutlineCheckCircle = __unplugin_components_5$2;
-      const _component_ActionMessage = _sfc_main$1h;
-      const _component_Button = _sfc_main$1i;
+      const _component_ActionMessage = _sfc_main$1i;
+      const _component_Button = _sfc_main$1j;
       const _component_ActionSection = __unplugin_components_8$1;
-      const _component_DialogModal = _sfc_main$1m;
-      const _component_SecondaryButton = _sfc_main$1n;
-      const _component_ConfirmationModal = _sfc_main$1o;
-      const _component_DangerButton = _sfc_main$1q;
+      const _component_DialogModal = _sfc_main$1n;
+      const _component_SecondaryButton = _sfc_main$1o;
+      const _component_ConfirmationModal = _sfc_main$1p;
+      const _component_DangerButton = _sfc_main$1r;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
       if (unref(userPermissions).canAddTeamMembers) {
         _push(`<div>`);
@@ -9460,12 +9585,12 @@ const _sfc_main$e = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1c;
-      const _component_Label = _sfc_main$1d;
-      const _component_Input = _sfc_main$1e;
-      const _component_InputError = _sfc_main$1f;
-      const _component_ActionMessage = _sfc_main$1h;
-      const _component_Button = _sfc_main$1i;
+      const _component_FormSection = _sfc_main$1d;
+      const _component_Label = _sfc_main$1e;
+      const _component_Input = _sfc_main$1f;
+      const _component_InputError = _sfc_main$1g;
+      const _component_ActionMessage = _sfc_main$1i;
+      const _component_Button = _sfc_main$1j;
       _push(ssrRenderComponent(_component_FormSection, mergeProps({ onSubmitted: updateTeamName }, _attrs), createSlots({
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -9625,10 +9750,10 @@ const _sfc_main$d = {
   props: ["team", "availableRoles", "permissions"],
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_MainLayout = _sfc_main$P;
+      const _component_MainLayout = _sfc_main$Q;
       const _component_UpdateTeamNameForm = _sfc_main$e;
       const _component_TeamMemberManager = _sfc_main$f;
-      const _component_SectionBorder = _sfc_main$1j;
+      const _component_SectionBorder = _sfc_main$1k;
       const _component_DeleteTeamForm = _sfc_main$g;
       _push(ssrRenderComponent(_component_MainLayout, mergeProps({
         title: _ctx.__("Team Settings")
@@ -9704,7 +9829,7 @@ _sfc_main$d.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Teams/Show.vue");
   return _sfc_setup$d ? _sfc_setup$d(props, ctx) : void 0;
 };
-const __vite_glob_0_19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$d
 }, Symbol.toStringTag, { value: "Module" }));
@@ -9713,7 +9838,7 @@ const _sfc_main$c = {
   __ssrInlineRender: true,
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$I;
+      const _component_GuestLayout = _sfc_main$J;
       const _component_Head = resolveComponent("Head");
       const _component_AuthenticationCardLogo = __unplugin_components_1$1;
       _push(ssrRenderComponent(_component_GuestLayout, _attrs, {
@@ -9758,7 +9883,7 @@ _sfc_main$c.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/TermsOfService.vue");
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
-const __vite_glob_0_20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$c
 }, Symbol.toStringTag, { value: "Module" }));
@@ -9854,7 +9979,7 @@ const _sfc_main$a = {
     ];
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Head = resolveComponent("Head");
-      const _component_GuestHeader = _sfc_main$J;
+      const _component_GuestHeader = _sfc_main$K;
       const _component_ApplicationLogo = __unplugin_components_1$2;
       const _component_Link = resolveComponent("Link");
       const _component_IconOutlineCheck = __unplugin_components_2;
@@ -9962,7 +10087,7 @@ _sfc_main$a.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Welcome.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
-const __vite_glob_0_21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_22 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$a
 }, Symbol.toStringTag, { value: "Module" }));
@@ -10731,7 +10856,7 @@ _sfc_main$3.setup = (props, ctx) => {
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
 const _sfc_main$2 = {
-  __name: "Sidebar",
+  __name: "DocSidebar",
   __ssrInlineRender: true,
   setup(__props) {
     const navigation = usePage().props.sidebar;
@@ -10774,7 +10899,7 @@ const _sfc_main$2 = {
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/Sidebar.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/DocSidebar.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const _sfc_main$1 = {
@@ -10798,14 +10923,14 @@ const _sfc_main$1 = {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Link = resolveComponent("Link");
       const _component_ApplicationMark = __unplugin_components_4$1;
-      const _component_NavLink = _sfc_main$T;
+      const _component_NavLink = _sfc_main$U;
       const _component_IconOutlineSearch = __unplugin_components_2$3;
-      const _component_ThemeSwitcher = _sfc_main$W;
+      const _component_ThemeSwitcher = _sfc_main$X;
       const _component_IconOutlineMenu = __unplugin_components_4$2;
       const _component_IconOutlineX = __unplugin_components_5$1;
-      const _component_GuestResponsiveNavMenu = _sfc_main$K;
-      const _component_DocHeaderbar = _sfc_main$Z;
-      const _component_SearchModal = _sfc_main$13;
+      const _component_GuestResponsiveNavMenu = _sfc_main$L;
+      const _component_DocHeaderbar = _sfc_main$_;
+      const _component_SearchModal = _sfc_main$14;
       _push(`<!--[--><nav class="${ssrRenderClass([{ stickyHeader: unref(stickyHeader) }, "sticky top-0 z-50 bg-white dark:bg-gray-800"])}"><div class="px-6"><div class="flex h-16 justify-center md:justify-between"><div class="flex w-full items-center"><div class="flex shrink-0 items-center">`);
       _push(ssrRenderComponent(_component_Link, {
         href: _ctx.route("home"),
@@ -10948,12 +11073,12 @@ const _sfc_main = {
     status.value = usePage().props.title == "Page Not Found" ? 404 : 200;
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Head = resolveComponent("Head");
-      const _component_MainNavigation = _sfc_main$R;
+      const _component_MainNavigation = _sfc_main$S;
       const _component_DocNavigation = _sfc_main$1;
-      const _component_Sidebar = _sfc_main$2;
+      const _component_DocSidebar = _sfc_main$2;
       const _component_MobileCanvas = _sfc_main$3;
       const _component_ApplicationMark = __unplugin_components_4$1;
-      const _component_SectionBorder = _sfc_main$1j;
+      const _component_SectionBorder = _sfc_main$1k;
       const _component_MobileNavTrigger = _sfc_main$4;
       const _component_PageNavigation = __unplugin_components_7;
       const _component_PageFooter = __unplugin_components_8;
@@ -10987,7 +11112,7 @@ const _sfc_main = {
         _push(ssrRenderComponent(_component_DocNavigation, null, null, _parent));
       }
       _push(`<main class="mt-4 grid grid-cols-12 gap-4 px-4 pb-8"><aside class="sticky top-0 col-span-2 hidden min-h-screen bg-gray-100 dark:bg-gray-900 lg:block">`);
-      _push(ssrRenderComponent(_component_Sidebar, null, null, _parent));
+      _push(ssrRenderComponent(_component_DocSidebar, null, null, _parent));
       _push(`</aside>`);
       _push(ssrRenderComponent(_component_MobileCanvas, null, null, _parent));
       _push(`<div class="col-span-12 rounded bg-white px-4 py-6 shadow dark:bg-gray-800 lg:col-span-7"><div class="flex items-center">`);
@@ -11024,7 +11149,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Layouts/DocLayout.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const pages = /* @__PURE__ */ Object.assign({ "./pages/API/Index.vue": __vite_glob_0_0, "./pages/Auth/ConfirmPassword.vue": __vite_glob_0_1, "./pages/Auth/ForgotPassword.vue": __vite_glob_0_2, "./pages/Auth/Login.vue": __vite_glob_0_3, "./pages/Auth/Register.vue": __vite_glob_0_4, "./pages/Auth/ResetPassword.vue": __vite_glob_0_5, "./pages/Auth/TwoFactorChallenge.vue": __vite_glob_0_6, "./pages/Auth/VerifyEmail.vue": __vite_glob_0_7, "./pages/Dashboard.vue": __vite_glob_0_8, "./pages/Docs/2.0/action-domain-responder.md": __vite_glob_0_9, "./pages/Docs/2.0/getting-started.md": __vite_glob_0_10, "./pages/Docs/2.0/installation.md": __vite_glob_0_11, "./pages/Docs/404.md": __vite_glob_0_12, "./pages/Markdown/Policy.md": __vite_glob_0_13, "./pages/Markdown/Terms.md": __vite_glob_0_14, "./pages/PrivacyPolicy.vue": __vite_glob_0_15, "./pages/Profile/Show.vue": __vite_glob_0_16, "./pages/Settings/Show.vue": __vite_glob_0_17, "./pages/Teams/Create.vue": __vite_glob_0_18, "./pages/Teams/Show.vue": __vite_glob_0_19, "./pages/TermsOfService.vue": __vite_glob_0_20, "./pages/Welcome.vue": __vite_glob_0_21 });
+const pages = /* @__PURE__ */ Object.assign({ "./pages/API/Index.vue": __vite_glob_0_0, "./pages/Auth/ConfirmPassword.vue": __vite_glob_0_1, "./pages/Auth/ForgotPassword.vue": __vite_glob_0_2, "./pages/Auth/InviteUser.vue": __vite_glob_0_3, "./pages/Auth/Login.vue": __vite_glob_0_4, "./pages/Auth/Register.vue": __vite_glob_0_5, "./pages/Auth/ResetPassword.vue": __vite_glob_0_6, "./pages/Auth/TwoFactorChallenge.vue": __vite_glob_0_7, "./pages/Auth/VerifyEmail.vue": __vite_glob_0_8, "./pages/Dashboard.vue": __vite_glob_0_9, "./pages/Docs/2.0/action-domain-responder.md": __vite_glob_0_10, "./pages/Docs/2.0/getting-started.md": __vite_glob_0_11, "./pages/Docs/2.0/installation.md": __vite_glob_0_12, "./pages/Docs/404.md": __vite_glob_0_13, "./pages/Markdown/Policy.md": __vite_glob_0_14, "./pages/Markdown/Terms.md": __vite_glob_0_15, "./pages/PrivacyPolicy.vue": __vite_glob_0_16, "./pages/Profile/Show.vue": __vite_glob_0_17, "./pages/Settings/Show.vue": __vite_glob_0_18, "./pages/Teams/Create.vue": __vite_glob_0_19, "./pages/Teams/Show.vue": __vite_glob_0_20, "./pages/TermsOfService.vue": __vite_glob_0_21, "./pages/Welcome.vue": __vite_glob_0_22 });
 const appName = "Serenity";
 createServer(
   (page) => createInertiaApp({

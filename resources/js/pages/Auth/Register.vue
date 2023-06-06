@@ -1,16 +1,18 @@
 <script setup>
 const form = useForm({
-  name: '',
+  username: '',
+  fname: '',
+  lname: '',
   email: '',
   password: '',
   password_confirmation: '',
-  terms: false,
+  terms: false
 })
 
 const submit = () => {
   form.post(useRoutes('register'), {
     onStart: () => form.clearErrors(),
-    onFinish: () => form.reset('password', 'password_confirmation'),
+    onFinish: () => form.reset('password', 'password_confirmation')
   })
 }
 </script>
@@ -22,20 +24,25 @@ const submit = () => {
 
       <form @submit.prevent="submit">
         <div>
-          <Label for="name" :value="__('Name')" req />
+          <Label for="username" :value="__('Username')" req />
           <Input
-            id="name"
+            id="username"
             type="text"
-            class="block w-full mt-1"
-            v-model="form.name"
+            class="mt-1 block w-full"
+            v-model="form.username"
             required
             autofocus
-            autocomplete="name" />
+            autocomplete="username" />
         </div>
 
         <div class="mt-4">
           <Label for="email" :value="__('Email')" req />
-          <Input id="email" type="email" class="block w-full mt-1" v-model="form.email" required />
+          <Input
+            id="email"
+            type="email"
+            class="mt-1 block w-full"
+            v-model="form.email"
+            required />
         </div>
 
         <div class="mt-4">
@@ -43,24 +50,29 @@ const submit = () => {
           <Input
             id="password"
             type="password"
-            class="block w-full mt-1"
+            class="mt-1 block w-full"
             v-model="form.password"
             required
             autocomplete="new-password" />
         </div>
 
         <div class="mt-4">
-          <Label for="password_confirmation" :value="__('Confirm Password')" req />
+          <Label
+            for="password_confirmation"
+            :value="__('Confirm Password')"
+            req />
           <Input
             id="password_confirmation"
             type="password"
-            class="block w-full mt-1"
+            class="mt-1 block w-full"
             v-model="form.password_confirmation"
             required
             autocomplete="new-password" />
         </div>
 
-        <div class="mt-4" v-if="$page.props.serenity.hasTermsAndPrivacyPolicyFeature">
+        <div
+          class="mt-4"
+          v-if="$page.props.serenity.hasTermsAndPrivacyPolicyFeature">
           <Label for="terms">
             <div class="flex items-center">
               <Checkbox name="terms" id="terms" v-model:checked="form.terms" />
@@ -83,12 +95,17 @@ const submit = () => {
           </Label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-          <Link :href="route('login')" class="text-sm text-gray-700 underline hover:text-gray-900 dark:text-gray-500">
+        <div class="mt-4 flex items-center justify-end">
+          <Link
+            :href="route('login')"
+            class="text-sm text-gray-700 underline hover:text-gray-900 dark:text-gray-500">
             {{ __('Already registered?') }}
           </Link>
 
-          <Button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+          <Button
+            class="ml-4"
+            :class="{ 'opacity-25': form.processing }"
+            :disabled="form.processing">
             {{ __('Register') }}
           </Button>
         </div>

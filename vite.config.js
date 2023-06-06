@@ -189,7 +189,22 @@ export default defineConfig(({ command, mode }) => {
           '@vueuse/core',
           {
             '@inertiajs/vue3': ['router', 'useForm', 'usePage', 'useRemember'],
-            composable: ['useTrans', 'useRoutes', 'useDayjs', 'useClientOnly'],
+            composable: [
+              'useTrans',
+              'useRoutes',
+              'useDayjs',
+              'useClientOnly'
+              // 'useAction',
+              // 'useBulkAction',
+              // 'useBulkSelect',
+              // 'useAdminForm',
+              // 'useFormLocale',
+              // 'useInput',
+              // 'useListingFilters',
+              // 'useListingSearch',
+              // 'usePaginationLinks',
+              // 'useUser'
+            ],
             store: ['useCoreStore', 'useDocStore']
           }
         ],
@@ -229,6 +244,7 @@ export default defineConfig(({ command, mode }) => {
     },
     resolve: {
       alias: {
+        '@/': resolve(__dirname, 'resources/js/'),
         '@/storage': resolve(__dirname, 'storage/app/public'),
         ziggy: resolve(__dirname, 'vendor/tightenco/ziggy/dist/vue.es.js'),
         zora: resolve(__dirname, 'vendor/jetstreamlabs/zora/dist/index.js'),
