@@ -2,17 +2,17 @@
 
 namespace App\Actions\Private\Admin;
 
-use App\Domain\Contracts\Responders\Admin\HomeResponder;
+use App\Domain\Contracts\Responders\Admin\DashboardResponder;
 use Inertia\ResponseFactory;
 use Serenity\Foundation\Action;
 use Serenity\Routing\Attributes\Route;
 
-class HomeAction extends Action
+class DashboardAction extends Action
 {
   public function __construct(
-      protected HomeResponder $responder
+      protected DashboardResponder $responder
     ) {
-    $this->with('Admin/Home');
+    $this->with('Private/Admin/Dashboard');
 
     bcs([
       __('Admin') => 'last',
