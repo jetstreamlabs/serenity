@@ -4,7 +4,6 @@ use App\Domain\Models\Permission;
 use App\Domain\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
