@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Domain\Models\Team;
 use App\Domain\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Serenity\Foundation\Features;
 
@@ -29,15 +30,12 @@ class UserFactory extends Factory
   {
     return [
       'id' => app(config('snowflake.instance'))->id(),
-      'name' => $this->faker->name(),
+      'username' => $this->faker->userName(),
+      'fname' => $this->faker->firstName(),
+      'lname' => $this->faker->lastName(),
       'email' => $this->faker->unique()->safeEmail(),
       'email_verified_at' => now(),
-      'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-      'two_factor_secret' => null,
-      'two_factor_recovery_codes' => null,
-      'remember_token' => Str::random(10),
-      'profile_photo_path' => null,
-      'current_team_id' => null,
+      'password' => Hash::make('password'), // password
     ];
   }
 
@@ -69,7 +67,7 @@ class UserFactory extends Factory
     return $this->has(
       Team::factory()
           ->state(function (array $attributes, User $user) {
-            return ['name' => $user->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
+            return ['name' => $user->username.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
           }),
       'ownedTeams'
     );

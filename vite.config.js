@@ -189,22 +189,7 @@ export default defineConfig(({ command, mode }) => {
           '@vueuse/core',
           {
             '@inertiajs/vue3': ['router', 'useForm', 'usePage', 'useRemember'],
-            composable: [
-              'useTrans',
-              'useRoutes',
-              'useDayjs',
-              'useClientOnly'
-              // 'useAction',
-              // 'useBulkAction',
-              // 'useBulkSelect',
-              // 'useAdminForm',
-              // 'useFormLocale',
-              // 'useInput',
-              // 'useListingFilters',
-              // 'useListingSearch',
-              // 'usePaginationLinks',
-              // 'useUser'
-            ],
+            composable: ['useTrans', 'useRoutes', 'useDayjs', 'useClientOnly'],
             store: ['useCoreStore', 'useDocStore']
           }
         ],
@@ -230,14 +215,7 @@ export default defineConfig(({ command, mode }) => {
       noExternal: ['@inertiajs/server']
     },
     optimizeDeps: {
-      include: [
-        'vue',
-        'vuex',
-        'pinia',
-        '@inertiajs/vue3',
-        '@headlessui/vue',
-        'axios'
-      ],
+      include: ['vue', 'pinia', '@inertiajs/vue3', '@headlessui/vue', 'axios'],
       esbuildOptions: {
         target: 'esnext'
       }

@@ -10,6 +10,7 @@ use Serenity\Database\Team as BaseTeam;
 use Serenity\Events\TeamCreated;
 use Serenity\Events\TeamDeleted;
 use Serenity\Events\TeamUpdated;
+use Spatie\Permission\PermissionRegistrar;
 
 class Team extends BaseTeam
 {
@@ -54,5 +55,23 @@ class Team extends BaseTeam
   protected static function newFactory(): Factory
   {
     return TeamFactory::new();
+  }
+
+  /**
+   * Set the current team id for roles and permissions.
+   */
+  public function register(int $team_id = null): self
+  {
+    $service = app(PermissionRegistrar::class);
+
+    if (is_null($team_id)) {
+      $service->setCurrentTeamId($this->id);
+
+      return $this;
+    }
+
+    $service->setCurrentTeamId($team_id);
+
+    return $this;
   }
 }

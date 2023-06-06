@@ -12,12 +12,17 @@ use Serenity\Concerns\HasProfilePhoto;
 use Serenity\Concerns\HasTeams;
 use Serenity\Concerns\TwoFactorAuthenticatable;
 use Serenity\Database\User as Authenticatable;
+use Spatie\Permission\PermissionRegistrar;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
   use HasApiTokens;
   use HasFactory;
+  use HasPermissions;
   use HasProfilePhoto;
+  use HasRoles;
   use HasTeams;
   use Notifiable;
   use SoftDeletes;
@@ -76,5 +81,28 @@ class User extends Authenticatable
   protected static function newFactory(): Factory
   {
     return UserFactory::new();
+  }
+
+  /**
+   * Set the current team id for roles and permissions.
+   */
+  public function register(int $team_id = null): self
+  {
+    $service = app(PermissionRegistrar::class);
+
+    if (is_null($team_id)) {
+      $service->setCurrentTeamId($this->current_team_id);
+
+      return $this;
+    }
+
+    $service->setCurrentTeamId($team_id);
+
+    return $this;
+  }
+
+  public function getPermissions()
+  {
+    return $this->getAllPermissions();
   }
 }

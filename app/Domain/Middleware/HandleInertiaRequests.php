@@ -38,15 +38,7 @@ class HandleInertiaRequests extends Middleware
   public function share(Request $request): array
   {
     return array_merge(parent::share($request), [
-      'flash' => function () {
-        return [
-          'success' => request()->session()->get('success'),
-          'error' => request()->session()->get('error'),
-          'warning' => request()->session()->get('warning'),
-          'info' => request()->session()->get('info'),
-          'status' => request()->session()->get('status'),
-        ];
-      },
+      'session_team' => session('current_team_id'),
       'canLogin' => Route::has('login'),
       'canRegister' => Route::has('register'),
       'copyright' => '&copy; '.date('Y').'. Jetstream Labs, LLC.',

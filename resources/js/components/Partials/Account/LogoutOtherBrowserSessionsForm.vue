@@ -3,7 +3,7 @@ const props = defineProps(['sessions'])
 const confirmingLogout = ref(false)
 const password = ref()
 const form = useForm({
-  password: '',
+  password: ''
 })
 
 const confirmLogout = () => {
@@ -16,7 +16,7 @@ const logoutOtherBrowserSessions = () => {
     preserveScroll: true,
     onSuccess: () => closeModal(),
     onError: () => password.value.input.focus(),
-    onFinish: () => form.reset(),
+    onFinish: () => form.reset()
   })
 }
 
@@ -33,11 +33,15 @@ defineExpose({ password })
     <template #title>{{ __('Browser Sessions') }}</template>
 
     <template #description>
-      {{ __('Manage and log out your active sessions on other browsers and devices.') }}
+      {{
+        __(
+          'Manage and log out your active sessions on other browsers and devices.'
+        )
+      }}
     </template>
 
     <template #content>
-      <div class="max-w-xl text-sm text-gray-600">
+      <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
         {{
           __(
             'If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.'
@@ -46,23 +50,34 @@ defineExpose({ password })
       </div>
 
       <div class="mt-5 space-y-6" v-if="props.sessions.length > 0">
-        <div class="flex items-center" v-for="(session, i) in props.sessions" :key="i">
+        <div
+          class="flex items-center"
+          v-for="(session, i) in props.sessions"
+          :key="i">
           <div>
-            <IconOutlineDesktopComputer v-if="session.agent.is_desktop" class="h-8 w-8 text-gray-500" />
-            <IconOutlineDeviceMobile v-else class="h-8 w-8 text-gray-500" />
+            <IconOutlineDesktopComputer
+              v-if="session.agent.is_desktop"
+              class="h-8 w-8 text-gray-600 dark:text-gray-400" />
+            <IconOutlineDeviceMobile v-else class="h-8 w-8 text-gray-600" />
           </div>
 
           <div class="ml-3">
-            <div class="text-sm text-gray-600">{{ session.agent.platform }} - {{ session.agent.browser }}</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">
+              {{ session.agent.platform }} - {{ session.agent.browser }}
+            </div>
 
             <div>
-              <div class="text-xs text-gray-500">
+              <div class="text-xs text-gray-600 dark:text-gray-400">
                 {{ session.ip_address }},
 
-                <span class="font-semibold text-green-500" v-if="session.is_current_device">
+                <span
+                  class="font-semibold text-green-500"
+                  v-if="session.is_current_device">
                   {{ __('This device') }}
                 </span>
-                <span v-else> {{ __('Last active') }} {{ session.last_active }} </span>
+                <span v-else>
+                  {{ __('Last active') }} {{ session.last_active }}
+                </span>
               </div>
             </div>
           </div>
@@ -74,7 +89,9 @@ defineExpose({ password })
           {{ __('Log Out Other Browser Sessions') }}
         </Button>
 
-        <ActionMessage :on="form.recentlySuccessful" class="ml-3"> {{ __('Done.') }}</ActionMessage>
+        <ActionMessage :on="form.recentlySuccessful" class="ml-3">
+          {{ __('Done.') }}</ActionMessage
+        >
       </div>
 
       <DialogModal :show="confirmingLogout" @close="closeModal">

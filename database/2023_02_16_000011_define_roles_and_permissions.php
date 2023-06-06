@@ -54,8 +54,7 @@ return new class extends Migration
     $permissions = collect($this->defaultPermissions);
 
     $adminRole = Role::create([
-      'name' => 'Administrator',
-      'guard_name' => 'admin',
+      'name' => 'admin',
       'created_at' => Carbon::now(),
       'updated_at' => Carbon::now(),
     ]);
@@ -63,7 +62,6 @@ return new class extends Migration
     $permissions->each(function ($permission) use ($adminRole) {
       $adminPermission = Permission::create([
         'name' => $permission,
-        'guard_name' => 'admin',
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
 
@@ -75,10 +73,9 @@ return new class extends Migration
       ]);
     });
 
-    // let's create a default Guest role in case self-registration is enabled
+    // let's create a default Member role in case self-registration is enabled
     $guestRole = Role::create([
-      'name' => 'Guest',
-      'guard_name' => 'guest',
+      'name' => 'member',
       'created_at' => Carbon::now(),
       'updated_at' => Carbon::now(),
     ]);
@@ -86,7 +83,6 @@ return new class extends Migration
     DB::table('permission_role')->insert([
       'permission_id' => DB::table('permissions')
         ->where('name', '=', 'admin')
-        ->where('guard_name', '=', 'admin')
         ->value('id'),
       'role_id' => $guestRole->id,
     ]);
@@ -103,7 +99,7 @@ return new class extends Migration
   {
     $permissions = collect($this->defaultPermissions);
 
-    $guestRole = DB::table('roles')->where('name', 'Guest')->where('guard_name', 'admin')->first();
+    $guestRole = DB::table('roles')->where('name', 'member')->first();
 
     DB::table('permission_role')
       ->where('role_id', $guestRole->id)
@@ -111,7 +107,7 @@ return new class extends Migration
 
     DB::table('roles')->where('id', $guestRole->id)->delete();
 
-    $adminRole = DB::table('roles')->where('name', 'Administrator')->where('guard_name', 'admin')->first();
+    $adminRole = DB::table('roles')->where('name', 'admin')->first();
 
     DB::table('permission_role')
       ->where('role_id', $adminRole->id)
@@ -122,7 +118,6 @@ return new class extends Migration
     $permissions->each(function ($permission) {
       $permissionItem = DB::table('permissions')->where([
         'name' => $permission,
-        'guard_name' => 'admin',
       ])->first();
 
       if ($permissionItem !== null) {
