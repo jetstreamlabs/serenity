@@ -1,21 +1,28 @@
-import { useSSRContext, mergeProps, openBlock, createElementBlock, createElementVNode, computed, onMounted, onUnmounted, toRefs, watch, unref, withCtx, createVNode, renderSlot, ref, useSlots, createTextVNode, toDisplayString, createBlock, Fragment, renderList, createCommentVNode, inject, nextTick, resolveComponent, withModifiers, defineComponent, resolveDirective, withDirectives, vShow, withKeys, createSlots, createSSRApp, h as h$1 } from "vue";
-import { ssrRenderAttrs, ssrRenderSlot, ssrRenderTeleport, ssrRenderStyle, ssrRenderClass, ssrRenderComponent, ssrLooseContain, ssrGetDynamicModelProps, ssrInterpolate, ssrRenderAttr, ssrRenderList, ssrGetDirectiveProps } from "vue/server-renderer";
-import { useForm, usePage, router, Head, Link, createInertiaApp } from "@inertiajs/vue3";
+import { useSSRContext, mergeProps, openBlock, createElementBlock, createElementVNode, computed, onMounted, onUnmounted, toRefs, watch, unref, withCtx, createVNode, renderSlot, ref, useSlots, createTextVNode, toDisplayString, createBlock, Fragment, renderList, createCommentVNode, inject, nextTick, resolveComponent, withModifiers, resolveDynamicComponent, onBeforeUnmount, withDirectives, vShow, getCurrentInstance, withKeys, createSlots, createSSRApp, h as h$1 } from "vue";
+import { ssrRenderAttrs, ssrRenderSlot, ssrRenderTeleport, ssrRenderStyle, ssrRenderClass, ssrRenderComponent, ssrLooseContain, ssrGetDynamicModelProps, ssrInterpolate, ssrRenderAttr, ssrRenderList, ssrRenderVNode, ssrIncludeBooleanAttr } from "vue/server-renderer";
+import { usePage, useForm, router, Head, Link, createInertiaApp } from "@inertiajs/vue3";
 import _ from "lodash";
 import route from "ziggy-js";
 import dayjs from "dayjs";
-import { useToast } from "@brackets/vue-toastification";
-import "lodash/debounce.js";
-import "lodash/pick.js";
-import "lodash/pickBy.js";
 import { useDark, useToggle } from "@vueuse/core";
-import "laravel-vue-i18n";
+import { TransitionRoot, Dialog, TransitionChild, DialogPanel } from "@headlessui/vue";
+import uniq from "lodash-es/uniq.js";
+import find from "lodash-es/find.js";
+import { createPopper, flip, preventOverflow } from "@popperjs/core";
+import qs from "qs";
+import clone from "lodash-es/clone.js";
+import filter from "lodash-es/filter.js";
+import findKey from "lodash-es/findKey.js";
+import forEach from "lodash-es/forEach.js";
+import isEqual from "lodash-es/isEqual.js";
+import map from "lodash-es/map.js";
+import pickBy from "lodash-es/pickBy.js";
 import createServer from "@inertiajs/vue3/server";
 import { renderToString } from "@vue/server-renderer";
 import { createPinia, defineStore } from "pinia";
 import mitt from "mitt";
 import axios$1 from "axios";
-const _sfc_main$1r = {
+const _sfc_main$1O = {
   __name: "DangerButton",
   __ssrInlineRender: true,
   props: {
@@ -36,18 +43,18 @@ const _sfc_main$1r = {
     };
   }
 };
-const _sfc_setup$1r = _sfc_main$1r.setup;
-_sfc_main$1r.setup = (props, ctx) => {
+const _sfc_setup$1O = _sfc_main$1O.setup;
+_sfc_main$1O.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/DangerButton.vue");
-  return _sfc_setup$1r ? _sfc_setup$1r(props, ctx) : void 0;
+  return _sfc_setup$1O ? _sfc_setup$1O(props, ctx) : void 0;
 };
-const _hoisted_1$k = {
+const _hoisted_1$w = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$k = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$w = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -55,14 +62,14 @@ const _hoisted_2$k = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3Z"
 }, null, -1);
-const _hoisted_3$k = [
-  _hoisted_2$k
+const _hoisted_3$w = [
+  _hoisted_2$w
 ];
-function render$k(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$k, _hoisted_3$k);
+function render$w(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$w, _hoisted_3$w);
 }
-const __unplugin_components_1$7 = { name: "heroicons-outline-exclamation", render: render$k };
-const _sfc_main$1q = {
+const __unplugin_components_1$9 = { name: "heroicons-outline-exclamation", render: render$w };
+const _sfc_main$1N = {
   __name: "Modal",
   __ssrInlineRender: true,
   props: {
@@ -124,13 +131,13 @@ const _sfc_main$1q = {
     };
   }
 };
-const _sfc_setup$1q = _sfc_main$1q.setup;
-_sfc_main$1q.setup = (props, ctx) => {
+const _sfc_setup$1N = _sfc_main$1N.setup;
+_sfc_main$1N.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Modal.vue");
-  return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
+  return _sfc_setup$1N ? _sfc_setup$1N(props, ctx) : void 0;
 };
-const _sfc_main$1p = {
+const _sfc_main$1M = {
   __name: "ConfirmationModal",
   __ssrInlineRender: true,
   props: {
@@ -152,8 +159,8 @@ const _sfc_main$1p = {
       emit("close");
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Modal = _sfc_main$1q;
-      const _component_IconOutlineExclamation = __unplugin_components_1$7;
+      const _component_Modal = _sfc_main$1N;
+      const _component_IconOutlineExclamation = __unplugin_components_1$9;
       _push(ssrRenderComponent(_component_Modal, mergeProps({
         show: unref(show),
         "max-width": unref(maxWidth),
@@ -199,13 +206,13 @@ const _sfc_main$1p = {
     };
   }
 };
-const _sfc_setup$1p = _sfc_main$1p.setup;
-_sfc_main$1p.setup = (props, ctx) => {
+const _sfc_setup$1M = _sfc_main$1M.setup;
+_sfc_main$1M.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ConfirmationModal.vue");
-  return _sfc_setup$1p ? _sfc_setup$1p(props, ctx) : void 0;
+  return _sfc_setup$1M ? _sfc_setup$1M(props, ctx) : void 0;
 };
-const _sfc_main$1o = {
+const _sfc_main$1L = {
   __name: "SecondaryButton",
   __ssrInlineRender: true,
   props: {
@@ -227,13 +234,13 @@ const _sfc_main$1o = {
     };
   }
 };
-const _sfc_setup$1o = _sfc_main$1o.setup;
-_sfc_main$1o.setup = (props, ctx) => {
+const _sfc_setup$1L = _sfc_main$1L.setup;
+_sfc_main$1L.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/SecondaryButton.vue");
-  return _sfc_setup$1o ? _sfc_setup$1o(props, ctx) : void 0;
+  return _sfc_setup$1L ? _sfc_setup$1L(props, ctx) : void 0;
 };
-const _sfc_main$1n = {
+const _sfc_main$1K = {
   __name: "DialogModal",
   __ssrInlineRender: true,
   props: {
@@ -255,7 +262,7 @@ const _sfc_main$1n = {
       emit("close");
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Modal = _sfc_main$1q;
+      const _component_Modal = _sfc_main$1N;
       _push(ssrRenderComponent(_component_Modal, mergeProps({
         show: unref(show),
         "max-width": unref(maxWidth),
@@ -292,11 +299,11 @@ const _sfc_main$1n = {
     };
   }
 };
-const _sfc_setup$1n = _sfc_main$1n.setup;
-_sfc_main$1n.setup = (props, ctx) => {
+const _sfc_setup$1K = _sfc_main$1K.setup;
+_sfc_main$1K.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/DialogModal.vue");
-  return _sfc_setup$1n ? _sfc_setup$1n(props, ctx) : void 0;
+  return _sfc_setup$1K ? _sfc_setup$1K(props, ctx) : void 0;
 };
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -305,8 +312,8 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_main$1m = {};
-function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs) {
+const _sfc_main$1J = {};
+function _sfc_ssrRender$g(_ctx, _push, _parent, _attrs) {
   _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex justify-between md:col-span-1" }, _attrs))}><div class="px-4 sm:px-0"><h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">`);
   ssrRenderSlot(_ctx.$slots, "title", {}, null, _push, _parent);
   _push(`</h3><p class="mt-1 text-sm text-gray-600 dark:text-gray-300">`);
@@ -315,16 +322,16 @@ function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs) {
   ssrRenderSlot(_ctx.$slots, "aside", {}, null, _push, _parent);
   _push(`</div></div>`);
 }
-const _sfc_setup$1m = _sfc_main$1m.setup;
-_sfc_main$1m.setup = (props, ctx) => {
+const _sfc_setup$1J = _sfc_main$1J.setup;
+_sfc_main$1J.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/SectionTitle.vue");
-  return _sfc_setup$1m ? _sfc_setup$1m(props, ctx) : void 0;
+  return _sfc_setup$1J ? _sfc_setup$1J(props, ctx) : void 0;
 };
-const __unplugin_components_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$1m, [["ssrRender", _sfc_ssrRender$b]]);
-const _sfc_main$1l = {};
-function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs) {
-  const _component_SectionTitle = __unplugin_components_0$4;
+const __unplugin_components_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$1J, [["ssrRender", _sfc_ssrRender$g]]);
+const _sfc_main$1I = {};
+function _sfc_ssrRender$f(_ctx, _push, _parent, _attrs) {
+  const _component_SectionTitle = __unplugin_components_0$6;
   _push(`<div${ssrRenderAttrs(mergeProps({ class: "md:grid md:grid-cols-3 md:gap-6" }, _attrs))}>`);
   _push(ssrRenderComponent(_component_SectionTitle, null, {
     title: withCtx((_2, _push2, _parent2, _scopeId) => {
@@ -351,14 +358,14 @@ function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs) {
   ssrRenderSlot(_ctx.$slots, "content", {}, null, _push, _parent);
   _push(`</div></div></div>`);
 }
-const _sfc_setup$1l = _sfc_main$1l.setup;
-_sfc_main$1l.setup = (props, ctx) => {
+const _sfc_setup$1I = _sfc_main$1I.setup;
+_sfc_main$1I.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ActionSection.vue");
-  return _sfc_setup$1l ? _sfc_setup$1l(props, ctx) : void 0;
+  return _sfc_setup$1I ? _sfc_setup$1I(props, ctx) : void 0;
 };
-const __unplugin_components_8$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["ssrRender", _sfc_ssrRender$a]]);
-const _sfc_main$1k = {
+const __unplugin_components_8$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1I, [["ssrRender", _sfc_ssrRender$f]]);
+const _sfc_main$1H = {
   __name: "SectionBorder",
   __ssrInlineRender: true,
   props: {
@@ -383,13 +390,13 @@ const _sfc_main$1k = {
     };
   }
 };
-const _sfc_setup$1k = _sfc_main$1k.setup;
-_sfc_main$1k.setup = (props, ctx) => {
+const _sfc_setup$1H = _sfc_main$1H.setup;
+_sfc_main$1H.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/SectionBorder.vue");
-  return _sfc_setup$1k ? _sfc_setup$1k(props, ctx) : void 0;
+  return _sfc_setup$1H ? _sfc_setup$1H(props, ctx) : void 0;
 };
-const _sfc_main$1j = {
+const _sfc_main$1G = {
   __name: "Button",
   __ssrInlineRender: true,
   props: {
@@ -410,13 +417,13 @@ const _sfc_main$1j = {
     };
   }
 };
-const _sfc_setup$1j = _sfc_main$1j.setup;
-_sfc_main$1j.setup = (props, ctx) => {
+const _sfc_setup$1G = _sfc_main$1G.setup;
+_sfc_main$1G.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Button.vue");
-  return _sfc_setup$1j ? _sfc_setup$1j(props, ctx) : void 0;
+  return _sfc_setup$1G ? _sfc_setup$1G(props, ctx) : void 0;
 };
-const _sfc_main$1i = {
+const _sfc_main$1F = {
   __name: "ActionMessage",
   __ssrInlineRender: true,
   props: ["on"],
@@ -429,13 +436,13 @@ const _sfc_main$1i = {
     };
   }
 };
-const _sfc_setup$1i = _sfc_main$1i.setup;
-_sfc_main$1i.setup = (props, ctx) => {
+const _sfc_setup$1F = _sfc_main$1F.setup;
+_sfc_main$1F.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ActionMessage.vue");
-  return _sfc_setup$1i ? _sfc_setup$1i(props, ctx) : void 0;
+  return _sfc_setup$1F ? _sfc_setup$1F(props, ctx) : void 0;
 };
-const _sfc_main$1h = {
+const _sfc_main$1E = {
   __name: "Checkbox",
   __ssrInlineRender: true,
   props: {
@@ -469,13 +476,13 @@ const _sfc_main$1h = {
     };
   }
 };
-const _sfc_setup$1h = _sfc_main$1h.setup;
-_sfc_main$1h.setup = (props, ctx) => {
+const _sfc_setup$1E = _sfc_main$1E.setup;
+_sfc_main$1E.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Checkbox.vue");
-  return _sfc_setup$1h ? _sfc_setup$1h(props, ctx) : void 0;
+  return _sfc_setup$1E ? _sfc_setup$1E(props, ctx) : void 0;
 };
-const _sfc_main$1g = {
+const _sfc_main$1D = {
   __name: "InputError",
   __ssrInlineRender: true,
   props: ["message"],
@@ -488,13 +495,13 @@ const _sfc_main$1g = {
     };
   }
 };
-const _sfc_setup$1g = _sfc_main$1g.setup;
-_sfc_main$1g.setup = (props, ctx) => {
+const _sfc_setup$1D = _sfc_main$1D.setup;
+_sfc_main$1D.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/InputError.vue");
-  return _sfc_setup$1g ? _sfc_setup$1g(props, ctx) : void 0;
+  return _sfc_setup$1D ? _sfc_setup$1D(props, ctx) : void 0;
 };
-const _sfc_main$1f = {
+const _sfc_main$1C = {
   __name: "Input",
   __ssrInlineRender: true,
   props: {
@@ -525,13 +532,13 @@ const _sfc_main$1f = {
     };
   }
 };
-const _sfc_setup$1f = _sfc_main$1f.setup;
-_sfc_main$1f.setup = (props, ctx) => {
+const _sfc_setup$1C = _sfc_main$1C.setup;
+_sfc_main$1C.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Input.vue");
-  return _sfc_setup$1f ? _sfc_setup$1f(props, ctx) : void 0;
+  return _sfc_setup$1C ? _sfc_setup$1C(props, ctx) : void 0;
 };
-const _sfc_main$1e = {
+const _sfc_main$1B = {
   __name: "Label",
   __ssrInlineRender: true,
   props: {
@@ -560,13 +567,13 @@ const _sfc_main$1e = {
     };
   }
 };
-const _sfc_setup$1e = _sfc_main$1e.setup;
-_sfc_main$1e.setup = (props, ctx) => {
+const _sfc_setup$1B = _sfc_main$1B.setup;
+_sfc_main$1B.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Label.vue");
-  return _sfc_setup$1e ? _sfc_setup$1e(props, ctx) : void 0;
+  return _sfc_setup$1B ? _sfc_setup$1B(props, ctx) : void 0;
 };
-const _sfc_main$1d = {
+const _sfc_main$1A = {
   __name: "FormSection",
   __ssrInlineRender: true,
   props: {
@@ -584,7 +591,7 @@ const _sfc_main$1d = {
       return !!slots.actions;
     });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_SectionTitle = __unplugin_components_0$4;
+      const _component_SectionTitle = __unplugin_components_0$6;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "md:grid md:grid-cols-3 md:gap-6" }, _attrs))}>`);
       _push(ssrRenderComponent(_component_SectionTitle, null, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
@@ -627,11 +634,11 @@ const _sfc_main$1d = {
     };
   }
 };
-const _sfc_setup$1d = _sfc_main$1d.setup;
-_sfc_main$1d.setup = (props, ctx) => {
+const _sfc_setup$1A = _sfc_main$1A.setup;
+_sfc_main$1A.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/FormSection.vue");
-  return _sfc_setup$1d ? _sfc_setup$1d(props, ctx) : void 0;
+  return _sfc_setup$1A ? _sfc_setup$1A(props, ctx) : void 0;
 };
 const trans$1 = (key, replace, Zora2) => {
   const locale = window.locale;
@@ -699,14 +706,14 @@ const ZoraSSR = {
     }
   })
 };
-const Zora = { translations: { "en": { "php": { "auth": { "failed": "These credentials do not match our records.", "password": "The provided password is incorrect.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "pagination": { "previous": "&laquo; Previous", "next": "Next &raquo;" }, "passwords": { "reset": "Your password has been reset!", "sent": "We have emailed your password reset link!", "throttled": "Please wait before retrying.", "token": "This password reset token is invalid.", "user": "We can't find a user with that email address." }, "validation": { "accepted": "The :attribute must be accepted.", "accepted_if": "The :attribute must be accepted when :other is :value.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute must only contain letters.", "alpha_dash": "The :attribute must only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute must only contain letters and numbers.", "array": "The :attribute must be an array.", "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "numeric": "The :attribute must be between :min and :max.", "file": "The :attribute must be between :min and :max kilobytes.", "string": "The :attribute must be between :min and :max characters.", "array": "The :attribute must have between :min and :max items." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "current_password": "The password is incorrect.", "date": "The :attribute is not a valid date.", "date_equals": "The :attribute must be a date equal to :date.", "date_format": "The :attribute does not match the format :format.", "declined": "The :attribute must be declined.", "declined_if": "The :attribute must be declined when :other is :value.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "email": "The :attribute must be a valid email address.", "ends_with": "The :attribute must end with one of the following: :values.", "enum": "The selected :attribute is invalid.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "numeric": "The :attribute must be greater than :value.", "file": "The :attribute must be greater than :value kilobytes.", "string": "The :attribute must be greater than :value characters.", "array": "The :attribute must have more than :value items." }, "gte": { "numeric": "The :attribute must be greater than or equal to :value.", "file": "The :attribute must be greater than or equal to :value kilobytes.", "string": "The :attribute must be greater than or equal to :value characters.", "array": "The :attribute must have :value items or more." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "mac_address": "The :attribute must be a valid MAC address.", "json": "The :attribute must be a valid JSON string.", "lt": { "numeric": "The :attribute must be less than :value.", "file": "The :attribute must be less than :value kilobytes.", "string": "The :attribute must be less than :value characters.", "array": "The :attribute must have less than :value items." }, "lte": { "numeric": "The :attribute must be less than or equal to :value.", "file": "The :attribute must be less than or equal to :value kilobytes.", "string": "The :attribute must be less than or equal to :value characters.", "array": "The :attribute must not have more than :value items." }, "max": { "numeric": "The :attribute must not be greater than :max.", "file": "The :attribute must not be greater than :max kilobytes.", "string": "The :attribute must not be greater than :max characters.", "array": "The :attribute must not have more than :max items." }, "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "numeric": "The :attribute must be at least :min.", "file": "The :attribute must be at least :min kilobytes.", "string": "The :attribute must be at least :min characters.", "array": "The :attribute must have at least :min items." }, "multiple_of": "The :attribute must be a multiple of :value.", "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "password": "The password is incorrect.", "present": "The :attribute field must be present.", "prohibited": "The :attribute field is prohibited.", "prohibited_if": "The :attribute field is prohibited when :other is :value.", "prohibited_unless": "The :attribute field is prohibited unless :other is in :values.", "prohibits": "The :attribute field prohibits :other from being present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_if": "The :attribute field is required when :other is :value.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values are present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "numeric": "The :attribute must be :size.", "file": "The :attribute must be :size kilobytes.", "string": "The :attribute must be :size characters.", "array": "The :attribute must contain :size items." }, "starts_with": "The :attribute must start with one of the following: :values.", "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid timezone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "url": "The :attribute must be a valid URL.", "uuid": "The :attribute must be a valid UUID.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "attributes": [] } }, "json": { "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.", "The :attribute must contain at least one number.": "The :attribute must contain at least one number.", "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.", "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.", "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute." } } } };
+const Zora = { translations: { "en": { "php": { "app": { "password-updated": "Password updated successfully.", "profile-information-updated": "Profile information updated successfully.", "recovery-codes-generated": "Recovery codes generated succussfully.", "two-factor-authentication-confirmed": "Two-factor authentication confirmed.", "two-factor-authentication-disabled": "Two-factor authentication disabled.", "two-factor-authentication-enabled": "Two-factor authentication enabled.", "verification-link-sent": "Verification link sent. Please check your email." }, "auth": { "failed": "These credentials do not match our records.", "password": "The provided password is incorrect.", "throttle": "Too many login attempts. Please try again in :seconds seconds." }, "pagination": { "previous": "&laquo; Previous", "next": "Next &raquo;" }, "passwords": { "reset": "Your password has been reset!", "sent": "We have emailed your password reset link!", "throttled": "Please wait before retrying.", "token": "This password reset token is invalid.", "user": "We can't find a user with that email address." }, "validation": { "accepted": "The :attribute must be accepted.", "accepted_if": "The :attribute must be accepted when :other is :value.", "active_url": "The :attribute is not a valid URL.", "after": "The :attribute must be a date after :date.", "after_or_equal": "The :attribute must be a date after or equal to :date.", "alpha": "The :attribute must only contain letters.", "alpha_dash": "The :attribute must only contain letters, numbers, dashes and underscores.", "alpha_num": "The :attribute must only contain letters and numbers.", "array": "The :attribute must be an array.", "ascii": "The :attribute field must only contain single-byte alphanumeric characters and symbols.", "before": "The :attribute must be a date before :date.", "before_or_equal": "The :attribute must be a date before or equal to :date.", "between": { "array": "The :attribute must have between :min and :max items.", "file": "The :attribute must be between :min and :max kilobytes.", "numeric": "The :attribute must be between :min and :max.", "string": "The :attribute must be between :min and :max characters." }, "boolean": "The :attribute field must be true or false.", "confirmed": "The :attribute confirmation does not match.", "current_password": "The password is incorrect.", "date": "The :attribute is not a valid date.", "date_equals": "The :attribute must be a date equal to :date.", "date_format": "The :attribute does not match the format :format.", "decimal": "The :attribute field must have :decimal decimal places.", "declined": "The :attribute must be declined.", "declined_if": "The :attribute must be declined when :other is :value.", "different": "The :attribute and :other must be different.", "digits": "The :attribute must be :digits digits.", "digits_between": "The :attribute must be between :min and :max digits.", "dimensions": "The :attribute has invalid image dimensions.", "distinct": "The :attribute field has a duplicate value.", "doesnt_end_with": "The :attribute field must not end with one of the following: :values.", "doesnt_start_with": "The :attribute field must not start with one of the following: :values.", "email": "The :attribute must be a valid email address.", "ends_with": "The :attribute must end with one of the following: :values.", "enum": "The selected :attribute is invalid.", "exists": "The selected :attribute is invalid.", "file": "The :attribute must be a file.", "filled": "The :attribute field must have a value.", "gt": { "array": "The :attribute must have more than :value items.", "file": "The :attribute must be greater than :value kilobytes.", "numeric": "The :attribute must be greater than :value.", "string": "The :attribute must be greater than :value characters." }, "gte": { "array": "The :attribute must have :value items or more.", "file": "The :attribute must be greater than or equal to :value kilobytes.", "numeric": "The :attribute must be greater than or equal to :value.", "string": "The :attribute must be greater than or equal to :value characters." }, "image": "The :attribute must be an image.", "in": "The selected :attribute is invalid.", "in_array": "The :attribute field does not exist in :other.", "integer": "The :attribute must be an integer.", "ip": "The :attribute must be a valid IP address.", "ipv4": "The :attribute must be a valid IPv4 address.", "ipv6": "The :attribute must be a valid IPv6 address.", "json": "The :attribute must be a valid JSON string.", "lowercase": "The :attribute field must be lowercase.", "lt": { "array": "The :attribute must have less than :value items.", "file": "The :attribute must be less than :value kilobytes.", "numeric": "The :attribute must be less than :value.", "string": "The :attribute must be less than :value characters." }, "lte": { "array": "The :attribute must not have more than :value items.", "file": "The :attribute must be less than or equal to :value kilobytes.", "numeric": "The :attribute must be less than or equal to :value.", "string": "The :attribute must be less than or equal to :value characters." }, "mac_address": "The :attribute must be a valid MAC address.", "max": { "array": "The :attribute must not have more than :max items.", "file": "The :attribute must not be greater than :max kilobytes.", "numeric": "The :attribute must not be greater than :max.", "string": "The :attribute must not be greater than :max characters." }, "max_digits": "The :attribute field must not have more than :max digits.", "mimes": "The :attribute must be a file of type: :values.", "mimetypes": "The :attribute must be a file of type: :values.", "min": { "array": "The :attribute must have at least :min items.", "file": "The :attribute must be at least :min kilobytes.", "numeric": "The :attribute must be at least :min.", "string": "The :attribute must be at least :min characters." }, "min_digits": "The :attribute field must have at least :min digits.", "missing": "The :attribute field must be missing.", "missing_if": "The :attribute field must be missing when :other is :value.", "missing_unless": "The :attribute field must be missing unless :other is :value.", "missing_with": "The :attribute field must be missing when :values is present.", "missing_with_all": "The :attribute field must be missing when :values are present.", "multiple_of": "The :attribute must be a multiple of :value.", "not_in": "The selected :attribute is invalid.", "not_regex": "The :attribute format is invalid.", "numeric": "The :attribute must be a number.", "password": "The password is incorrect.", "present": "The :attribute field must be present.", "prohibited": "The :attribute field is prohibited.", "prohibited_if": "The :attribute field is prohibited when :other is :value.", "prohibited_unless": "The :attribute field is prohibited unless :other is in :values.", "prohibits": "The :attribute field prohibits :other from being present.", "regex": "The :attribute format is invalid.", "required": "The :attribute field is required.", "required_array_keys": "The :attribute field must contain entries for: :values.", "required_if": "The :attribute field is required when :other is :value.", "required_if_accepted": "The :attribute field is required when :other is accepted.", "required_unless": "The :attribute field is required unless :other is in :values.", "required_with": "The :attribute field is required when :values is present.", "required_with_all": "The :attribute field is required when :values are present.", "required_without": "The :attribute field is required when :values is not present.", "required_without_all": "The :attribute field is required when none of :values are present.", "same": "The :attribute and :other must match.", "size": { "array": "The :attribute must contain :size items.", "file": "The :attribute must be :size kilobytes.", "numeric": "The :attribute must be :size.", "string": "The :attribute must be :size characters." }, "starts_with": "The :attribute must start with one of the following: :values.", "string": "The :attribute must be a string.", "timezone": "The :attribute must be a valid timezone.", "unique": "The :attribute has already been taken.", "uploaded": "The :attribute failed to upload.", "uppercase": "The :attribute field must be uppercase.", "url": "The :attribute must be a valid URL.", "ulid": "The :attribute field must be a valid ULID.", "uuid": "The :attribute must be a valid UUID.", "custom": { "attribute-name": { "rule-name": "custom-message" } }, "attributes": [] } }, "json": { "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.", "The :attribute must contain at least one number.": "The :attribute must contain at least one number.", "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.", "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.", "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute." } } } };
 if (typeof window !== "undefined" && typeof window.Zora !== "undefined") {
   Object.assign(Zora.routes, window.Zora.routes);
 }
 function useTrans(key, replace) {
   return trans$1(key, replace, Zora);
 }
-const Ziggy$1 = { "url": "https://serenity.test", "port": null, "defaults": {}, "routes": { "sanctum.csrf-cookie": { "uri": "sanctum/csrf-cookie", "methods": ["GET", "HEAD"] }, "login": { "uri": "login", "methods": ["GET", "HEAD"] }, "login.store": { "uri": "login", "methods": ["POST"] }, "logout": { "uri": "logout", "methods": ["POST"] }, "password.request": { "uri": "forgot-password", "methods": ["GET", "HEAD"] }, "password.reset": { "uri": "reset-password/{token}", "methods": ["GET", "HEAD"] }, "password.email": { "uri": "forgot-password", "methods": ["POST"] }, "password.update": { "uri": "reset-password", "methods": ["POST"] }, "register": { "uri": "register", "methods": ["GET", "HEAD"] }, "register.store": { "uri": "register", "methods": ["POST"] }, "verification.notice": { "uri": "email/verify/prompt", "methods": ["GET", "HEAD"] }, "verification.verify": { "uri": "email/verify/{id}/{hash}", "methods": ["GET", "HEAD"] }, "verification.send": { "uri": "email/verify/store", "methods": ["POST"] }, "user-profile-information.update": { "uri": "user/profile/update", "methods": ["PUT"] }, "user-password.update": { "uri": "user/password", "methods": ["PUT"] }, "password.create": { "uri": "user/password/confirm", "methods": ["GET", "HEAD"] }, "password.confirmation": { "uri": "user/password/status", "methods": ["GET", "HEAD"] }, "password.confirm": { "uri": "user/password/confirm", "methods": ["POST"] }, "two-factor.login": { "uri": "two-factor-challenge", "methods": ["GET", "HEAD"] }, "two-factor.challenge": { "uri": "two-factor-challenge", "methods": ["POST"] }, "two-factor.enable": { "uri": "user/two-factor-authentication", "methods": ["POST"] }, "two-factor.confirm": { "uri": "user/confirmed-two-factor-authentication", "methods": ["POST"] }, "two-factor.disable": { "uri": "user/two-factor-authentication", "methods": ["DELETE"] }, "two-factor.qr-code": { "uri": "user/two-factor-qr-code", "methods": ["GET", "HEAD"] }, "two-factor.secret-key": { "uri": "user/two-factor-secret-key", "methods": ["GET", "HEAD"] }, "two-factor.recovery-codes": { "uri": "user/two-factor-recovery-codes", "methods": ["GET", "HEAD"] }, "two-factor.store": { "uri": "user/two-factor-recovery-codes", "methods": ["POST"] }, "terms.show": { "uri": "terms-of-service", "methods": ["GET", "HEAD"] }, "policy.show": { "uri": "privacy-policy", "methods": ["GET", "HEAD"] }, "profile.show": { "uri": "user/profile", "methods": ["GET", "HEAD"] }, "settings.show": { "uri": "user/settings", "methods": ["GET", "HEAD"] }, "other-browser-sessions.destroy": { "uri": "user/browsers/delete", "methods": ["DELETE"] }, "current-user-photo.destroy": { "uri": "user/profile-photo", "methods": ["DELETE"] }, "current-user.destroy": { "uri": "user", "methods": ["DELETE"] }, "api-tokens.index": { "uri": "user/api-tokens", "methods": ["GET", "HEAD"] }, "api-tokens.store": { "uri": "user/api-tokens", "methods": ["POST"] }, "api-tokens.update": { "uri": "user/api-tokens/{token}", "methods": ["PUT"] }, "api-tokens.destroy": { "uri": "user/api-tokens/{token}", "methods": ["DELETE"] }, "teams.create": { "uri": "teams/create", "methods": ["GET", "HEAD"] }, "teams.store": { "uri": "teams", "methods": ["POST"] }, "teams.show": { "uri": "teams/{team}", "methods": ["GET", "HEAD"] }, "teams.update": { "uri": "teams/{team}", "methods": ["PUT"] }, "teams.destroy": { "uri": "teams/{team}", "methods": ["DELETE"] }, "current-team.update": { "uri": "current-team", "methods": ["PUT"] }, "team-members.store": { "uri": "teams/{team}/members", "methods": ["POST"] }, "team-members.update": { "uri": "teams/{team}/members/{user}", "methods": ["PUT"] }, "team-members.destroy": { "uri": "teams/{team}/members/{user}", "methods": ["DELETE"] }, "team-invitations.accept": { "uri": "teams/invitations/{invitation}", "methods": ["GET", "HEAD"] }, "team-invitations.destroy": { "uri": "teams/invitations/{invitation}", "methods": ["DELETE"] }, "docs.home": { "uri": "docs", "methods": ["GET", "HEAD"] }, "docs.show": { "uri": "docs/{version}/{page?}", "methods": ["GET", "HEAD"], "wheres": { "page": "(.*)" } }, "ignition.healthCheck": { "uri": "_ignition/health-check", "methods": ["GET", "HEAD"] }, "ignition.executeSolution": { "uri": "_ignition/execute-solution", "methods": ["POST"] }, "ignition.updateConfig": { "uri": "_ignition/update-config", "methods": ["POST"] }, "home": { "uri": "/", "methods": ["GET", "HEAD"] }, "dashboard": { "uri": "dashboard", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.upload": { "uri": "admin/unassigned-media/upload", "methods": ["GET", "HEAD"] }, "admin.unassigned-media": { "uri": "admin/unassigned-media", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.authorize": { "uri": "admin/unassigned-media/authorize", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.authorize-for-user": { "uri": "admin/unassigned-media/authorize-for-user", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.authorize-resource": { "uri": "admin/unassigned-media/authorize-resource", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.dispatch-sync": { "uri": "admin/unassigned-media/dispatch-sync", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.validate-with": { "uri": "admin/unassigned-media/validate-with", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.validate": { "uri": "admin/unassigned-media/validate", "methods": ["GET", "HEAD"] }, "admin.unassigned-media.validate-with-bag": { "uri": "admin/unassigned-media/validate-with-bag", "methods": ["GET", "HEAD"] }, "admin.dashboard": { "uri": "admin/dashboard", "methods": ["GET", "HEAD"] }, "admin.file-upload.upload": { "uri": "admin/file-upload/upload", "methods": ["GET", "HEAD"] }, "admin.file-upload.authorize": { "uri": "admin/file-upload/authorize", "methods": ["GET", "HEAD"] }, "admin.file-upload.authorize-for-user": { "uri": "admin/file-upload/authorize-for-user", "methods": ["GET", "HEAD"] }, "admin.file-upload.authorize-resource": { "uri": "admin/file-upload/authorize-resource", "methods": ["GET", "HEAD"] }, "admin.file-upload.dispatch-sync": { "uri": "admin/file-upload/dispatch-sync", "methods": ["GET", "HEAD"] }, "admin.file-upload.validate-with": { "uri": "admin/file-upload/validate-with", "methods": ["GET", "HEAD"] }, "admin.file-upload.validate": { "uri": "admin/file-upload/validate", "methods": ["GET", "HEAD"] }, "admin.file-upload.validate-with-bag": { "uri": "admin/file-upload/validate-with-bag", "methods": ["GET", "HEAD"] }, "admin.tags": { "uri": "admin/tags", "methods": ["GET", "HEAD"] }, "admin.settings.settings": { "uri": "admin/settings/settings", "methods": ["GET", "HEAD"] }, "admin.roles.role": { "uri": "admin/roles/role/{role}", "methods": ["GET", "HEAD"], "bindings": { "role": "id" } }, "admin.roles.role.edit": { "uri": "admin/roles/role/edit/{role}", "methods": ["GET", "HEAD"], "bindings": { "role": "id" } }, "admin.user.user-profile.edit": { "uri": "admin/user/user-profile/edit", "methods": ["GET", "HEAD"] }, "admin.user.user-profile": { "uri": "admin/user/user-profile", "methods": ["GET", "HEAD"] }, "admin.user.user": { "uri": "admin/user/user/{user}", "methods": ["GET", "HEAD"], "bindings": { "user": "id" } }, "admin.user.user.create": { "uri": "admin/user/user/create", "methods": ["GET", "HEAD"] }, "admin.user.user.edit": { "uri": "admin/user/user/edit", "methods": ["GET", "HEAD"] }, "admin.user.user.resend-email-verification-notification": { "uri": "admin/user/user/resend-email-verification-notification", "methods": ["GET", "HEAD"] }, "admin.user.user.bulk-destroy": { "uri": "admin/user/user/bulk-destroy", "methods": ["GET", "HEAD"] }, "admin.user.user.bulk-deactivate": { "uri": "admin/user/user/bulk-deactivate", "methods": ["GET", "HEAD"] }, "admin.user.user.bulk-activate": { "uri": "admin/user/user/bulk-activate", "methods": ["GET", "HEAD"] }, "admin.user.user.impersonal-login": { "uri": "admin/user/user/impersonal-login", "methods": ["GET", "HEAD"] }, "admin.user.user-password.edit": { "uri": "admin/user/user-password/edit", "methods": ["GET", "HEAD"] }, "admin.user.user-password": { "uri": "admin/user/user-password", "methods": ["GET", "HEAD"] }, "admin.user.user-invitation.invite-user": { "uri": "admin/user/user-invitation/invite-user", "methods": ["GET", "HEAD"] }, "admin.user.user-invitation.create-invite-acceptation-user": { "uri": "admin/user/user-invitation/create-invite-acceptation-user", "methods": ["GET", "HEAD"] }, "admin.user.user-invitation.store-invite-acceptation-user": { "uri": "admin/user/user-invitation/store-invite-acceptation-user", "methods": ["GET", "HEAD"] }, "admin.user.user-invitation.send-invitation": { "uri": "admin/user/user-invitation/send-invitation", "methods": ["GET", "HEAD"] }, "admin.permissions.permission": { "uri": "admin/permissions/permission", "methods": ["GET", "HEAD"] }, "admin.translations.translations": { "uri": "admin/translations/translations/{translation}", "methods": ["GET", "HEAD"], "bindings": { "translation": "id" } }, "admin.translations.translations.rescan": { "uri": "admin/translations/translations/rescan", "methods": ["GET", "HEAD"] }, "admin.translations.translations.publish": { "uri": "admin/translations/translations/publish", "methods": ["GET", "HEAD"] }, "admin.translations.translations.export": { "uri": "admin/translations/translations/export", "methods": ["GET", "HEAD"] }, "admin.translations.translations.import": { "uri": "admin/translations/translations/import", "methods": ["GET", "HEAD"] }, "admin.translations.translations.import-resolved-conflicts": { "uri": "admin/translations/translations/import-resolved-conflicts", "methods": ["GET", "HEAD"] }, "admin.media.media": { "uri": "admin/media/media", "methods": ["GET", "HEAD"] }, "admin.media.media.images": { "uri": "admin/media/media/images", "methods": ["GET", "HEAD"] }, "admin.media.media.files": { "uri": "admin/media/media/files", "methods": ["GET", "HEAD"] }, "admin.media.media.update-media": { "uri": "admin/media/media/update-media/{media}", "methods": ["GET", "HEAD"], "bindings": { "media": "id" } } } };
+const Ziggy$1 = { "url": "https://serenity.test", "port": null, "defaults": {}, "routes": { "sanctum.csrf-cookie": { "uri": "sanctum/csrf-cookie", "methods": ["GET", "HEAD"] }, "login": { "uri": "login", "methods": ["GET", "HEAD"] }, "login.store": { "uri": "login", "methods": ["POST"] }, "logout": { "uri": "logout", "methods": ["POST"] }, "password.request": { "uri": "forgot-password", "methods": ["GET", "HEAD"] }, "password.reset": { "uri": "reset-password/{token}", "methods": ["GET", "HEAD"] }, "password.email": { "uri": "forgot-password", "methods": ["POST"] }, "password.update": { "uri": "reset-password", "methods": ["POST"] }, "register": { "uri": "register", "methods": ["GET", "HEAD"] }, "register.store": { "uri": "register", "methods": ["POST"] }, "verification.notice": { "uri": "email/verify/prompt", "methods": ["GET", "HEAD"] }, "verification.verify": { "uri": "email/verify/{id}/{hash}", "methods": ["GET", "HEAD"] }, "verification.send": { "uri": "email/verify/store", "methods": ["POST"] }, "user-profile-information.update": { "uri": "user/profile/update", "methods": ["PUT"] }, "user-password.update": { "uri": "user/password", "methods": ["PUT"] }, "password.create": { "uri": "user/password/confirm", "methods": ["GET", "HEAD"] }, "password.confirmation": { "uri": "user/password/status", "methods": ["GET", "HEAD"] }, "password.confirm": { "uri": "user/password/confirm", "methods": ["POST"] }, "two-factor.login": { "uri": "two-factor-challenge", "methods": ["GET", "HEAD"] }, "two-factor.challenge": { "uri": "two-factor-challenge", "methods": ["POST"] }, "two-factor.enable": { "uri": "user/two-factor-authentication", "methods": ["POST"] }, "two-factor.confirm": { "uri": "user/confirmed-two-factor-authentication", "methods": ["POST"] }, "two-factor.disable": { "uri": "user/two-factor-authentication", "methods": ["DELETE"] }, "two-factor.qr-code": { "uri": "user/two-factor-qr-code", "methods": ["GET", "HEAD"] }, "two-factor.secret-key": { "uri": "user/two-factor-secret-key", "methods": ["GET", "HEAD"] }, "two-factor.recovery-codes": { "uri": "user/two-factor-recovery-codes", "methods": ["GET", "HEAD"] }, "two-factor.store": { "uri": "user/two-factor-recovery-codes", "methods": ["POST"] }, "terms.show": { "uri": "terms-of-service", "methods": ["GET", "HEAD"] }, "policy.show": { "uri": "privacy-policy", "methods": ["GET", "HEAD"] }, "profile.show": { "uri": "user/profile", "methods": ["GET", "HEAD"] }, "settings.show": { "uri": "user/settings", "methods": ["GET", "HEAD"] }, "other-browser-sessions.destroy": { "uri": "user/browsers/delete", "methods": ["DELETE"] }, "current-user-photo.destroy": { "uri": "user/profile-photo", "methods": ["DELETE"] }, "current-user.destroy": { "uri": "user", "methods": ["DELETE"] }, "api-tokens.index": { "uri": "user/api-tokens", "methods": ["GET", "HEAD"] }, "api-tokens.store": { "uri": "user/api-tokens", "methods": ["POST"] }, "api-tokens.update": { "uri": "user/api-tokens/{token}", "methods": ["PUT"] }, "api-tokens.destroy": { "uri": "user/api-tokens/{token}", "methods": ["DELETE"] }, "teams.create": { "uri": "teams/create", "methods": ["GET", "HEAD"] }, "teams.store": { "uri": "teams", "methods": ["POST"] }, "teams.show": { "uri": "teams/{team}", "methods": ["GET", "HEAD"] }, "teams.update": { "uri": "teams/{team}", "methods": ["PUT"] }, "teams.destroy": { "uri": "teams/{team}", "methods": ["DELETE"] }, "current-team.update": { "uri": "current-team", "methods": ["PUT"] }, "team-members.store": { "uri": "teams/{team}/members", "methods": ["POST"] }, "team-members.update": { "uri": "teams/{team}/members/{user}", "methods": ["PUT"] }, "team-members.destroy": { "uri": "teams/{team}/members/{user}", "methods": ["DELETE"] }, "team-invitations.accept": { "uri": "teams/invitations/{invitation}", "methods": ["GET", "HEAD"] }, "team-invitations.destroy": { "uri": "teams/invitations/{invitation}", "methods": ["DELETE"] }, "docs.home": { "uri": "docs", "methods": ["GET", "HEAD"] }, "docs.show": { "uri": "docs/{version}/{page?}", "methods": ["GET", "HEAD"], "wheres": { "page": "(.*)" } }, "ignition.healthCheck": { "uri": "_ignition/health-check", "methods": ["GET", "HEAD"] }, "ignition.executeSolution": { "uri": "_ignition/execute-solution", "methods": ["POST"] }, "ignition.updateConfig": { "uri": "_ignition/update-config", "methods": ["POST"] }, "home": { "uri": "/", "methods": ["GET", "HEAD"] }, "dashboard": { "uri": "dashboard", "methods": ["GET", "HEAD"] }, "admin.dashboard": { "uri": "admin/dashboard", "methods": ["GET", "HEAD"] }, "admin.playground": { "uri": "admin/playground", "methods": ["GET", "HEAD"] }, "admin.roles.role": { "uri": "admin/roles/role/{role}", "methods": ["GET", "HEAD"], "bindings": { "role": "id" } }, "admin.roles.role.edit": { "uri": "admin/roles/role/edit/{role}", "methods": ["GET", "HEAD"], "bindings": { "role": "id" } }, "admin.permissions.permission": { "uri": "admin/permissions/permission", "methods": ["GET", "HEAD"] }, "admin.users.create": { "uri": "admin/users/create", "methods": ["GET", "HEAD"] }, "admin.users.restore": { "uri": "admin/users/restore", "methods": ["PUT", "PATCH"] }, "admin.users.destroy": { "uri": "admin/users/destroy", "methods": ["DELETE"] }, "admin.users.show": { "uri": "admin/users/show", "methods": ["GET", "HEAD"] }, "admin.users.store": { "uri": "admin/users/store", "methods": ["POST"] }, "admin.users.update": { "uri": "admin/users/update", "methods": ["PUT", "PATCH"] }, "admin.users": { "uri": "admin/users", "methods": ["GET", "HEAD"] }, "admin.users.edit": { "uri": "admin/users/edit", "methods": ["GET", "HEAD"] }, "admin.users.delete": { "uri": "admin/users/delete", "methods": ["DELETE"] } } };
 if (typeof window !== "undefined" && typeof window.Ziggy !== "undefined") {
   Object.assign(Ziggy$1.routes, window.Ziggy.routes);
 }
@@ -727,7 +734,15 @@ function useClientOnly() {
     isClient
   };
 }
-const _sfc_main$1c = {
+function usePermissions() {
+  const hasRole = (name) => usePage().props.user.roles.includes(name);
+  const hasPermission = (name) => usePage().props.user.permissions.includes(name);
+  return {
+    hasRole,
+    hasPermission
+  };
+}
+const _sfc_main$1z = {
   __name: "ApiTokenManager",
   __ssrInlineRender: true,
   props: ["tokens", "availablePermissions", "defaultPermissions"],
@@ -776,19 +791,19 @@ const _sfc_main$1c = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1d;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_InputError = _sfc_main$1g;
-      const _component_Checkbox = _sfc_main$1h;
-      const _component_ActionMessage = _sfc_main$1i;
-      const _component_Button = _sfc_main$1j;
-      const _component_SectionBorder = _sfc_main$1k;
-      const _component_ActionSection = __unplugin_components_8$1;
-      const _component_DialogModal = _sfc_main$1n;
-      const _component_SecondaryButton = _sfc_main$1o;
-      const _component_ConfirmationModal = _sfc_main$1p;
-      const _component_DangerButton = _sfc_main$1r;
+      const _component_FormSection = _sfc_main$1A;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_InputError = _sfc_main$1D;
+      const _component_Checkbox = _sfc_main$1E;
+      const _component_ActionMessage = _sfc_main$1F;
+      const _component_Button = _sfc_main$1G;
+      const _component_SectionBorder = _sfc_main$1H;
+      const _component_ActionSection = __unplugin_components_8$2;
+      const _component_DialogModal = _sfc_main$1K;
+      const _component_SecondaryButton = _sfc_main$1L;
+      const _component_ConfirmationModal = _sfc_main$1M;
+      const _component_DangerButton = _sfc_main$1O;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
       _push(ssrRenderComponent(_component_FormSection, { onSubmitted: createApiToken }, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
@@ -1276,18 +1291,18 @@ const _sfc_main$1c = {
     };
   }
 };
-const _sfc_setup$1c = _sfc_main$1c.setup;
-_sfc_main$1c.setup = (props, ctx) => {
+const _sfc_setup$1z = _sfc_main$1z.setup;
+_sfc_main$1z.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Api/ApiTokenManager.vue");
-  return _sfc_setup$1c ? _sfc_setup$1c(props, ctx) : void 0;
+  return _sfc_setup$1z ? _sfc_setup$1z(props, ctx) : void 0;
 };
-const _hoisted_1$j = {
+const _hoisted_1$v = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$j = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$v = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -1295,19 +1310,19 @@ const _hoisted_2$j = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "1.5",
   d: "m4.5 19.5l15-15m-15 0l15 15"
 }, null, -1);
-const _hoisted_3$j = [
-  _hoisted_2$j
+const _hoisted_3$v = [
+  _hoisted_2$v
 ];
-function render$j(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$j, _hoisted_3$j);
+function render$v(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$v, _hoisted_3$v);
 }
-const __unplugin_components_1$6 = { name: "heroicons-outline-x-mark", render: render$j };
-const _hoisted_1$i = {
+const __unplugin_components_0$5 = { name: "heroicons-outline-x-mark", render: render$v };
+const _hoisted_1$u = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$i = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$u = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -1315,14 +1330,14 @@ const _hoisted_2$i = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "m10 20l4-16m4 4l4 4l-4 4M6 16l-4-4l4-4"
 }, null, -1);
-const _hoisted_3$i = [
-  _hoisted_2$i
+const _hoisted_3$u = [
+  _hoisted_2$u
 ];
-function render$i(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$i, _hoisted_3$i);
+function render$u(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$u, _hoisted_3$u);
 }
-const __unplugin_components_0$3 = { name: "heroicons-outline-code", render: render$i };
-const _sfc_main$1b = {
+const __unplugin_components_0$4 = { name: "heroicons-outline-code", render: render$u };
+const _sfc_main$1y = {
   __name: "NotifyStatus",
   __ssrInlineRender: true,
   props: {
@@ -1343,8 +1358,8 @@ const _sfc_main$1b = {
       message.value = usePage().props.flash.status;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_IconOutlineCode = __unplugin_components_0$3;
-      const _component_IconOutlineXMark = __unplugin_components_1$6;
+      const _component_IconOutlineCode = __unplugin_components_0$4;
+      const _component_IconOutlineXMark = __unplugin_components_0$5;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5" }, _attrs))}><div class="bg-violet-400 p-4 dark:bg-violet-500"><div class="flex items-start"><div class="flex-shrink-0">`);
       _push(ssrRenderComponent(_component_IconOutlineCode, {
         class: "h-6 w-6 text-violet-900",
@@ -1359,18 +1374,18 @@ const _sfc_main$1b = {
     };
   }
 };
-const _sfc_setup$1b = _sfc_main$1b.setup;
-_sfc_main$1b.setup = (props, ctx) => {
+const _sfc_setup$1y = _sfc_main$1y.setup;
+_sfc_main$1y.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifyStatus.vue");
-  return _sfc_setup$1b ? _sfc_setup$1b(props, ctx) : void 0;
+  return _sfc_setup$1y ? _sfc_setup$1y(props, ctx) : void 0;
 };
-const _hoisted_1$h = {
+const _hoisted_1$t = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$h = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$t = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -1378,14 +1393,14 @@ const _hoisted_2$h = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z"
 }, null, -1);
-const _hoisted_3$h = [
-  _hoisted_2$h
+const _hoisted_3$t = [
+  _hoisted_2$t
 ];
-function render$h(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$h, _hoisted_3$h);
+function render$t(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$t, _hoisted_3$t);
 }
-const __unplugin_components_0$2 = { name: "heroicons-outline-information-circle", render: render$h };
-const _sfc_main$1a = {
+const __unplugin_components_0$3 = { name: "heroicons-outline-information-circle", render: render$t };
+const _sfc_main$1x = {
   __name: "NotifyInfo",
   __ssrInlineRender: true,
   props: {
@@ -1406,8 +1421,8 @@ const _sfc_main$1a = {
       message.value = usePage().props.flash.info;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_IconOutlineInformationCircle = __unplugin_components_0$2;
-      const _component_IconOutlineXMark = __unplugin_components_1$6;
+      const _component_IconOutlineInformationCircle = __unplugin_components_0$3;
+      const _component_IconOutlineXMark = __unplugin_components_0$5;
       if (__props.show) {
         _push(`<div${ssrRenderAttrs(mergeProps({ class: "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5" }, _attrs))}><div class="bg-blue-400 p-4 dark:bg-blue-500"><div class="flex items-start"><div class="flex-shrink-0">`);
         _push(ssrRenderComponent(_component_IconOutlineInformationCircle, {
@@ -1426,18 +1441,18 @@ const _sfc_main$1a = {
     };
   }
 };
-const _sfc_setup$1a = _sfc_main$1a.setup;
-_sfc_main$1a.setup = (props, ctx) => {
+const _sfc_setup$1x = _sfc_main$1x.setup;
+_sfc_main$1x.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifyInfo.vue");
-  return _sfc_setup$1a ? _sfc_setup$1a(props, ctx) : void 0;
+  return _sfc_setup$1x ? _sfc_setup$1x(props, ctx) : void 0;
 };
-const _hoisted_1$g = {
+const _hoisted_1$s = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$g = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$s = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -1445,14 +1460,14 @@ const _hoisted_2$g = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "M12 8v4m0 4h.01M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z"
 }, null, -1);
-const _hoisted_3$g = [
-  _hoisted_2$g
+const _hoisted_3$s = [
+  _hoisted_2$s
 ];
-function render$g(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$g, _hoisted_3$g);
+function render$s(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$s, _hoisted_3$s);
 }
-const __unplugin_components_0$1 = { name: "heroicons-outline-exclamation-circle", render: render$g };
-const _sfc_main$19 = {
+const __unplugin_components_0$2 = { name: "heroicons-outline-exclamation-circle", render: render$s };
+const _sfc_main$1w = {
   __name: "NotifyWarning",
   __ssrInlineRender: true,
   props: {
@@ -1473,8 +1488,8 @@ const _sfc_main$19 = {
       message.value = usePage().props.flash.warning;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_IconOutlineExclamationCircle = __unplugin_components_0$1;
-      const _component_IconOutlineXMark = __unplugin_components_1$6;
+      const _component_IconOutlineExclamationCircle = __unplugin_components_0$2;
+      const _component_IconOutlineXMark = __unplugin_components_0$5;
       if (__props.show) {
         _push(`<div${ssrRenderAttrs(mergeProps({ class: "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5" }, _attrs))}><div class="bg-yellow-400 p-4 dark:bg-yellow-500"><div class="flex items-start"><div class="flex-shrink-0">`);
         _push(ssrRenderComponent(_component_IconOutlineExclamationCircle, {
@@ -1493,13 +1508,13 @@ const _sfc_main$19 = {
     };
   }
 };
-const _sfc_setup$19 = _sfc_main$19.setup;
-_sfc_main$19.setup = (props, ctx) => {
+const _sfc_setup$1w = _sfc_main$1w.setup;
+_sfc_main$1w.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifyWarning.vue");
-  return _sfc_setup$19 ? _sfc_setup$19(props, ctx) : void 0;
+  return _sfc_setup$1w ? _sfc_setup$1w(props, ctx) : void 0;
 };
-const _sfc_main$18 = {
+const _sfc_main$1v = {
   __name: "NotifyError",
   __ssrInlineRender: true,
   props: {
@@ -1520,8 +1535,8 @@ const _sfc_main$18 = {
       message.value = usePage().props.flash.error;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_IconOutlineExclamation = __unplugin_components_1$7;
-      const _component_IconOutlineXMark = __unplugin_components_1$6;
+      const _component_IconOutlineExclamation = __unplugin_components_1$9;
+      const _component_IconOutlineXMark = __unplugin_components_0$5;
       if (__props.show) {
         _push(`<div${ssrRenderAttrs(mergeProps({ class: "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5" }, _attrs))}><div class="bg-red-400 p-4 dark:bg-red-500"><div class="flex items-start"><div class="flex-shrink-0">`);
         _push(ssrRenderComponent(_component_IconOutlineExclamation, {
@@ -1540,18 +1555,18 @@ const _sfc_main$18 = {
     };
   }
 };
-const _sfc_setup$18 = _sfc_main$18.setup;
-_sfc_main$18.setup = (props, ctx) => {
+const _sfc_setup$1v = _sfc_main$1v.setup;
+_sfc_main$1v.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifyError.vue");
-  return _sfc_setup$18 ? _sfc_setup$18(props, ctx) : void 0;
+  return _sfc_setup$1v ? _sfc_setup$1v(props, ctx) : void 0;
 };
-const _hoisted_1$f = {
+const _hoisted_1$r = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$f = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$r = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -1559,14 +1574,14 @@ const _hoisted_2$f = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "m9 12l2 2l4-4m6 2a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z"
 }, null, -1);
-const _hoisted_3$f = [
-  _hoisted_2$f
+const _hoisted_3$r = [
+  _hoisted_2$r
 ];
-function render$f(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$f, _hoisted_3$f);
+function render$r(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$r, _hoisted_3$r);
 }
-const __unplugin_components_5$2 = { name: "heroicons-outline-check-circle", render: render$f };
-const _sfc_main$17 = {
+const __unplugin_components_5$3 = { name: "heroicons-outline-check-circle", render: render$r };
+const _sfc_main$1u = {
   __name: "NotifySuccess",
   __ssrInlineRender: true,
   props: {
@@ -1587,8 +1602,8 @@ const _sfc_main$17 = {
       message.value = usePage().props.flash.success;
     }
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_IconOutlineCheckCircle = __unplugin_components_5$2;
-      const _component_IconOutlineXMark = __unplugin_components_1$6;
+      const _component_IconOutlineCheckCircle = __unplugin_components_5$3;
+      const _component_IconOutlineXMark = __unplugin_components_0$5;
       if (__props.show) {
         _push(`<div${ssrRenderAttrs(mergeProps({ class: "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5" }, _attrs))}><div class="bg-emerald-400 p-4 dark:bg-emerald-500"><div class="flex items-start"><div class="flex-shrink-0">`);
         _push(ssrRenderComponent(_component_IconOutlineCheckCircle, {
@@ -1607,13 +1622,13 @@ const _sfc_main$17 = {
     };
   }
 };
-const _sfc_setup$17 = _sfc_main$17.setup;
-_sfc_main$17.setup = (props, ctx) => {
+const _sfc_setup$1u = _sfc_main$1u.setup;
+_sfc_main$1u.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Notifications/NotifySuccess.vue");
-  return _sfc_setup$17 ? _sfc_setup$17(props, ctx) : void 0;
+  return _sfc_setup$1u ? _sfc_setup$1u(props, ctx) : void 0;
 };
-const _sfc_main$16 = {
+const _sfc_main$1t = {
   data() {
     return {
       minimum: 4e3,
@@ -1680,12 +1695,12 @@ const _sfc_main$16 = {
     }
   }
 };
-function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  const _component_NotifySuccess = _sfc_main$17;
-  const _component_NotifyError = _sfc_main$18;
-  const _component_NotifyWarning = _sfc_main$19;
-  const _component_NotifyInfo = _sfc_main$1a;
-  const _component_NotifyStatus = _sfc_main$1b;
+function _sfc_ssrRender$e(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  const _component_NotifySuccess = _sfc_main$1u;
+  const _component_NotifyError = _sfc_main$1v;
+  const _component_NotifyWarning = _sfc_main$1w;
+  const _component_NotifyInfo = _sfc_main$1x;
+  const _component_NotifyStatus = _sfc_main$1y;
   _push(`<div${ssrRenderAttrs(mergeProps({
     "aria-live": "assertive",
     class: "pointer-events-none fixed inset-0 z-50 flex items-end px-4 py-6 sm:items-start sm:p-6"
@@ -1720,14 +1735,14 @@ function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
   }
   _push(`</div></div>`);
 }
-const _sfc_setup$16 = _sfc_main$16.setup;
-_sfc_main$16.setup = (props, ctx) => {
+const _sfc_setup$1t = _sfc_main$1t.setup;
+_sfc_main$1t.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Notification.vue");
-  return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
+  return _sfc_setup$1t ? _sfc_setup$1t(props, ctx) : void 0;
 };
-const __unplugin_components_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["ssrRender", _sfc_ssrRender$9]]);
-const _sfc_main$15 = {
+const __unplugin_components_3$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1t, [["ssrRender", _sfc_ssrRender$e]]);
+const _sfc_main$1s = {
   __name: "MainFooter",
   __ssrInlineRender: true,
   setup(__props) {
@@ -1737,18 +1752,18 @@ const _sfc_main$15 = {
     };
   }
 };
-const _sfc_setup$15 = _sfc_main$15.setup;
-_sfc_main$15.setup = (props, ctx) => {
+const _sfc_setup$1s = _sfc_main$1s.setup;
+_sfc_main$1s.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Main/MainFooter.vue");
-  return _sfc_setup$15 ? _sfc_setup$15(props, ctx) : void 0;
+  return _sfc_setup$1s ? _sfc_setup$1s(props, ctx) : void 0;
 };
-const _hoisted_1$e = {
+const _hoisted_1$q = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$e = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$q = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -1756,14 +1771,14 @@ const _hoisted_2$e = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "m21 21l-6-6m2-5a7 7 0 1 1-14 0a7 7 0 0 1 14 0Z"
 }, null, -1);
-const _hoisted_3$e = [
-  _hoisted_2$e
+const _hoisted_3$q = [
+  _hoisted_2$q
 ];
-function render$e(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$e, _hoisted_3$e);
+function render$q(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$q, _hoisted_3$q);
 }
-const __unplugin_components_2$3 = { name: "heroicons-outline-search", render: render$e };
-const _sfc_main$14 = {
+const __unplugin_components_2$3 = { name: "heroicons-outline-search", render: render$q };
+const _sfc_main$1r = {
   __name: "SearchModal",
   __ssrInlineRender: true,
   props: ["id", "searchId", "modalOpen"],
@@ -1964,13 +1979,13 @@ const _sfc_main$14 = {
     };
   }
 };
-const _sfc_setup$14 = _sfc_main$14.setup;
-_sfc_main$14.setup = (props, ctx) => {
+const _sfc_setup$1r = _sfc_main$1r.setup;
+_sfc_main$1r.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/SearchModal.vue");
-  return _sfc_setup$14 ? _sfc_setup$14(props, ctx) : void 0;
+  return _sfc_setup$1r ? _sfc_setup$1r(props, ctx) : void 0;
 };
-const _sfc_main$13 = {
+const _sfc_main$1q = {
   __name: "Breadcrumbs",
   __ssrInlineRender: true,
   setup(__props) {
@@ -2008,32 +2023,32 @@ const _sfc_main$13 = {
     };
   }
 };
-const _sfc_setup$13 = _sfc_main$13.setup;
-_sfc_main$13.setup = (props, ctx) => {
+const _sfc_setup$1q = _sfc_main$1q.setup;
+_sfc_main$1q.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Breadcrumbs.vue");
-  return _sfc_setup$13 ? _sfc_setup$13(props, ctx) : void 0;
+  return _sfc_setup$1q ? _sfc_setup$1q(props, ctx) : void 0;
 };
-const _sfc_main$12 = {};
-function _sfc_ssrRender$8(_ctx, _push, _parent, _attrs) {
-  const _component_Breadcrumbs = _sfc_main$13;
+const _sfc_main$1p = {};
+function _sfc_ssrRender$d(_ctx, _push, _parent, _attrs) {
+  const _component_Breadcrumbs = _sfc_main$1q;
   _push(`<header${ssrRenderAttrs(mergeProps({ class: "transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 lg:block" }, _attrs))}><div class="mx-auto w-full px-4 py-6 lg:px-8">`);
   _push(ssrRenderComponent(_component_Breadcrumbs, null, null, _parent));
   _push(`</div></header>`);
 }
-const _sfc_setup$12 = _sfc_main$12.setup;
-_sfc_main$12.setup = (props, ctx) => {
+const _sfc_setup$1p = _sfc_main$1p.setup;
+_sfc_main$1p.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Main/MainHeaderbar.vue");
-  return _sfc_setup$12 ? _sfc_setup$12(props, ctx) : void 0;
+  return _sfc_setup$1p ? _sfc_setup$1p(props, ctx) : void 0;
 };
-const __unplugin_components_9 = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["ssrRender", _sfc_ssrRender$8]]);
-const _hoisted_1$d = {
+const __unplugin_components_9$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1p, [["ssrRender", _sfc_ssrRender$d]]);
+const _hoisted_1$p = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$d = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$p = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -2041,14 +2056,14 @@ const _hoisted_2$d = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "m9 12l2 2l4-4M7.835 4.697a3.42 3.42 0 0 0 1.946-.806a3.42 3.42 0 0 1 4.438 0a3.42 3.42 0 0 0 1.946.806a3.42 3.42 0 0 1 3.138 3.138a3.42 3.42 0 0 0 .806 1.946a3.42 3.42 0 0 1 0 4.438a3.42 3.42 0 0 0-.806 1.946a3.42 3.42 0 0 1-3.138 3.138a3.42 3.42 0 0 0-1.946.806a3.42 3.42 0 0 1-4.438 0a3.42 3.42 0 0 0-1.946-.806a3.42 3.42 0 0 1-3.138-3.138a3.42 3.42 0 0 0-.806-1.946a3.42 3.42 0 0 1 0-4.438a3.42 3.42 0 0 0 .806-1.946a3.42 3.42 0 0 1 3.138-3.138Z"
 }, null, -1);
-const _hoisted_3$d = [
-  _hoisted_2$d
+const _hoisted_3$p = [
+  _hoisted_2$p
 ];
-function render$d(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$d, _hoisted_3$d);
+function render$p(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$p, _hoisted_3$p);
 }
-const __unplugin_components_3$1 = { name: "heroicons-outline-badge-check", render: render$d };
-const _sfc_main$11 = {
+const __unplugin_components_3$2 = { name: "heroicons-outline-badge-check", render: render$p };
+const _sfc_main$1o = {
   __name: "DropdownLink",
   __ssrInlineRender: true,
   props: ["href", "as"],
@@ -2087,18 +2102,18 @@ const _sfc_main$11 = {
     };
   }
 };
-const _sfc_setup$11 = _sfc_main$11.setup;
-_sfc_main$11.setup = (props, ctx) => {
+const _sfc_setup$1o = _sfc_main$1o.setup;
+_sfc_main$1o.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/DropdownLink.vue");
-  return _sfc_setup$11 ? _sfc_setup$11(props, ctx) : void 0;
+  return _sfc_setup$1o ? _sfc_setup$1o(props, ctx) : void 0;
 };
-const _hoisted_1$c = {
+const _hoisted_1$o = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$c = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$o = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -2106,14 +2121,14 @@ const _hoisted_2$c = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "m8 9l4-4l4 4m0 6l-4 4l-4-4"
 }, null, -1);
-const _hoisted_3$c = [
-  _hoisted_2$c
+const _hoisted_3$o = [
+  _hoisted_2$o
 ];
-function render$c(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$c, _hoisted_3$c);
+function render$o(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$o, _hoisted_3$o);
 }
-const __unplugin_components_1$5 = { name: "heroicons-outline-selector", render: render$c };
-const _sfc_main$10 = {
+const __unplugin_components_1$8 = { name: "heroicons-outline-selector", render: render$o };
+const _sfc_main$1n = {
   __name: "Dropdown",
   __ssrInlineRender: true,
   props: {
@@ -2197,13 +2212,13 @@ const _sfc_main$10 = {
     };
   }
 };
-const _sfc_setup$10 = _sfc_main$10.setup;
-_sfc_main$10.setup = (props, ctx) => {
+const _sfc_setup$1n = _sfc_main$1n.setup;
+_sfc_main$1n.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Dropdown.vue");
-  return _sfc_setup$10 ? _sfc_setup$10(props, ctx) : void 0;
+  return _sfc_setup$1n ? _sfc_setup$1n(props, ctx) : void 0;
 };
-const _sfc_main$$ = {
+const _sfc_main$1m = {
   __name: "VersionMenu",
   __ssrInlineRender: true,
   props: ["sticky"],
@@ -2213,10 +2228,10 @@ const _sfc_main$$ = {
       router.get(useRoutes("docs.show", { version, page }));
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Dropdown = _sfc_main$10;
-      const _component_IconOutlineSelector = __unplugin_components_1$5;
-      const _component_DropdownLink = _sfc_main$11;
-      const _component_IconOutlineBadgeCheck = __unplugin_components_3$1;
+      const _component_Dropdown = _sfc_main$1n;
+      const _component_IconOutlineSelector = __unplugin_components_1$8;
+      const _component_DropdownLink = _sfc_main$1o;
+      const _component_IconOutlineBadgeCheck = __unplugin_components_3$2;
       if (_ctx.$page.props.versions) {
         _push(ssrRenderComponent(_component_Dropdown, mergeProps({
           align: "right",
@@ -2318,13 +2333,13 @@ const _sfc_main$$ = {
     };
   }
 };
-const _sfc_setup$$ = _sfc_main$$.setup;
-_sfc_main$$.setup = (props, ctx) => {
+const _sfc_setup$1m = _sfc_main$1m.setup;
+_sfc_main$1m.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/VersionMenu.vue");
-  return _sfc_setup$$ ? _sfc_setup$$(props, ctx) : void 0;
+  return _sfc_setup$1m ? _sfc_setup$1m(props, ctx) : void 0;
 };
-const _sfc_main$_ = {
+const _sfc_main$1l = {
   __name: "DocHeaderbar",
   __ssrInlineRender: true,
   setup(__props) {
@@ -2340,8 +2355,8 @@ const _sfc_main$_ = {
       }
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Breadcrumbs = _sfc_main$13;
-      const _component_VersionMenu = _sfc_main$$;
+      const _component_Breadcrumbs = _sfc_main$1q;
+      const _component_VersionMenu = _sfc_main$1m;
       _push(`<header${ssrRenderAttrs(mergeProps({ class: "transparent hidden border-t border-gray-100 text-gray-800 dark:border-gray-900 dark:text-gray-100 md:flex md:items-center md:justify-between" }, _attrs))}><div class="mx-auto w-full px-4 py-6 sm:px-6 lg:px-8">`);
       _push(ssrRenderComponent(_component_Breadcrumbs, null, null, _parent));
       _push(`</div><div class="flex items-center px-4 py-6 sm:px-6 lg:px-8"><div class="relative ml-3">`);
@@ -2350,13 +2365,13 @@ const _sfc_main$_ = {
     };
   }
 };
-const _sfc_setup$_ = _sfc_main$_.setup;
-_sfc_main$_.setup = (props, ctx) => {
+const _sfc_setup$1l = _sfc_main$1l.setup;
+_sfc_main$1l.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Docs/DocHeaderbar.vue");
-  return _sfc_setup$_ ? _sfc_setup$_(props, ctx) : void 0;
+  return _sfc_setup$1l ? _sfc_setup$1l(props, ctx) : void 0;
 };
-const _sfc_main$Z = {
+const _sfc_main$1k = {
   __name: "ResponsiveNavLink",
   __ssrInlineRender: true,
   props: {
@@ -2397,13 +2412,13 @@ const _sfc_main$Z = {
     };
   }
 };
-const _sfc_setup$Z = _sfc_main$Z.setup;
-_sfc_main$Z.setup = (props, ctx) => {
+const _sfc_setup$1k = _sfc_main$1k.setup;
+_sfc_main$1k.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ResponsiveNavLink.vue");
-  return _sfc_setup$Z ? _sfc_setup$Z(props, ctx) : void 0;
+  return _sfc_setup$1k ? _sfc_setup$1k(props, ctx) : void 0;
 };
-const _sfc_main$Y = {
+const _sfc_main$1j = {
   __name: "ResponsiveNavMenu",
   __ssrInlineRender: true,
   props: {
@@ -2414,8 +2429,8 @@ const _sfc_main$Y = {
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_ResponsiveNavLink = _sfc_main$Z;
-      const _component_IconOutlineBadgeCheck = __unplugin_components_3$1;
+      const _component_ResponsiveNavLink = _sfc_main$1k;
+      const _component_IconOutlineBadgeCheck = __unplugin_components_3$2;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: [{ block: __props.show, hidden: !__props.show }, "lg:hidden"]
       }, _attrs))}><div class="pt-2 pb-3 pl-6 pr-4 space-y-1">`);
@@ -2578,18 +2593,18 @@ const _sfc_main$Y = {
     };
   }
 };
-const _sfc_setup$Y = _sfc_main$Y.setup;
-_sfc_main$Y.setup = (props, ctx) => {
+const _sfc_setup$1j = _sfc_main$1j.setup;
+_sfc_main$1j.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Main/ResponsiveNavMenu.vue");
-  return _sfc_setup$Y ? _sfc_setup$Y(props, ctx) : void 0;
+  return _sfc_setup$1j ? _sfc_setup$1j(props, ctx) : void 0;
 };
-const _hoisted_1$b = {
+const _hoisted_1$n = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$b = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$n = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -2597,19 +2612,19 @@ const _hoisted_2$b = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "M6 18L18 6M6 6l12 12"
 }, null, -1);
-const _hoisted_3$b = [
-  _hoisted_2$b
+const _hoisted_3$n = [
+  _hoisted_2$n
 ];
-function render$b(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$b, _hoisted_3$b);
+function render$n(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$n, _hoisted_3$n);
 }
-const __unplugin_components_5$1 = { name: "heroicons-outline-x", render: render$b };
-const _hoisted_1$a = {
+const __unplugin_components_5$2 = { name: "heroicons-outline-x", render: render$n };
+const _hoisted_1$m = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$a = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$m = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -2617,14 +2632,14 @@ const _hoisted_2$a = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "M4 6h16M4 12h16M4 18h16"
 }, null, -1);
-const _hoisted_3$a = [
-  _hoisted_2$a
+const _hoisted_3$m = [
+  _hoisted_2$m
 ];
-function render$a(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$a, _hoisted_3$a);
+function render$m(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$m, _hoisted_3$m);
 }
-const __unplugin_components_4$2 = { name: "heroicons-outline-menu", render: render$a };
-const _sfc_main$X = {
+const __unplugin_components_4$2 = { name: "heroicons-outline-menu", render: render$m };
+const _sfc_main$1i = {
   __name: "ThemeSwitcher",
   __ssrInlineRender: true,
   setup(__props) {
@@ -2645,18 +2660,18 @@ const _sfc_main$X = {
     };
   }
 };
-const _sfc_setup$X = _sfc_main$X.setup;
-_sfc_main$X.setup = (props, ctx) => {
+const _sfc_setup$1i = _sfc_main$1i.setup;
+_sfc_main$1i.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ThemeSwitcher.vue");
-  return _sfc_setup$X ? _sfc_setup$X(props, ctx) : void 0;
+  return _sfc_setup$1i ? _sfc_setup$1i(props, ctx) : void 0;
 };
-const _hoisted_1$9 = {
+const _hoisted_1$l = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$9 = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$l = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -2664,24 +2679,26 @@ const _hoisted_2$9 = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "m19 9l-7 7l-7-7"
 }, null, -1);
-const _hoisted_3$9 = [
-  _hoisted_2$9
+const _hoisted_3$l = [
+  _hoisted_2$l
 ];
-function render$9(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$9, _hoisted_3$9);
+function render$l(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$l, _hoisted_3$l);
 }
-const __unplugin_components_1$4 = { name: "heroicons-outline-chevron-down", render: render$9 };
-const _sfc_main$W = {
+const __unplugin_components_1$7 = { name: "heroicons-outline-chevron-down", render: render$l };
+const _sfc_main$1h = {
   __name: "AccountManagerMenu",
   __ssrInlineRender: true,
   setup(__props) {
     const logout = () => {
       router.post(useRoutes("logout"));
     };
+    const { hasRole, hasPermission } = usePermissions();
+    console.log(hasPermission("view-users"));
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Dropdown = _sfc_main$10;
-      const _component_IconOutlineChevronDown = __unplugin_components_1$4;
-      const _component_DropdownLink = _sfc_main$11;
+      const _component_Dropdown = _sfc_main$1n;
+      const _component_IconOutlineChevronDown = __unplugin_components_1$7;
+      const _component_DropdownLink = _sfc_main$1o;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "relative ml-3" }, _attrs))}>`);
       _push(ssrRenderComponent(_component_Dropdown, {
         align: "right",
@@ -2775,7 +2792,45 @@ const _sfc_main$W = {
             } else {
               _push2(`<!---->`);
             }
-            _push2(`<div class="border-t border-gray-200 dark:border-gray-600"${_scopeId}></div><form${_scopeId}>`);
+            _push2(`<div class="border-t border-gray-200 dark:border-gray-600"${_scopeId}></div>`);
+            if (unref(hasRole)("super-admin")) {
+              _push2(`<!--[-->`);
+              if (_ctx.$page.url.startsWith("/admin")) {
+                _push2(ssrRenderComponent(_component_DropdownLink, {
+                  href: _ctx.route("dashboard")
+                }, {
+                  default: withCtx((_3, _push3, _parent3, _scopeId2) => {
+                    if (_push3) {
+                      _push3(`${ssrInterpolate(_ctx.__("Exit Admin"))}`);
+                    } else {
+                      return [
+                        createTextVNode(toDisplayString(_ctx.__("Exit Admin")), 1)
+                      ];
+                    }
+                  }),
+                  _: 1
+                }, _parent2, _scopeId));
+              } else {
+                _push2(ssrRenderComponent(_component_DropdownLink, {
+                  href: _ctx.route("admin.dashboard")
+                }, {
+                  default: withCtx((_3, _push3, _parent3, _scopeId2) => {
+                    if (_push3) {
+                      _push3(`${ssrInterpolate(_ctx.__("Admin"))}`);
+                    } else {
+                      return [
+                        createTextVNode(toDisplayString(_ctx.__("Admin")), 1)
+                      ];
+                    }
+                  }),
+                  _: 1
+                }, _parent2, _scopeId));
+              }
+              _push2(`<div class="border-t border-gray-200 dark:border-gray-600"${_scopeId}></div><!--]-->`);
+            } else {
+              _push2(`<!---->`);
+            }
+            _push2(`<form${_scopeId}>`);
             _push2(ssrRenderComponent(_component_DropdownLink, { as: "button" }, {
               default: withCtx((_3, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
@@ -2819,6 +2874,26 @@ const _sfc_main$W = {
                 _: 1
               }, 8, ["href"])) : createCommentVNode("", true),
               createVNode("div", { class: "border-t border-gray-200 dark:border-gray-600" }),
+              unref(hasRole)("super-admin") ? (openBlock(), createBlock(Fragment, { key: 2 }, [
+                _ctx.$page.url.startsWith("/admin") ? (openBlock(), createBlock(_component_DropdownLink, {
+                  key: 0,
+                  href: _ctx.route("dashboard")
+                }, {
+                  default: withCtx(() => [
+                    createTextVNode(toDisplayString(_ctx.__("Exit Admin")), 1)
+                  ]),
+                  _: 1
+                }, 8, ["href"])) : (openBlock(), createBlock(_component_DropdownLink, {
+                  key: 1,
+                  href: _ctx.route("admin.dashboard")
+                }, {
+                  default: withCtx(() => [
+                    createTextVNode(toDisplayString(_ctx.__("Admin")), 1)
+                  ]),
+                  _: 1
+                }, 8, ["href"])),
+                createVNode("div", { class: "border-t border-gray-200 dark:border-gray-600" })
+              ], 64)) : createCommentVNode("", true),
               createVNode("form", {
                 onSubmit: withModifiers(logout, ["prevent"])
               }, [
@@ -2838,13 +2913,13 @@ const _sfc_main$W = {
     };
   }
 };
-const _sfc_setup$W = _sfc_main$W.setup;
-_sfc_main$W.setup = (props, ctx) => {
+const _sfc_setup$1h = _sfc_main$1h.setup;
+_sfc_main$1h.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Account/AccountManagerMenu.vue");
-  return _sfc_setup$W ? _sfc_setup$W(props, ctx) : void 0;
+  return _sfc_setup$1h ? _sfc_setup$1h(props, ctx) : void 0;
 };
-const _sfc_main$V = {
+const _sfc_main$1g = {
   __name: "TeamManagerMenu",
   __ssrInlineRender: true,
   props: {
@@ -2862,10 +2937,10 @@ const _sfc_main$V = {
       );
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Dropdown = _sfc_main$10;
-      const _component_IconOutlineSelector = __unplugin_components_1$5;
-      const _component_DropdownLink = _sfc_main$11;
-      const _component_IconOutlineBadgeCheck = __unplugin_components_3$1;
+      const _component_Dropdown = _sfc_main$1n;
+      const _component_IconOutlineSelector = __unplugin_components_1$8;
+      const _component_DropdownLink = _sfc_main$1o;
+      const _component_IconOutlineBadgeCheck = __unplugin_components_3$2;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "relative ml-3" }, _attrs))}>`);
       if (_ctx.$page.props.serenity.hasTeamFeatures) {
         _push(ssrRenderComponent(_component_Dropdown, {
@@ -3023,13 +3098,13 @@ const _sfc_main$V = {
     };
   }
 };
-const _sfc_setup$V = _sfc_main$V.setup;
-_sfc_main$V.setup = (props, ctx) => {
+const _sfc_setup$1g = _sfc_main$1g.setup;
+_sfc_main$1g.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Teams/TeamManagerMenu.vue");
-  return _sfc_setup$V ? _sfc_setup$V(props, ctx) : void 0;
+  return _sfc_setup$1g ? _sfc_setup$1g(props, ctx) : void 0;
 };
-const _sfc_main$U = {
+const _sfc_main$1f = {
   __name: "NavLink",
   __ssrInlineRender: true,
   props: ["href", "active"],
@@ -3059,14 +3134,14 @@ const _sfc_main$U = {
     };
   }
 };
-const _sfc_setup$U = _sfc_main$U.setup;
-_sfc_main$U.setup = (props, ctx) => {
+const _sfc_setup$1f = _sfc_main$1f.setup;
+_sfc_main$1f.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/NavLink.vue");
-  return _sfc_setup$U ? _sfc_setup$U(props, ctx) : void 0;
+  return _sfc_setup$1f ? _sfc_setup$1f(props, ctx) : void 0;
 };
-const _sfc_main$T = {};
-function _sfc_ssrRender$7(_ctx, _push, _parent, _attrs) {
+const _sfc_main$1e = {};
+function _sfc_ssrRender$c(_ctx, _push, _parent, _attrs) {
   _push(`<svg${ssrRenderAttrs(mergeProps({ xmlns: "http://www.w3.org/2000/svg" }, _ctx.$attrs, {
     "xml:space": "preserve",
     "fill-rule": "evenodd",
@@ -3076,14 +3151,14 @@ function _sfc_ssrRender$7(_ctx, _push, _parent, _attrs) {
     viewBox: "0 0 909 749"
   }, _attrs))}><path fill="url(#a)" fill-rule="nonzero" d="M328.6 641.9c-2.4-.8-4.6-1.9-7-2.8l-7-3-7.2-3.5-3.6-1.8-3.6-2a11375.7 11375.7 0 0 0-10.7-6.6 1196.4 1196.4 0 0 1-7.1-5l-3.5-2.6-6.9-5.8c-9-8-17.7-17-25.3-27.2a227.6 227.6 0 0 1-20.7-33.2 380 380 0 0 1-27.5-77c-3.5-13.4-6.6-27-9.7-40.6-1.6-6.8-3.1-13.6-4.8-20.3l-2-7.9c-.8-3.5-1.7-7-2.7-10.4l-3.1-10.6-3.6-11-9.4-29 24.6 8c8.3 2.7 16.4 5.5 24.2 7.8 4 1 7.8 2.2 11.7 3.1l8.7 2.2 11.3 2.8c15.1 3.6 30.3 7 45.2 11 15 3.8 29.6 8 43.6 13 7 2.5 14 5.2 20.6 8.1l5.6 2.5 8.3 3.9a383 383 0 0 1 8 3.9l4 2 2 1c.6.3 1.4.5 1.8 1-1.7 7.3-3.6 14.7-5 21.5l-1.4 7.2a203.4 203.4 0 0 0-.8 68 246.7 246.7 0 0 0 20.2 65c8 17.5 15.7 30.9 21 39.9l3.7 6 2.7 4.2 2.2 3.5-2.8-3-3.5-3.7-4.7-5.2a288.7 288.7 0 0 1-44.4-65.4c-5.2-11-10.2-23.2-14.2-36.9a196 196 0 0 1-7.2-76.2l.3-3.2v-4.5c-.2-.2-.7-.2-1-.3l-1.2-.3-1-.2h-.3l-.3-.2-1.1-.4-2.3-.8c-6.2-2.1-12.6-4.1-19.2-6a613 613 0 0 0-41.6-9.8c-14.6-3-29.7-5.8-45.4-9l-11.8-2.6-3-.7c.1 0 0 0 0 0v.4l.6 2.5a916 916 0 0 1 4.6 21c2.8 14 5.5 27.4 8.3 40.4 5.6 26 12.2 50 21.2 71.7a186.7 186.7 0 0 0 34.8 55.2c14 14.8 30 26.1 46.2 34.4a263 263 0 0 0 45.9 18.4 352.4 352.4 0 0 0 50.7 11.6c4 .6 7.5 1 10.2 1.5l8.5 1-8.6.6-10.3.4h-14.2c-10.7-.2-23.8-1-39-3.2s-32.4-5.9-51-12.7Zm58.8-196.3a185.5 185.5 0 0 1 6-34.5 385.7 385.7 0 0 1 25.3-68 447.4 447.4 0 0 1 18.1-33.8c1.6-2.8 3.4-5.6 5.2-8.3l5.2-8.3a1469.9 1469.9 0 0 0 16.1-25.4l4-6.5 5.7-10c3.7-6.6 7.3-13.8 10.9-20.8l10.6-20.6 11.6 23.1c3.9 7.8 7.6 15.2 11.5 22.2l3 5.2 2.8 4.8 3 5 5.9 10c8 13.4 16 26.5 23.6 39.5a504 504 0 0 1 20.4 38.8 316 316 0 0 1 8.2 19.2l2 4.9a7830.3 7830.3 0 0 1 5.3 14.9l1.2 3.6.6 1.8.4.9c0 .3.2.6.1.8l-12.2 7.3c-2 1.3-3.9 2.4-5.7 3.7l-3.6 2.2a222.4 222.4 0 0 0-34 27.4 215.8 215.8 0 0 0-28.8 36.4 270.8 270.8 0 0 0-18.2 33.4l-1.2 2.5.7-2.7c.4-1.7 1-4.3 2-7.7 2-6.7 5-16.7 10.3-29a203 203 0 0 1 44.8-65.2c3.9-3.8 8-7.6 12.5-11.2l3.2-2.6 1.1-1.1 2.2-2c.1 0 0 0 0-.2v-.2l-.3-.4-.5-.8a33 33 0 0 0-1.7-2.9l-2-4c-3-5.6-6-11.3-9.4-17a622.5 622.5 0 0 0-22.3-35.3c-8.1-12.1-16.9-24.6-25.7-37.8l-6.6-10-3.3-5.2-.2-.3-.2-.1c-.2-.2-.4-.1-.4 0v.4l-.1.2-.4.7-1.5 2.5a612.8 612.8 0 0 1-16.9 26.4 7969 7969 0 0 0-5 7.7l-5 7.7a538.5 538.5 0 0 0-17.7 31 437.5 437.5 0 0 0-27 61.4 196.4 196.4 0 0 0-7.4 29.3 167.1 167.1 0 0 0-2 21.4l-.1 7 .3 6.7.2 3.4c0 1.1.1 2.3.3 3.4l1 6.6c0 1 .2 2.2.4 3.2l.6 3.2 1.3 6.4c.4 2.1 1 4.1 1.5 6.2l1.6 6 2 5.9c5 15.4 11.2 29 17.3 40.7a359 359 0 0 0 24.3 39.7l5.3 7.5 4.5 6.1-5.6-5.1-6.7-6.4a302.9 302.9 0 0 1-31-36 241 241 0 0 1-24-40.2l-3-6-2.5-6.4-2.5-6.5-2.2-6.9-1.1-3.5-1-3.6-1.8-7.3a3707.3 3707.3 0 0 1-1.4-7.6c-.4-2.7-1-5.2-1.2-7.9l-.7-8a177.4 177.4 0 0 1 0-25Zm310.3-69c13.3-3.4 26.8-6.4 40.2-9.5 6.7-1.5 13.4-3 20-4.7l8.5-2.1 10.3-2.8c3.5-1 7-2 10.5-3.2l10.9-3.5 27.4-9-7.8 24.1c-2.7 8-5.4 16-7.6 23.7l-3.2 11.4-2.2 9-2.7 11c-3.6 14.8-7 29.6-10.7 44.2a527.3 527.3 0 0 1-12.6 42.7A344 344 0 0 1 771 528l-2.5 5.8-3.7 8.1a436 436 0 0 1-3.8 8c-1.2 2.6-2.4 5.3-3.7 7.7-7.4-1.8-14.8-3.7-21.7-5.1a10364.7 10364.7 0 0 1-12.8-2.5 196 196 0 0 0-62.4-.4 246 246 0 0 0-65.3 19.5c-17.6 7.9-31 15.4-40.1 20.8l-6 3.5-4.3 2.7-3.5 2.2 3-2.8 3.7-3.5 5.3-4.6a293 293 0 0 1 65.9-43.7 251 251 0 0 1 37-14 202.2 202.2 0 0 1 79.4-6.1h1l.5.1h2.7c.2-.2.3-.8.4-1l.2-1.2.2-1v-.3l.4-1 .8-2.3c2-6.2 4-12.4 5.7-19 3.5-12.9 6.6-26.5 9.5-40.7 3-14.3 5.7-29 8.9-44.4l2.5-11.6.6-2.4-.1-.1h-.7l-1.3.4-20.9 4.6c-13.7 2.8-27 5.4-39.8 8.2a421.4 421.4 0 0 0-71.2 20.6 193.8 193.8 0 0 0-55.4 33.6 173.4 173.4 0 0 0-34.9 45 262.6 262.6 0 0 0-19 45 346.2 346.2 0 0 0-12 50l-1.6 10.1-1.2 8.4-.5-8.5-.2-10.2v-6.6c0-2.3 0-4.8.2-7.4a300 300 0 0 1 3.7-38.5c2.4-15 6.3-32 13.4-50.3a182.6 182.6 0 0 1 33.8-55.4 204 204 0 0 1 60.4-44.3c23.5-11.8 49.5-20 76.1-26.9Zm-348 305a231.9 231.9 0 0 1-83.5-35.2 200.1 200.1 0 0 1-40.8-37.3l-2.7-3.2a2136.5 2136.5 0 0 0-5.1-6.3l-.2-.2-.3.2-.6.3-1.2.6a65.1 65.1 0 0 0-6.7 3.5c-5.7 2.9-11.4 6-17 9.3a570 570 0 0 0-35.2 22.4c-12 8.2-24.4 17-37.6 26a9462 9462 0 0 1-5 3.5l-2.5 1.7-1.2.8-.3.3a1275 1275 0 0 0-6.2 4.9c2.9 1 5.2 2 7.1 2.8l.7.3 3.6 2.1 7.6 4.5 15.2 9.2a726.5 726.5 0 0 0 61.6 34.9c10.6 5 21.5 9.6 32.5 13.3l8.3 2.6 8.4 2.3 8.4 1.8 4.2.7 4.3.7a150.6 150.6 0 0 0 68.2-6 247 247 0 0 0 54.6-26.3c17.5-11 34.4-23.3 51.3-35.8l12.7-9.4 12.9-9.3c4.2-3.1 8.6-6.1 12.9-9.1l13-8.8c17.3-11.5 35-22.1 52.8-31.5 17.9-9.3 36-17.4 54.2-23.8a309.3 309.3 0 0 1 54.5-14 267.7 267.7 0 0 1 100.5 3.1c30 6.8 55.3 18.5 75.8 30.5 10.3 6 19.5 12 27.8 17.8l4.4 3.1a385.2 385.2 0 1 0-741.4-4.2c7.3-4.3 14.6-8.6 21.8-12.6 13-7.4 26-14.3 38.7-20.2a343 343 0 0 1 19.1-8.2c4.7-2 9.1-3.5 13.5-5.1a335 335 0 0 1 6.5-2.3l3.2-1 1.6-.6.8-.3h.7l7.8 13 3.8 6 3.1 4.6a211.6 211.6 0 0 0 34 38.4c15.6 13.7 31.3 23 44.5 30a298 298 0 0 0 31.3 13.8l8.4 3 3 1-3-.5-8.9-1.8Z" transform="translate(-36.4 -136.4)"></path><path fill="#00b4e2" fill-rule="nonzero" d="M887.9 631.4a867.4 867.4 0 0 0-40.5-32.8 520.3 520.3 0 0 0-28.5-16.4c-7-3.6-14.3-7.3-22-10.6-3.9-1.8-8-3.3-12-5l-6.2-2.3a245.6 245.6 0 0 0-62.5-14c-20-1.8-41.3-1.4-62.9 1.8l-8.1 1.4c-2.7.4-5.4 1-8.2 1.6-2.7.5-5.4 1.3-8.1 1.9-2.8.7-5.5 1.2-8.2 2l-8.3 2.4c-2.7.7-5.4 1.7-8.2 2.6-5.5 1.6-11 3.7-16.4 5.7-11 4.3-21.7 8.7-32 13.7-5.3 2.4-10.3 5-15.4 7.5-5 2.7-10 5.2-15 8a920.3 920.3 0 0 0-55.6 33.5c-17.5 11.2-34 22.5-50.1 32.4-16 10-31.6 18.6-46.3 25.4a252.7 252.7 0 0 1-41 15c-6.3 1.4-12 2.9-17.5 3.6l-4 .6-2 .3-1.8.2-7.1.6-3.3.3H288c-3.4.2-6.3-.1-8.7-.3l-7-.5 7-.5c2.4-.2 5.2-.3 8.6-.9l5.4-.7 3-.5 3.2-.6 6.8-1.5 1.8-.4 1.8-.5 3.8-1.1c5.1-1.3 10.5-3.4 16.4-5.4a269.9 269.9 0 0 0 37.7-18.5 506.6 506.6 0 0 0 42.7-28.3c15-10.8 30.6-23.1 47.8-35.6 17.1-12.4 35.6-25 55.7-36.7 5-3 10.2-5.8 15.4-8.7 5.2-2.8 10.5-5.7 16-8.3a393.1 393.1 0 0 1 33.8-14.7 315 315 0 0 1 71-18 272 272 0 0 1 70.2 0c10.8 1.6 21 1.6 30.6 3.7 8.2 1.9 19.4 3.3 37 8.6 20.7 6.3 41 16.6 45.9 19a330.8 330.8 0 0 1 32.4 19.4l11 7.2-9.8-8.8c-6.5-5.7-16-14.2-28.7-24.8-5.3-4.4-11.1-9-17.5-14l-12.9-7.7c-8.5-5-18-10.2-28.2-15.2a290 290 0 0 0-33.6-14A248.8 248.8 0 0 0 617 494a286 286 0 0 0-48.6 14.1 409 409 0 0 0-49.2 23c-16.4 8.8-32.8 19-49.3 30l-12.3 8.3-12.5 8.7-12.5 9-12.7 9.2a711.2 711.2 0 0 1-55 37 277.7 277.7 0 0 1-65.7 29 196 196 0 0 1-44.5 7.3c-15.2.4-30-1-44.3-3.8l-5.3-1.1c-1.8-.4-3.6-.7-5.3-1.3l-10.4-2.8-10-3.4c-3.4-1.2-6.6-2.6-9.8-3.8a312 312 0 0 1-36.4-18 662.2 662.2 0 0 1-62.3-42L56.8 583l-7-5-3.6-2.7-6.5-4.5a299 299 0 0 0-13.2-8.6l-13.7-8.1L0 546.6c8.9 5.2 69.1 56.5 73.9 60 19 14 38.8 30.3 59 47.2 12.2 10.1 123.2 114 228.1 91.7C443.3 728 472 672 584.6 617.8c26-12.5 45.4-22.7 77.3-27.2l35.6-4.8c24.3-3.1 45.3-1 52.3-1 21.3.2 64.5 11.8 73 14.8a202.4 202.4 0 0 1 35.7 17.2c10.8 6.4 19.7 12.7 27.1 17.6l23 15.3s-7.3-6.6-20.7-18.3Z"></path><defs><linearGradient id="a" x1="0" x2="1" y1="0" y2="0" gradientTransform="matrix(227 368 -292 181 262.4 229)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c53030"></stop><stop offset=".4" stop-color="#d14b32"></stop><stop offset="1" stop-color="#ed8936"></stop></linearGradient></defs></svg>`);
 }
-const _sfc_setup$T = _sfc_main$T.setup;
-_sfc_main$T.setup = (props, ctx) => {
+const _sfc_setup$1e = _sfc_main$1e.setup;
+_sfc_main$1e.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ApplicationMark.vue");
-  return _sfc_setup$T ? _sfc_setup$T(props, ctx) : void 0;
+  return _sfc_setup$1e ? _sfc_setup$1e(props, ctx) : void 0;
 };
-const __unplugin_components_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["ssrRender", _sfc_ssrRender$7]]);
-const _sfc_main$S = {
+const __unplugin_components_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1e, [["ssrRender", _sfc_ssrRender$c]]);
+const _sfc_main$1d = {
   __name: "MainNavigation",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3103,16 +3178,16 @@ const _sfc_main$S = {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Link = resolveComponent("Link");
       const _component_ApplicationMark = __unplugin_components_4$1;
-      const _component_NavLink = _sfc_main$U;
-      const _component_TeamManagerMenu = _sfc_main$V;
-      const _component_AccountManagerMenu = _sfc_main$W;
-      const _component_ThemeSwitcher = _sfc_main$X;
+      const _component_NavLink = _sfc_main$1f;
+      const _component_TeamManagerMenu = _sfc_main$1g;
+      const _component_AccountManagerMenu = _sfc_main$1h;
+      const _component_ThemeSwitcher = _sfc_main$1i;
       const _component_IconOutlineMenu = __unplugin_components_4$2;
-      const _component_IconOutlineX = __unplugin_components_5$1;
-      const _component_ResponsiveNavMenu = _sfc_main$Y;
-      const _component_DocHeaderbar = _sfc_main$_;
-      const _component_MainHeaderbar = __unplugin_components_9;
-      const _component_SearchModal = _sfc_main$14;
+      const _component_IconOutlineX = __unplugin_components_5$2;
+      const _component_ResponsiveNavMenu = _sfc_main$1j;
+      const _component_DocHeaderbar = _sfc_main$1l;
+      const _component_MainHeaderbar = __unplugin_components_9$1;
+      const _component_SearchModal = _sfc_main$1r;
       _push(`<!--[--><nav class="${ssrRenderClass([{ stickyHeader: unref(stickyHeader) }, "sticky top-0 z-50 bg-white dark:bg-gray-800"])}"><div class="px-6"><div class="flex h-16 justify-between"><div class="flex w-full items-center"><div class="flex shrink-0 items-center">`);
       _push(ssrRenderComponent(_component_Link, {
         href: _ctx.route("dashboard"),
@@ -3199,13 +3274,13 @@ const _sfc_main$S = {
     };
   }
 };
-const _sfc_setup$S = _sfc_main$S.setup;
-_sfc_main$S.setup = (props, ctx) => {
+const _sfc_setup$1d = _sfc_main$1d.setup;
+_sfc_main$1d.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Main/MainNavigation.vue");
-  return _sfc_setup$S ? _sfc_setup$S(props, ctx) : void 0;
+  return _sfc_setup$1d ? _sfc_setup$1d(props, ctx) : void 0;
 };
-const _sfc_main$R = {
+const _sfc_main$1c = {
   __name: "Banner",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3219,9 +3294,9 @@ const _sfc_main$R = {
       return ((_a = usePage().props.serenity.flash) == null ? void 0 : _a.banner) || "";
     });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_IconOutlineCheckCircle = __unplugin_components_5$2;
-      const _component_IconOutlineExclamation = __unplugin_components_1$7;
-      const _component_IconOutlineX = __unplugin_components_5$1;
+      const _component_IconOutlineCheckCircle = __unplugin_components_5$3;
+      const _component_IconOutlineExclamation = __unplugin_components_1$9;
+      const _component_IconOutlineX = __unplugin_components_5$2;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
       if (unref(show) && unref(message)) {
         _push(`<div class="${ssrRenderClass({ "bg-emerald-500": unref(style) == "success", "bg-red-700": unref(style) == "danger" })}"><div class="max-w-screen-xl px-3 py-2 mx-auto sm:px-6 lg:px-8"><div class="flex flex-wrap items-center justify-between"><div class="flex items-center flex-1 w-0 min-w-0"><span class="${ssrRenderClass([{ "bg-emerald-700": unref(style) == "success", "bg-red-600": unref(style) == "danger" }, "flex p-2 rounded-lg"])}">`);
@@ -3248,13 +3323,13 @@ const _sfc_main$R = {
     };
   }
 };
-const _sfc_setup$R = _sfc_main$R.setup;
-_sfc_main$R.setup = (props, ctx) => {
+const _sfc_setup$1c = _sfc_main$1c.setup;
+_sfc_main$1c.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/Banner.vue");
-  return _sfc_setup$R ? _sfc_setup$R(props, ctx) : void 0;
+  return _sfc_setup$1c ? _sfc_setup$1c(props, ctx) : void 0;
 };
-const _sfc_main$Q = {
+const _sfc_main$1b = {
   __name: "MainLayout",
   __ssrInlineRender: true,
   props: { title: String },
@@ -3263,10 +3338,10 @@ const _sfc_main$Q = {
     const title2 = props.title || useTrans(__("Dashboard"));
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Head = resolveComponent("Head");
-      const _component_Banner = _sfc_main$R;
-      const _component_MainNavigation = _sfc_main$S;
-      const _component_MainFooter = _sfc_main$15;
-      const _component_Notification = __unplugin_components_3$2;
+      const _component_Banner = _sfc_main$1c;
+      const _component_MainNavigation = _sfc_main$1d;
+      const _component_MainFooter = _sfc_main$1s;
+      const _component_Notification = __unplugin_components_3$3;
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_component_Head, { title: unref(title2) }, null, _parent));
       _push(ssrRenderComponent(_component_Banner, null, null, _parent));
@@ -3282,13 +3357,13 @@ const _sfc_main$Q = {
     };
   }
 };
-const _sfc_setup$Q = _sfc_main$Q.setup;
-_sfc_main$Q.setup = (props, ctx) => {
+const _sfc_setup$1b = _sfc_main$1b.setup;
+_sfc_main$1b.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Layouts/MainLayout.vue");
-  return _sfc_setup$Q ? _sfc_setup$Q(props, ctx) : void 0;
+  return _sfc_setup$1b ? _sfc_setup$1b(props, ctx) : void 0;
 };
-const _sfc_main$P = {
+const _sfc_main$1a = {
   __name: "Index",
   __ssrInlineRender: true,
   props: [
@@ -3299,8 +3374,8 @@ const _sfc_main$P = {
   setup(__props) {
     const props = __props;
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_MainLayout = _sfc_main$Q;
-      const _component_ApiTokenManager = _sfc_main$1c;
+      const _component_MainLayout = _sfc_main$1b;
+      const _component_ApiTokenManager = _sfc_main$1z;
       _push(ssrRenderComponent(_component_MainLayout, mergeProps({
         title: _ctx.__("API Tokens")
       }, _attrs), {
@@ -3341,17 +3416,17 @@ const _sfc_main$P = {
     };
   }
 };
-const _sfc_setup$P = _sfc_main$P.setup;
-_sfc_main$P.setup = (props, ctx) => {
+const _sfc_setup$1a = _sfc_main$1a.setup;
+_sfc_main$1a.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/API/Index.vue");
-  return _sfc_setup$P ? _sfc_setup$P(props, ctx) : void 0;
+  return _sfc_setup$1a ? _sfc_setup$1a(props, ctx) : void 0;
 };
 const __vite_glob_0_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$P
+  default: _sfc_main$1a
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$O = {
+const _sfc_main$19 = {
   __name: "ValidationErrors",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3374,13 +3449,13 @@ const _sfc_main$O = {
     };
   }
 };
-const _sfc_setup$O = _sfc_main$O.setup;
-_sfc_main$O.setup = (props, ctx) => {
+const _sfc_setup$19 = _sfc_main$19.setup;
+_sfc_main$19.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ValidationErrors.vue");
-  return _sfc_setup$O ? _sfc_setup$O(props, ctx) : void 0;
+  return _sfc_setup$19 ? _sfc_setup$19(props, ctx) : void 0;
 };
-const _sfc_main$N = {
+const _sfc_main$18 = {
   __name: "AuthenticationCard",
   __ssrInlineRender: true,
   props: {
@@ -3411,14 +3486,14 @@ const _sfc_main$N = {
     };
   }
 };
-const _sfc_setup$N = _sfc_main$N.setup;
-_sfc_main$N.setup = (props, ctx) => {
+const _sfc_setup$18 = _sfc_main$18.setup;
+_sfc_main$18.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/AuthenticationCard.vue");
-  return _sfc_setup$N ? _sfc_setup$N(props, ctx) : void 0;
+  return _sfc_setup$18 ? _sfc_setup$18(props, ctx) : void 0;
 };
-const _sfc_main$M = {};
-function _sfc_ssrRender$6(_ctx, _push, _parent, _attrs) {
+const _sfc_main$17 = {};
+function _sfc_ssrRender$b(_ctx, _push, _parent, _attrs) {
   const _component_Link = resolveComponent("Link");
   _push(`<footer${ssrRenderAttrs(mergeProps({ class: "flex flex-col items-center justify-center bg-transparent px-6 py-12 text-sm sm:flex-row sm:justify-between sm:space-y-0" }, _attrs))}><div class="space-x-4 text-gray-400 dark:text-gray-300">`);
   _push(ssrRenderComponent(_component_Link, {
@@ -3453,14 +3528,14 @@ function _sfc_ssrRender$6(_ctx, _push, _parent, _attrs) {
   }, _parent));
   _push(`</div><div class="space-x-4 text-gray-400 dark:text-gray-300"><span>${_ctx.$page.props.copyright}</span><span> Serenity v${ssrInterpolate(_ctx.$page.props.serenityVersion)} (PHP v${ssrInterpolate(_ctx.$page.props.phpVersion)}) </span></div></footer>`);
 }
-const _sfc_setup$M = _sfc_main$M.setup;
-_sfc_main$M.setup = (props, ctx) => {
+const _sfc_setup$17 = _sfc_main$17.setup;
+_sfc_main$17.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Guest/GuestFooter.vue");
-  return _sfc_setup$M ? _sfc_setup$M(props, ctx) : void 0;
+  return _sfc_setup$17 ? _sfc_setup$17(props, ctx) : void 0;
 };
-const __unplugin_components_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["ssrRender", _sfc_ssrRender$6]]);
-const _sfc_main$L = {
+const __unplugin_components_1$6 = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["ssrRender", _sfc_ssrRender$b]]);
+const _sfc_main$16 = {
   __name: "GuestResponsiveNavMenu",
   __ssrInlineRender: true,
   props: {
@@ -3471,7 +3546,7 @@ const _sfc_main$L = {
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_ResponsiveNavLink = _sfc_main$Z;
+      const _component_ResponsiveNavLink = _sfc_main$1k;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: [{ block: __props.show, hidden: !__props.show }, "sm:hidden"]
       }, _attrs))}><div class="space-y-1 pb-3 pl-6 pr-4 pt-2">`);
@@ -3560,13 +3635,13 @@ const _sfc_main$L = {
     };
   }
 };
-const _sfc_setup$L = _sfc_main$L.setup;
-_sfc_main$L.setup = (props, ctx) => {
+const _sfc_setup$16 = _sfc_main$16.setup;
+_sfc_main$16.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Guest/GuestResponsiveNavMenu.vue");
-  return _sfc_setup$L ? _sfc_setup$L(props, ctx) : void 0;
+  return _sfc_setup$16 ? _sfc_setup$16(props, ctx) : void 0;
 };
-const _sfc_main$K = {
+const _sfc_main$15 = {
   __name: "GuestHeader",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3586,13 +3661,13 @@ const _sfc_main$K = {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Link = resolveComponent("Link");
       const _component_ApplicationMark = __unplugin_components_4$1;
-      const _component_NavLink = _sfc_main$U;
-      const _component_TeamManagerMenu = _sfc_main$V;
-      const _component_AccountManagerMenu = _sfc_main$W;
-      const _component_ThemeSwitcher = _sfc_main$X;
+      const _component_NavLink = _sfc_main$1f;
+      const _component_TeamManagerMenu = _sfc_main$1g;
+      const _component_AccountManagerMenu = _sfc_main$1h;
+      const _component_ThemeSwitcher = _sfc_main$1i;
       const _component_IconOutlineMenu = __unplugin_components_4$2;
-      const _component_IconOutlineX = __unplugin_components_5$1;
-      const _component_GuestResponsiveNavMenu = _sfc_main$L;
+      const _component_IconOutlineX = __unplugin_components_5$2;
+      const _component_GuestResponsiveNavMenu = _sfc_main$16;
       _push(`<nav${ssrRenderAttrs(mergeProps({
         class: ["sticky top-0 z-50 min-w-full border-b border-gray-100 bg-white bg-opacity-5 backdrop-blur-lg backdrop-filter dark:border-gray-900 dark:bg-gray-800 dark:bg-opacity-5 dark:backdrop-blur-lg dark:backdrop-filter", { stickyGuestHeader: unref(stickyHeader) }]
       }, _attrs))}><div class="px-6"><div class="flex h-16 justify-between"><div class="flex"><div class="flex shrink-0 items-center">`);
@@ -3714,22 +3789,22 @@ const _sfc_main$K = {
     };
   }
 };
-const _sfc_setup$K = _sfc_main$K.setup;
-_sfc_main$K.setup = (props, ctx) => {
+const _sfc_setup$15 = _sfc_main$15.setup;
+_sfc_main$15.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Partials/Guest/GuestHeader.vue");
-  return _sfc_setup$K ? _sfc_setup$K(props, ctx) : void 0;
+  return _sfc_setup$15 ? _sfc_setup$15(props, ctx) : void 0;
 };
-const _sfc_main$J = {
+const _sfc_main$14 = {
   __name: "GuestLayout",
   __ssrInlineRender: true,
   props: { title: String },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Head = resolveComponent("Head");
-      const _component_GuestHeader = _sfc_main$K;
-      const _component_GuestFooter = __unplugin_components_1$3;
-      const _component_Notification = __unplugin_components_3$2;
+      const _component_GuestHeader = _sfc_main$15;
+      const _component_GuestFooter = __unplugin_components_1$6;
+      const _component_Notification = __unplugin_components_3$3;
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_component_Head, { title: __props.title }, null, _parent));
       _push(`<div class="beams min-h-screen bg-gray-200 dark:bg-gray-900 dark:text-gray-100">`);
@@ -3743,13 +3818,13 @@ const _sfc_main$J = {
     };
   }
 };
-const _sfc_setup$J = _sfc_main$J.setup;
-_sfc_main$J.setup = (props, ctx) => {
+const _sfc_setup$14 = _sfc_main$14.setup;
+_sfc_main$14.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Layouts/GuestLayout.vue");
-  return _sfc_setup$J ? _sfc_setup$J(props, ctx) : void 0;
+  return _sfc_setup$14 ? _sfc_setup$14(props, ctx) : void 0;
 };
-const _sfc_main$I = {
+const _sfc_main$13 = {
   __name: "ConfirmPassword",
   __ssrInlineRender: true,
   setup(__props) {
@@ -3763,12 +3838,12 @@ const _sfc_main$I = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$J;
-      const _component_AuthenticationCard = _sfc_main$N;
-      const _component_ValidationErrors = _sfc_main$O;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_Button = _sfc_main$1j;
+      const _component_GuestLayout = _sfc_main$14;
+      const _component_AuthenticationCard = _sfc_main$18;
+      const _component_ValidationErrors = _sfc_main$19;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Secure Area")
       }, _attrs), {
@@ -3899,17 +3974,17 @@ const _sfc_main$I = {
     };
   }
 };
-const _sfc_setup$I = _sfc_main$I.setup;
-_sfc_main$I.setup = (props, ctx) => {
+const _sfc_setup$13 = _sfc_main$13.setup;
+_sfc_main$13.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/ConfirmPassword.vue");
-  return _sfc_setup$I ? _sfc_setup$I(props, ctx) : void 0;
+  return _sfc_setup$13 ? _sfc_setup$13(props, ctx) : void 0;
 };
 const __vite_glob_0_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$I
+  default: _sfc_main$13
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$H = {
+const _sfc_main$12 = {
   __name: "ForgotPassword",
   __ssrInlineRender: true,
   props: {
@@ -3927,12 +4002,12 @@ const _sfc_main$H = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$J;
-      const _component_AuthenticationCard = _sfc_main$N;
-      const _component_ValidationErrors = _sfc_main$O;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_Button = _sfc_main$1j;
+      const _component_GuestLayout = _sfc_main$14;
+      const _component_AuthenticationCard = _sfc_main$18;
+      const _component_ValidationErrors = _sfc_main$19;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Forgot Password")
       }, _attrs), {
@@ -4079,135 +4154,17 @@ const _sfc_main$H = {
     };
   }
 };
-const _sfc_setup$H = _sfc_main$H.setup;
-_sfc_main$H.setup = (props, ctx) => {
+const _sfc_setup$12 = _sfc_main$12.setup;
+_sfc_main$12.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/ForgotPassword.vue");
-  return _sfc_setup$H ? _sfc_setup$H(props, ctx) : void 0;
+  return _sfc_setup$12 ? _sfc_setup$12(props, ctx) : void 0;
 };
 const __vite_glob_0_2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$H
+  default: _sfc_main$12
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$G = /* @__PURE__ */ defineComponent({
-  __name: "InviteUser",
-  __ssrInlineRender: true,
-  props: {
-    locales: { default: () => ["en"] },
-    defaultLocale: { default: "en" },
-    email: {}
-  },
-  setup(__props) {
-    const props = __props;
-    const form = useForm({
-      email: props.email,
-      first_name: "",
-      last_name: "",
-      password: "",
-      password_confirmation: "",
-      locale: ""
-    });
-    useToast();
-    return (_ctx, _push, _parent, _attrs) => {
-      const _component_Head = resolveComponent("Head");
-      const _component_TextInput = resolveComponent("TextInput");
-      const _component_Multiselect = resolveComponent("Multiselect");
-      const _component_Button = _sfc_main$1j;
-      const _directive_auto_animate = resolveDirective("auto-animate");
-      _push(`<div${ssrRenderAttrs(_attrs)}>`);
-      _push(ssrRenderComponent(_component_Head, {
-        title: _ctx.$t("builder", "Register")
-      }, null, _parent));
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "space-y-3 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10" }, ssrGetDirectiveProps(_ctx, _directive_auto_animate)))}><form class="space-y-6">`);
-      _push(ssrRenderComponent(_component_TextInput, {
-        modelValue: unref(form).first_name,
-        "onUpdate:modelValue": ($event) => unref(form).first_name = $event,
-        name: "first_name",
-        label: _ctx.$t("builder", "First name"),
-        class: "col-span-6 sm:col-span-3",
-        required: true
-      }, null, _parent));
-      _push(ssrRenderComponent(_component_TextInput, {
-        modelValue: unref(form).last_name,
-        "onUpdate:modelValue": ($event) => unref(form).last_name = $event,
-        name: "last_name",
-        label: _ctx.$t("builder", "Last name"),
-        class: "col-span-6 sm:col-span-3",
-        required: true
-      }, null, _parent));
-      _push(ssrRenderComponent(_component_TextInput, {
-        modelValue: unref(form).email,
-        "onUpdate:modelValue": ($event) => unref(form).email = $event,
-        name: "email",
-        label: _ctx.$t("builder", "E-mail"),
-        type: "email",
-        class: "col-span-6 sm:col-span-3",
-        disabled: true
-      }, null, _parent));
-      _push(ssrRenderComponent(_component_TextInput, {
-        modelValue: unref(form).password,
-        "onUpdate:modelValue": ($event) => unref(form).password = $event,
-        name: "password",
-        label: _ctx.$t("builder", "Password"),
-        type: "password",
-        autocomplete: "new-password",
-        class: "col-span-6 sm:col-span-3 sm:col-start-1",
-        required: true
-      }, null, _parent));
-      _push(ssrRenderComponent(_component_TextInput, {
-        modelValue: unref(form).password_confirmation,
-        "onUpdate:modelValue": ($event) => unref(form).password_confirmation = $event,
-        name: "password_confirmation",
-        label: _ctx.$t("builder", "Password confirmation"),
-        type: "password",
-        autocomplete: "new-password",
-        class: "col-span-6 sm:col-span-3 sm:col-start-1",
-        required: true
-      }, null, _parent));
-      _push(ssrRenderComponent(_component_Multiselect, {
-        modelValue: unref(form).locale,
-        "onUpdate:modelValue": ($event) => unref(form).locale = $event,
-        name: "locale",
-        label: _ctx.$t("builder", "Locale"),
-        mode: "single",
-        options: _ctx.locales,
-        "options-value-prop": "key",
-        "options-label": "value",
-        class: "col-span-6 sm:col-span-3 sm:col-start-1",
-        canDeselect: false,
-        required: true
-      }, null, _parent));
-      _push(ssrRenderComponent(_component_Button, {
-        class: "w-full",
-        type: "submit",
-        disabled: unref(form).processing
-      }, {
-        default: withCtx((_2, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`${ssrInterpolate(_ctx.$t("builder", "Save"))}`);
-          } else {
-            return [
-              createTextVNode(toDisplayString(_ctx.$t("builder", "Save")), 1)
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
-      _push(`</form></div></div>`);
-    };
-  }
-});
-const _sfc_setup$G = _sfc_main$G.setup;
-_sfc_main$G.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/InviteUser.vue");
-  return _sfc_setup$G ? _sfc_setup$G(props, ctx) : void 0;
-};
-const __vite_glob_0_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: _sfc_main$G
-}, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$F = {
+const _sfc_main$11 = {
   __name: "Login",
   __ssrInlineRender: true,
   props: {
@@ -4229,14 +4186,14 @@ const _sfc_main$F = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$J;
-      const _component_AuthenticationCard = _sfc_main$N;
-      const _component_ValidationErrors = _sfc_main$O;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_Checkbox = _sfc_main$1h;
+      const _component_GuestLayout = _sfc_main$14;
+      const _component_AuthenticationCard = _sfc_main$18;
+      const _component_ValidationErrors = _sfc_main$19;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_Checkbox = _sfc_main$1E;
       const _component_Link = resolveComponent("Link");
-      const _component_Button = _sfc_main$1j;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Login")
       }, _attrs), {
@@ -4492,17 +4449,17 @@ const _sfc_main$F = {
     };
   }
 };
-const _sfc_setup$F = _sfc_main$F.setup;
-_sfc_main$F.setup = (props, ctx) => {
+const _sfc_setup$11 = _sfc_main$11.setup;
+_sfc_main$11.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/Login.vue");
-  return _sfc_setup$F ? _sfc_setup$F(props, ctx) : void 0;
+  return _sfc_setup$11 ? _sfc_setup$11(props, ctx) : void 0;
 };
-const __vite_glob_0_4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$F
+  default: _sfc_main$11
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$E = {
+const _sfc_main$10 = {
   __name: "Register",
   __ssrInlineRender: true,
   setup(__props) {
@@ -4522,14 +4479,14 @@ const _sfc_main$E = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$J;
-      const _component_AuthenticationCard = _sfc_main$N;
-      const _component_ValidationErrors = _sfc_main$O;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_Checkbox = _sfc_main$1h;
+      const _component_GuestLayout = _sfc_main$14;
+      const _component_AuthenticationCard = _sfc_main$18;
+      const _component_ValidationErrors = _sfc_main$19;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_Checkbox = _sfc_main$1E;
       const _component_Link = resolveComponent("Link");
-      const _component_Button = _sfc_main$1j;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Register")
       }, _attrs), {
@@ -4998,17 +4955,17 @@ const _sfc_main$E = {
     };
   }
 };
-const _sfc_setup$E = _sfc_main$E.setup;
-_sfc_main$E.setup = (props, ctx) => {
+const _sfc_setup$10 = _sfc_main$10.setup;
+_sfc_main$10.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/Register.vue");
-  return _sfc_setup$E ? _sfc_setup$E(props, ctx) : void 0;
+  return _sfc_setup$10 ? _sfc_setup$10(props, ctx) : void 0;
 };
-const __vite_glob_0_5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$E
+  default: _sfc_main$10
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$D = {
+const _sfc_main$$ = {
   __name: "ResetPassword",
   __ssrInlineRender: true,
   props: {
@@ -5030,12 +4987,12 @@ const _sfc_main$D = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$J;
-      const _component_AuthenticationCard = _sfc_main$N;
-      const _component_ValidationErrors = _sfc_main$O;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_Button = _sfc_main$1j;
+      const _component_GuestLayout = _sfc_main$14;
+      const _component_AuthenticationCard = _sfc_main$18;
+      const _component_ValidationErrors = _sfc_main$19;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Reset Password")
       }, _attrs), {
@@ -5257,17 +5214,17 @@ const _sfc_main$D = {
     };
   }
 };
-const _sfc_setup$D = _sfc_main$D.setup;
-_sfc_main$D.setup = (props, ctx) => {
+const _sfc_setup$$ = _sfc_main$$.setup;
+_sfc_main$$.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/ResetPassword.vue");
-  return _sfc_setup$D ? _sfc_setup$D(props, ctx) : void 0;
+  return _sfc_setup$$ ? _sfc_setup$$(props, ctx) : void 0;
 };
-const __vite_glob_0_6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$D
+  default: _sfc_main$$
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$C = {
+const _sfc_main$_ = {
   __name: "TwoFactorChallenge",
   __ssrInlineRender: true,
   setup(__props, { expose: __expose }) {
@@ -5295,12 +5252,12 @@ const _sfc_main$C = {
     };
     __expose({ code, recovery_code });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$J;
-      const _component_AuthenticationCard = _sfc_main$N;
-      const _component_ValidationErrors = _sfc_main$O;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_Button = _sfc_main$1j;
+      const _component_GuestLayout = _sfc_main$14;
+      const _component_AuthenticationCard = _sfc_main$18;
+      const _component_ValidationErrors = _sfc_main$19;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Two-factor Confirmation")
       }, _attrs), {
@@ -5540,23 +5497,23 @@ const _sfc_main$C = {
     };
   }
 };
-const _sfc_setup$C = _sfc_main$C.setup;
-_sfc_main$C.setup = (props, ctx) => {
+const _sfc_setup$_ = _sfc_main$_.setup;
+_sfc_main$_.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/TwoFactorChallenge.vue");
-  return _sfc_setup$C ? _sfc_setup$C(props, ctx) : void 0;
+  return _sfc_setup$_ ? _sfc_setup$_(props, ctx) : void 0;
 };
-const __vite_glob_0_7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$C
+  default: _sfc_main$_
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$B = {
+const _sfc_main$Z = {
   __name: "VerifyEmail",
   __ssrInlineRender: true,
   props: { status: String },
   setup(__props) {
     const props = __props;
-    const form = useForm();
+    const form = useForm({});
     const submit = () => {
       form.post(useRoutes("verification.send"));
     };
@@ -5564,9 +5521,9 @@ const _sfc_main$B = {
       return props.status === "verification-link-sent";
     });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$J;
-      const _component_AuthenticationCard = _sfc_main$N;
-      const _component_Button = _sfc_main$1j;
+      const _component_GuestLayout = _sfc_main$14;
+      const _component_AuthenticationCard = _sfc_main$18;
+      const _component_Button = _sfc_main$1G;
       const _component_Link = resolveComponent("Link");
       _push(ssrRenderComponent(_component_GuestLayout, mergeProps({
         title: _ctx.__("Email Verification")
@@ -5576,11 +5533,13 @@ const _sfc_main$B = {
             _push2(ssrRenderComponent(_component_AuthenticationCard, { "max-width": "md" }, {
               default: withCtx((_3, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<div class="mb-4 text-sm text-gray-600"${_scopeId2}>${ssrInterpolate(_ctx.__(
+                  _push3(`<div class="mb-4 text-sm text-gray-600 dark:text-gray-400"${_scopeId2}>${ssrInterpolate(_ctx.__(
                     "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another."
                   ))}</div>`);
                   if (unref(verificationLinkSent)) {
-                    _push3(`<div class="mb-4 text-sm font-medium text-green-600"${_scopeId2}>${ssrInterpolate(_ctx.__("A new verification link has been sent to the email address you provided during registration."))}</div>`);
+                    _push3(`<div class="mb-4 text-sm font-medium text-green-600"${_scopeId2}>${ssrInterpolate(_ctx.__(
+                      "A new verification link has been sent to the email address you provided during registration."
+                    ))}</div>`);
                   } else {
                     _push3(`<!---->`);
                   }
@@ -5604,7 +5563,7 @@ const _sfc_main$B = {
                     href: _ctx.route("logout"),
                     method: "post",
                     as: "button",
-                    class: "text-sm text-gray-600 underline hover:text-gray-900"
+                    class: "text-sm text-gray-600 underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                   }, {
                     default: withCtx((_4, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
@@ -5620,13 +5579,15 @@ const _sfc_main$B = {
                   _push3(`</div></form>`);
                 } else {
                   return [
-                    createVNode("div", { class: "mb-4 text-sm text-gray-600" }, toDisplayString(_ctx.__(
+                    createVNode("div", { class: "mb-4 text-sm text-gray-600 dark:text-gray-400" }, toDisplayString(_ctx.__(
                       "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another."
                     )), 1),
                     unref(verificationLinkSent) ? (openBlock(), createBlock("div", {
                       key: 0,
                       class: "mb-4 text-sm font-medium text-green-600"
-                    }, toDisplayString(_ctx.__("A new verification link has been sent to the email address you provided during registration.")), 1)) : createCommentVNode("", true),
+                    }, toDisplayString(_ctx.__(
+                      "A new verification link has been sent to the email address you provided during registration."
+                    )), 1)) : createCommentVNode("", true),
                     createVNode("form", {
                       onSubmit: withModifiers(submit, ["prevent"])
                     }, [
@@ -5644,7 +5605,7 @@ const _sfc_main$B = {
                           href: _ctx.route("logout"),
                           method: "post",
                           as: "button",
-                          class: "text-sm text-gray-600 underline hover:text-gray-900"
+                          class: "text-sm text-gray-600 underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                         }, {
                           default: withCtx(() => [
                             createTextVNode(toDisplayString(_ctx.__("Log Out")), 1)
@@ -5662,13 +5623,15 @@ const _sfc_main$B = {
             return [
               createVNode(_component_AuthenticationCard, { "max-width": "md" }, {
                 default: withCtx(() => [
-                  createVNode("div", { class: "mb-4 text-sm text-gray-600" }, toDisplayString(_ctx.__(
+                  createVNode("div", { class: "mb-4 text-sm text-gray-600 dark:text-gray-400" }, toDisplayString(_ctx.__(
                     "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another."
                   )), 1),
                   unref(verificationLinkSent) ? (openBlock(), createBlock("div", {
                     key: 0,
                     class: "mb-4 text-sm font-medium text-green-600"
-                  }, toDisplayString(_ctx.__("A new verification link has been sent to the email address you provided during registration.")), 1)) : createCommentVNode("", true),
+                  }, toDisplayString(_ctx.__(
+                    "A new verification link has been sent to the email address you provided during registration."
+                  )), 1)) : createCommentVNode("", true),
                   createVNode("form", {
                     onSubmit: withModifiers(submit, ["prevent"])
                   }, [
@@ -5686,7 +5649,7 @@ const _sfc_main$B = {
                         href: _ctx.route("logout"),
                         method: "post",
                         as: "button",
-                        class: "text-sm text-gray-600 underline hover:text-gray-900"
+                        class: "text-sm text-gray-600 underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                       }, {
                         default: withCtx(() => [
                           createTextVNode(toDisplayString(_ctx.__("Log Out")), 1)
@@ -5706,22 +5669,22 @@ const _sfc_main$B = {
     };
   }
 };
-const _sfc_setup$B = _sfc_main$B.setup;
-_sfc_main$B.setup = (props, ctx) => {
+const _sfc_setup$Z = _sfc_main$Z.setup;
+_sfc_main$Z.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Auth/VerifyEmail.vue");
-  return _sfc_setup$B ? _sfc_setup$B(props, ctx) : void 0;
+  return _sfc_setup$Z ? _sfc_setup$Z(props, ctx) : void 0;
 };
-const __vite_glob_0_8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$B
+  default: _sfc_main$Z
 }, Symbol.toStringTag, { value: "Module" }));
-const _hoisted_1$8 = {
+const _hoisted_1$k = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$8 = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$k = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -5729,19 +5692,19 @@ const _hoisted_2$8 = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "1.5",
   d: "M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75Zm12 1.5c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25Zm-10.5 7.5c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z"
 }, null, -1);
-const _hoisted_3$8 = [
-  _hoisted_2$8
+const _hoisted_3$k = [
+  _hoisted_2$k
 ];
-function render$8(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$8, _hoisted_3$8);
+function render$k(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$k, _hoisted_3$k);
 }
-const __unplugin_components_6 = { name: "heroicons-outline-rectangle-group", render: render$8 };
-const _hoisted_1$7 = {
+const __unplugin_components_6$3 = { name: "heroicons-outline-rectangle-group", render: render$k };
+const _hoisted_1$j = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$7 = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$j = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -5749,19 +5712,19 @@ const _hoisted_2$7 = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "1.5",
   d: "M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
 }, null, -1);
-const _hoisted_3$7 = [
-  _hoisted_2$7
+const _hoisted_3$j = [
+  _hoisted_2$j
 ];
-function render$7(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$7, _hoisted_3$7);
+function render$j(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$j, _hoisted_3$j);
 }
-const __unplugin_components_5 = { name: "heroicons-outline-arrows-right-left", render: render$7 };
-const _hoisted_1$6 = {
+const __unplugin_components_5$1 = { name: "heroicons-outline-arrows-right-left", render: render$j };
+const _hoisted_1$i = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$6 = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$i = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -5769,37 +5732,37 @@ const _hoisted_2$6 = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "m13 5l7 7l-7 7M5 5l7 7l-7 7"
 }, null, -1);
-const _hoisted_3$6 = [
-  _hoisted_2$6
+const _hoisted_3$i = [
+  _hoisted_2$i
 ];
-function render$6(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$6, _hoisted_3$6);
+function render$i(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$i, _hoisted_3$i);
 }
-const __unplugin_components_4 = { name: "heroicons-outline-chevron-double-right", render: render$6 };
-const _hoisted_1$5 = {
+const __unplugin_components_4 = { name: "heroicons-outline-chevron-double-right", render: render$i };
+const _hoisted_1$h = {
   viewBox: "0 0 20 20",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$5 = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$h = /* @__PURE__ */ createElementVNode("path", {
   fill: "currentColor",
   "fill-rule": "evenodd",
   d: "M10.293 3.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414L14.586 11H3a1 1 0 1 1 0-2h11.586l-4.293-4.293a1 1 0 0 1 0-1.414Z",
   "clip-rule": "evenodd"
 }, null, -1);
-const _hoisted_3$5 = [
-  _hoisted_2$5
+const _hoisted_3$h = [
+  _hoisted_2$h
 ];
-function render$5(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$5, _hoisted_3$5);
+function render$h(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$h, _hoisted_3$h);
 }
-const __unplugin_components_3 = { name: "heroicons-solid-arrow-right", render: render$5 };
-const _hoisted_1$4 = {
+const __unplugin_components_3$1 = { name: "heroicons-solid-arrow-right", render: render$h };
+const _hoisted_1$g = {
   viewBox: "0 0 24 24",
   width: "1.2em",
   height: "1.2em"
 };
-const _hoisted_2$4 = /* @__PURE__ */ createElementVNode("path", {
+const _hoisted_2$g = /* @__PURE__ */ createElementVNode("path", {
   fill: "none",
   stroke: "currentColor",
   "stroke-linecap": "round",
@@ -5807,15 +5770,15 @@ const _hoisted_2$4 = /* @__PURE__ */ createElementVNode("path", {
   "stroke-width": "2",
   d: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
 }, null, -1);
-const _hoisted_3$4 = [
-  _hoisted_2$4
+const _hoisted_3$g = [
+  _hoisted_2$g
 ];
-function render$4(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$4, _hoisted_3$4);
+function render$g(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$g, _hoisted_3$g);
 }
-const __unplugin_components_2$2 = { name: "heroicons-outline-book-open", render: render$4 };
-const _sfc_main$A = {};
-function _sfc_ssrRender$5(_ctx, _push, _parent, _attrs) {
+const __unplugin_components_2$2 = { name: "heroicons-outline-book-open", render: render$g };
+const _sfc_main$Y = {};
+function _sfc_ssrRender$a(_ctx, _push, _parent, _attrs) {
   _push(`<svg${ssrRenderAttrs(mergeProps({
     xmlns: "http://www.w3.org/2000/svg",
     fill: "currentColor"
@@ -5828,23 +5791,23 @@ function _sfc_ssrRender$5(_ctx, _push, _parent, _attrs) {
     viewBox: "0 0 499 221"
   }, _attrs))}><g fill-rule="nonzero"><path d="M278.1 21.4v-1.7l-.3-.9V18c-.6-2.3-1.6-4.6-2.8-6.6A26.8 26.8 0 0 0 251.6 0a56.7 56.7 0 0 0-18.2 4.2c-2 .7-3.7 1.5-5.6 2.3L225 7.8l-2.7 1.5-.7.3-.6.4-1.4.7-2.6 1.6a115.7 115.7 0 0 0-18.8 15.2A88.2 88.2 0 0 0 184 47.1a43.7 43.7 0 0 0-4.8 18.2 28.3 28.3 0 0 0 3 12.5 27.3 27.3 0 0 0 8.6 9.5 57.4 57.4 0 0 0 9.5 5.1l1.4.6 2.9 1.1 1.4.5.7.2.7.3c7.5 2.6 15 4.4 22.3 7.1l2.7 1 1.3.6 1.3.6a36.5 36.5 0 0 1 9.4 5.8c1.4 1.2 2.6 2.5 3.7 4a19.2 19.2 0 0 1 3.7 10 31 31 0 0 1-.9 10.8 48.9 48.9 0 0 1-3 8l-.6 1.2-.3.7-.4.6a50 50 0 0 1-10.4 13.6 33.1 33.1 0 0 1-9 6.6c-1 .4-1.7.8-2.6 1a12.4 12.4 0 0 1-5.3 1.1c-1 .2-1.8 0-2.7 0l-1.3-.2-.6-.1-.7-.2-2.4-1a11.2 11.2 0 0 1-3.9-3.5c-.5-.7-1-1.5-1.3-2.3l-.2-.7-.2-.3-.1-.3-.2-.6-.1-.7-.5-2.7v-2.7c0-.5 0-1 .2-1.4a19.8 19.8 0 0 1 1-4c1.2-3.7 3.2-7 5.5-10 .4-.5.3-1.2-.2-1.6-.4-.4-1.1-.3-1.5.2l-1.8 2.4-1.6 2.6a25.6 25.6 0 0 0-3.6 8.5l-.3 1.5-.2 1.6v3c0 1 .2 2.2.4 3.2l.2.8.2.7s0 .3.2.4v.4l.4.7a15.1 15.1 0 0 0 3.6 5.3l2.6 1.9a38.9 38.9 0 0 0 3.7 1.5l.8.2 1.6.3c1 0 2 .2 3.2 0a16.3 16.3 0 0 0 6-1.1l3-1.2a44.2 44.2 0 0 0 14.1-11.3c2.7-3 5-6.3 7-9.9l.4-.7.4-.6.3-.7.4-.7 1.3-2.7a56.7 56.7 0 0 0 3.2-11.9 32.1 32.1 0 0 0-1.3-12.4c-.7-2-1.7-3.9-3-5.7a31.4 31.4 0 0 0-9.2-8.4l-5.3-2.9-1.4-.6-1.4-.6-2.8-1.2c-7.4-2.9-15-4.9-22.3-7.5l-.6-.2-.7-.3-1.4-.5-2.6-1-1.3-.6-1.3-.6-2.6-1.3a31.2 31.2 0 0 1-8.7-6.4 17.1 17.1 0 0 1-2.9-4.3 23 23 0 0 1-2.3-10.1 33 33 0 0 1 4.4-15.6 91.6 91.6 0 0 1 41.6-37.1c1.8-.9 3.6-1.6 5.3-2.3l5.4-1.7c3.5-1 7-1.7 10.6-1.7a22.4 22.4 0 0 1 14.1 4.7c1.2 1 2.2 2.2 3 3.6.8 1.3 1.4 2.7 1.7 4.2l.1.3v.3l.1.6.1 1.1v2.4c-.5 3.2-1.7 6.5-3.6 9.3l-.7 1.1-.8 1-1.7 2a54.6 54.6 0 0 1-3.4 3.5c-.3-.4-.7-.7-1.3-1a4 4 0 0 0-5.2 2l-.7 1.6-.6 1.9-.2 1.4V48c.1.5.3 1.2.8 2 .3.4.7.8 1.2 1 .2.3.4.4.6.5l.7.2h.6c.2.2.3.2.5.2h.4l.4-.1.6-.1h.2l.3-.1.3-.1.4-.2 1-.5.8-.5 1.5-1.1 2.4-2.1c1.6-1.4 3-3 4.4-4.5l2-2.4 1-1.3 1-1.4a27.7 27.7 0 0 0 4.3-12.7l.1-.9v-2.6Zm-21.7 22.9.1-.1h-.1Z"></path><path d="M295.5 92.1c-.3-.2-.8 0-.9.3a31.9 31.9 0 0 1-4.7 6.3l-2.8 2.8-3 2.4c-1 .8-2.2 1.4-3.3 2a9 9 0 0 1-3.4 1.1l-.2.1H274l-1.7-.5-1.4-.7a7.5 7.5 0 0 1-3.3-3.6l-.6-1.5c-.4-1.5-.5-3.1-.3-4.7.3.2.7.4 1.1.4.5.1 1 0 1.4-.1l.3-.1.3-.1.7-.4 1-1 .4-1.3c.2-.4.2-.9.2-1.4 0-.4 0-1-.3-1.5 0-.3-.3-.5-.5-.8l-.7-.6a4 4 0 0 0-1.7-.5c-.6-.1-1 0-1.6.1l-.8.3-.4.2-.3.2-1 1a9 9 0 0 0-1.4 2.3 14 14 0 0 0-1 4.5l.1 2.4.1.6.1.6.3 1.1a14.7 14.7 0 0 0 2.3 4.2c1.1 1.2 2.3 2.3 3.7 3l2.3 1c.7.1 1.5.3 2.3.3l2.3.1h1.1c.2-.2.3-.2.5-.2h.6c1.6-.5 3-1 4.2-1.8 1.3-.7 2.4-1.6 3.5-2.5a36.6 36.6 0 0 0 8.2-9.4l2-3.7c.1-.3 0-.7-.4-.9Zm-27.9.7.3-.4.1-.1v-.1l.2-.1.4-.1h.3l.1.1.3.4v1.3c0 .2 0 .4-.3.6l-.2.2-.2.1-.7.1a.8.8 0 0 1-.4-.2l-.5-.7.6-1.1Z"></path><path d="M321.9 93.3c-.1-.3-.4-.5-.8-.4-.6.1-1.3.1-2-.1l-2.2-.8-4.6-2c-.5-.1-.9-.3-1.4-.3l-1.2-.2H307l-1.4.5-1.3.7a25.8 25.8 0 0 0-6.1 9.6l.3-4.9 1-8.3.2-2 .3-2.1.4-2.2.3-.5.4-.8v-1.3c0-.1 0-.3-.2-.5 0-.2 0-.4-.2-.6 0-.2-.3-.3-.4-.5l-.4-.4-.4-.3-1.2-.5c-1.5-.3-2.9.7-3.4 2.2-.4 1.6-.6 3.2-.7 4.7l-.2 2.2v2c-.3 3-.4 5.8-.5 8.7l.1 8.6.2 2.2.1 2.2c.2 1.5.5 3.1 1.2 4.7v.1c.1.3.3.6.6.8a2 2 0 0 0 2.7-.4c.4-.6.7-1.2.8-1.8l.3-1.5.2-1.2.2-1.2a40.5 40.5 0 0 1 2.3-9.3l.5-1 .3-.6.2-.5.6-1 .6-1c1-1.2 2-2.2 3.1-2.5a7 7 0 0 1 2.1-.1l1.2.1 1 .1c1.5.4 3 1.1 4.6 1.7l2.5.7a5 5 0 0 0 2.7-.2c.3-.1.5-.4.4-.8Zm35.8-1.2c-.3-.2-.8 0-1 .3a31.9 31.9 0 0 1-4.6 6.3l-2.8 2.8c-1 .8-2 1.7-3.1 2.4-1 .8-2.1 1.4-3.2 2a9 9 0 0 1-3.4 1.1l-.2.1h-1.7c-.5.1-1.1 0-1.6 0l-1.7-.5-1.4-.7a7.5 7.5 0 0 1-3.3-3.6l-.6-1.5c-.4-1.5-.5-3.1-.3-4.7.3.2.7.4 1 .4.6.1 1 0 1.5-.1l.3-.1.3-.1.7-.4.9-1 .5-1.3c.2-.4.2-.9.2-1.4l-.3-1.5-.5-.8-.7-.6a4 4 0 0 0-1.7-.5c-.6-.1-1.1 0-1.6.1l-.8.3-.4.2-.3.2-1.1 1a9 9 0 0 0-1.3 2.3 14 14 0 0 0-1 4.5v2.4l.2.6v.6l.4 1.1a14.7 14.7 0 0 0 2.3 4.2 12 12 0 0 0 3.7 3l2.3 1c.7.1 1.5.3 2.3.3l2.3.1h1l.6-.2h.6c1.6-.5 2.9-1 4.2-1.8 1.3-.7 2.4-1.6 3.5-2.5a36.6 36.6 0 0 0 10-13.1c.3-.3 0-.7-.2-.9Zm-28 .7.4-.4v-.2l.3-.1.4-.1h.3v.1l.4.4v1.3l-.3.6-.2.2-.2.1-.7.1a.8.8 0 0 1-.4-.2l-.5-.7.6-1.1Z"></path><path d="M405.3 92.4a1 1 0 0 0-1.3.4l-1.5 2.3-1.5 2.2a47.9 47.9 0 0 1-7.2 7.8 7 7 0 0 1-4.4 1.5c-1.5 0-2.8-1-4-2.2a35.2 35.2 0 0 1-3-4.2l-3-4.7a13 13 0 0 0-1.9-2.3 9.2 9.2 0 0 0-2.6-2.1c-.5-.2-1-.5-1.7-.5l-1.8-.1c-1.2.2-2.3.7-3.2 1.3-1 .7-1.7 1.4-2.4 2.2l-1.8 2.4-3 4.7-.3.5v-1.2a47.1 47.1 0 0 1 1-10.5v-.3h.2l.5-.7.2-.5.4-.8.4-1.7.2-1-.1-1.1-.2-.8-.6-1a3 3 0 0 0-1.2-1c-.5-.2-1.1-.4-1.6-.4h-.2a3.1 3.1 0 0 0-3 2.6l-.2 1.4-.2 1.5-.4 2.9a56.4 56.4 0 0 0-.1 11.6c0 1 0 2 .3 3v1.1l.2.5c0 .4.2.8.5 1.2 0 .2.3.5.5.7l.8.7 1 .4h1.3a3.5 3.5 0 0 0 2.2-1.7l.5-.6 1.5-2.6 2.6-4.8c.8-1.5 1.8-2.9 3-3.8.5-.4 1.1-.7 1.7-.8l.9-.1.8.3c.6.2 1.2.7 1.7 1.2l1.7 2 3.1 4.4a26 26 0 0 0 3.7 4.5c.7.7 1.5 1.3 2.4 1.8 1 .5 2 .8 3.1 1 1.1 0 2.1-.3 3.1-.7a19 19 0 0 0 6.7-5.4c2.5-2.8 4.5-6 6.5-9.1.3-.5.2-1.1-.3-1.4Zm-46.2 11.4s0 .1 0 0Z"></path><path d="M411.4 109.2c-.2-.4-.5-.6-.9-.5-.3.1-.6.2-.8.1-.2 0-.4 0-.6-.3-.4-.3-.7-.9-.9-1.5-.5-1.3-.8-2.7-.9-4.2-.2-1.4-.2-2.9-.2-4.3v-3.4l.1-1v-.3a2 2 0 0 0-2-1.8c-1.2.1-2 1-1.9 2v.1l.1 1.1.1 1.2.3 2.3 1 4.6c.1.8.3 1.5.6 2.3l1 2.2.7 1.1 1 1c.5.2 1 .4 1.5.4s1 0 1.4-.3c.3-.2.5-.5.4-.8ZM404.8 88c.2.3.4.7.7.9.4.2.8.3 1.2.1.4-.1.7-.3 1-.7.1-.2.2-.5.1-.8l.2-.6c0-.4-.2-.8-.5-1.1-.3-.2-.7-.4-1-.4-.5 0-.9 0-1.2.4 0 .2-.2.3-.3.5l-.2.5v1.1Z"></path><path d="M477.2 40.5a767.4 767.4 0 0 0-53-4h-1c.2-4 .5-8 1-12l.4-7 .5-.7v-.4s0-.2.2-.3v-.5l.2-1 .2-2v-3l-.1-.8-.1-.5h-.1l-.1-.3-.4-.5-.4-.3c-.9-.3-1.8 0-2.2.8v.3a55.6 55.6 0 0 0-3.5 15.7l-.9 12.2a347.2 347.2 0 0 0-33.8.7l-6.6.9h-.5l-.4.2c-.3 0-.6 0-.9.2A7 7 0 0 0 372 40c-.1 0-.2 0-.2.2l-.3.3-.3.5-.3.6-.2.7h-.1a2 2 0 0 0 1.4 2.3c1 .2 2-.4 2.3-1.4v-.1c0-.2.1-.3.3-.5l.8-.6 1.3-.4.7-.2h.3l.4-.1 6.5-1 13.1-1h20.1v.4l-.8 15.7c-.3 5.2-.4 10.5-.6 15.7l-.2 7.9c0 2.6 0 5.2-.2 7.8v15.9c.1 5.1.4 10.4 1.2 15.7.5 2.7 1.1 5.3 2.1 8 .5 1.2 1.1 2.5 2 3.6.7 1.2 1.6 2.3 2.8 3.3.4.4 1 .3 1.6 0 .4-.6.4-1.3 0-1.7h-.1a22 22 0 0 1-2.2-2.9c-.6-1-1-2.2-1.4-3.4a65 65 0 0 1-2-15 99 99 0 0 1 0-7.7l.5-15.7.3-7.8.4-7.8.8-15.6 1-15.6v-.7h1.2a756.1 756.1 0 0 1 52.8 3.2c.7 0 1.2-.3 1.3-1 .1-.6-.4-1.1-1-1.2Z"></path><path d="M498 92.3a1 1 0 0 0-1.4-.1l-14.9 13.6-1.2-3.8-.6-1.4-.2-.7-.3-.7-.6-1.3-.7-1.4c-1-1.7-2.2-3.5-3.8-4.9-.8-.8-1.8-1.4-2.8-1.9l-1.6-.5a9.3 9.3 0 0 0-5 0l-3 1.1a39.5 39.5 0 0 0-9 7.4 57.6 57.6 0 0 1-8.5 7l-2.3 1.5-1.1.7-1.1.6c-.7.3-1.4.5-2 .5h-.6a1 1 0 0 1-.7-.4c-.4-.2-.7-.7-1.1-1.3a10.2 10.2 0 0 1-1-3.2l-.1-.6v-.3l-.1-.3-.1-2.6a40 40 0 0 1 0-4.9l.5-.5.2-.6c0-.1 0-.3.2-.4v-.8c.2-.4.3-.9.3-1.4v-1.5l-.1-.9-.3-.8-.3-.3-.2-.2-.3-.2-.8-.2h-.6c-.4.3-.8.6-1 1v.2l-.6 1.4-.5 1.4-.7 2.9c-.3 1.9-.5 3.9-.5 6v1.4c0 .5 0 1 .2 1.5v.7c0 .3 0 .6.2.8 0 .6.2 1.1.4 1.6.3 1.1.7 2.1 1.4 3.1l1 1.5c.5.5 1 1 1.7 1.2.6.4 1.2.6 1.9.8h2c.7 0 1.4-.2 1.9-.4l1.5-.8 1.3-.9 1.2-.8 2.2-1.8c3-2.4 5.8-5 8.5-7.7a137 137 0 0 1 4-3.7l2.2-1.6 2.2-1.3a8.4 8.4 0 0 1 5.7-.6l1 .4c.6.4 1.2.8 1.8 1.4 1 1.1 1.9 2.5 2.7 4.1l.5 1.2.5 1.2.2.6.2.7.4 1.2a72 72 0 0 1 1.5 6.3l-1.8 1.7-2 2-2 2.1c-2.4 2.8-5 5.6-7.3 8.5l-7 9-3.2 4.6-3.1 4.8c-4 6.3-7.6 13-10.8 20a126.5 126.5 0 0 0-9.8 32.7 50 50 0 0 0-.3 11.6l.2 1.5.3 1.5c.2 1 .4 2 .8 3s.8 2 1.4 3a11 11 0 0 0 5.5 4.4 11 11 0 0 0 6.9-.5 22 22 0 0 0 5.4-3.1l2.3-1.9a70.7 70.7 0 0 0 16.6-23.5 122.2 122.2 0 0 0 11.2-32.2 140.5 140.5 0 0 0 3-34l-.4-5.8-.1-1.5-.1-1.4-.4-2.8-.7-4.4c5-5.2 10.3-10.2 15.5-15.4a1 1 0 0 0 0-1.2Zm-18.8 43.6a134.2 134.2 0 0 1-18.8 62.7 61 61 0 0 1-6.4 8.7l-3.7 3.8-2.1 1.7c-.6.6-1.3 1-2 1.5-1.4.8-3 1.5-4.3 1.6a5 5 0 0 1-3.6-1 7 7 0 0 1-2.4-3.8l-.7-2.3-.2-1.3-.2-1.3c-.4-3.5-.3-7.1.2-10.7a132 132 0 0 1 9.1-31.7 166.6 166.6 0 0 1 23-37.8 193 193 0 0 1 7.3-8.6l3.9-4.3.1.8.5 5.5a94.8 94.8 0 0 1 .3 16.5Zm3.1-67.7v-8.3h-3v-1.7h8V60h-3v8.3h-2Zm6.2 0v-10h3l1.8 6.8 1.8-6.8h3v10h-1.8v-7.8l-2 7.8h-2l-1.9-7.8v7.8h-1.9Z"></path></g><path fill="url(#a)" fill-rule="nonzero" d="M328.6 641.9c-2.4-.8-4.6-1.9-7-2.8l-7-3-7.2-3.5-3.6-1.8-3.6-2a11375.7 11375.7 0 0 0-10.7-6.6 1196.4 1196.4 0 0 1-7.1-5l-3.5-2.6-6.9-5.8c-9-8-17.7-17-25.3-27.2a227.6 227.6 0 0 1-20.7-33.2 380 380 0 0 1-27.5-77c-3.5-13.4-6.6-27-9.7-40.6-1.6-6.8-3.1-13.6-4.8-20.3l-2-7.9c-.8-3.5-1.7-7-2.7-10.4l-3.1-10.6-3.6-11-9.4-29 24.6 8c8.3 2.7 16.4 5.5 24.2 7.8 4 1 7.8 2.2 11.7 3.1l8.7 2.2 11.3 2.8c15.1 3.6 30.3 7 45.2 11 15 3.8 29.6 8 43.6 13 7 2.5 14 5.2 20.6 8.1l5.6 2.5 8.3 3.9a383 383 0 0 1 8 3.9l4 2 2 1c.6.3 1.4.5 1.8 1-1.7 7.3-3.6 14.7-5 21.5l-1.4 7.2a203.4 203.4 0 0 0-.8 68 246.7 246.7 0 0 0 20.2 65c8 17.5 15.7 30.9 21 39.9l3.7 6 2.7 4.2 2.2 3.5-2.8-3-3.5-3.7-4.7-5.2a288.7 288.7 0 0 1-44.4-65.4c-5.2-11-10.2-23.2-14.2-36.9a196 196 0 0 1-7.2-76.2l.3-3.2v-4.5c-.2-.2-.7-.2-1-.3l-1.2-.3-1-.2h-.3l-.3-.2-1.1-.4-2.3-.8c-6.2-2.1-12.6-4.1-19.2-6a613 613 0 0 0-41.6-9.8c-14.6-3-29.7-5.8-45.4-9l-11.8-2.6-3-.7c.1 0 0 0 0 0v.4l.6 2.5a916 916 0 0 1 4.6 21c2.8 14 5.5 27.4 8.3 40.4 5.6 26 12.2 50 21.2 71.7a186.7 186.7 0 0 0 34.8 55.2c14 14.8 30 26.1 46.2 34.4a263 263 0 0 0 45.9 18.4 352.4 352.4 0 0 0 50.7 11.6c4 .6 7.5 1 10.2 1.5l8.5 1-8.6.6-10.3.4h-14.2c-10.7-.2-23.8-1-39-3.2s-32.4-5.9-51-12.7Zm58.8-196.3a185.5 185.5 0 0 1 6-34.5 385.7 385.7 0 0 1 25.3-68 447.4 447.4 0 0 1 18.1-33.8c1.6-2.8 3.4-5.6 5.2-8.3l5.2-8.3a1469.9 1469.9 0 0 0 16.1-25.4l4-6.5 5.7-10c3.7-6.6 7.3-13.8 10.9-20.8l10.6-20.6 11.6 23.1c3.9 7.8 7.6 15.2 11.5 22.2l3 5.2 2.8 4.8 3 5 5.9 10c8 13.4 16 26.5 23.6 39.5a504 504 0 0 1 20.4 38.8 316 316 0 0 1 8.2 19.2l2 4.9a7830.3 7830.3 0 0 1 5.3 14.9l1.2 3.6.6 1.8.4.9c0 .3.2.6.1.8l-12.2 7.3c-2 1.3-3.9 2.4-5.7 3.7l-3.6 2.2a222.4 222.4 0 0 0-34 27.4 215.8 215.8 0 0 0-28.8 36.4 270.8 270.8 0 0 0-18.2 33.4l-1.2 2.5.7-2.7c.4-1.7 1-4.3 2-7.7 2-6.7 5-16.7 10.3-29a203 203 0 0 1 44.8-65.2c3.9-3.8 8-7.6 12.5-11.2l3.2-2.6 1.1-1.1 2.2-2c.1 0 0 0 0-.2v-.2l-.3-.4-.5-.8a33 33 0 0 0-1.7-2.9l-2-4c-3-5.6-6-11.3-9.4-17a622.5 622.5 0 0 0-22.3-35.3c-8.1-12.1-16.9-24.6-25.7-37.8l-6.6-10-3.3-5.2-.2-.3-.2-.1c-.2-.2-.4-.1-.4 0v.4l-.1.2-.4.7-1.5 2.5a612.8 612.8 0 0 1-16.9 26.4 7969 7969 0 0 0-5 7.7l-5 7.7a538.5 538.5 0 0 0-17.7 31 437.5 437.5 0 0 0-27 61.4 196.4 196.4 0 0 0-7.4 29.3 167.1 167.1 0 0 0-2 21.4l-.1 7 .3 6.7.2 3.4c0 1.1.1 2.3.3 3.4l1 6.6c0 1 .2 2.2.4 3.2l.6 3.2 1.3 6.4c.4 2.1 1 4.1 1.5 6.2l1.6 6 2 5.9c5 15.4 11.2 29 17.3 40.7a359 359 0 0 0 24.3 39.7l5.3 7.5 4.5 6.1-5.6-5.1-6.7-6.4a302.9 302.9 0 0 1-31-36 241 241 0 0 1-24-40.2l-3-6-2.5-6.4-2.5-6.5-2.2-6.9-1.1-3.5-1-3.6-1.8-7.3a3707.3 3707.3 0 0 1-1.4-7.6c-.4-2.7-1-5.2-1.2-7.9l-.7-8a177.4 177.4 0 0 1 0-25Zm310.3-69c13.3-3.4 26.8-6.4 40.2-9.5 6.7-1.5 13.4-3 20-4.7l8.5-2.1 10.3-2.8c3.5-1 7-2 10.5-3.2l10.9-3.5 27.4-9-7.8 24.1c-2.7 8-5.4 16-7.6 23.7l-3.2 11.4-2.2 9-2.7 11c-3.6 14.8-7 29.6-10.7 44.2a527.3 527.3 0 0 1-12.6 42.7A344 344 0 0 1 771 528l-2.5 5.8-3.7 8.1a436 436 0 0 1-3.8 8c-1.2 2.6-2.4 5.3-3.7 7.7-7.4-1.8-14.8-3.7-21.7-5.1a10364.7 10364.7 0 0 1-12.8-2.5 196 196 0 0 0-62.4-.4 246 246 0 0 0-65.3 19.5c-17.6 7.9-31 15.4-40.1 20.8l-6 3.5-4.3 2.7-3.5 2.2 3-2.8 3.7-3.5 5.3-4.6a293 293 0 0 1 65.9-43.7 251 251 0 0 1 37-14 202.2 202.2 0 0 1 79.4-6.1h1l.5.1h2.7c.2-.2.3-.8.4-1l.2-1.2.2-1v-.3l.4-1 .8-2.3c2-6.2 4-12.4 5.7-19 3.5-12.9 6.6-26.5 9.5-40.7 3-14.3 5.7-29 8.9-44.4l2.5-11.6.6-2.4-.1-.1h-.7l-1.3.4-20.9 4.6c-13.7 2.8-27 5.4-39.8 8.2a421.4 421.4 0 0 0-71.2 20.6 193.8 193.8 0 0 0-55.4 33.6 173.4 173.4 0 0 0-34.9 45 262.6 262.6 0 0 0-19 45 346.2 346.2 0 0 0-12 50l-1.6 10.1-1.2 8.4-.5-8.5-.2-10.2v-6.6c0-2.3 0-4.8.2-7.4a300 300 0 0 1 3.7-38.5c2.4-15 6.3-32 13.4-50.3a182.6 182.6 0 0 1 33.8-55.4 204 204 0 0 1 60.4-44.3c23.5-11.8 49.5-20 76.1-26.9Zm-348 305a231.9 231.9 0 0 1-83.5-35.2 200.1 200.1 0 0 1-40.8-37.3l-2.7-3.2a2136.5 2136.5 0 0 0-5.1-6.3l-.2-.2-.3.2-.6.3-1.2.6a65.1 65.1 0 0 0-6.7 3.5c-5.7 2.9-11.4 6-17 9.3a570 570 0 0 0-35.2 22.4c-12 8.2-24.4 17-37.6 26a9462 9462 0 0 1-5 3.5l-2.5 1.7-1.2.8-.3.3a1275 1275 0 0 0-6.2 4.9c2.9 1 5.2 2 7.1 2.8l.7.3 3.6 2.1 7.6 4.5 15.2 9.2a726.5 726.5 0 0 0 61.6 34.9c10.6 5 21.5 9.6 32.5 13.3l8.3 2.6 8.4 2.3 8.4 1.8 4.2.7 4.3.7a150.6 150.6 0 0 0 68.2-6 247 247 0 0 0 54.6-26.3c17.5-11 34.4-23.3 51.3-35.8l12.7-9.4 12.9-9.3c4.2-3.1 8.6-6.1 12.9-9.1l13-8.8c17.3-11.5 35-22.1 52.8-31.5 17.9-9.3 36-17.4 54.2-23.8a309.3 309.3 0 0 1 54.5-14 267.7 267.7 0 0 1 100.5 3.1c30 6.8 55.3 18.5 75.8 30.5 10.3 6 19.5 12 27.8 17.8l4.4 3.1a385.2 385.2 0 1 0-741.4-4.2c7.3-4.3 14.6-8.6 21.8-12.6 13-7.4 26-14.3 38.7-20.2a343 343 0 0 1 19.1-8.2c4.7-2 9.1-3.5 13.5-5.1a335 335 0 0 1 6.5-2.3l3.2-1 1.6-.6.8-.3h.7l7.8 13 3.8 6 3.1 4.6a211.6 211.6 0 0 0 34 38.4c15.6 13.7 31.3 23 44.5 30a298 298 0 0 0 31.3 13.8l8.4 3 3 1-3-.5-8.9-1.8Z" transform="matrix(.181 0 0 .181 -6.6 -17.6)"></path><path fill="#00b4e2" fill-rule="nonzero" d="M160.7 121.4a157 157 0 0 0-7.3-6 94.2 94.2 0 0 0-9.2-4.8l-2.1-1c-.4 0-.8-.2-1.1-.3a44.5 44.5 0 0 0-22.7-2.2l-1.5.2-1.5.3-1.5.3-1.5.4-1.4.4-1.5.5-3 1c-2 .8-4 1.6-5.8 2.5l-2.8 1.4-2.7 1.4c-3.5 2-6.9 4-10 6l-9.1 6c-3 1.7-5.7 3.3-8.4 4.5a45.7 45.7 0 0 1-7.4 2.8l-3.2.6-.7.1h-.4l-.3.1-1.3.1h-5l1.3-.2 1.5-.1 1-.2h.5l.6-.2 1.2-.2.4-.1h.3c.2-.2.4-.2.7-.3 1-.2 1.9-.6 3-1a59 59 0 0 0 14.5-8.4l8.7-6.5c3-2.2 6.4-4.5 10-6.6l2.8-1.6 3-1.5c1.9-1 4-1.8 6-2.7a55.8 55.8 0 0 1 25.6-3.2c2 .3 3.8.3 5.5.7 1.5.3 3.6.5 6.7 1.5 3.8 1.1 7.5 3 8.3 3.5 2.8 1.4 4.6 2.6 6 3.5l2 1.3-1.9-1.6-5.2-4.5-3.1-2.6a132.9 132.9 0 0 0-7.5-4.1 52.8 52.8 0 0 0-13.1-4.3 45 45 0 0 0-25.2 2.8 116.6 116.6 0 0 0-17.8 9.6l-2.3 1.5-2.2 1.6-2.3 1.6L76 115c-3.1 2.2-6.4 4.5-10 6.7-3.6 2-7.5 4-11.8 5.2a35.5 35.5 0 0 1-16.1.6l-1-.2-1-.2-1.8-.5-1.8-.6-1.8-.7c-2.3-1-4.5-2-6.6-3.3-4.1-2.4-7.8-5-11.3-7.6l-2.5-1.9-1.3-.9-.6-.5-1.2-.8-2.4-1.5-2.5-1.5L0 106c1.6.9 12.5 10.2 13.4 10.8 3.4 2.6 7 5.5 10.7 8.6 2.2 1.8 22.3 20.6 41.2 16.6 15-3.2 20.1-13.3 40.5-23.2 4.7-2.2 8.2-4 14-4.9l6.5-.9c4.3-.5 8.1-.1 9.4-.1a62 62 0 0 1 13.2 2.6c2.5 1 4.5 2 6.5 3.2 2 1.1 3.6 2.3 4.9 3.2l4.2 2.7-3.8-3.3Z"></path><defs><linearGradient id="a" x1="0" x2="1" y1="0" y2="0" gradientTransform="matrix(227.497 368.152 -292.233 180.584 262.4 229)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c53030"></stop><stop offset=".4" stop-color="#d14b32"></stop><stop offset="1" stop-color="#ed8936"></stop></linearGradient></defs></svg>`);
 }
-const _sfc_setup$A = _sfc_main$A.setup;
-_sfc_main$A.setup = (props, ctx) => {
+const _sfc_setup$Y = _sfc_main$Y.setup;
+_sfc_main$Y.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/ApplicationLogo.vue");
-  return _sfc_setup$A ? _sfc_setup$A(props, ctx) : void 0;
+  return _sfc_setup$Y ? _sfc_setup$Y(props, ctx) : void 0;
 };
-const __unplugin_components_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["ssrRender", _sfc_ssrRender$5]]);
-const _sfc_main$z = {};
-function _sfc_ssrRender$4(_ctx, _push, _parent, _attrs) {
-  const _component_MainLayout = _sfc_main$Q;
-  const _component_ApplicationLogo = __unplugin_components_1$2;
+const __unplugin_components_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["ssrRender", _sfc_ssrRender$a]]);
+const _sfc_main$X = {};
+function _sfc_ssrRender$9(_ctx, _push, _parent, _attrs) {
+  const _component_MainLayout = _sfc_main$1b;
+  const _component_ApplicationLogo = __unplugin_components_1$5;
   const _component_IconOutlineBookOpen = __unplugin_components_2$2;
   const _component_Link = resolveComponent("Link");
-  const _component_IconSolidArrowRight = __unplugin_components_3;
+  const _component_IconSolidArrowRight = __unplugin_components_3$1;
   const _component_IconOutlineChevronDoubleRight = __unplugin_components_4;
-  const _component_IconOutlineArrowsRightLeft = __unplugin_components_5;
-  const _component_IconOutlineRectangleGroup = __unplugin_components_6;
+  const _component_IconOutlineArrowsRightLeft = __unplugin_components_5$1;
+  const _component_IconOutlineRectangleGroup = __unplugin_components_6$3;
   _push(ssrRenderComponent(_component_MainLayout, mergeProps({
     title: _ctx.__("Dashboard")
   }, _attrs), {
@@ -5981,21 +5944,21 @@ function _sfc_ssrRender$4(_ctx, _push, _parent, _attrs) {
     _: 1
   }, _parent));
 }
-const _sfc_setup$z = _sfc_main$z.setup;
-_sfc_main$z.setup = (props, ctx) => {
+const _sfc_setup$X = _sfc_main$X.setup;
+_sfc_main$X.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Dashboard.vue");
-  return _sfc_setup$z ? _sfc_setup$z(props, ctx) : void 0;
+  return _sfc_setup$X ? _sfc_setup$X(props, ctx) : void 0;
 };
-const Dashboard = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["ssrRender", _sfc_ssrRender$4]]);
-const __vite_glob_0_9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const Dashboard = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["ssrRender", _sfc_ssrRender$9]]);
+const __vite_glob_0_8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Dashboard
 }, Symbol.toStringTag, { value: "Module" }));
 const title$2 = "Action Domain Responder";
 const description$2 = "Quasi sapiente voluptates aut minima non doloribus similique quisquam. In quo expedita ipsum nostrum corrupti incidunt. Et aut eligendi ea perferendis.";
 const tags$2 = ["core", "concepts", "action-domain-responder", "adr"];
-const _sfc_main$y = {
+const _sfc_main$W = {
   __name: "action-domain-responder",
   __ssrInlineRender: true,
   setup(__props, { expose: __expose }) {
@@ -6014,15 +5977,15 @@ const _sfc_main$y = {
     };
   }
 };
-const _sfc_setup$y = _sfc_main$y.setup;
-_sfc_main$y.setup = (props, ctx) => {
+const _sfc_setup$W = _sfc_main$W.setup;
+_sfc_main$W.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Docs/2.0/action-domain-responder.md");
-  return _sfc_setup$y ? _sfc_setup$y(props, ctx) : void 0;
+  return _sfc_setup$W ? _sfc_setup$W(props, ctx) : void 0;
 };
-const __vite_glob_0_10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$y,
+  default: _sfc_main$W,
   description: description$2,
   tags: tags$2,
   title: title$2
@@ -6030,7 +5993,7 @@ const __vite_glob_0_10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 const title$1 = "Getting Started";
 const description$1 = "Thanks for your interest in Serenity, we think you'll be pleasantly surprised by how easy it can be to build Enterprise level applications for the web and desktop with the Serenity framework.";
 const tags$1 = ["introduction", "getting started"];
-const _sfc_main$x = {
+const _sfc_main$V = {
   __name: "getting-started",
   __ssrInlineRender: true,
   setup(__props, { expose: __expose }) {
@@ -6041,15 +6004,15 @@ const _sfc_main$x = {
     };
   }
 };
-const _sfc_setup$x = _sfc_main$x.setup;
-_sfc_main$x.setup = (props, ctx) => {
+const _sfc_setup$V = _sfc_main$V.setup;
+_sfc_main$V.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Docs/2.0/getting-started.md");
-  return _sfc_setup$x ? _sfc_setup$x(props, ctx) : void 0;
+  return _sfc_setup$V ? _sfc_setup$V(props, ctx) : void 0;
 };
-const __vite_glob_0_11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$x,
+  default: _sfc_main$V,
   description: description$1,
   tags: tags$1,
   title: title$1
@@ -6057,7 +6020,7 @@ const __vite_glob_0_11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 const title = "Installation";
 const description = "Quasi sapiente voluptates aut minima non doloribus similique quisquam. In quo expedita ipsum nostrum corrupti incidunt. Et aut eligendi ea perferendis.";
 const tags = ["introduction", "installation"];
-const _sfc_main$w = {
+const _sfc_main$U = {
   __name: "installation",
   __ssrInlineRender: true,
   setup(__props, { expose: __expose }) {
@@ -6071,20 +6034,20 @@ const _sfc_main$w = {
     };
   }
 };
-const _sfc_setup$w = _sfc_main$w.setup;
-_sfc_main$w.setup = (props, ctx) => {
+const _sfc_setup$U = _sfc_main$U.setup;
+_sfc_main$U.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Docs/2.0/installation.md");
-  return _sfc_setup$w ? _sfc_setup$w(props, ctx) : void 0;
+  return _sfc_setup$U ? _sfc_setup$U(props, ctx) : void 0;
 };
-const __vite_glob_0_12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$w,
+  default: _sfc_main$U,
   description,
   tags,
   title
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$v = {
+const _sfc_main$T = {
   __name: "404",
   __ssrInlineRender: true,
   setup(__props, { expose: __expose }) {
@@ -6095,17 +6058,17 @@ const _sfc_main$v = {
     };
   }
 };
-const _sfc_setup$v = _sfc_main$v.setup;
-_sfc_main$v.setup = (props, ctx) => {
+const _sfc_setup$T = _sfc_main$T.setup;
+_sfc_main$T.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Docs/404.md");
-  return _sfc_setup$v ? _sfc_setup$v(props, ctx) : void 0;
+  return _sfc_setup$T ? _sfc_setup$T(props, ctx) : void 0;
 };
-const __vite_glob_0_13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$v
+  default: _sfc_main$T
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$u = {
+const _sfc_main$S = {
   __name: "Policy",
   __ssrInlineRender: true,
   setup(__props, { expose: __expose }) {
@@ -6129,17 +6092,17 @@ const _sfc_main$u = {
     };
   }
 };
-const _sfc_setup$u = _sfc_main$u.setup;
-_sfc_main$u.setup = (props, ctx) => {
+const _sfc_setup$S = _sfc_main$S.setup;
+_sfc_main$S.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Markdown/Policy.md");
-  return _sfc_setup$u ? _sfc_setup$u(props, ctx) : void 0;
+  return _sfc_setup$S ? _sfc_setup$S(props, ctx) : void 0;
 };
-const __vite_glob_0_14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$u
+  default: _sfc_main$S
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$t = {
+const _sfc_main$R = {
   __name: "Terms",
   __ssrInlineRender: true,
   setup(__props, { expose: __expose }) {
@@ -6150,18 +6113,18 @@ const _sfc_main$t = {
     };
   }
 };
-const _sfc_setup$t = _sfc_main$t.setup;
-_sfc_main$t.setup = (props, ctx) => {
+const _sfc_setup$R = _sfc_main$R.setup;
+_sfc_main$R.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Markdown/Terms.md");
-  return _sfc_setup$t ? _sfc_setup$t(props, ctx) : void 0;
+  return _sfc_setup$R ? _sfc_setup$R(props, ctx) : void 0;
 };
-const __vite_glob_0_15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: _sfc_main$t
+  default: _sfc_main$R
 }, Symbol.toStringTag, { value: "Module" }));
-const _sfc_main$s = {};
-function _sfc_ssrRender$3(_ctx, _push, _parent, _attrs) {
+const _sfc_main$Q = {};
+function _sfc_ssrRender$8(_ctx, _push, _parent, _attrs) {
   const _component_Link = resolveComponent("Link");
   _push(ssrRenderComponent(_component_Link, mergeProps({
     href: _ctx.route("home")
@@ -6228,21 +6191,21 @@ function _sfc_ssrRender$3(_ctx, _push, _parent, _attrs) {
     _: 1
   }, _parent));
 }
-const _sfc_setup$s = _sfc_main$s.setup;
-_sfc_main$s.setup = (props, ctx) => {
+const _sfc_setup$Q = _sfc_main$Q.setup;
+_sfc_main$Q.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/AuthenticationCardLogo.vue");
-  return _sfc_setup$s ? _sfc_setup$s(props, ctx) : void 0;
+  return _sfc_setup$Q ? _sfc_setup$Q(props, ctx) : void 0;
 };
-const __unplugin_components_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["ssrRender", _sfc_ssrRender$3]]);
-const _sfc_main$r = {
+const __unplugin_components_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["ssrRender", _sfc_ssrRender$8]]);
+const _sfc_main$P = {
   __name: "PrivacyPolicy",
   __ssrInlineRender: true,
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$J;
+      const _component_GuestLayout = _sfc_main$14;
       const _component_Head = resolveComponent("Head");
-      const _component_AuthenticationCardLogo = __unplugin_components_1$1;
+      const _component_AuthenticationCardLogo = __unplugin_components_1$4;
       _push(ssrRenderComponent(_component_GuestLayout, _attrs, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -6252,7 +6215,7 @@ const _sfc_main$r = {
             _push2(`<div class="font-sans antialiased"${_scopeId}><div class="pt-4"${_scopeId}><div class="flex min-h-screen flex-col items-center pt-6 sm:pt-0"${_scopeId}><div${_scopeId}>`);
             _push2(ssrRenderComponent(_component_AuthenticationCardLogo, { class: "h-auto w-24" }, null, _parent2, _scopeId));
             _push2(`</div><div class="docs docs-slate dark:docs-invert docs-headings:font-normal mt-6 w-full overflow-hidden bg-white p-6 shadow-md dark:bg-gray-800 sm:max-w-2xl sm:rounded-lg"${_scopeId}>`);
-            _push2(ssrRenderComponent(unref(_sfc_main$u), null, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent(unref(_sfc_main$S), null, null, _parent2, _scopeId));
             _push2(`</div></div></div></div>`);
           } else {
             return [
@@ -6266,7 +6229,7 @@ const _sfc_main$r = {
                       createVNode(_component_AuthenticationCardLogo, { class: "h-auto w-24" })
                     ]),
                     createVNode("div", { class: "docs docs-slate dark:docs-invert docs-headings:font-normal mt-6 w-full overflow-hidden bg-white p-6 shadow-md dark:bg-gray-800 sm:max-w-2xl sm:rounded-lg" }, [
-                      createVNode(unref(_sfc_main$u))
+                      createVNode(unref(_sfc_main$S))
                     ])
                   ])
                 ])
@@ -6279,13 +6242,3909 @@ const _sfc_main$r = {
     };
   }
 };
+const _sfc_setup$P = _sfc_main$P.setup;
+_sfc_main$P.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/PrivacyPolicy.vue");
+  return _sfc_setup$P ? _sfc_setup$P(props, ctx) : void 0;
+};
+const __vite_glob_0_15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: _sfc_main$P
+}, Symbol.toStringTag, { value: "Module" }));
+const _sfc_main$O = {};
+function _sfc_ssrRender$7(_ctx, _push, _parent, _attrs) {
+  const _component_z_card = resolveComponent("z-card");
+  const _component_z_divider = resolveComponent("z-divider");
+  _push(ssrRenderComponent(_component_z_card, mergeProps({ class: "mx-6 px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4" }, _attrs), {
+    default: withCtx((_2, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`<h2 class="py-3 text-2xl font-medium"${_scopeId}>`);
+        ssrRenderSlot(_ctx.$slots, "title", {}, null, _push2, _parent2, _scopeId);
+        _push2(`</h2>`);
+        _push2(ssrRenderComponent(_component_z_divider, { class: "mb-4 mt-2" }, null, _parent2, _scopeId));
+        ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+        ssrRenderSlot(_ctx.$slots, "footer", {}, null, _push2, _parent2, _scopeId);
+      } else {
+        return [
+          createVNode("h2", { class: "py-3 text-2xl font-medium" }, [
+            renderSlot(_ctx.$slots, "title")
+          ]),
+          createVNode(_component_z_divider, { class: "mb-4 mt-2" }),
+          renderSlot(_ctx.$slots, "default"),
+          renderSlot(_ctx.$slots, "footer")
+        ];
+      }
+    }),
+    _: 3
+  }, _parent));
+}
+const _sfc_setup$O = _sfc_main$O.setup;
+_sfc_main$O.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Zen/Cards/Card.vue");
+  return _sfc_setup$O ? _sfc_setup$O(props, ctx) : void 0;
+};
+const __unplugin_components_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["ssrRender", _sfc_ssrRender$7]]);
+const _hoisted_1$f = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$f = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11a6.002 6.002 0 0 0-4-5.659V5a2 2 0 1 0-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"
+}, null, -1);
+const _hoisted_3$f = [
+  _hoisted_2$f
+];
+function render$f(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$f, _hoisted_3$f);
+}
+const __unplugin_components_9 = { name: "heroicons-outline-bell", render: render$f };
+const _hoisted_1$e = {
+  viewBox: "0 0 20 20",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$e = /* @__PURE__ */ createElementVNode("path", {
+  fill: "currentColor",
+  "fill-rule": "evenodd",
+  d: "M9 3.5a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z",
+  "clip-rule": "evenodd"
+}, null, -1);
+const _hoisted_3$e = [
+  _hoisted_2$e
+];
+function render$e(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$e, _hoisted_3$e);
+}
+const __unplugin_components_8$1 = { name: "heroicons-solid-magnifying-glass", render: render$e };
+const _hoisted_1$d = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$d = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "1.5",
+  d: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+}, null, -1);
+const _hoisted_3$d = [
+  _hoisted_2$d
+];
+function render$d(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$d, _hoisted_3$d);
+}
+const __unplugin_components_7$1 = { name: "heroicons-outline-bars3", render: render$d };
+const _hoisted_1$c = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$c = /* @__PURE__ */ createElementVNode("g", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "1.5"
+}, [
+  /* @__PURE__ */ createElementVNode("path", { d: "M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87c.074.04.147.083.22.127c.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 0 1 0 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 0 1 0-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124c.072-.044.146-.087.22-.128c.332-.183.582-.495.644-.869l.214-1.281Z" }),
+  /* @__PURE__ */ createElementVNode("path", { d: "M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0Z" })
+], -1);
+const _hoisted_3$c = [
+  _hoisted_2$c
+];
+function render$c(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$c, _hoisted_3$c);
+}
+const __unplugin_components_6$2 = { name: "heroicons-outline-cog6-tooth", render: render$c };
+const _hoisted_1$b = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$b = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "m3 12l2-2m0 0l7-7l7 7M5 10v10a1 1 0 0 0 1 1h3m10-11l2 2m-2-2v10a1 1 0 0 1-1 1h-3m-6 0a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1m-6 0h6"
+}, null, -1);
+const _hoisted_3$b = [
+  _hoisted_2$b
+];
+function render$b(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$b, _hoisted_3$b);
+}
+const IconHome = { name: "heroicons-outline-home", render: render$b };
+const _hoisted_1$a = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$a = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M12 4.354a4 4 0 1 1 0 5.292M15 21H3v-1a6 6 0 0 1 12 0v1Zm0 0h6v-1a6 6 0 0 0-9-5.197M13 7a4 4 0 1 1-8 0a4 4 0 0 1 8 0Z"
+}, null, -1);
+const _hoisted_3$a = [
+  _hoisted_2$a
+];
+function render$a(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$a, _hoisted_3$a);
+}
+const IconUsers = { name: "heroicons-outline-users", render: render$a };
+const _hoisted_1$9 = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$9 = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M21 13.255A23.931 23.931 0 0 1 12 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2m4 6h.01M5 20h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"
+}, null, -1);
+const _hoisted_3$9 = [
+  _hoisted_2$9
+];
+function render$9(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$9, _hoisted_3$9);
+}
+const IconBriefcase = { name: "heroicons-outline-briefcase", render: render$9 };
+const _hoisted_1$8 = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$8 = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M15 7a2 2 0 0 1 2 2m4 0a6 6 0 0 1-7.743 5.743L11 17H9v2H7v2H4a1 1 0 0 1-1-1v-2.586a1 1 0 0 1 .293-.707l5.964-5.964A6 6 0 1 1 21 9Z"
+}, null, -1);
+const _hoisted_3$8 = [
+  _hoisted_2$8
+];
+function render$8(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$8, _hoisted_3$8);
+}
+const IconKey = { name: "heroicons-outline-key", render: render$8 };
+const _sfc_main$N = {
+  __name: "AdminLayout",
+  __ssrInlineRender: true,
+  setup(__props) {
+    const navigation = [
+      {
+        name: "Dashboard",
+        href: useRoutes("admin.dashboard"),
+        icon: IconHome,
+        current: useRoutes().current("admin.dashboard")
+      },
+      {
+        name: "Users",
+        href: useRoutes("admin.users"),
+        icon: IconUsers,
+        current: useRoutes().current("admin.users")
+      },
+      { name: "Roles", href: "#", icon: IconBriefcase, current: false },
+      { name: "Permissions", href: "#", icon: IconKey, current: false }
+    ];
+    const sidebarOpen = ref(false);
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_TransitionRoot = TransitionRoot;
+      const _component_Dialog = Dialog;
+      const _component_TransitionChild = TransitionChild;
+      const _component_DialogPanel = DialogPanel;
+      const _component_IconOutlineXMark = __unplugin_components_0$5;
+      const _component_ApplicationMark = __unplugin_components_4$1;
+      const _component_Link = resolveComponent("Link");
+      const _component_IconOutlineCog6Tooth = __unplugin_components_6$2;
+      const _component_IconOutlineBars3 = __unplugin_components_7$1;
+      const _component_IconSolidMagnifyingGlass = __unplugin_components_8$1;
+      const _component_IconOutlineBell = __unplugin_components_9;
+      const _component_AccountManagerMenu = _sfc_main$1h;
+      const _component_ThemeSwitcher = _sfc_main$1i;
+      const _component_Breadcrumbs = _sfc_main$1q;
+      _push(`<div${ssrRenderAttrs(_attrs)}>`);
+      _push(ssrRenderComponent(_component_TransitionRoot, {
+        as: "template",
+        show: unref(sidebarOpen)
+      }, {
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_Dialog, {
+              as: "div",
+              class: "relative z-50 lg:hidden",
+              onClose: ($event) => sidebarOpen.value = false
+            }, {
+              default: withCtx((_3, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(ssrRenderComponent(_component_TransitionChild, {
+                    as: "template",
+                    enter: "transition-opacity ease-linear duration-300",
+                    "enter-from": "opacity-0",
+                    "enter-to": "opacity-100",
+                    leave: "transition-opacity ease-linear duration-300",
+                    "leave-from": "opacity-100",
+                    "leave-to": "opacity-0"
+                  }, {
+                    default: withCtx((_4, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(`<div class="fixed inset-0 bg-gray-900/80"${_scopeId3}></div>`);
+                      } else {
+                        return [
+                          createVNode("div", { class: "fixed inset-0 bg-gray-900/80" })
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                  _push3(`<div class="fixed inset-0 flex"${_scopeId2}>`);
+                  _push3(ssrRenderComponent(_component_TransitionChild, {
+                    as: "template",
+                    enter: "transition ease-in-out duration-300 transform",
+                    "enter-from": "-translate-x-full",
+                    "enter-to": "translate-x-0",
+                    leave: "transition ease-in-out duration-300 transform",
+                    "leave-from": "translate-x-0",
+                    "leave-to": "-translate-x-full"
+                  }, {
+                    default: withCtx((_4, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(ssrRenderComponent(_component_DialogPanel, { class: "relative mr-16 flex w-full max-w-xs flex-1" }, {
+                          default: withCtx((_5, _push5, _parent5, _scopeId4) => {
+                            if (_push5) {
+                              _push5(ssrRenderComponent(_component_TransitionChild, {
+                                as: "template",
+                                enter: "ease-in-out duration-300",
+                                "enter-from": "opacity-0",
+                                "enter-to": "opacity-100",
+                                leave: "ease-in-out duration-300",
+                                "leave-from": "opacity-100",
+                                "leave-to": "opacity-0"
+                              }, {
+                                default: withCtx((_6, _push6, _parent6, _scopeId5) => {
+                                  if (_push6) {
+                                    _push6(`<div class="absolute left-full top-0 flex w-16 justify-center pt-5"${_scopeId5}><button type="button" class="-m-2.5 p-2.5"${_scopeId5}><span class="sr-only"${_scopeId5}>Close sidebar</span>`);
+                                    _push6(ssrRenderComponent(_component_IconOutlineXMark, {
+                                      class: "h-6 w-6 text-white",
+                                      "aria-hidden": "true"
+                                    }, null, _parent6, _scopeId5));
+                                    _push6(`</button></div>`);
+                                  } else {
+                                    return [
+                                      createVNode("div", { class: "absolute left-full top-0 flex w-16 justify-center pt-5" }, [
+                                        createVNode("button", {
+                                          type: "button",
+                                          class: "-m-2.5 p-2.5",
+                                          onClick: ($event) => sidebarOpen.value = false
+                                        }, [
+                                          createVNode("span", { class: "sr-only" }, "Close sidebar"),
+                                          createVNode(_component_IconOutlineXMark, {
+                                            class: "h-6 w-6 text-white",
+                                            "aria-hidden": "true"
+                                          })
+                                        ], 8, ["onClick"])
+                                      ])
+                                    ];
+                                  }
+                                }),
+                                _: 1
+                              }, _parent5, _scopeId4));
+                              _push5(`<div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 dark:bg-gray-900"${_scopeId4}><div class="flex h-16 shrink-0 items-center"${_scopeId4}>`);
+                              _push5(ssrRenderComponent(_component_ApplicationMark, { class: "h-12 w-12" }, null, _parent5, _scopeId4));
+                              _push5(`<h2 class="ml-4 text-2xl font-medium text-gray-800 dark:text-gray-300"${_scopeId4}> Serenity </h2></div><nav class="flex flex-1 flex-col"${_scopeId4}><ul role="list" class="flex flex-1 flex-col gap-y-7"${_scopeId4}><li${_scopeId4}><ul role="list" class="-mx-2 space-y-1"${_scopeId4}><!--[-->`);
+                              ssrRenderList(navigation, (item) => {
+                                _push5(`<li${_scopeId4}>`);
+                                _push5(ssrRenderComponent(_component_Link, {
+                                  href: item.href,
+                                  class: [
+                                    item.current ? "bg-blue-50/20 text-blue-500" : "text-gray-700 hover:bg-orange-50/20 hover:text-orange-500 dark:text-gray-500 dark:hover:text-orange-500",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                  ]
+                                }, {
+                                  default: withCtx((_6, _push6, _parent6, _scopeId5) => {
+                                    if (_push6) {
+                                      ssrRenderVNode(_push6, createVNode(resolveDynamicComponent(item.icon), {
+                                        class: [
+                                          item.current ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                                          "h-6 w-6 shrink-0"
+                                        ],
+                                        "aria-hidden": "true"
+                                      }, null), _parent6, _scopeId5);
+                                      _push6(` ${ssrInterpolate(item.name)}`);
+                                    } else {
+                                      return [
+                                        (openBlock(), createBlock(resolveDynamicComponent(item.icon), {
+                                          class: [
+                                            item.current ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                                            "h-6 w-6 shrink-0"
+                                          ],
+                                          "aria-hidden": "true"
+                                        }, null, 8, ["class"])),
+                                        createTextVNode(" " + toDisplayString(item.name), 1)
+                                      ];
+                                    }
+                                  }),
+                                  _: 2
+                                }, _parent5, _scopeId4));
+                                _push5(`</li>`);
+                              });
+                              _push5(`<!--]--></ul></li><li class="mt-auto"${_scopeId4}>`);
+                              _push5(ssrRenderComponent(_component_Link, {
+                                href: _ctx.route("admin.playground"),
+                                class: "group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-500"
+                              }, {
+                                default: withCtx((_6, _push6, _parent6, _scopeId5) => {
+                                  if (_push6) {
+                                    _push6(ssrRenderComponent(_component_IconOutlineCog6Tooth, {
+                                      class: "h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-500",
+                                      "aria-hidden": "true"
+                                    }, null, _parent6, _scopeId5));
+                                    _push6(` ${ssrInterpolate(_ctx.__("Playground"))}`);
+                                  } else {
+                                    return [
+                                      createVNode(_component_IconOutlineCog6Tooth, {
+                                        class: "h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-500",
+                                        "aria-hidden": "true"
+                                      }),
+                                      createTextVNode(" " + toDisplayString(_ctx.__("Playground")), 1)
+                                    ];
+                                  }
+                                }),
+                                _: 1
+                              }, _parent5, _scopeId4));
+                              _push5(`</li></ul></nav></div>`);
+                            } else {
+                              return [
+                                createVNode(_component_TransitionChild, {
+                                  as: "template",
+                                  enter: "ease-in-out duration-300",
+                                  "enter-from": "opacity-0",
+                                  "enter-to": "opacity-100",
+                                  leave: "ease-in-out duration-300",
+                                  "leave-from": "opacity-100",
+                                  "leave-to": "opacity-0"
+                                }, {
+                                  default: withCtx(() => [
+                                    createVNode("div", { class: "absolute left-full top-0 flex w-16 justify-center pt-5" }, [
+                                      createVNode("button", {
+                                        type: "button",
+                                        class: "-m-2.5 p-2.5",
+                                        onClick: ($event) => sidebarOpen.value = false
+                                      }, [
+                                        createVNode("span", { class: "sr-only" }, "Close sidebar"),
+                                        createVNode(_component_IconOutlineXMark, {
+                                          class: "h-6 w-6 text-white",
+                                          "aria-hidden": "true"
+                                        })
+                                      ], 8, ["onClick"])
+                                    ])
+                                  ]),
+                                  _: 1
+                                }),
+                                createVNode("div", { class: "flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 dark:bg-gray-900" }, [
+                                  createVNode("div", { class: "flex h-16 shrink-0 items-center" }, [
+                                    createVNode(_component_ApplicationMark, { class: "h-12 w-12" }),
+                                    createVNode("h2", { class: "ml-4 text-2xl font-medium text-gray-800 dark:text-gray-300" }, " Serenity ")
+                                  ]),
+                                  createVNode("nav", { class: "flex flex-1 flex-col" }, [
+                                    createVNode("ul", {
+                                      role: "list",
+                                      class: "flex flex-1 flex-col gap-y-7"
+                                    }, [
+                                      createVNode("li", null, [
+                                        createVNode("ul", {
+                                          role: "list",
+                                          class: "-mx-2 space-y-1"
+                                        }, [
+                                          (openBlock(), createBlock(Fragment, null, renderList(navigation, (item) => {
+                                            return createVNode("li", {
+                                              key: item.name
+                                            }, [
+                                              createVNode(_component_Link, {
+                                                href: item.href,
+                                                class: [
+                                                  item.current ? "bg-blue-50/20 text-blue-500" : "text-gray-700 hover:bg-orange-50/20 hover:text-orange-500 dark:text-gray-500 dark:hover:text-orange-500",
+                                                  "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                                ]
+                                              }, {
+                                                default: withCtx(() => [
+                                                  (openBlock(), createBlock(resolveDynamicComponent(item.icon), {
+                                                    class: [
+                                                      item.current ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                                                      "h-6 w-6 shrink-0"
+                                                    ],
+                                                    "aria-hidden": "true"
+                                                  }, null, 8, ["class"])),
+                                                  createTextVNode(" " + toDisplayString(item.name), 1)
+                                                ]),
+                                                _: 2
+                                              }, 1032, ["href", "class"])
+                                            ]);
+                                          }), 64))
+                                        ])
+                                      ]),
+                                      createVNode("li", { class: "mt-auto" }, [
+                                        createVNode(_component_Link, {
+                                          href: _ctx.route("admin.playground"),
+                                          class: "group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-500"
+                                        }, {
+                                          default: withCtx(() => [
+                                            createVNode(_component_IconOutlineCog6Tooth, {
+                                              class: "h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-500",
+                                              "aria-hidden": "true"
+                                            }),
+                                            createTextVNode(" " + toDisplayString(_ctx.__("Playground")), 1)
+                                          ]),
+                                          _: 1
+                                        }, 8, ["href"])
+                                      ])
+                                    ])
+                                  ])
+                                ])
+                              ];
+                            }
+                          }),
+                          _: 1
+                        }, _parent4, _scopeId3));
+                      } else {
+                        return [
+                          createVNode(_component_DialogPanel, { class: "relative mr-16 flex w-full max-w-xs flex-1" }, {
+                            default: withCtx(() => [
+                              createVNode(_component_TransitionChild, {
+                                as: "template",
+                                enter: "ease-in-out duration-300",
+                                "enter-from": "opacity-0",
+                                "enter-to": "opacity-100",
+                                leave: "ease-in-out duration-300",
+                                "leave-from": "opacity-100",
+                                "leave-to": "opacity-0"
+                              }, {
+                                default: withCtx(() => [
+                                  createVNode("div", { class: "absolute left-full top-0 flex w-16 justify-center pt-5" }, [
+                                    createVNode("button", {
+                                      type: "button",
+                                      class: "-m-2.5 p-2.5",
+                                      onClick: ($event) => sidebarOpen.value = false
+                                    }, [
+                                      createVNode("span", { class: "sr-only" }, "Close sidebar"),
+                                      createVNode(_component_IconOutlineXMark, {
+                                        class: "h-6 w-6 text-white",
+                                        "aria-hidden": "true"
+                                      })
+                                    ], 8, ["onClick"])
+                                  ])
+                                ]),
+                                _: 1
+                              }),
+                              createVNode("div", { class: "flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 dark:bg-gray-900" }, [
+                                createVNode("div", { class: "flex h-16 shrink-0 items-center" }, [
+                                  createVNode(_component_ApplicationMark, { class: "h-12 w-12" }),
+                                  createVNode("h2", { class: "ml-4 text-2xl font-medium text-gray-800 dark:text-gray-300" }, " Serenity ")
+                                ]),
+                                createVNode("nav", { class: "flex flex-1 flex-col" }, [
+                                  createVNode("ul", {
+                                    role: "list",
+                                    class: "flex flex-1 flex-col gap-y-7"
+                                  }, [
+                                    createVNode("li", null, [
+                                      createVNode("ul", {
+                                        role: "list",
+                                        class: "-mx-2 space-y-1"
+                                      }, [
+                                        (openBlock(), createBlock(Fragment, null, renderList(navigation, (item) => {
+                                          return createVNode("li", {
+                                            key: item.name
+                                          }, [
+                                            createVNode(_component_Link, {
+                                              href: item.href,
+                                              class: [
+                                                item.current ? "bg-blue-50/20 text-blue-500" : "text-gray-700 hover:bg-orange-50/20 hover:text-orange-500 dark:text-gray-500 dark:hover:text-orange-500",
+                                                "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                              ]
+                                            }, {
+                                              default: withCtx(() => [
+                                                (openBlock(), createBlock(resolveDynamicComponent(item.icon), {
+                                                  class: [
+                                                    item.current ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                                                    "h-6 w-6 shrink-0"
+                                                  ],
+                                                  "aria-hidden": "true"
+                                                }, null, 8, ["class"])),
+                                                createTextVNode(" " + toDisplayString(item.name), 1)
+                                              ]),
+                                              _: 2
+                                            }, 1032, ["href", "class"])
+                                          ]);
+                                        }), 64))
+                                      ])
+                                    ]),
+                                    createVNode("li", { class: "mt-auto" }, [
+                                      createVNode(_component_Link, {
+                                        href: _ctx.route("admin.playground"),
+                                        class: "group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-500"
+                                      }, {
+                                        default: withCtx(() => [
+                                          createVNode(_component_IconOutlineCog6Tooth, {
+                                            class: "h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-500",
+                                            "aria-hidden": "true"
+                                          }),
+                                          createTextVNode(" " + toDisplayString(_ctx.__("Playground")), 1)
+                                        ]),
+                                        _: 1
+                                      }, 8, ["href"])
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            ]),
+                            _: 1
+                          })
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                  _push3(`</div>`);
+                } else {
+                  return [
+                    createVNode(_component_TransitionChild, {
+                      as: "template",
+                      enter: "transition-opacity ease-linear duration-300",
+                      "enter-from": "opacity-0",
+                      "enter-to": "opacity-100",
+                      leave: "transition-opacity ease-linear duration-300",
+                      "leave-from": "opacity-100",
+                      "leave-to": "opacity-0"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode("div", { class: "fixed inset-0 bg-gray-900/80" })
+                      ]),
+                      _: 1
+                    }),
+                    createVNode("div", { class: "fixed inset-0 flex" }, [
+                      createVNode(_component_TransitionChild, {
+                        as: "template",
+                        enter: "transition ease-in-out duration-300 transform",
+                        "enter-from": "-translate-x-full",
+                        "enter-to": "translate-x-0",
+                        leave: "transition ease-in-out duration-300 transform",
+                        "leave-from": "translate-x-0",
+                        "leave-to": "-translate-x-full"
+                      }, {
+                        default: withCtx(() => [
+                          createVNode(_component_DialogPanel, { class: "relative mr-16 flex w-full max-w-xs flex-1" }, {
+                            default: withCtx(() => [
+                              createVNode(_component_TransitionChild, {
+                                as: "template",
+                                enter: "ease-in-out duration-300",
+                                "enter-from": "opacity-0",
+                                "enter-to": "opacity-100",
+                                leave: "ease-in-out duration-300",
+                                "leave-from": "opacity-100",
+                                "leave-to": "opacity-0"
+                              }, {
+                                default: withCtx(() => [
+                                  createVNode("div", { class: "absolute left-full top-0 flex w-16 justify-center pt-5" }, [
+                                    createVNode("button", {
+                                      type: "button",
+                                      class: "-m-2.5 p-2.5",
+                                      onClick: ($event) => sidebarOpen.value = false
+                                    }, [
+                                      createVNode("span", { class: "sr-only" }, "Close sidebar"),
+                                      createVNode(_component_IconOutlineXMark, {
+                                        class: "h-6 w-6 text-white",
+                                        "aria-hidden": "true"
+                                      })
+                                    ], 8, ["onClick"])
+                                  ])
+                                ]),
+                                _: 1
+                              }),
+                              createVNode("div", { class: "flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 dark:bg-gray-900" }, [
+                                createVNode("div", { class: "flex h-16 shrink-0 items-center" }, [
+                                  createVNode(_component_ApplicationMark, { class: "h-12 w-12" }),
+                                  createVNode("h2", { class: "ml-4 text-2xl font-medium text-gray-800 dark:text-gray-300" }, " Serenity ")
+                                ]),
+                                createVNode("nav", { class: "flex flex-1 flex-col" }, [
+                                  createVNode("ul", {
+                                    role: "list",
+                                    class: "flex flex-1 flex-col gap-y-7"
+                                  }, [
+                                    createVNode("li", null, [
+                                      createVNode("ul", {
+                                        role: "list",
+                                        class: "-mx-2 space-y-1"
+                                      }, [
+                                        (openBlock(), createBlock(Fragment, null, renderList(navigation, (item) => {
+                                          return createVNode("li", {
+                                            key: item.name
+                                          }, [
+                                            createVNode(_component_Link, {
+                                              href: item.href,
+                                              class: [
+                                                item.current ? "bg-blue-50/20 text-blue-500" : "text-gray-700 hover:bg-orange-50/20 hover:text-orange-500 dark:text-gray-500 dark:hover:text-orange-500",
+                                                "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                              ]
+                                            }, {
+                                              default: withCtx(() => [
+                                                (openBlock(), createBlock(resolveDynamicComponent(item.icon), {
+                                                  class: [
+                                                    item.current ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                                                    "h-6 w-6 shrink-0"
+                                                  ],
+                                                  "aria-hidden": "true"
+                                                }, null, 8, ["class"])),
+                                                createTextVNode(" " + toDisplayString(item.name), 1)
+                                              ]),
+                                              _: 2
+                                            }, 1032, ["href", "class"])
+                                          ]);
+                                        }), 64))
+                                      ])
+                                    ]),
+                                    createVNode("li", { class: "mt-auto" }, [
+                                      createVNode(_component_Link, {
+                                        href: _ctx.route("admin.playground"),
+                                        class: "group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-500"
+                                      }, {
+                                        default: withCtx(() => [
+                                          createVNode(_component_IconOutlineCog6Tooth, {
+                                            class: "h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-500",
+                                            "aria-hidden": "true"
+                                          }),
+                                          createTextVNode(" " + toDisplayString(_ctx.__("Playground")), 1)
+                                        ]),
+                                        _: 1
+                                      }, 8, ["href"])
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            ]),
+                            _: 1
+                          })
+                        ]),
+                        _: 1
+                      })
+                    ])
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_Dialog, {
+                as: "div",
+                class: "relative z-50 lg:hidden",
+                onClose: ($event) => sidebarOpen.value = false
+              }, {
+                default: withCtx(() => [
+                  createVNode(_component_TransitionChild, {
+                    as: "template",
+                    enter: "transition-opacity ease-linear duration-300",
+                    "enter-from": "opacity-0",
+                    "enter-to": "opacity-100",
+                    leave: "transition-opacity ease-linear duration-300",
+                    "leave-from": "opacity-100",
+                    "leave-to": "opacity-0"
+                  }, {
+                    default: withCtx(() => [
+                      createVNode("div", { class: "fixed inset-0 bg-gray-900/80" })
+                    ]),
+                    _: 1
+                  }),
+                  createVNode("div", { class: "fixed inset-0 flex" }, [
+                    createVNode(_component_TransitionChild, {
+                      as: "template",
+                      enter: "transition ease-in-out duration-300 transform",
+                      "enter-from": "-translate-x-full",
+                      "enter-to": "translate-x-0",
+                      leave: "transition ease-in-out duration-300 transform",
+                      "leave-from": "translate-x-0",
+                      "leave-to": "-translate-x-full"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(_component_DialogPanel, { class: "relative mr-16 flex w-full max-w-xs flex-1" }, {
+                          default: withCtx(() => [
+                            createVNode(_component_TransitionChild, {
+                              as: "template",
+                              enter: "ease-in-out duration-300",
+                              "enter-from": "opacity-0",
+                              "enter-to": "opacity-100",
+                              leave: "ease-in-out duration-300",
+                              "leave-from": "opacity-100",
+                              "leave-to": "opacity-0"
+                            }, {
+                              default: withCtx(() => [
+                                createVNode("div", { class: "absolute left-full top-0 flex w-16 justify-center pt-5" }, [
+                                  createVNode("button", {
+                                    type: "button",
+                                    class: "-m-2.5 p-2.5",
+                                    onClick: ($event) => sidebarOpen.value = false
+                                  }, [
+                                    createVNode("span", { class: "sr-only" }, "Close sidebar"),
+                                    createVNode(_component_IconOutlineXMark, {
+                                      class: "h-6 w-6 text-white",
+                                      "aria-hidden": "true"
+                                    })
+                                  ], 8, ["onClick"])
+                                ])
+                              ]),
+                              _: 1
+                            }),
+                            createVNode("div", { class: "flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4 dark:bg-gray-900" }, [
+                              createVNode("div", { class: "flex h-16 shrink-0 items-center" }, [
+                                createVNode(_component_ApplicationMark, { class: "h-12 w-12" }),
+                                createVNode("h2", { class: "ml-4 text-2xl font-medium text-gray-800 dark:text-gray-300" }, " Serenity ")
+                              ]),
+                              createVNode("nav", { class: "flex flex-1 flex-col" }, [
+                                createVNode("ul", {
+                                  role: "list",
+                                  class: "flex flex-1 flex-col gap-y-7"
+                                }, [
+                                  createVNode("li", null, [
+                                    createVNode("ul", {
+                                      role: "list",
+                                      class: "-mx-2 space-y-1"
+                                    }, [
+                                      (openBlock(), createBlock(Fragment, null, renderList(navigation, (item) => {
+                                        return createVNode("li", {
+                                          key: item.name
+                                        }, [
+                                          createVNode(_component_Link, {
+                                            href: item.href,
+                                            class: [
+                                              item.current ? "bg-blue-50/20 text-blue-500" : "text-gray-700 hover:bg-orange-50/20 hover:text-orange-500 dark:text-gray-500 dark:hover:text-orange-500",
+                                              "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                            ]
+                                          }, {
+                                            default: withCtx(() => [
+                                              (openBlock(), createBlock(resolveDynamicComponent(item.icon), {
+                                                class: [
+                                                  item.current ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                                                  "h-6 w-6 shrink-0"
+                                                ],
+                                                "aria-hidden": "true"
+                                              }, null, 8, ["class"])),
+                                              createTextVNode(" " + toDisplayString(item.name), 1)
+                                            ]),
+                                            _: 2
+                                          }, 1032, ["href", "class"])
+                                        ]);
+                                      }), 64))
+                                    ])
+                                  ]),
+                                  createVNode("li", { class: "mt-auto" }, [
+                                    createVNode(_component_Link, {
+                                      href: _ctx.route("admin.playground"),
+                                      class: "group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-blue-500"
+                                    }, {
+                                      default: withCtx(() => [
+                                        createVNode(_component_IconOutlineCog6Tooth, {
+                                          class: "h-6 w-6 shrink-0 text-gray-400 group-hover:text-blue-500",
+                                          "aria-hidden": "true"
+                                        }),
+                                        createTextVNode(" " + toDisplayString(_ctx.__("Playground")), 1)
+                                      ]),
+                                      _: 1
+                                    }, 8, ["href"])
+                                  ])
+                                ])
+                              ])
+                            ])
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ]),
+                _: 1
+              }, 8, ["onClose"])
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`<div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col"><div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4 dark:border-gray-950 dark:bg-gray-900"><div class="flex h-16 shrink-0 items-center">`);
+      _push(ssrRenderComponent(_component_ApplicationMark, { class: "h-10 w-10" }, null, _parent));
+      _push(`<h2 class="ml-4 text-2xl font-medium text-gray-800 dark:text-gray-300"> Serenity </h2></div><nav class="flex flex-1 flex-col"><ul role="list" class="flex flex-1 flex-col gap-y-7"><li><ul role="list" class="-mx-2 space-y-1"><!--[-->`);
+      ssrRenderList(navigation, (item) => {
+        _push(`<li>`);
+        _push(ssrRenderComponent(_component_Link, {
+          href: item.href,
+          class: [
+            item.current ? "bg-blue-50/20 text-blue-500" : "text-gray-700 hover:bg-orange-50/20 hover:text-orange-500 dark:text-gray-500 dark:hover:text-orange-500",
+            "group flex gap-x-3 rounded-md p-2 text-sm leading-6"
+          ]
+        }, {
+          default: withCtx((_2, _push2, _parent2, _scopeId) => {
+            if (_push2) {
+              ssrRenderVNode(_push2, createVNode(resolveDynamicComponent(item.icon), {
+                class: [
+                  item.current ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                  "h-5 w-5 shrink-0"
+                ],
+                "aria-hidden": "true"
+              }, null), _parent2, _scopeId);
+              _push2(` ${ssrInterpolate(item.name)}`);
+            } else {
+              return [
+                (openBlock(), createBlock(resolveDynamicComponent(item.icon), {
+                  class: [
+                    item.current ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                    "h-5 w-5 shrink-0"
+                  ],
+                  "aria-hidden": "true"
+                }, null, 8, ["class"])),
+                createTextVNode(" " + toDisplayString(item.name), 1)
+              ];
+            }
+          }),
+          _: 2
+        }, _parent));
+        _push(`</li>`);
+      });
+      _push(`<!--]--></ul></li><li class="mt-auto">`);
+      _push(ssrRenderComponent(_component_Link, {
+        href: _ctx.route("admin.playground"),
+        class: [
+          _ctx.route().current("admin.playground") ? "bg-blue-50/20 text-blue-500" : "text-gray-700 hover:bg-orange-50/20 hover:text-orange-500 dark:text-gray-500 dark:hover:text-orange-500",
+          "group flex gap-x-3 rounded-md p-2 text-sm leading-6"
+        ]
+      }, {
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_IconOutlineCog6Tooth, {
+              class: [
+                _ctx.route().current("admin.playground") ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                "h-5 w-5 shrink-0"
+              ],
+              "aria-hidden": "true"
+            }, null, _parent2, _scopeId));
+            _push2(` ${ssrInterpolate(_ctx.__("Playground"))}`);
+          } else {
+            return [
+              createVNode(_component_IconOutlineCog6Tooth, {
+                class: [
+                  _ctx.route().current("admin.playground") ? "text-blue-500" : "text-gray-400 group-hover:text-orange-500 dark:text-gray-500",
+                  "h-5 w-5 shrink-0"
+                ],
+                "aria-hidden": "true"
+              }, null, 8, ["class"]),
+              createTextVNode(" " + toDisplayString(_ctx.__("Playground")), 1)
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</li></ul></nav></div></div><div class="beams h-screen bg-white dark:bg-gray-800 lg:pl-64"><div class="sticky top-0 z-40 shadow lg:w-full"><div class="flex h-16 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm dark:border-gray-900 dark:bg-gray-800 sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none"><button type="button" class="-m-2.5 p-2.5 text-gray-700 dark:text-gray-400 lg:hidden"><span class="sr-only">Open sidebar</span>`);
+      _push(ssrRenderComponent(_component_IconOutlineBars3, {
+        class: "h-6 w-6",
+        "aria-hidden": "true"
+      }, null, _parent));
+      _push(`</button><div class="h-6 w-px bg-gray-200 dark:bg-gray-500 lg:hidden" aria-hidden="true"></div><div class="flex flex-1 gap-x-4 self-stretch px-8 lg:gap-x-6"><form class="relative flex flex-1" action="#" method="GET"><label for="search-field" class="sr-only">Search</label>`);
+      _push(ssrRenderComponent(_component_IconSolidMagnifyingGlass, {
+        class: "pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400 dark:text-gray-500",
+        "aria-hidden": "true"
+      }, null, _parent));
+      _push(`<input id="search-field" class="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 dark:bg-gray-800 dark:text-gray-300 dark:placeholder:text-gray-500 sm:text-sm" placeholder="Search..." type="search" name="search"></form><div class="flex items-center gap-x-4 lg:gap-x-4"><button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400"><span class="sr-only">View notifications</span>`);
+      _push(ssrRenderComponent(_component_IconOutlineBell, {
+        class: "h-6 w-6",
+        "aria-hidden": "true"
+      }, null, _parent));
+      _push(`</button><div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200 dark:lg:bg-gray-500" aria-hidden="true"></div>`);
+      _push(ssrRenderComponent(_component_AccountManagerMenu, { class: "ml-0" }, null, _parent));
+      _push(ssrRenderComponent(_component_ThemeSwitcher, { class: "-ml-2" }, null, _parent));
+      _push(`</div></div></div><header class="hidden border-gray-100 bg-white text-gray-800 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100 lg:block"><div class="mx-auto w-full px-4 py-6 lg:px-8">`);
+      _push(ssrRenderComponent(_component_Breadcrumbs, null, null, _parent));
+      _push(`</div></header></div><main class="py-10 dark:text-gray-400">`);
+      ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+      _push(`</main></div></div>`);
+    };
+  }
+};
+const _sfc_setup$N = _sfc_main$N.setup;
+_sfc_main$N.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Layouts/AdminLayout.vue");
+  return _sfc_setup$N ? _sfc_setup$N(props, ctx) : void 0;
+};
+const _sfc_main$M = {
+  __name: "Dashboard",
+  __ssrInlineRender: true,
+  setup(__props) {
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_Head = resolveComponent("Head");
+      const _component_AdminLayout = _sfc_main$N;
+      const _component_Card = __unplugin_components_1$3;
+      _push(`<!--[-->`);
+      _push(ssrRenderComponent(_component_Head, {
+        title: _ctx.__("Dashboard")
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_AdminLayout, null, {
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_Card, null, {
+              title: withCtx((_3, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(`${ssrInterpolate(_ctx.__("Welcome to Serenity Admin"))}`);
+                } else {
+                  return [
+                    createTextVNode(toDisplayString(_ctx.__("Welcome to Serenity Admin")), 1)
+                  ];
+                }
+              }),
+              default: withCtx((_3, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(`<p${_scopeId2}>We&#39;ll add some content here soon.</p>`);
+                } else {
+                  return [
+                    createVNode("p", null, "We'll add some content here soon.")
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_Card, null, {
+                title: withCtx(() => [
+                  createTextVNode(toDisplayString(_ctx.__("Welcome to Serenity Admin")), 1)
+                ]),
+                default: withCtx(() => [
+                  createVNode("p", null, "We'll add some content here soon.")
+                ]),
+                _: 1
+              })
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`<!--]-->`);
+    };
+  }
+};
+const _sfc_setup$M = _sfc_main$M.setup;
+_sfc_main$M.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Private/Admin/Dashboard.vue");
+  return _sfc_setup$M ? _sfc_setup$M(props, ctx) : void 0;
+};
+const __vite_glob_0_16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: _sfc_main$M
+}, Symbol.toStringTag, { value: "Module" }));
+const Index_vue_vue_type_style_index_0_lang = "";
+const _sfc_main$L = {};
+function _sfc_ssrRender$6(_ctx, _push, _parent, _attrs) {
+  const _component_Head = resolveComponent("Head");
+  const _component_AdminLayout = _sfc_main$N;
+  const _component_z_card = resolveComponent("z-card");
+  _push(`<!--[-->`);
+  _push(ssrRenderComponent(_component_Head, {
+    title: _ctx.__("Playground")
+  }, null, _parent));
+  _push(ssrRenderComponent(_component_AdminLayout, null, {
+    default: withCtx((_2, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(ssrRenderComponent(_component_z_card, { class: "mx-6 px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4" }, {
+          default: withCtx((_3, _push3, _parent3, _scopeId2) => {
+            if (_push3) {
+              _push3(`<div class="p:2 flex h-screen flex-1 flex-col justify-between sm:p-6"${_scopeId2}><div class="flex justify-between border-b-2 border-gray-200 py-3 sm:items-center"${_scopeId2}><div class="relative flex items-center space-x-4"${_scopeId2}><div class="relative"${_scopeId2}><span class="absolute bottom-0 right-0 text-green-500"${_scopeId2}><svg width="20" height="20"${_scopeId2}><circle cx="8" cy="8" r="8" fill="currentColor"${_scopeId2}></circle></svg></span><img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="" class="h-10 w-10 rounded-full sm:h-16 sm:w-16"${_scopeId2}></div><div class="flex flex-col leading-tight"${_scopeId2}><div class="mt-1 flex items-center text-2xl"${_scopeId2}><span class="mr-3 text-gray-700"${_scopeId2}>Anderson Vanhron</span></div><span class="text-lg text-gray-600"${_scopeId2}>Junior Developer</span></div></div></div><div id="messages" class="scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch flex flex-col space-y-4 overflow-y-auto p-3"${_scopeId2}><div class="chat-message"${_scopeId2}><div class="flex items-end"${_scopeId2}><div class="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs"${_scopeId2}><div${_scopeId2}><span class="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>Can be verified on any platform using docker</span></div></div><img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="order-1 h-6 w-6 rounded-full"${_scopeId2}></div></div><div class="chat-message"${_scopeId2}><div class="flex items-end justify-end"${_scopeId2}><div class="order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs"${_scopeId2}><div${_scopeId2}><span class="inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white"${_scopeId2}>Your error message says permission denied, npm global installs must be given root privileges.</span></div></div><img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="order-2 h-6 w-6 rounded-full"${_scopeId2}></div></div><div class="chat-message"${_scopeId2}><div class="flex items-end"${_scopeId2}><div class="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs"${_scopeId2}><div${_scopeId2}><span class="inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>Command was run with root privileges. I&#39;m sure about that.</span></div><div${_scopeId2}><span class="inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>I&#39;ve update the description so it&#39;s more obviously now</span></div><div${_scopeId2}><span class="inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>FYI https://askubuntu.com/a/700266/510172</span></div><div${_scopeId2}><span class="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}> Check the line above (it ends with a # so, I&#39;m running it as root ) <pre${_scopeId2}># npm install -g @vue/devtools</pre></span></div></div><img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="order-1 h-6 w-6 rounded-full"${_scopeId2}></div></div><div class="chat-message"${_scopeId2}><div class="flex items-end justify-end"${_scopeId2}><div class="order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs"${_scopeId2}><div${_scopeId2}><span class="inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white"${_scopeId2}>Any updates on this issue? I&#39;m getting the same error when trying to install devtools. Thanks</span></div></div><img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="order-2 h-6 w-6 rounded-full"${_scopeId2}></div></div><div class="chat-message"${_scopeId2}><div class="flex items-end"${_scopeId2}><div class="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs"${_scopeId2}><div${_scopeId2}><span class="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>Thanks for your message David. I thought I&#39;m alone with this issue. Please, ? the issue to support it :)</span></div></div><img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="order-1 h-6 w-6 rounded-full"${_scopeId2}></div></div><div class="chat-message"${_scopeId2}><div class="flex items-end justify-end"${_scopeId2}><div class="order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs"${_scopeId2}><div${_scopeId2}><span class="inline-block rounded-lg bg-blue-600 px-4 py-2 text-white"${_scopeId2}>Are you using sudo?</span></div><div${_scopeId2}><span class="inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white"${_scopeId2}>Run this command sudo chown -R \`whoami\` /Users/${ssrInterpolate(_ctx.your_user_profile)}/.npm-global/ then install the package globally without using sudo</span></div></div><img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="order-2 h-6 w-6 rounded-full"${_scopeId2}></div></div><div class="chat-message"${_scopeId2}><div class="flex items-end"${_scopeId2}><div class="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs"${_scopeId2}><div${_scopeId2}><span class="inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>It seems like you are from Mac OS world. There is no /Users/ folder on linux ?</span></div><div${_scopeId2}><span class="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>I have no issue with any other packages installed with root permission globally.</span></div></div><img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="order-1 h-6 w-6 rounded-full"${_scopeId2}></div></div><div class="chat-message"${_scopeId2}><div class="flex items-end justify-end"${_scopeId2}><div class="order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs"${_scopeId2}><div${_scopeId2}><span class="inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white"${_scopeId2}>yes, I have a mac. I never had issues with root permission as well, but this helped me to solve the problem</span></div></div><img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="order-2 h-6 w-6 rounded-full"${_scopeId2}></div></div><div class="chat-message"${_scopeId2}><div class="flex items-end"${_scopeId2}><div class="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs"${_scopeId2}><div${_scopeId2}><span class="inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>I get the same error on Arch Linux (also with sudo)</span></div><div${_scopeId2}><span class="inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>I also have this issue, Here is what I was doing until now: #1076</span></div><div${_scopeId2}><span class="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600"${_scopeId2}>even i am facing</span></div></div><img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" class="order-1 h-6 w-6 rounded-full"${_scopeId2}></div></div></div><div class="mb-2 border-t-2 border-gray-200 px-4 pt-4 sm:mb-0"${_scopeId2}><div class="relative flex"${_scopeId2}><span class="absolute inset-y-0 flex items-center"${_scopeId2}><button type="button" class="inline-flex h-12 w-12 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"${_scopeId2}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-gray-600"${_scopeId2}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"${_scopeId2}></path></svg></button></span><input type="text" placeholder="Write your message!" class="w-full rounded-md bg-gray-200 py-3 pl-12 text-gray-600 placeholder-gray-600 focus:placeholder-gray-400 focus:outline-none"${_scopeId2}><div class="absolute inset-y-0 right-0 hidden items-center sm:flex"${_scopeId2}><button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"${_scopeId2}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-gray-600"${_scopeId2}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"${_scopeId2}></path></svg></button><button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"${_scopeId2}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-gray-600"${_scopeId2}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"${_scopeId2}></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"${_scopeId2}></path></svg></button><button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"${_scopeId2}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-gray-600"${_scopeId2}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"${_scopeId2}></path></svg></button><button type="button" class="inline-flex items-center justify-center rounded-lg bg-blue-500 px-4 py-3 text-white transition duration-500 ease-in-out hover:bg-blue-400 focus:outline-none"${_scopeId2}><span class="font-bold"${_scopeId2}>Send</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="ml-2 h-6 w-6 rotate-90 transform"${_scopeId2}><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"${_scopeId2}></path></svg></button></div></div></div></div>`);
+            } else {
+              return [
+                createVNode("div", { class: "p:2 flex h-screen flex-1 flex-col justify-between sm:p-6" }, [
+                  createVNode("div", { class: "flex justify-between border-b-2 border-gray-200 py-3 sm:items-center" }, [
+                    createVNode("div", { class: "relative flex items-center space-x-4" }, [
+                      createVNode("div", { class: "relative" }, [
+                        createVNode("span", { class: "absolute bottom-0 right-0 text-green-500" }, [
+                          (openBlock(), createBlock("svg", {
+                            width: "20",
+                            height: "20"
+                          }, [
+                            createVNode("circle", {
+                              cx: "8",
+                              cy: "8",
+                              r: "8",
+                              fill: "currentColor"
+                            })
+                          ]))
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "",
+                          class: "h-10 w-10 rounded-full sm:h-16 sm:w-16"
+                        })
+                      ]),
+                      createVNode("div", { class: "flex flex-col leading-tight" }, [
+                        createVNode("div", { class: "mt-1 flex items-center text-2xl" }, [
+                          createVNode("span", { class: "mr-3 text-gray-700" }, "Anderson Vanhron")
+                        ]),
+                        createVNode("span", { class: "text-lg text-gray-600" }, "Junior Developer")
+                      ])
+                    ])
+                  ]),
+                  createVNode("div", {
+                    id: "messages",
+                    class: "scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch flex flex-col space-y-4 overflow-y-auto p-3"
+                  }, [
+                    createVNode("div", { class: "chat-message" }, [
+                      createVNode("div", { class: "flex items-end" }, [
+                        createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, "Can be verified on any platform using docker")
+                          ])
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "My profile",
+                          class: "order-1 h-6 w-6 rounded-full"
+                        })
+                      ])
+                    ]),
+                    createVNode("div", { class: "chat-message" }, [
+                      createVNode("div", { class: "flex items-end justify-end" }, [
+                        createVNode("div", { class: "order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs" }, [
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white" }, "Your error message says permission denied, npm global installs must be given root privileges.")
+                          ])
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "My profile",
+                          class: "order-2 h-6 w-6 rounded-full"
+                        })
+                      ])
+                    ]),
+                    createVNode("div", { class: "chat-message" }, [
+                      createVNode("div", { class: "flex items-end" }, [
+                        createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "Command was run with root privileges. I'm sure about that.")
+                          ]),
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "I've update the description so it's more obviously now")
+                          ]),
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "FYI https://askubuntu.com/a/700266/510172")
+                          ]),
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, [
+                              createTextVNode(" Check the line above (it ends with a # so, I'm running it as root ) "),
+                              createVNode("pre", null, "# npm install -g @vue/devtools")
+                            ])
+                          ])
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "My profile",
+                          class: "order-1 h-6 w-6 rounded-full"
+                        })
+                      ])
+                    ]),
+                    createVNode("div", { class: "chat-message" }, [
+                      createVNode("div", { class: "flex items-end justify-end" }, [
+                        createVNode("div", { class: "order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs" }, [
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white" }, "Any updates on this issue? I'm getting the same error when trying to install devtools. Thanks")
+                          ])
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "My profile",
+                          class: "order-2 h-6 w-6 rounded-full"
+                        })
+                      ])
+                    ]),
+                    createVNode("div", { class: "chat-message" }, [
+                      createVNode("div", { class: "flex items-end" }, [
+                        createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, "Thanks for your message David. I thought I'm alone with this issue. Please, ? the issue to support it :)")
+                          ])
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "My profile",
+                          class: "order-1 h-6 w-6 rounded-full"
+                        })
+                      ])
+                    ]),
+                    createVNode("div", { class: "chat-message" }, [
+                      createVNode("div", { class: "flex items-end justify-end" }, [
+                        createVNode("div", { class: "order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs" }, [
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg bg-blue-600 px-4 py-2 text-white" }, "Are you using sudo?")
+                          ]),
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white" }, "Run this command sudo chown -R `whoami` /Users/" + toDisplayString(_ctx.your_user_profile) + "/.npm-global/ then install the package globally without using sudo", 1)
+                          ])
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "My profile",
+                          class: "order-2 h-6 w-6 rounded-full"
+                        })
+                      ])
+                    ]),
+                    createVNode("div", { class: "chat-message" }, [
+                      createVNode("div", { class: "flex items-end" }, [
+                        createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "It seems like you are from Mac OS world. There is no /Users/ folder on linux ?")
+                          ]),
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, "I have no issue with any other packages installed with root permission globally.")
+                          ])
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "My profile",
+                          class: "order-1 h-6 w-6 rounded-full"
+                        })
+                      ])
+                    ]),
+                    createVNode("div", { class: "chat-message" }, [
+                      createVNode("div", { class: "flex items-end justify-end" }, [
+                        createVNode("div", { class: "order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs" }, [
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white" }, "yes, I have a mac. I never had issues with root permission as well, but this helped me to solve the problem")
+                          ])
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "My profile",
+                          class: "order-2 h-6 w-6 rounded-full"
+                        })
+                      ])
+                    ]),
+                    createVNode("div", { class: "chat-message" }, [
+                      createVNode("div", { class: "flex items-end" }, [
+                        createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "I get the same error on Arch Linux (also with sudo)")
+                          ]),
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "I also have this issue, Here is what I was doing until now: #1076")
+                          ]),
+                          createVNode("div", null, [
+                            createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, "even i am facing")
+                          ])
+                        ]),
+                        createVNode("img", {
+                          src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                          alt: "My profile",
+                          class: "order-1 h-6 w-6 rounded-full"
+                        })
+                      ])
+                    ])
+                  ]),
+                  createVNode("div", { class: "mb-2 border-t-2 border-gray-200 px-4 pt-4 sm:mb-0" }, [
+                    createVNode("div", { class: "relative flex" }, [
+                      createVNode("span", { class: "absolute inset-y-0 flex items-center" }, [
+                        createVNode("button", {
+                          type: "button",
+                          class: "inline-flex h-12 w-12 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
+                        }, [
+                          (openBlock(), createBlock("svg", {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            fill: "none",
+                            viewBox: "0 0 24 24",
+                            stroke: "currentColor",
+                            class: "h-6 w-6 text-gray-600"
+                          }, [
+                            createVNode("path", {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              d: "M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                            })
+                          ]))
+                        ])
+                      ]),
+                      createVNode("input", {
+                        type: "text",
+                        placeholder: "Write your message!",
+                        class: "w-full rounded-md bg-gray-200 py-3 pl-12 text-gray-600 placeholder-gray-600 focus:placeholder-gray-400 focus:outline-none"
+                      }),
+                      createVNode("div", { class: "absolute inset-y-0 right-0 hidden items-center sm:flex" }, [
+                        createVNode("button", {
+                          type: "button",
+                          class: "inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
+                        }, [
+                          (openBlock(), createBlock("svg", {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            fill: "none",
+                            viewBox: "0 0 24 24",
+                            stroke: "currentColor",
+                            class: "h-6 w-6 text-gray-600"
+                          }, [
+                            createVNode("path", {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              d: "M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                            })
+                          ]))
+                        ]),
+                        createVNode("button", {
+                          type: "button",
+                          class: "inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
+                        }, [
+                          (openBlock(), createBlock("svg", {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            fill: "none",
+                            viewBox: "0 0 24 24",
+                            stroke: "currentColor",
+                            class: "h-6 w-6 text-gray-600"
+                          }, [
+                            createVNode("path", {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              d: "M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                            }),
+                            createVNode("path", {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              d: "M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                            })
+                          ]))
+                        ]),
+                        createVNode("button", {
+                          type: "button",
+                          class: "inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
+                        }, [
+                          (openBlock(), createBlock("svg", {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            fill: "none",
+                            viewBox: "0 0 24 24",
+                            stroke: "currentColor",
+                            class: "h-6 w-6 text-gray-600"
+                          }, [
+                            createVNode("path", {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              d: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            })
+                          ]))
+                        ]),
+                        createVNode("button", {
+                          type: "button",
+                          class: "inline-flex items-center justify-center rounded-lg bg-blue-500 px-4 py-3 text-white transition duration-500 ease-in-out hover:bg-blue-400 focus:outline-none"
+                        }, [
+                          createVNode("span", { class: "font-bold" }, "Send"),
+                          (openBlock(), createBlock("svg", {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 20 20",
+                            fill: "currentColor",
+                            class: "ml-2 h-6 w-6 rotate-90 transform"
+                          }, [
+                            createVNode("path", { d: "M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" })
+                          ]))
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ];
+            }
+          }),
+          _: 1
+        }, _parent2, _scopeId));
+      } else {
+        return [
+          createVNode(_component_z_card, { class: "mx-6 px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4" }, {
+            default: withCtx(() => [
+              createVNode("div", { class: "p:2 flex h-screen flex-1 flex-col justify-between sm:p-6" }, [
+                createVNode("div", { class: "flex justify-between border-b-2 border-gray-200 py-3 sm:items-center" }, [
+                  createVNode("div", { class: "relative flex items-center space-x-4" }, [
+                    createVNode("div", { class: "relative" }, [
+                      createVNode("span", { class: "absolute bottom-0 right-0 text-green-500" }, [
+                        (openBlock(), createBlock("svg", {
+                          width: "20",
+                          height: "20"
+                        }, [
+                          createVNode("circle", {
+                            cx: "8",
+                            cy: "8",
+                            r: "8",
+                            fill: "currentColor"
+                          })
+                        ]))
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "",
+                        class: "h-10 w-10 rounded-full sm:h-16 sm:w-16"
+                      })
+                    ]),
+                    createVNode("div", { class: "flex flex-col leading-tight" }, [
+                      createVNode("div", { class: "mt-1 flex items-center text-2xl" }, [
+                        createVNode("span", { class: "mr-3 text-gray-700" }, "Anderson Vanhron")
+                      ]),
+                      createVNode("span", { class: "text-lg text-gray-600" }, "Junior Developer")
+                    ])
+                  ])
+                ]),
+                createVNode("div", {
+                  id: "messages",
+                  class: "scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch flex flex-col space-y-4 overflow-y-auto p-3"
+                }, [
+                  createVNode("div", { class: "chat-message" }, [
+                    createVNode("div", { class: "flex items-end" }, [
+                      createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, "Can be verified on any platform using docker")
+                        ])
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "My profile",
+                        class: "order-1 h-6 w-6 rounded-full"
+                      })
+                    ])
+                  ]),
+                  createVNode("div", { class: "chat-message" }, [
+                    createVNode("div", { class: "flex items-end justify-end" }, [
+                      createVNode("div", { class: "order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs" }, [
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white" }, "Your error message says permission denied, npm global installs must be given root privileges.")
+                        ])
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "My profile",
+                        class: "order-2 h-6 w-6 rounded-full"
+                      })
+                    ])
+                  ]),
+                  createVNode("div", { class: "chat-message" }, [
+                    createVNode("div", { class: "flex items-end" }, [
+                      createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "Command was run with root privileges. I'm sure about that.")
+                        ]),
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "I've update the description so it's more obviously now")
+                        ]),
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "FYI https://askubuntu.com/a/700266/510172")
+                        ]),
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, [
+                            createTextVNode(" Check the line above (it ends with a # so, I'm running it as root ) "),
+                            createVNode("pre", null, "# npm install -g @vue/devtools")
+                          ])
+                        ])
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "My profile",
+                        class: "order-1 h-6 w-6 rounded-full"
+                      })
+                    ])
+                  ]),
+                  createVNode("div", { class: "chat-message" }, [
+                    createVNode("div", { class: "flex items-end justify-end" }, [
+                      createVNode("div", { class: "order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs" }, [
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white" }, "Any updates on this issue? I'm getting the same error when trying to install devtools. Thanks")
+                        ])
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "My profile",
+                        class: "order-2 h-6 w-6 rounded-full"
+                      })
+                    ])
+                  ]),
+                  createVNode("div", { class: "chat-message" }, [
+                    createVNode("div", { class: "flex items-end" }, [
+                      createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, "Thanks for your message David. I thought I'm alone with this issue. Please, ? the issue to support it :)")
+                        ])
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "My profile",
+                        class: "order-1 h-6 w-6 rounded-full"
+                      })
+                    ])
+                  ]),
+                  createVNode("div", { class: "chat-message" }, [
+                    createVNode("div", { class: "flex items-end justify-end" }, [
+                      createVNode("div", { class: "order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs" }, [
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg bg-blue-600 px-4 py-2 text-white" }, "Are you using sudo?")
+                        ]),
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white" }, "Run this command sudo chown -R `whoami` /Users/" + toDisplayString(_ctx.your_user_profile) + "/.npm-global/ then install the package globally without using sudo", 1)
+                        ])
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "My profile",
+                        class: "order-2 h-6 w-6 rounded-full"
+                      })
+                    ])
+                  ]),
+                  createVNode("div", { class: "chat-message" }, [
+                    createVNode("div", { class: "flex items-end" }, [
+                      createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "It seems like you are from Mac OS world. There is no /Users/ folder on linux ?")
+                        ]),
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, "I have no issue with any other packages installed with root permission globally.")
+                        ])
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "My profile",
+                        class: "order-1 h-6 w-6 rounded-full"
+                      })
+                    ])
+                  ]),
+                  createVNode("div", { class: "chat-message" }, [
+                    createVNode("div", { class: "flex items-end justify-end" }, [
+                      createVNode("div", { class: "order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs" }, [
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg rounded-br-none bg-blue-600 px-4 py-2 text-white" }, "yes, I have a mac. I never had issues with root permission as well, but this helped me to solve the problem")
+                        ])
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "My profile",
+                        class: "order-2 h-6 w-6 rounded-full"
+                      })
+                    ])
+                  ]),
+                  createVNode("div", { class: "chat-message" }, [
+                    createVNode("div", { class: "flex items-end" }, [
+                      createVNode("div", { class: "order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs" }, [
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "I get the same error on Arch Linux (also with sudo)")
+                        ]),
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg bg-gray-300 px-4 py-2 text-gray-600" }, "I also have this issue, Here is what I was doing until now: #1076")
+                        ]),
+                        createVNode("div", null, [
+                          createVNode("span", { class: "inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600" }, "even i am facing")
+                        ])
+                      ]),
+                      createVNode("img", {
+                        src: "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=144&h=144",
+                        alt: "My profile",
+                        class: "order-1 h-6 w-6 rounded-full"
+                      })
+                    ])
+                  ])
+                ]),
+                createVNode("div", { class: "mb-2 border-t-2 border-gray-200 px-4 pt-4 sm:mb-0" }, [
+                  createVNode("div", { class: "relative flex" }, [
+                    createVNode("span", { class: "absolute inset-y-0 flex items-center" }, [
+                      createVNode("button", {
+                        type: "button",
+                        class: "inline-flex h-12 w-12 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
+                      }, [
+                        (openBlock(), createBlock("svg", {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          stroke: "currentColor",
+                          class: "h-6 w-6 text-gray-600"
+                        }, [
+                          createVNode("path", {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d: "M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                          })
+                        ]))
+                      ])
+                    ]),
+                    createVNode("input", {
+                      type: "text",
+                      placeholder: "Write your message!",
+                      class: "w-full rounded-md bg-gray-200 py-3 pl-12 text-gray-600 placeholder-gray-600 focus:placeholder-gray-400 focus:outline-none"
+                    }),
+                    createVNode("div", { class: "absolute inset-y-0 right-0 hidden items-center sm:flex" }, [
+                      createVNode("button", {
+                        type: "button",
+                        class: "inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
+                      }, [
+                        (openBlock(), createBlock("svg", {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          stroke: "currentColor",
+                          class: "h-6 w-6 text-gray-600"
+                        }, [
+                          createVNode("path", {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d: "M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                          })
+                        ]))
+                      ]),
+                      createVNode("button", {
+                        type: "button",
+                        class: "inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
+                      }, [
+                        (openBlock(), createBlock("svg", {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          stroke: "currentColor",
+                          class: "h-6 w-6 text-gray-600"
+                        }, [
+                          createVNode("path", {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d: "M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                          }),
+                          createVNode("path", {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d: "M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                          })
+                        ]))
+                      ]),
+                      createVNode("button", {
+                        type: "button",
+                        class: "inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-500 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none"
+                      }, [
+                        (openBlock(), createBlock("svg", {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          stroke: "currentColor",
+                          class: "h-6 w-6 text-gray-600"
+                        }, [
+                          createVNode("path", {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          })
+                        ]))
+                      ]),
+                      createVNode("button", {
+                        type: "button",
+                        class: "inline-flex items-center justify-center rounded-lg bg-blue-500 px-4 py-3 text-white transition duration-500 ease-in-out hover:bg-blue-400 focus:outline-none"
+                      }, [
+                        createVNode("span", { class: "font-bold" }, "Send"),
+                        (openBlock(), createBlock("svg", {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          viewBox: "0 0 20 20",
+                          fill: "currentColor",
+                          class: "ml-2 h-6 w-6 rotate-90 transform"
+                        }, [
+                          createVNode("path", { d: "M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" })
+                        ]))
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _: 1
+          })
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`<!--]-->`);
+}
+const _sfc_setup$L = _sfc_main$L.setup;
+_sfc_main$L.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Private/Admin/Playground/Index.vue");
+  return _sfc_setup$L ? _sfc_setup$L(props, ctx) : void 0;
+};
+const Index = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["ssrRender", _sfc_ssrRender$6]]);
+const __vite_glob_0_17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: Index
+}, Symbol.toStringTag, { value: "Module" }));
+const _sfc_main$K = {
+  __name: "Create",
+  __ssrInlineRender: true,
+  setup(__props) {
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(` // `);
+    };
+  }
+};
+const _sfc_setup$K = _sfc_main$K.setup;
+_sfc_main$K.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Private/Admin/Users/Create.vue");
+  return _sfc_setup$K ? _sfc_setup$K(props, ctx) : void 0;
+};
+const __vite_glob_0_18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: _sfc_main$K
+}, Symbol.toStringTag, { value: "Module" }));
+const _sfc_main$J = {
+  __name: "Edit",
+  __ssrInlineRender: true,
+  setup(__props) {
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(` // `);
+    };
+  }
+};
+const _sfc_setup$J = _sfc_main$J.setup;
+_sfc_main$J.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Private/Admin/Users/Edit.vue");
+  return _sfc_setup$J ? _sfc_setup$J(props, ctx) : void 0;
+};
+const __vite_glob_0_19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: _sfc_main$J
+}, Symbol.toStringTag, { value: "Module" }));
+const _hoisted_1$7 = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$7 = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "m19 7l-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3M4 7h16"
+}, null, -1);
+const _hoisted_3$7 = [
+  _hoisted_2$7
+];
+function render$7(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$7, _hoisted_3$7);
+}
+const __unplugin_components_6$1 = { name: "heroicons-outline-trash", render: render$7 };
+const _hoisted_1$6 = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$6 = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5m-1.414-9.414a2 2 0 1 1 2.828 2.828L11.828 15H9v-2.828l8.586-8.586Z"
+}, null, -1);
+const _hoisted_3$6 = [
+  _hoisted_2$6
+];
+function render$6(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$6, _hoisted_3$6);
+}
+const __unplugin_components_5 = { name: "heroicons-outline-pencil-alt", render: render$6 };
+const _sfc_main$I = {
+  __name: "TableButton",
+  __ssrInlineRender: true,
+  props: {
+    color: {
+      type: String,
+      required: false,
+      default: "default"
+    },
+    link: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    uri: {
+      type: String,
+      required: false
+    },
+    state: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    scroll: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    const buttons = {
+      success: "success",
+      error: "error",
+      info: "info",
+      warning: "warning",
+      status: "status",
+      primary: "primary",
+      default: "default"
+    };
+    const buttonColor = computed(() => {
+      return buttons[props.color];
+    });
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_Link = resolveComponent("Link");
+      if (__props.link) {
+        _push(ssrRenderComponent(_component_Link, mergeProps({
+          href: __props.uri,
+          "preserve-scroll": __props.scroll,
+          "preserve-state": __props.state,
+          class: ["btn-sm", unref(buttonColor)]
+        }, _attrs), {
+          default: withCtx((_2, _push2, _parent2, _scopeId) => {
+            if (_push2) {
+              ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+            } else {
+              return [
+                renderSlot(_ctx.$slots, "default")
+              ];
+            }
+          }),
+          _: 3
+        }, _parent));
+      } else {
+        _push(`<button${ssrRenderAttrs(mergeProps({
+          type: "button",
+          class: ["btn-sm", unref(buttonColor)]
+        }, _attrs))}>`);
+        ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+        _push(`</button>`);
+      }
+    };
+  }
+};
+const _sfc_setup$I = _sfc_main$I.setup;
+_sfc_main$I.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/TableButton.vue");
+  return _sfc_setup$I ? _sfc_setup$I(props, ctx) : void 0;
+};
+const _sfc_main$H = {};
+function _sfc_ssrRender$5(_ctx, _push, _parent, _attrs) {
+  _push(`<div${ssrRenderAttrs(mergeProps({
+    class: "flex items-center justify-end",
+    role: "group"
+  }, _attrs))}>`);
+  ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+  _push(`</div>`);
+}
+const _sfc_setup$H = _sfc_main$H.setup;
+_sfc_main$H.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Shared/TableActionButtons.vue");
+  return _sfc_setup$H ? _sfc_setup$H(props, ctx) : void 0;
+};
+const __unplugin_components_3 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["ssrRender", _sfc_ssrRender$5]]);
+const translationsObject = {
+  translations: {
+    next: "Next",
+    no_results_found: "No results found",
+    of: "of",
+    per_page: "per page",
+    previous: "Previous",
+    results: "results",
+    to: "to"
+  }
+};
+function getTranslations() {
+  return translationsObject.translations;
+}
+const _sfc_main$G = {
+  __name: "PerPageSelector",
+  __ssrInlineRender: true,
+  props: {
+    dusk: {
+      type: String,
+      default: null,
+      required: false
+    },
+    value: {
+      type: Number,
+      default: 15,
+      required: false
+    },
+    options: {
+      type: Array,
+      default() {
+        return [15, 30, 50, 100];
+      },
+      required: false
+    },
+    onChange: {
+      type: Function,
+      required: true
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    const translations = getTranslations();
+    const perPageOptions = computed(() => {
+      let options = [...props.options];
+      options.push(parseInt(props.value));
+      return uniq(options).sort((a2, b2) => a2 - b2);
+    });
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(`<select${ssrRenderAttrs(mergeProps({
+        name: "per_page",
+        dusk: __props.dusk,
+        value: __props.value,
+        class: "focus:border-primary-500 focus:ring-primary-500 block min-w-max rounded-md border-gray-300 text-sm shadow-sm"
+      }, _attrs))}><!--[-->`);
+      ssrRenderList(unref(perPageOptions), (option) => {
+        _push(`<option${ssrRenderAttr("value", option)}>${ssrInterpolate(option)} ${ssrInterpolate(unref(translations).per_page)}</option>`);
+      });
+      _push(`<!--]--></select>`);
+    };
+  }
+};
+const _sfc_setup$G = _sfc_main$G.setup;
+_sfc_main$G.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/PerPageSelector.vue");
+  return _sfc_setup$G ? _sfc_setup$G(props, ctx) : void 0;
+};
+const _sfc_main$F = {
+  __name: "Pagination",
+  __ssrInlineRender: true,
+  props: {
+    onClick: {
+      type: Function,
+      required: false
+    },
+    perPageOptions: {
+      type: Array,
+      default() {
+        return () => [15, 30, 50, 100];
+      },
+      required: false
+    },
+    onPerPageChange: {
+      type: Function,
+      default() {
+        return () => {
+        };
+      },
+      required: false
+    },
+    hasData: {
+      type: Boolean,
+      required: true
+    },
+    meta: {
+      type: Object,
+      required: false
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    const translations = getTranslations();
+    const hasLinks = computed(() => {
+      if (!("links" in pagination.value)) {
+        return false;
+      }
+      return pagination.value.links.length > 0;
+    });
+    const hasPagination = computed(() => {
+      return Object.keys(pagination.value).length > 0;
+    });
+    const pagination = computed(() => {
+      return props.meta;
+    });
+    const previousPageUrl = computed(() => {
+      if ("prev_page_url" in pagination.value) {
+        return pagination.value.prev_page_url;
+      }
+      return null;
+    });
+    const nextPageUrl = computed(() => {
+      if ("next_page_url" in pagination.value) {
+        return pagination.value.next_page_url;
+      }
+      return null;
+    });
+    const perPage = computed(() => {
+      return parseInt(pagination.value.per_page);
+    });
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_PerPageSelector = _sfc_main$G;
+      if (unref(hasPagination)) {
+        _push(`<nav${ssrRenderAttrs(mergeProps({ class: "flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" }, _attrs))}>`);
+        if (!__props.hasData || unref(pagination).total < 1) {
+          _push(`<p>${ssrInterpolate(unref(translations).no_results_found)}</p>`);
+        } else {
+          _push(`<!---->`);
+        }
+        if (__props.hasData) {
+          _push(`<div class="${ssrRenderClass([{ "sm:hidden": unref(hasLinks) }, "flex flex-1 justify-between"])}">`);
+          ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(previousPageUrl) ? "a" : "div"), {
+            class: [{
+              "cursor-not-allowed text-gray-400": !unref(previousPageUrl),
+              "text-gray-700 hover:text-gray-500": unref(previousPageUrl)
+            }, "relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium"],
+            href: unref(previousPageUrl),
+            dusk: unref(previousPageUrl) ? "pagination-simple-previous" : null,
+            onClick: ($event) => __props.onClick(unref(previousPageUrl))
+          }, {
+            default: withCtx((_2, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(`<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"${_scopeId}><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"${_scopeId}></path></svg><span class="ml-2 hidden sm:inline"${_scopeId}>${ssrInterpolate(unref(translations).previous)}</span>`);
+              } else {
+                return [
+                  (openBlock(), createBlock("svg", {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    class: "h-5 w-5 text-gray-400",
+                    fill: "none",
+                    viewBox: "0 0 24 24",
+                    stroke: "currentColor",
+                    "stroke-width": "2"
+                  }, [
+                    createVNode("path", {
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round",
+                      d: "M7 16l-4-4m0 0l4-4m-4 4h18"
+                    })
+                  ])),
+                  createVNode("span", { class: "ml-2 hidden sm:inline" }, toDisplayString(unref(translations).previous), 1)
+                ];
+              }
+            }),
+            _: 1
+          }), _parent);
+          _push(ssrRenderComponent(_component_PerPageSelector, {
+            dusk: "per-page-mobile",
+            value: unref(perPage),
+            options: __props.perPageOptions,
+            "on-change": __props.onPerPageChange
+          }, null, _parent));
+          ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(nextPageUrl) ? "a" : "div"), {
+            class: [{
+              "cursor-not-allowed text-gray-400": !unref(nextPageUrl),
+              "text-gray-700 hover:text-gray-500": unref(nextPageUrl)
+            }, "relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium"],
+            href: unref(nextPageUrl),
+            dusk: unref(nextPageUrl) ? "pagination-simple-next" : null,
+            onClick: ($event) => __props.onClick(unref(nextPageUrl))
+          }, {
+            default: withCtx((_2, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(`<span class="mr-2 hidden sm:inline"${_scopeId}>${ssrInterpolate(unref(translations).next)}</span><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"${_scopeId}><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"${_scopeId}></path></svg>`);
+              } else {
+                return [
+                  createVNode("span", { class: "mr-2 hidden sm:inline" }, toDisplayString(unref(translations).next), 1),
+                  (openBlock(), createBlock("svg", {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    class: "h-5 w-5 text-gray-400",
+                    fill: "none",
+                    viewBox: "0 0 24 24",
+                    stroke: "currentColor",
+                    "stroke-width": "2"
+                  }, [
+                    createVNode("path", {
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round",
+                      d: "M17 8l4 4m0 0l-4 4m4-4H3"
+                    })
+                  ]))
+                ];
+              }
+            }),
+            _: 1
+          }), _parent);
+          _push(`</div>`);
+        } else {
+          _push(`<!---->`);
+        }
+        if (__props.hasData && unref(hasLinks)) {
+          _push(`<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between"><div class="flex flex-grow flex-row items-center space-x-4">`);
+          _push(ssrRenderComponent(_component_PerPageSelector, {
+            dusk: "per-page-full",
+            value: unref(perPage),
+            options: __props.perPageOptions,
+            "on-change": __props.onPerPageChange
+          }, null, _parent));
+          _push(`<p class="hidden flex-grow text-sm text-gray-700 lg:block"><span class="font-medium">${ssrInterpolate(unref(pagination).from)}</span> ${ssrInterpolate(unref(translations).to)} <span class="font-medium">${ssrInterpolate(unref(pagination).to)}</span> ${ssrInterpolate(unref(translations).of)} <span class="font-medium">${ssrInterpolate(unref(pagination).total)}</span> ${ssrInterpolate(unref(translations).results)}</p></div><div><nav class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">`);
+          ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(previousPageUrl) ? "a" : "div"), {
+            class: [{
+              "cursor-not-allowed text-gray-400": !unref(previousPageUrl),
+              "text-gray-500 hover:bg-gray-50": unref(previousPageUrl)
+            }, "relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium"],
+            href: unref(previousPageUrl),
+            dusk: unref(previousPageUrl) ? "pagination-previous" : null,
+            onClick: ($event) => __props.onClick(unref(previousPageUrl))
+          }, {
+            default: withCtx((_2, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(`<span class="sr-only"${_scopeId}>${ssrInterpolate(unref(translations).previous)}</span><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"${_scopeId}><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"${_scopeId}></path></svg>`);
+              } else {
+                return [
+                  createVNode("span", { class: "sr-only" }, toDisplayString(unref(translations).previous), 1),
+                  (openBlock(), createBlock("svg", {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    class: "h-5 w-5",
+                    viewBox: "0 0 20 20",
+                    fill: "currentColor"
+                  }, [
+                    createVNode("path", {
+                      "fill-rule": "evenodd",
+                      d: "M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z",
+                      "clip-rule": "evenodd"
+                    })
+                  ]))
+                ];
+              }
+            }),
+            _: 1
+          }), _parent);
+          _push(`<!--[-->`);
+          ssrRenderList(unref(pagination).links, (link, key) => {
+            _push(`<div>`);
+            ssrRenderSlot(_ctx.$slots, "link", {}, () => {
+              if (!isNaN(link.label) || link.label === "...") {
+                ssrRenderVNode(_push, createVNode(resolveDynamicComponent(link.url ? "a" : "div"), {
+                  href: link.url,
+                  dusk: link.url ? `pagination-${link.label}` : null,
+                  class: ["relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700", {
+                    "cursor-not-allowed": !link.url,
+                    "hover:bg-gray-50": link.url,
+                    "bg-gray-100": link.active
+                  }],
+                  onClick: ($event) => __props.onClick(link.url)
+                }, {
+                  default: withCtx((_2, _push2, _parent2, _scopeId) => {
+                    if (_push2) {
+                      _push2(`${ssrInterpolate(link.label)}`);
+                    } else {
+                      return [
+                        createTextVNode(toDisplayString(link.label), 1)
+                      ];
+                    }
+                  }),
+                  _: 2
+                }), _parent);
+              } else {
+                _push(`<!---->`);
+              }
+            }, _push, _parent);
+            _push(`</div>`);
+          });
+          _push(`<!--]-->`);
+          ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(nextPageUrl) ? "a" : "div"), {
+            class: [{
+              "cursor-not-allowed text-gray-400": !unref(nextPageUrl),
+              "text-gray-500 hover:bg-gray-50": unref(nextPageUrl)
+            }, "relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium"],
+            href: unref(nextPageUrl),
+            dusk: unref(nextPageUrl) ? "pagination-next" : null,
+            onClick: ($event) => __props.onClick(unref(nextPageUrl))
+          }, {
+            default: withCtx((_2, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(`<span class="sr-only"${_scopeId}>${ssrInterpolate(unref(translations).next)}</span><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"${_scopeId}><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"${_scopeId}></path></svg>`);
+              } else {
+                return [
+                  createVNode("span", { class: "sr-only" }, toDisplayString(unref(translations).next), 1),
+                  (openBlock(), createBlock("svg", {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    class: "h-5 w-5",
+                    viewBox: "0 0 20 20",
+                    fill: "currentColor"
+                  }, [
+                    createVNode("path", {
+                      "fill-rule": "evenodd",
+                      d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
+                      "clip-rule": "evenodd"
+                    })
+                  ]))
+                ];
+              }
+            }),
+            _: 1
+          }), _parent);
+          _push(`</nav></div></div>`);
+        } else {
+          _push(`<!---->`);
+        }
+        _push(`</nav>`);
+      } else {
+        _push(`<!---->`);
+      }
+    };
+  }
+};
+const _sfc_setup$F = _sfc_main$F.setup;
+_sfc_main$F.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/Pagination.vue");
+  return _sfc_setup$F ? _sfc_setup$F(props, ctx) : void 0;
+};
+const _sfc_main$E = {
+  __name: "HeaderCell",
+  __ssrInlineRender: true,
+  props: {
+    cell: {
+      type: Object,
+      required: true
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    function onClick() {
+      if (props.cell.sortable) {
+        props.cell.onSort(props.cell.key);
+      }
+    }
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(`<th${ssrRenderAttrs(mergeProps({
+        style: !__props.cell.hidden ? null : { display: "none" }
+      }, _attrs))}>`);
+      ssrRenderVNode(_push, createVNode(resolveDynamicComponent(__props.cell.sortable ? "button" : "div"), {
+        class: "w-full px-6 py-3",
+        dusk: __props.cell.sortable ? `sort-${__props.cell.key}` : null,
+        onClick
+      }, {
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<span class="flex flex-row items-center"${_scopeId}>`);
+            ssrRenderSlot(_ctx.$slots, "label", {}, () => {
+              _push2(`<span class="uppercase"${_scopeId}>${ssrInterpolate(__props.cell.label)}</span>`);
+            }, _push2, _parent2, _scopeId);
+            ssrRenderSlot(_ctx.$slots, "sort", {}, () => {
+              if (__props.cell.sortable) {
+                _push2(`<svg aria-hidden="true" class="${ssrRenderClass([{
+                  "text-gray-400": !__props.cell.sorted,
+                  "text-secondary-500": __props.cell.sorted
+                }, "ml-2 h-3 w-3"])}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"${ssrRenderAttr("sorted", __props.cell.sorted)}${_scopeId}>`);
+                if (!__props.cell.sorted) {
+                  _push2(`<path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"${_scopeId}></path>`);
+                } else {
+                  _push2(`<!---->`);
+                }
+                if (__props.cell.sorted === "asc") {
+                  _push2(`<path fill="currentColor" d="M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z"${_scopeId}></path>`);
+                } else {
+                  _push2(`<!---->`);
+                }
+                if (__props.cell.sorted === "desc") {
+                  _push2(`<path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"${_scopeId}></path>`);
+                } else {
+                  _push2(`<!---->`);
+                }
+                _push2(`</svg>`);
+              } else {
+                _push2(`<!---->`);
+              }
+            }, _push2, _parent2, _scopeId);
+            _push2(`</span>`);
+          } else {
+            return [
+              createVNode("span", { class: "flex flex-row items-center" }, [
+                renderSlot(_ctx.$slots, "label", {}, () => [
+                  createVNode("span", { class: "uppercase" }, toDisplayString(__props.cell.label), 1)
+                ]),
+                renderSlot(_ctx.$slots, "sort", {}, () => [
+                  __props.cell.sortable ? (openBlock(), createBlock("svg", {
+                    key: 0,
+                    "aria-hidden": "true",
+                    class: ["ml-2 h-3 w-3", {
+                      "text-gray-400": !__props.cell.sorted,
+                      "text-secondary-500": __props.cell.sorted
+                    }],
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 320 512",
+                    sorted: __props.cell.sorted
+                  }, [
+                    !__props.cell.sorted ? (openBlock(), createBlock("path", {
+                      key: 0,
+                      fill: "currentColor",
+                      d: "M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                    })) : createCommentVNode("", true),
+                    __props.cell.sorted === "asc" ? (openBlock(), createBlock("path", {
+                      key: 1,
+                      fill: "currentColor",
+                      d: "M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z"
+                    })) : createCommentVNode("", true),
+                    __props.cell.sorted === "desc" ? (openBlock(), createBlock("path", {
+                      key: 2,
+                      fill: "currentColor",
+                      d: "M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"
+                    })) : createCommentVNode("", true)
+                  ], 10, ["sorted"])) : createCommentVNode("", true)
+                ])
+              ])
+            ];
+          }
+        }),
+        _: 3
+      }), _parent);
+      _push(`</th>`);
+    };
+  }
+};
+const _sfc_setup$E = _sfc_main$E.setup;
+_sfc_main$E.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/HeaderCell.vue");
+  return _sfc_setup$E ? _sfc_setup$E(props, ctx) : void 0;
+};
+const _sfc_main$D = {};
+function _sfc_ssrRender$4(_ctx, _push, _parent, _attrs) {
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex flex-col" }, _attrs))}><div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"><div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"><div class="relative overflow-hidden rounded-lg border border-gray-200 dark:border-gray-900">`);
+  ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+  _push(`</div></div></div></div>`);
+}
+const _sfc_setup$D = _sfc_main$D.setup;
+_sfc_main$D.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/TableWrapper.vue");
+  return _sfc_setup$D ? _sfc_setup$D(props, ctx) : void 0;
+};
+const __unplugin_components_6 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["ssrRender", _sfc_ssrRender$4]]);
+const _hoisted_1$5 = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$5 = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "1.5",
+  d: "m21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+}, null, -1);
+const _hoisted_3$5 = [
+  _hoisted_2$5
+];
+function render$5(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$5, _hoisted_3$5);
+}
+const __unplugin_components_0$1 = { name: "heroicons-outline-magnifying-glass", render: render$5 };
+const _sfc_main$C = {
+  __name: "TableSearchRows",
+  __ssrInlineRender: true,
+  props: {
+    searchInputs: {
+      type: Object,
+      required: true
+    },
+    forcedVisibleSearchInputs: {
+      type: Array,
+      required: true
+    },
+    onChange: {
+      type: Function,
+      required: true
+    },
+    onRemove: {
+      type: Function,
+      required: true
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    const skipUnwrap = { el: ref([]) };
+    let el = computed(() => skipUnwrap.el.value);
+    function isForcedVisible(key) {
+      return props.forcedVisibleSearchInputs.includes(key);
+    }
+    watch(
+      props.forcedVisibleSearchInputs,
+      (inputs) => {
+        const latestInput = inputs.length > 0 ? inputs[inputs.length - 1] : null;
+        if (!latestInput) {
+          return;
+        }
+        nextTick().then(() => {
+          const inputElement = find(el.value, (el2) => {
+            return el2.__vnode.key === latestInput;
+          });
+          if (inputElement) {
+            inputElement.focus();
+          }
+        });
+      },
+      { immediate: true }
+    );
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_IconOutlineMagnifyingGlass = __unplugin_components_0$1;
+      const _component_IconOutlineXMark = __unplugin_components_0$5;
+      _push(`<!--[-->`);
+      ssrRenderList(__props.searchInputs, (searchInput, key) => {
+        _push(`<div style="${ssrRenderStyle(searchInput.value !== null || isForcedVisible(searchInput.key) ? null : { display: "none" })}" class="px-4 sm:px-0"><div class="relative mt-3 flex rounded-md shadow-sm"><label${ssrRenderAttr("for", searchInput.key)} class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-4 text-sm text-gray-500">`);
+        _push(ssrRenderComponent(_component_IconOutlineMagnifyingGlass, { class: "mr-2 h-4 w-4 text-gray-400" }, null, _parent));
+        _push(`<span>${ssrInterpolate(searchInput.label)}</span></label><input${ssrRenderAttr("id", searchInput.key)}${ssrRenderAttr("name", searchInput.key)}${ssrRenderAttr("value", searchInput.value)} type="text" class="focus:border-primary-500 focus:ring-primary-500 block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 px-3 py-2 text-sm"><div class="absolute inset-y-0 right-0 flex items-center pr-3"><button class="focus:ring-primary-500 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2"${ssrRenderAttr("dusk", `remove-search-row-${searchInput.key}`)}><span class="sr-only">Remove search</span>`);
+        _push(ssrRenderComponent(_component_IconOutlineXMark, { class: "h-4 w-4" }, null, _parent));
+        _push(`</button></div></div></div>`);
+      });
+      _push(`<!--]-->`);
+    };
+  }
+};
+const _sfc_setup$C = _sfc_main$C.setup;
+_sfc_main$C.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/TableSearchRows.vue");
+  return _sfc_setup$C ? _sfc_setup$C(props, ctx) : void 0;
+};
+const _hoisted_1$4 = {
+  viewBox: "0 0 24 24",
+  width: "1.2em",
+  height: "1.2em"
+};
+const _hoisted_2$4 = /* @__PURE__ */ createElementVNode("path", {
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2.586a1 1 0 0 1-.293.707l-6.414 6.414a1 1 0 0 0-.293.707V17l-4 4v-6.586a1 1 0 0 0-.293-.707L3.293 7.293A1 1 0 0 1 3 6.586V4Z"
+}, null, -1);
+const _hoisted_3$4 = [
+  _hoisted_2$4
+];
+function render$4(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$4, _hoisted_3$4);
+}
+const __unplugin_components_1$2 = { name: "heroicons-outline-filter", render: render$4 };
+const _sfc_main$B = {
+  __name: "OnClickOutside",
+  __ssrInlineRender: true,
+  props: {
+    do: {
+      type: Function,
+      required: true
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    const listener = ref(null);
+    const root = ref(null);
+    onMounted(() => {
+      listener.value = (e2) => {
+        if (e2.target === root.value || root.value.contains(e2.target)) {
+          return;
+        }
+        props.do();
+      };
+      document.addEventListener("click", listener.value);
+      document.addEventListener("touchstart", listener.value);
+    });
+    onBeforeUnmount(() => {
+      document.removeEventListener("click", listener.value);
+      document.removeEventListener("touchstart", listener.value);
+    });
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(`<div${ssrRenderAttrs(mergeProps({
+        ref_key: "root",
+        ref: root
+      }, _attrs))}>`);
+      ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
+      _push(`</div>`);
+    };
+  }
+};
+const _sfc_setup$B = _sfc_main$B.setup;
+_sfc_main$B.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/OnClickOutside.vue");
+  return _sfc_setup$B ? _sfc_setup$B(props, ctx) : void 0;
+};
+const _sfc_main$A = {
+  __name: "ButtonWithDropdown",
+  __ssrInlineRender: true,
+  props: {
+    placement: {
+      type: String,
+      default: "bottom-start",
+      required: false
+    },
+    active: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    dusk: {
+      type: String,
+      default: null,
+      required: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
+  },
+  setup(__props, { expose: __expose }) {
+    const props = __props;
+    const opened = ref(false);
+    const popper = ref(null);
+    function toggle() {
+      opened.value = !opened.value;
+    }
+    function hide() {
+      opened.value = false;
+    }
+    watch(opened, () => {
+      popper.value.update();
+    });
+    const button = ref(null);
+    const tooltip = ref(null);
+    onMounted(() => {
+      popper.value = createPopper(button.value, tooltip.value, {
+        placement: props.placement,
+        modifiers: [flip, preventOverflow]
+      });
+    });
+    __expose({ hide });
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_OnClickOutside = _sfc_main$B;
+      _push(ssrRenderComponent(_component_OnClickOutside, mergeProps({ do: hide }, _attrs), {
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<div class="relative"${_scopeId}><button type="button"${ssrRenderAttr("dusk", __props.dusk)}${ssrIncludeBooleanAttr(__props.disabled) ? " disabled" : ""} class="${ssrRenderClass([{
+              "border-secondary-300": __props.active,
+              "border-gray-300 dark:border-gray-600": !__props.active,
+              "cursor-not-allowed": __props.disabled
+            }, "focus:ring-primary-500 inline-flex w-full justify-center rounded-md border bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800"])}" aria-haspopup="true"${_scopeId}>`);
+            ssrRenderSlot(_ctx.$slots, "button", {}, null, _push2, _parent2, _scopeId);
+            _push2(`</button><div style="${ssrRenderStyle(unref(opened) ? null : { display: "none" })}" class="absolute z-10"${_scopeId}><div class="mt-2 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5"${_scopeId}>`);
+            ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+            _push2(`</div></div></div>`);
+          } else {
+            return [
+              createVNode("div", { class: "relative" }, [
+                createVNode("button", {
+                  ref_key: "button",
+                  ref: button,
+                  type: "button",
+                  dusk: __props.dusk,
+                  disabled: __props.disabled,
+                  class: ["focus:ring-primary-500 inline-flex w-full justify-center rounded-md border bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800", {
+                    "border-secondary-300": __props.active,
+                    "border-gray-300 dark:border-gray-600": !__props.active,
+                    "cursor-not-allowed": __props.disabled
+                  }],
+                  "aria-haspopup": "true",
+                  onClick: withModifiers(toggle, ["prevent"])
+                }, [
+                  renderSlot(_ctx.$slots, "button")
+                ], 10, ["dusk", "disabled", "onClick"]),
+                withDirectives(createVNode("div", {
+                  ref_key: "tooltip",
+                  ref: tooltip,
+                  class: "absolute z-10"
+                }, [
+                  createVNode("div", { class: "mt-2 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5" }, [
+                    renderSlot(_ctx.$slots, "default")
+                  ])
+                ], 512), [
+                  [vShow, unref(opened)]
+                ])
+              ])
+            ];
+          }
+        }),
+        _: 3
+      }, _parent));
+    };
+  }
+};
+const _sfc_setup$A = _sfc_main$A.setup;
+_sfc_main$A.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/ButtonWithDropdown.vue");
+  return _sfc_setup$A ? _sfc_setup$A(props, ctx) : void 0;
+};
+const _sfc_main$z = {
+  __name: "TableColumns",
+  __ssrInlineRender: true,
+  props: {
+    columns: {
+      type: Object,
+      required: true
+    },
+    hasHiddenColumns: {
+      type: Boolean,
+      required: true
+    },
+    onChange: {
+      type: Function,
+      required: true
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_ButtonWithDropdown = _sfc_main$A;
+      const _component_IconOutlineFilter = __unplugin_components_1$2;
+      _push(ssrRenderComponent(_component_ButtonWithDropdown, mergeProps({
+        placement: "bottom-end",
+        dusk: "columns-dropdown",
+        active: __props.hasHiddenColumns
+      }, _attrs), {
+        button: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_IconOutlineFilter, {
+              class: ["h-5 w-5", {
+                "text-gray-400": !__props.hasHiddenColumns,
+                "text-secondary-400": __props.hasHiddenColumns
+              }]
+            }, null, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_IconOutlineFilter, {
+                class: ["h-5 w-5", {
+                  "text-gray-400": !__props.hasHiddenColumns,
+                  "text-secondary-400": __props.hasHiddenColumns
+                }]
+              }, null, 8, ["class"])
+            ];
+          }
+        }),
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<div role="menu" aria-orientation="horizontal" aria-labelledby="toggle-columns-menu" class="min-w-max"${_scopeId}><div class="rounded-md border border-gray-200 px-4 py-2 dark:border-gray-600 dark:bg-gray-800"${_scopeId}><ul class="divide-y divide-gray-200 dark:divide-gray-600"${_scopeId}><!--[-->`);
+            ssrRenderList(props.columns, (column, key) => {
+              _push2(`<li style="${ssrRenderStyle(column.can_be_hidden ? null : { display: "none" })}" class="flex items-center justify-between py-2"${_scopeId}><p class="text-sm text-gray-700 dark:text-gray-400"${_scopeId}>${ssrInterpolate(column.label)}</p><button type="button" class="${ssrRenderClass([{
+                "bg-secondary-500 dark:bg-gray-400": !column.hidden,
+                "bg-gray-200 dark:bg-gray-900": column.hidden
+              }, "relative ml-4 inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500"])}"${ssrRenderAttr("aria-pressed", !column.hidden)}${ssrRenderAttr("aria-labelledby", `toggle-column-${column.key}`)}${ssrRenderAttr("aria-describedby", `toggle-column-${column.key}`)}${ssrRenderAttr("dusk", `toggle-column-${column.key}`)}${_scopeId}><span class="sr-only"${_scopeId}>Column status</span><span aria-hidden="true" class="${ssrRenderClass([{
+                "translate-x-5": !column.hidden,
+                "translate-x-0": column.hidden
+              }, "inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out dark:bg-gray-600"])}"${_scopeId}></span></button></li>`);
+            });
+            _push2(`<!--]--></ul></div></div>`);
+          } else {
+            return [
+              createVNode("div", {
+                role: "menu",
+                "aria-orientation": "horizontal",
+                "aria-labelledby": "toggle-columns-menu",
+                class: "min-w-max"
+              }, [
+                createVNode("div", { class: "rounded-md border border-gray-200 px-4 py-2 dark:border-gray-600 dark:bg-gray-800" }, [
+                  createVNode("ul", { class: "divide-y divide-gray-200 dark:divide-gray-600" }, [
+                    (openBlock(true), createBlock(Fragment, null, renderList(props.columns, (column, key) => {
+                      return withDirectives((openBlock(), createBlock("li", {
+                        key,
+                        class: "flex items-center justify-between py-2"
+                      }, [
+                        createVNode("p", { class: "text-sm text-gray-700 dark:text-gray-400" }, toDisplayString(column.label), 1),
+                        createVNode("button", {
+                          type: "button",
+                          class: ["relative ml-4 inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500", {
+                            "bg-secondary-500 dark:bg-gray-400": !column.hidden,
+                            "bg-gray-200 dark:bg-gray-900": column.hidden
+                          }],
+                          "aria-pressed": !column.hidden,
+                          "aria-labelledby": `toggle-column-${column.key}`,
+                          "aria-describedby": `toggle-column-${column.key}`,
+                          dusk: `toggle-column-${column.key}`,
+                          onClick: withModifiers(($event) => __props.onChange(column.key, column.hidden), ["prevent"])
+                        }, [
+                          createVNode("span", { class: "sr-only" }, "Column status"),
+                          createVNode("span", {
+                            "aria-hidden": "true",
+                            class: [{
+                              "translate-x-5": !column.hidden,
+                              "translate-x-0": column.hidden
+                            }, "inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out dark:bg-gray-600"]
+                          }, null, 2)
+                        ], 10, ["aria-pressed", "aria-labelledby", "aria-describedby", "dusk", "onClick"])
+                      ])), [
+                        [vShow, column.can_be_hidden]
+                      ]);
+                    }), 128))
+                  ])
+                ])
+              ])
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+    };
+  }
+};
+const _sfc_setup$z = _sfc_main$z.setup;
+_sfc_main$z.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/TableColumns.vue");
+  return _sfc_setup$z ? _sfc_setup$z(props, ctx) : void 0;
+};
+const _sfc_main$y = {
+  __name: "TableAddSearchRow",
+  __ssrInlineRender: true,
+  props: {
+    searchInputs: {
+      type: Object,
+      required: true
+    },
+    hasSearchInputsWithoutValue: {
+      type: Boolean,
+      required: true
+    },
+    onAdd: {
+      type: Function,
+      required: true
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    const dropdown = ref(null);
+    function enableSearch(key) {
+      props.onAdd(key);
+      dropdown.value.hide();
+    }
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_ButtonWithDropdown = _sfc_main$A;
+      const _component_IconOutlineMagnifyingGlass = __unplugin_components_0$1;
+      _push(ssrRenderComponent(_component_ButtonWithDropdown, mergeProps({
+        ref_key: "dropdown",
+        ref: dropdown,
+        dusk: "add-search-row-dropdown",
+        disabled: !__props.hasSearchInputsWithoutValue,
+        class: "w-auto"
+      }, _attrs), {
+        button: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_IconOutlineMagnifyingGlass, { class: "h-5 w-5 text-gray-400" }, null, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_IconOutlineMagnifyingGlass, { class: "h-5 w-5 text-gray-400" })
+            ];
+          }
+        }),
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<div role="menu" aria-orientation="horizontal" aria-labelledby="add-search-input-menu" class="min-w-max overflow-hidden rounded-md border border-gray-200 p-1 dark:border-gray-600 dark:bg-gray-800"${_scopeId}><!--[-->`);
+            ssrRenderList(__props.searchInputs, (searchInput, key) => {
+              _push2(`<button${ssrRenderAttr("dusk", `add-search-row-${searchInput.key}`)} class="w-full rounded-md px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700" role="menuitem"${_scopeId}>${ssrInterpolate(searchInput.label)}</button>`);
+            });
+            _push2(`<!--]--></div>`);
+          } else {
+            return [
+              createVNode("div", {
+                role: "menu",
+                "aria-orientation": "horizontal",
+                "aria-labelledby": "add-search-input-menu",
+                class: "min-w-max overflow-hidden rounded-md border border-gray-200 p-1 dark:border-gray-600 dark:bg-gray-800"
+              }, [
+                (openBlock(true), createBlock(Fragment, null, renderList(__props.searchInputs, (searchInput, key) => {
+                  return openBlock(), createBlock("button", {
+                    key,
+                    dusk: `add-search-row-${searchInput.key}`,
+                    class: "w-full rounded-md px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700",
+                    role: "menuitem",
+                    onClick: withModifiers(($event) => enableSearch(searchInput.key), ["prevent"])
+                  }, toDisplayString(searchInput.label), 9, ["dusk", "onClick"]);
+                }), 128))
+              ])
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+    };
+  }
+};
+const _sfc_setup$y = _sfc_main$y.setup;
+_sfc_main$y.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/TableAddSearchRow.vue");
+  return _sfc_setup$y ? _sfc_setup$y(props, ctx) : void 0;
+};
+const _sfc_main$x = {
+  __name: "TableReset",
+  __ssrInlineRender: true,
+  props: {
+    onClick: {
+      type: Function,
+      required: true
+    }
+  },
+  setup(__props) {
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_IconOutlineXMark = __unplugin_components_0$5;
+      _push(`<button${ssrRenderAttrs(mergeProps({
+        ref: "button",
+        type: "button",
+        dusk: "reset-table",
+        class: "focus:ring-primary-500 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-400",
+        "aria-haspopup": "true"
+      }, _attrs))}>`);
+      _push(ssrRenderComponent(_component_IconOutlineXMark, { class: "mr-2 h-4 w-4 text-gray-500 dark:text-gray-400" }, null, _parent));
+      _push(`<span>Reset</span></button>`);
+    };
+  }
+};
+const _sfc_setup$x = _sfc_main$x.setup;
+_sfc_main$x.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/TableReset.vue");
+  return _sfc_setup$x ? _sfc_setup$x(props, ctx) : void 0;
+};
+const _sfc_main$w = {
+  __name: "TableGlobalSearch",
+  __ssrInlineRender: true,
+  props: {
+    label: {
+      type: String,
+      default: "Search ...",
+      required: false
+    },
+    value: {
+      type: String,
+      default: "",
+      required: false
+    },
+    onChange: {
+      type: Function,
+      required: true
+    }
+  },
+  setup(__props) {
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_IconOutlineMagnifyingGlass = __unplugin_components_0$1;
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "relative" }, _attrs))}><input class="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border-gray-300 pl-9 text-sm shadow-sm dark:border-gray-600 dark:bg-gray-700"${ssrRenderAttr("placeholder", __props.label)}${ssrRenderAttr("value", __props.value)} type="text" name="global"><div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">`);
+      _push(ssrRenderComponent(_component_IconOutlineMagnifyingGlass, { class: "h-4 w-4 text-gray-400" }, null, _parent));
+      _push(`</div></div>`);
+    };
+  }
+};
+const _sfc_setup$w = _sfc_main$w.setup;
+_sfc_main$w.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/TableGlobalSearch.vue");
+  return _sfc_setup$w ? _sfc_setup$w(props, ctx) : void 0;
+};
+const _sfc_main$v = {
+  __name: "TableFilter",
+  __ssrInlineRender: true,
+  props: {
+    hasEnabledFilters: {
+      type: Boolean,
+      required: true
+    },
+    filters: {
+      type: Object,
+      required: true
+    },
+    onFilterChange: {
+      type: Function,
+      required: true
+    }
+  },
+  setup(__props) {
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_ButtonWithDropdown = _sfc_main$A;
+      const _component_IconOutlineFilter = __unplugin_components_1$2;
+      _push(ssrRenderComponent(_component_ButtonWithDropdown, mergeProps({
+        placement: "bottom-end",
+        dusk: "filters-dropdown",
+        active: __props.hasEnabledFilters
+      }, _attrs), {
+        button: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_IconOutlineFilter, {
+              class: ["h-5 w-5", {
+                "text-gray-400": !__props.hasEnabledFilters,
+                "text-secondary-400": __props.hasEnabledFilters
+              }]
+            }, null, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_IconOutlineFilter, {
+                class: ["h-5 w-5", {
+                  "text-gray-400": !__props.hasEnabledFilters,
+                  "text-secondary-400": __props.hasEnabledFilters
+                }]
+              }, null, 8, ["class"])
+            ];
+          }
+        }),
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`<div role="menu" aria-orientation="horizontal" aria-labelledby="filter-menu" class="min-w-max"${_scopeId}><!--[-->`);
+            ssrRenderList(__props.filters, (filter2, key) => {
+              _push2(`<div${_scopeId}><h3 class="bg-gray-100 p-3 text-xs uppercase tracking-wide"${_scopeId}>${ssrInterpolate(filter2.label)}</h3><div class="p-2"${_scopeId}>`);
+              if (filter2.type === "select") {
+                _push2(`<select${ssrRenderAttr("name", filter2.key)}${ssrRenderAttr("value", filter2.value)} class="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border-gray-300 text-sm shadow-sm"${_scopeId}><!--[-->`);
+                ssrRenderList(filter2.options, (option, optionKey) => {
+                  _push2(`<option${ssrRenderAttr("value", optionKey)}${_scopeId}>${ssrInterpolate(option)}</option>`);
+                });
+                _push2(`<!--]--></select>`);
+              } else {
+                _push2(`<!---->`);
+              }
+              _push2(`</div></div>`);
+            });
+            _push2(`<!--]--></div>`);
+          } else {
+            return [
+              createVNode("div", {
+                role: "menu",
+                "aria-orientation": "horizontal",
+                "aria-labelledby": "filter-menu",
+                class: "min-w-max"
+              }, [
+                (openBlock(true), createBlock(Fragment, null, renderList(__props.filters, (filter2, key) => {
+                  return openBlock(), createBlock("div", { key }, [
+                    createVNode("h3", { class: "bg-gray-100 p-3 text-xs uppercase tracking-wide" }, toDisplayString(filter2.label), 1),
+                    createVNode("div", { class: "p-2" }, [
+                      filter2.type === "select" ? (openBlock(), createBlock("select", {
+                        key: 0,
+                        name: filter2.key,
+                        value: filter2.value,
+                        class: "focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border-gray-300 text-sm shadow-sm",
+                        onChange: ($event) => __props.onFilterChange(filter2.key, $event.target.value)
+                      }, [
+                        (openBlock(true), createBlock(Fragment, null, renderList(filter2.options, (option, optionKey) => {
+                          return openBlock(), createBlock("option", {
+                            key: optionKey,
+                            value: optionKey
+                          }, toDisplayString(option), 9, ["value"]);
+                        }), 128))
+                      ], 40, ["name", "value", "onChange"])) : createCommentVNode("", true)
+                    ])
+                  ]);
+                }), 128))
+              ])
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+    };
+  }
+};
+const _sfc_setup$v = _sfc_main$v.setup;
+_sfc_main$v.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/TableFilter.vue");
+  return _sfc_setup$v ? _sfc_setup$v(props, ctx) : void 0;
+};
+const _sfc_main$u = {
+  __name: "Table",
+  __ssrInlineRender: true,
+  props: {
+    inertia: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+      required: false
+    },
+    name: {
+      type: String,
+      default: "default",
+      required: false
+    },
+    striped: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    preventOverlappingRequests: {
+      type: Boolean,
+      default: true,
+      required: false
+    },
+    inputDebounceMs: {
+      type: Number,
+      default: 350,
+      required: false
+    },
+    preserveScroll: {
+      type: [Boolean, String],
+      default: false,
+      required: false
+    },
+    resource: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+      required: false
+    },
+    meta: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+      required: false
+    },
+    data: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+      required: false
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    const app = getCurrentInstance();
+    const $inertia = app ? app.appContext.config.globalProperties.$inertia : props.inertia;
+    const updates = ref(0);
+    const queryBuilderProps = computed(() => {
+      let data = $inertia.page.props.queryBuilderProps ? $inertia.page.props.queryBuilderProps[props.name] || {} : {};
+      data._updates = updates.value;
+      return data;
+    });
+    const queryBuilderData = ref(queryBuilderProps.value);
+    const pageName = computed(() => {
+      return queryBuilderProps.value.pageName;
+    });
+    const forcedVisibleSearchInputs = ref([]);
+    const tableFieldset = ref(null);
+    const hasOnlyData = computed(() => {
+      if (queryBuilderProps.value.hasToggleableColumns) {
+        return false;
+      }
+      if (queryBuilderProps.value.hasFilters) {
+        return false;
+      }
+      if (queryBuilderProps.value.hasSearchInputs) {
+        return false;
+      }
+      if (queryBuilderProps.value.globalSearch) {
+        return false;
+      }
+      return true;
+    });
+    const resourceData = computed(() => {
+      if (Object.keys(props.resource).length === 0) {
+        return props.data;
+      }
+      if ("data" in props.resource) {
+        return props.resource.data;
+      }
+      return props.resource;
+    });
+    const resourceMeta = computed(() => {
+      if (Object.keys(props.resource).length === 0) {
+        return props.meta;
+      }
+      if ("links" in props.resource && "meta" in props.resource) {
+        if (Object.keys(props.resource.links).length === 4 && "next" in props.resource.links && "prev" in props.resource.links) {
+          return {
+            ...props.resource.meta,
+            next_page_url: props.resource.links.next,
+            prev_page_url: props.resource.links.prev
+          };
+        }
+      }
+      if ("meta" in props.resource) {
+        return props.resource.meta;
+      }
+      return props.resource;
+    });
+    const hasData = computed(() => {
+      if (resourceData.value.length > 0) {
+        return true;
+      }
+      if (resourceMeta.value.total > 0) {
+        return true;
+      }
+      return false;
+    });
+    function disableSearchInput(key) {
+      forcedVisibleSearchInputs.value = forcedVisibleSearchInputs.value.filter(
+        (search) => search != key
+      );
+      changeSearchInputValue(key, null);
+    }
+    function showSearchInput(key) {
+      forcedVisibleSearchInputs.value.push(key);
+    }
+    const canBeReset = computed(() => {
+      if (forcedVisibleSearchInputs.value.length > 0) {
+        return true;
+      }
+      const queryStringData = qs.parse(location.search.substring(1));
+      const page = queryStringData[pageName.value];
+      if (page > 1) {
+        return true;
+      }
+      const prefix = props.name === "default" ? "" : props.name + "_";
+      let dirty = false;
+      forEach(["filter", "columns", "cursor", "sort"], (key) => {
+        const value = queryStringData[prefix + key];
+        if (key === "sort" && value === queryBuilderProps.value.defaultSort) {
+          return;
+        }
+        if (value !== void 0) {
+          dirty = true;
+        }
+      });
+      return dirty;
+    });
+    function resetQuery() {
+      forcedVisibleSearchInputs.value = [];
+      forEach(queryBuilderData.value.filters, (filter2, key) => {
+        queryBuilderData.value.filters[key].value = null;
+      });
+      forEach(queryBuilderData.value.searchInputs, (filter2, key) => {
+        queryBuilderData.value.searchInputs[key].value = null;
+      });
+      forEach(queryBuilderData.value.columns, (column, key) => {
+        queryBuilderData.value.columns[key].hidden = column.can_be_hidden ? !queryBuilderProps.value.defaultVisibleToggleableColumns.includes(
+          column.key
+        ) : false;
+      });
+      queryBuilderData.value.sort = null;
+      queryBuilderData.value.cursor = null;
+      queryBuilderData.value.page = 1;
+    }
+    const debounceTimeouts = {};
+    function changeSearchInputValue(key, value) {
+      clearTimeout(debounceTimeouts[key]);
+      debounceTimeouts[key] = setTimeout(() => {
+        if (visitCancelToken.value && props.preventOverlappingRequests) {
+          visitCancelToken.value.cancel();
+        }
+        const intKey = findDataKey("searchInputs", key);
+        queryBuilderData.value.searchInputs[intKey].value = value;
+        queryBuilderData.value.cursor = null;
+        queryBuilderData.value.page = 1;
+      }, props.inputDebounceMs);
+    }
+    function changeGlobalSearchValue(value) {
+      changeSearchInputValue("global", value);
+    }
+    function changeFilterValue(key, value) {
+      const intKey = findDataKey("filters", key);
+      queryBuilderData.value.filters[intKey].value = value;
+      queryBuilderData.value.cursor = null;
+      queryBuilderData.value.page = 1;
+    }
+    function onPerPageChange(value) {
+      queryBuilderData.value.cursor = null;
+      queryBuilderData.value.perPage = value;
+      queryBuilderData.value.page = 1;
+    }
+    function findDataKey(dataKey, key) {
+      return findKey(queryBuilderData.value[dataKey], (value) => {
+        return value.key == key;
+      });
+    }
+    function changeColumnStatus(key, visible) {
+      const intKey = findDataKey("columns", key);
+      queryBuilderData.value.columns[intKey].hidden = !visible;
+    }
+    function getFilterForQuery() {
+      let filtersWithValue = {};
+      forEach(queryBuilderData.value.searchInputs, (searchInput) => {
+        if (searchInput.value !== null) {
+          filtersWithValue[searchInput.key] = searchInput.value;
+        }
+      });
+      forEach(queryBuilderData.value.filters, (filters) => {
+        if (filters.value !== null) {
+          filtersWithValue[filters.key] = filters.value;
+        }
+      });
+      return filtersWithValue;
+    }
+    function getColumnsForQuery() {
+      const columns = queryBuilderData.value.columns;
+      let visibleColumns = filter(columns, (column) => {
+        return !column.hidden;
+      });
+      let visibleColumnKeys = map(visibleColumns, (column) => {
+        return column.key;
+      }).sort();
+      if (isEqual(
+        visibleColumnKeys,
+        queryBuilderProps.value.defaultVisibleToggleableColumns
+      )) {
+        return {};
+      }
+      return visibleColumnKeys;
+    }
+    function dataForNewQueryString() {
+      const filterForQuery = getFilterForQuery();
+      const columnsForQuery = getColumnsForQuery();
+      const queryData = {};
+      if (Object.keys(filterForQuery).length > 0) {
+        queryData.filter = filterForQuery;
+      }
+      if (Object.keys(columnsForQuery).length > 0) {
+        queryData.columns = columnsForQuery;
+      }
+      const cursor = queryBuilderData.value.cursor;
+      const page = queryBuilderData.value.page;
+      const sort = queryBuilderData.value.sort;
+      const perPage = queryBuilderData.value.perPage;
+      if (cursor) {
+        queryData.cursor = cursor;
+      }
+      if (page > 1) {
+        queryData.page = page;
+      }
+      if (perPage > 1) {
+        queryData.perPage = perPage;
+      }
+      if (sort) {
+        queryData.sort = sort;
+      }
+      return queryData;
+    }
+    function generateNewQueryString() {
+      const queryStringData = qs.parse(location.search.substring(1));
+      const prefix = props.name === "default" ? "" : props.name + "_";
+      forEach(["filter", "columns", "cursor", "sort"], (key) => {
+        delete queryStringData[prefix + key];
+      });
+      delete queryStringData[pageName.value];
+      forEach(dataForNewQueryString(), (value, key) => {
+        if (key === "page") {
+          queryStringData[pageName.value] = value;
+        } else if (key === "perPage") {
+          queryStringData.perPage = value;
+        } else {
+          queryStringData[prefix + key] = value;
+        }
+      });
+      let query = qs.stringify(queryStringData, {
+        filter(prefix2, value) {
+          if (typeof value === "object" && value !== null) {
+            return pickBy(value);
+          }
+          return value;
+        },
+        skipNulls: true,
+        strictNullHandling: true
+      });
+      if (!query || query === pageName.value + "=1") {
+        query = "";
+      }
+      return query;
+    }
+    const isVisiting = ref(false);
+    const visitCancelToken = ref(null);
+    function visit(url) {
+      if (!url) {
+        return;
+      }
+      $inertia.get(
+        url,
+        {},
+        {
+          replace: true,
+          preserveState: true,
+          preserveScroll: props.preserveScroll !== false,
+          onBefore() {
+            isVisiting.value = true;
+          },
+          onCancelToken(cancelToken) {
+            visitCancelToken.value = cancelToken;
+          },
+          onFinish() {
+            isVisiting.value = false;
+          },
+          onSuccess() {
+            if ("queryBuilderProps" in $inertia.page.props) {
+              queryBuilderData.value.cursor = queryBuilderProps.value.cursor;
+              queryBuilderData.value.page = queryBuilderProps.value.page;
+            }
+            if (props.preserveScroll === "table-top") {
+              const offset = -8;
+              const top = tableFieldset.value.getBoundingClientRect().top + window.pageYOffset + offset;
+              window.scrollTo({ top });
+            }
+            updates.value++;
+          }
+        }
+      );
+    }
+    watch(
+      queryBuilderData,
+      () => {
+        visit(location.pathname + "?" + generateNewQueryString());
+      },
+      { deep: true }
+    );
+    const inertiaListener = () => {
+      updates.value++;
+    };
+    onMounted(() => {
+      document.addEventListener("inertia:success", inertiaListener);
+    });
+    onUnmounted(() => {
+      document.removeEventListener("inertia:success", inertiaListener);
+    });
+    function sortBy(column) {
+      if (queryBuilderData.value.sort == column) {
+        queryBuilderData.value.sort = `-${column}`;
+      } else {
+        queryBuilderData.value.sort = column;
+      }
+      queryBuilderData.value.cursor = null;
+      queryBuilderData.value.page = 1;
+    }
+    function show(key) {
+      const intKey = findDataKey("columns", key);
+      return !queryBuilderData.value.columns[intKey].hidden;
+    }
+    function header(key) {
+      const intKey = findDataKey("columns", key);
+      const columnData = clone(queryBuilderProps.value.columns[intKey]);
+      columnData.onSort = sortBy;
+      return columnData;
+    }
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_TableFilter = _sfc_main$v;
+      const _component_TableGlobalSearch = _sfc_main$w;
+      const _component_TableReset = _sfc_main$x;
+      const _component_TableAddSearchRow = _sfc_main$y;
+      const _component_TableColumns = _sfc_main$z;
+      const _component_TableSearchRows = _sfc_main$C;
+      const _component_z_divider = resolveComponent("z-divider");
+      const _component_TableWrapper = __unplugin_components_6;
+      const _component_HeaderCell = _sfc_main$E;
+      const _component_Pagination = _sfc_main$F;
+      _push(`<fieldset${ssrRenderAttrs(mergeProps({
+        ref_key: "tableFieldset",
+        ref: tableFieldset,
+        key: `table-${__props.name}`,
+        dusk: `table-${__props.name}`,
+        class: ["min-w-0", { "opacity-75": unref(isVisiting) }]
+      }, _attrs))}><div class="flex flex-row flex-wrap justify-start px-4 sm:flex-nowrap sm:px-0">`);
+      if (!unref(queryBuilderProps).globalSearch) {
+        _push(`<div class="order-2 mr-2 sm:order-1 sm:mr-4">`);
+        ssrRenderSlot(_ctx.$slots, "tableFilter", {
+          hasFilters: unref(queryBuilderProps).hasFilters,
+          hasEnabledFilters: unref(queryBuilderProps).hasEnabledFilters,
+          filters: unref(queryBuilderProps).filters,
+          onFilterChange: changeFilterValue
+        }, () => {
+          if (unref(queryBuilderProps).hasFilters) {
+            _push(ssrRenderComponent(_component_TableFilter, {
+              "has-enabled-filters": unref(queryBuilderProps).hasEnabledFilters,
+              filters: unref(queryBuilderProps).filters,
+              "on-filter-change": changeFilterValue
+            }, null, _parent));
+          } else {
+            _push(`<!---->`);
+          }
+        }, _push, _parent);
+        _push(`</div>`);
+      } else {
+        _push(`<!---->`);
+      }
+      if (unref(queryBuilderProps).globalSearch) {
+        _push(`<div class="order-1 mb-2 flex w-full flex-row sm:order-2 sm:mb-0 sm:mr-4 sm:w-auto sm:flex-grow">`);
+        ssrRenderSlot(_ctx.$slots, "tableGlobalSearch", {
+          hasGlobalSearch: unref(queryBuilderProps).globalSearch,
+          label: unref(queryBuilderProps).globalSearch ? unref(queryBuilderProps).globalSearch.label : null,
+          value: unref(queryBuilderProps).globalSearch ? unref(queryBuilderProps).globalSearch.value : null,
+          onChange: changeGlobalSearchValue
+        }, () => {
+          if (unref(queryBuilderProps).globalSearch) {
+            _push(ssrRenderComponent(_component_TableGlobalSearch, {
+              class: "flex-grow",
+              label: unref(queryBuilderProps).globalSearch.label,
+              value: unref(queryBuilderProps).globalSearch.value,
+              "on-change": changeGlobalSearchValue
+            }, null, _parent));
+          } else {
+            _push(`<!---->`);
+          }
+        }, _push, _parent);
+        _push(`</div>`);
+      } else {
+        _push(`<!---->`);
+      }
+      ssrRenderSlot(_ctx.$slots, "tableReset", {
+        canBeReset: "canBeReset",
+        onClick: resetQuery
+      }, () => {
+        if (unref(canBeReset)) {
+          _push(`<div class="order-5 ml-auto sm:order-3 sm:mr-4">`);
+          _push(ssrRenderComponent(_component_TableReset, { "on-click": resetQuery }, null, _parent));
+          _push(`</div>`);
+        } else {
+          _push(`<!---->`);
+        }
+      }, _push, _parent);
+      ssrRenderSlot(_ctx.$slots, "tableAddSearchRow", {
+        hasSearchInputs: unref(queryBuilderProps).hasSearchInputs,
+        hasSearchInputsWithoutValue: unref(queryBuilderProps).hasSearchInputsWithoutValue,
+        searchInputs: unref(queryBuilderProps).searchInputsWithoutGlobal,
+        onAdd: showSearchInput
+      }, () => {
+        if (unref(queryBuilderProps).hasSearchInputs) {
+          _push(ssrRenderComponent(_component_TableAddSearchRow, {
+            class: "order-3 mr-2 sm:order-4 sm:mr-4",
+            "search-inputs": unref(queryBuilderProps).searchInputsWithoutGlobal,
+            "has-search-inputs-without-value": unref(queryBuilderProps).hasSearchInputsWithoutValue,
+            "on-add": showSearchInput
+          }, null, _parent));
+        } else {
+          _push(`<!---->`);
+        }
+      }, _push, _parent);
+      ssrRenderSlot(_ctx.$slots, "tableColumns", {
+        hasColumns: unref(queryBuilderProps).hasToggleableColumns,
+        columns: unref(queryBuilderProps).columns,
+        hasHiddenColumns: unref(queryBuilderProps).hasHiddenColumns,
+        onChange: changeColumnStatus
+      }, () => {
+        if (unref(queryBuilderProps).hasToggleableColumns) {
+          _push(ssrRenderComponent(_component_TableColumns, {
+            class: "order-4 mr-4 sm:order-5 sm:mr-0",
+            columns: unref(queryBuilderProps).columns,
+            "has-hidden-columns": unref(queryBuilderProps).hasHiddenColumns,
+            "on-change": changeColumnStatus
+          }, null, _parent));
+        } else {
+          _push(`<!---->`);
+        }
+      }, _push, _parent);
+      _push(`</div>`);
+      ssrRenderSlot(_ctx.$slots, "tableSearchRows", {
+        hasSearchRowsWithValue: unref(queryBuilderProps).hasSearchInputsWithValue,
+        searchInputs: unref(queryBuilderProps).searchInputsWithoutGlobal,
+        forcedVisibleSearchInputs: unref(forcedVisibleSearchInputs),
+        onChange: changeSearchInputValue
+      }, () => {
+        if (unref(queryBuilderProps).hasSearchInputsWithValue || unref(forcedVisibleSearchInputs).length > 0) {
+          _push(ssrRenderComponent(_component_TableSearchRows, {
+            "search-inputs": unref(queryBuilderProps).searchInputsWithoutGlobal,
+            "forced-visible-search-inputs": unref(forcedVisibleSearchInputs),
+            "on-change": changeSearchInputValue,
+            "on-remove": disableSearchInput
+          }, null, _parent));
+        } else {
+          _push(`<!---->`);
+        }
+      }, _push, _parent);
+      _push(ssrRenderComponent(_component_z_divider, { class: "my-4" }, null, _parent));
+      ssrRenderSlot(_ctx.$slots, "tableWrapper", { meta: unref(resourceMeta) }, () => {
+        _push(ssrRenderComponent(_component_TableWrapper, {
+          class: { "mt-3": !unref(hasOnlyData) }
+        }, {
+          default: withCtx((_2, _push2, _parent2, _scopeId) => {
+            if (_push2) {
+              ssrRenderSlot(_ctx.$slots, "table", {}, () => {
+                _push2(`<table class="min-w-full divide-y divide-gray-200 bg-white dark:divide-gray-600 dark:bg-gray-900"${_scopeId}><thead class="bg-gray-50 dark:bg-gray-900"${_scopeId}>`);
+                ssrRenderSlot(_ctx.$slots, "head", {
+                  show,
+                  sortBy,
+                  header
+                }, () => {
+                  _push2(`<tr class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"${_scopeId}><!--[-->`);
+                  ssrRenderList(unref(queryBuilderProps).columns, (column) => {
+                    _push2(ssrRenderComponent(_component_HeaderCell, {
+                      key: `table-${__props.name}-header-${column.key}`,
+                      cell: header(column.key)
+                    }, null, _parent2, _scopeId));
+                  });
+                  _push2(`<!--]--></tr>`);
+                }, _push2, _parent2, _scopeId);
+                _push2(`</thead><tbody class="divide-y divide-gray-200 bg-white dark:divide-gray-600 dark:bg-gray-800"${_scopeId}>`);
+                ssrRenderSlot(_ctx.$slots, "body", { show }, () => {
+                  _push2(`<!--[-->`);
+                  ssrRenderList(unref(resourceData), (item, key) => {
+                    _push2(`<tr class="" class="${ssrRenderClass([{
+                      "bg-gray-50 dark:bg-gray-700": __props.striped && key % 2,
+                      "hover:bg-gray-100 dark:hover:bg-gray-800": __props.striped,
+                      "hover:bg-gray-50 dark:hover:bg-gray-700": !__props.striped
+                    }, ""])}"${_scopeId}><!--[-->`);
+                    ssrRenderList(unref(queryBuilderProps).columns, (column) => {
+                      _push2(`<td style="${ssrRenderStyle(show(column.key) ? null : { display: "none" })}" class="whitespace-nowrap px-6 py-4 text-sm text-gray-500 dark:text-gray-400"${_scopeId}>`);
+                      ssrRenderSlot(_ctx.$slots, `cell(${column.key})`, { item }, () => {
+                        _push2(`${ssrInterpolate(item[column.key])}`);
+                      }, _push2, _parent2, _scopeId);
+                      _push2(`</td>`);
+                    });
+                    _push2(`<!--]--></tr>`);
+                  });
+                  _push2(`<!--]-->`);
+                }, _push2, _parent2, _scopeId);
+                _push2(`</tbody></table>`);
+              }, _push2, _parent2, _scopeId);
+              ssrRenderSlot(_ctx.$slots, "pagination", {
+                onClick: visit,
+                hasData: unref(hasData),
+                meta: unref(resourceMeta),
+                perPageOptions: unref(queryBuilderProps).perPageOptions,
+                onPerPageChange
+              }, () => {
+                _push2(ssrRenderComponent(_component_Pagination, {
+                  "on-click": visit,
+                  "has-data": unref(hasData),
+                  meta: unref(resourceMeta),
+                  "per-page-options": unref(queryBuilderProps).perPageOptions,
+                  "on-per-page-change": onPerPageChange
+                }, null, _parent2, _scopeId));
+              }, _push2, _parent2, _scopeId);
+            } else {
+              return [
+                renderSlot(_ctx.$slots, "table", {}, () => [
+                  createVNode("table", { class: "min-w-full divide-y divide-gray-200 bg-white dark:divide-gray-600 dark:bg-gray-900" }, [
+                    createVNode("thead", { class: "bg-gray-50 dark:bg-gray-900" }, [
+                      renderSlot(_ctx.$slots, "head", {
+                        show,
+                        sortBy,
+                        header
+                      }, () => [
+                        createVNode("tr", { class: "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500" }, [
+                          (openBlock(true), createBlock(Fragment, null, renderList(unref(queryBuilderProps).columns, (column) => {
+                            return openBlock(), createBlock(_component_HeaderCell, {
+                              key: `table-${__props.name}-header-${column.key}`,
+                              cell: header(column.key)
+                            }, null, 8, ["cell"]);
+                          }), 128))
+                        ])
+                      ])
+                    ]),
+                    createVNode("tbody", { class: "divide-y divide-gray-200 bg-white dark:divide-gray-600 dark:bg-gray-800" }, [
+                      renderSlot(_ctx.$slots, "body", { show }, () => [
+                        (openBlock(true), createBlock(Fragment, null, renderList(unref(resourceData), (item, key) => {
+                          return openBlock(), createBlock("tr", {
+                            key: `table-${__props.name}-row-${key}`,
+                            class: ["", {
+                              "bg-gray-50 dark:bg-gray-700": __props.striped && key % 2,
+                              "hover:bg-gray-100 dark:hover:bg-gray-800": __props.striped,
+                              "hover:bg-gray-50 dark:hover:bg-gray-700": !__props.striped
+                            }]
+                          }, [
+                            (openBlock(true), createBlock(Fragment, null, renderList(unref(queryBuilderProps).columns, (column) => {
+                              return withDirectives((openBlock(), createBlock("td", {
+                                key: `table-${__props.name}-row-${key}-column-${column.key}`,
+                                class: "whitespace-nowrap px-6 py-4 text-sm text-gray-500 dark:text-gray-400"
+                              }, [
+                                renderSlot(_ctx.$slots, `cell(${column.key})`, { item }, () => [
+                                  createTextVNode(toDisplayString(item[column.key]), 1)
+                                ])
+                              ])), [
+                                [vShow, show(column.key)]
+                              ]);
+                            }), 128))
+                          ], 2);
+                        }), 128))
+                      ])
+                    ])
+                  ])
+                ]),
+                renderSlot(_ctx.$slots, "pagination", {
+                  onClick: visit,
+                  hasData: unref(hasData),
+                  meta: unref(resourceMeta),
+                  perPageOptions: unref(queryBuilderProps).perPageOptions,
+                  onPerPageChange
+                }, () => [
+                  createVNode(_component_Pagination, {
+                    "on-click": visit,
+                    "has-data": unref(hasData),
+                    meta: unref(resourceMeta),
+                    "per-page-options": unref(queryBuilderProps).perPageOptions,
+                    "on-per-page-change": onPerPageChange
+                  }, null, 8, ["has-data", "meta", "per-page-options"])
+                ])
+              ];
+            }
+          }),
+          _: 3
+        }, _parent));
+      }, _push, _parent);
+      _push(`</fieldset>`);
+    };
+  }
+};
+const _sfc_setup$u = _sfc_main$u.setup;
+_sfc_main$u.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Tables/Table.vue");
+  return _sfc_setup$u ? _sfc_setup$u(props, ctx) : void 0;
+};
+const _sfc_main$t = {};
+function _sfc_ssrRender$3(_ctx, _push, _parent, _attrs) {
+  const _component_z_card = resolveComponent("z-card");
+  const _component_z_divider = resolveComponent("z-divider");
+  _push(ssrRenderComponent(_component_z_card, mergeProps({ class: "mx-6 px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4" }, _attrs), {
+    default: withCtx((_2, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`<div class="flex items-center justify-between"${_scopeId}><h2 class="py-3 text-2xl font-medium"${_scopeId}>`);
+        ssrRenderSlot(_ctx.$slots, "title", {}, null, _push2, _parent2, _scopeId);
+        _push2(`</h2>`);
+        ssrRenderSlot(_ctx.$slots, "button", {}, null, _push2, _parent2, _scopeId);
+        _push2(`</div>`);
+        _push2(ssrRenderComponent(_component_z_divider, { class: "my-4" }, null, _parent2, _scopeId));
+        ssrRenderSlot(_ctx.$slots, "table", {}, null, _push2, _parent2, _scopeId);
+        ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+      } else {
+        return [
+          createVNode("div", { class: "flex items-center justify-between" }, [
+            createVNode("h2", { class: "py-3 text-2xl font-medium" }, [
+              renderSlot(_ctx.$slots, "title")
+            ]),
+            renderSlot(_ctx.$slots, "button")
+          ]),
+          createVNode(_component_z_divider, { class: "my-4" }),
+          renderSlot(_ctx.$slots, "table"),
+          renderSlot(_ctx.$slots, "default")
+        ];
+      }
+    }),
+    _: 3
+  }, _parent));
+}
+const _sfc_setup$t = _sfc_main$t.setup;
+_sfc_main$t.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Zen/Cards/TableCard.vue");
+  return _sfc_setup$t ? _sfc_setup$t(props, ctx) : void 0;
+};
+const __unplugin_components_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["ssrRender", _sfc_ssrRender$3]]);
+const _sfc_main$s = {
+  __name: "Index",
+  __ssrInlineRender: true,
+  props: ["users"],
+  setup(__props) {
+    inject("_");
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_Head = resolveComponent("Head");
+      const _component_AdminLayout = _sfc_main$N;
+      const _component_TableCard = __unplugin_components_1$1;
+      const _component_z_button = resolveComponent("z-button");
+      const _component_Table = _sfc_main$u;
+      const _component_TableActionButtons = __unplugin_components_3;
+      const _component_TableButton = _sfc_main$I;
+      const _component_IconOutlinePencilAlt = __unplugin_components_5;
+      const _component_IconOutlineTrash = __unplugin_components_6$1;
+      _push(`<!--[-->`);
+      _push(ssrRenderComponent(_component_Head, {
+        title: _ctx.__("Users")
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_AdminLayout, null, {
+        default: withCtx((_2, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_TableCard, null, {
+              title: withCtx((_3, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(`${ssrInterpolate(_ctx.__("Users"))}`);
+                } else {
+                  return [
+                    createTextVNode(toDisplayString(_ctx.__("Users")), 1)
+                  ];
+                }
+              }),
+              button: withCtx((_3, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(ssrRenderComponent(_component_z_button, {
+                    color: "fuchsia",
+                    size: "sm"
+                  }, {
+                    default: withCtx((_4, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(`${ssrInterpolate(_ctx.__("Create User"))}`);
+                      } else {
+                        return [
+                          createTextVNode(toDisplayString(_ctx.__("Create User")), 1)
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                } else {
+                  return [
+                    createVNode(_component_z_button, {
+                      color: "fuchsia",
+                      size: "sm"
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode(toDisplayString(_ctx.__("Create User")), 1)
+                      ]),
+                      _: 1
+                    })
+                  ];
+                }
+              }),
+              table: withCtx((_3, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(ssrRenderComponent(_component_Table, {
+                    class: "font-ui",
+                    resource: __props.users,
+                    preventScroll: "table-top"
+                  }, {
+                    "cell(actions)": withCtx(({ item: user }, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(ssrRenderComponent(_component_TableActionButtons, null, {
+                          default: withCtx((_4, _push5, _parent5, _scopeId4) => {
+                            if (_push5) {
+                              _push5(ssrRenderComponent(_component_TableButton, {
+                                link: "",
+                                state: "",
+                                uri: _ctx.route("admin.users.edit", { id: user.id }),
+                                color: "primary",
+                                class: "group-left"
+                              }, {
+                                default: withCtx((_5, _push6, _parent6, _scopeId5) => {
+                                  if (_push6) {
+                                    _push6(ssrRenderComponent(_component_IconOutlinePencilAlt, { class: "h-4 w-4 text-white" }, null, _parent6, _scopeId5));
+                                  } else {
+                                    return [
+                                      createVNode(_component_IconOutlinePencilAlt, { class: "h-4 w-4 text-white" })
+                                    ];
+                                  }
+                                }),
+                                _: 2
+                              }, _parent5, _scopeId4));
+                              _push5(ssrRenderComponent(_component_TableButton, {
+                                color: "error",
+                                class: "group-right",
+                                onClick: ($event) => _ctx.confirmUserDeletion(user)
+                              }, {
+                                default: withCtx((_5, _push6, _parent6, _scopeId5) => {
+                                  if (_push6) {
+                                    _push6(ssrRenderComponent(_component_IconOutlineTrash, { class: "h-4 w-4 text-white" }, null, _parent6, _scopeId5));
+                                  } else {
+                                    return [
+                                      createVNode(_component_IconOutlineTrash, { class: "h-4 w-4 text-white" })
+                                    ];
+                                  }
+                                }),
+                                _: 2
+                              }, _parent5, _scopeId4));
+                            } else {
+                              return [
+                                createVNode(_component_TableButton, {
+                                  link: "",
+                                  state: "",
+                                  uri: _ctx.route("admin.users.edit", { id: user.id }),
+                                  color: "primary",
+                                  class: "group-left"
+                                }, {
+                                  default: withCtx(() => [
+                                    createVNode(_component_IconOutlinePencilAlt, { class: "h-4 w-4 text-white" })
+                                  ]),
+                                  _: 2
+                                }, 1032, ["uri"]),
+                                createVNode(_component_TableButton, {
+                                  color: "error",
+                                  class: "group-right",
+                                  onClick: ($event) => _ctx.confirmUserDeletion(user)
+                                }, {
+                                  default: withCtx(() => [
+                                    createVNode(_component_IconOutlineTrash, { class: "h-4 w-4 text-white" })
+                                  ]),
+                                  _: 2
+                                }, 1032, ["onClick"])
+                              ];
+                            }
+                          }),
+                          _: 2
+                        }, _parent4, _scopeId3));
+                      } else {
+                        return [
+                          createVNode(_component_TableActionButtons, null, {
+                            default: withCtx(() => [
+                              createVNode(_component_TableButton, {
+                                link: "",
+                                state: "",
+                                uri: _ctx.route("admin.users.edit", { id: user.id }),
+                                color: "primary",
+                                class: "group-left"
+                              }, {
+                                default: withCtx(() => [
+                                  createVNode(_component_IconOutlinePencilAlt, { class: "h-4 w-4 text-white" })
+                                ]),
+                                _: 2
+                              }, 1032, ["uri"]),
+                              createVNode(_component_TableButton, {
+                                color: "error",
+                                class: "group-right",
+                                onClick: ($event) => _ctx.confirmUserDeletion(user)
+                              }, {
+                                default: withCtx(() => [
+                                  createVNode(_component_IconOutlineTrash, { class: "h-4 w-4 text-white" })
+                                ]),
+                                _: 2
+                              }, 1032, ["onClick"])
+                            ]),
+                            _: 2
+                          }, 1024)
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                } else {
+                  return [
+                    createVNode(_component_Table, {
+                      class: "font-ui",
+                      resource: __props.users,
+                      preventScroll: "table-top"
+                    }, {
+                      "cell(actions)": withCtx(({ item: user }) => [
+                        createVNode(_component_TableActionButtons, null, {
+                          default: withCtx(() => [
+                            createVNode(_component_TableButton, {
+                              link: "",
+                              state: "",
+                              uri: _ctx.route("admin.users.edit", { id: user.id }),
+                              color: "primary",
+                              class: "group-left"
+                            }, {
+                              default: withCtx(() => [
+                                createVNode(_component_IconOutlinePencilAlt, { class: "h-4 w-4 text-white" })
+                              ]),
+                              _: 2
+                            }, 1032, ["uri"]),
+                            createVNode(_component_TableButton, {
+                              color: "error",
+                              class: "group-right",
+                              onClick: ($event) => _ctx.confirmUserDeletion(user)
+                            }, {
+                              default: withCtx(() => [
+                                createVNode(_component_IconOutlineTrash, { class: "h-4 w-4 text-white" })
+                              ]),
+                              _: 2
+                            }, 1032, ["onClick"])
+                          ]),
+                          _: 2
+                        }, 1024)
+                      ]),
+                      _: 1
+                    }, 8, ["resource"])
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_TableCard, null, {
+                title: withCtx(() => [
+                  createTextVNode(toDisplayString(_ctx.__("Users")), 1)
+                ]),
+                button: withCtx(() => [
+                  createVNode(_component_z_button, {
+                    color: "fuchsia",
+                    size: "sm"
+                  }, {
+                    default: withCtx(() => [
+                      createTextVNode(toDisplayString(_ctx.__("Create User")), 1)
+                    ]),
+                    _: 1
+                  })
+                ]),
+                table: withCtx(() => [
+                  createVNode(_component_Table, {
+                    class: "font-ui",
+                    resource: __props.users,
+                    preventScroll: "table-top"
+                  }, {
+                    "cell(actions)": withCtx(({ item: user }) => [
+                      createVNode(_component_TableActionButtons, null, {
+                        default: withCtx(() => [
+                          createVNode(_component_TableButton, {
+                            link: "",
+                            state: "",
+                            uri: _ctx.route("admin.users.edit", { id: user.id }),
+                            color: "primary",
+                            class: "group-left"
+                          }, {
+                            default: withCtx(() => [
+                              createVNode(_component_IconOutlinePencilAlt, { class: "h-4 w-4 text-white" })
+                            ]),
+                            _: 2
+                          }, 1032, ["uri"]),
+                          createVNode(_component_TableButton, {
+                            color: "error",
+                            class: "group-right",
+                            onClick: ($event) => _ctx.confirmUserDeletion(user)
+                          }, {
+                            default: withCtx(() => [
+                              createVNode(_component_IconOutlineTrash, { class: "h-4 w-4 text-white" })
+                            ]),
+                            _: 2
+                          }, 1032, ["onClick"])
+                        ]),
+                        _: 2
+                      }, 1024)
+                    ]),
+                    _: 1
+                  }, 8, ["resource"])
+                ]),
+                _: 1
+              })
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`<!--]-->`);
+    };
+  }
+};
+const _sfc_setup$s = _sfc_main$s.setup;
+_sfc_main$s.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Private/Admin/Users/Index.vue");
+  return _sfc_setup$s ? _sfc_setup$s(props, ctx) : void 0;
+};
+const __vite_glob_0_20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: _sfc_main$s
+}, Symbol.toStringTag, { value: "Module" }));
+const _sfc_main$r = {
+  __name: "Show",
+  __ssrInlineRender: true,
+  setup(__props) {
+    return (_ctx, _push, _parent, _attrs) => {
+      _push(` // `);
+    };
+  }
+};
 const _sfc_setup$r = _sfc_main$r.setup;
 _sfc_main$r.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/PrivacyPolicy.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Private/Admin/Users/Show.vue");
   return _sfc_setup$r ? _sfc_setup$r(props, ctx) : void 0;
 };
-const __vite_glob_0_16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$r
 }, Symbol.toStringTag, { value: "Module" }));
@@ -6298,7 +10157,9 @@ const _sfc_main$q = {
     const photo = ref(null);
     const form = useForm({
       _method: "PUT",
-      name: props.user.name,
+      username: props.user.username,
+      fname: props.user.fname,
+      lname: props.user.lname,
       email: props.user.email,
       photo: null
     });
@@ -6342,13 +10203,13 @@ const _sfc_main$q = {
     };
     __expose({ photo, photoPreview });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1d;
-      const _component_Label = _sfc_main$1e;
-      const _component_SecondaryButton = _sfc_main$1o;
-      const _component_InputError = _sfc_main$1g;
-      const _component_Input = _sfc_main$1f;
-      const _component_ActionMessage = _sfc_main$1i;
-      const _component_Button = _sfc_main$1j;
+      const _component_FormSection = _sfc_main$1A;
+      const _component_Label = _sfc_main$1B;
+      const _component_SecondaryButton = _sfc_main$1L;
+      const _component_InputError = _sfc_main$1D;
+      const _component_Input = _sfc_main$1C;
+      const _component_ActionMessage = _sfc_main$1F;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_FormSection, mergeProps({ onSubmitted: updateProfileInformation }, _attrs), {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -6376,9 +10237,9 @@ const _sfc_main$q = {
                 for: "photo",
                 value: _ctx.__("Photo")
               }, null, _parent2, _scopeId));
-              _push2(`<div class="mt-2" style="${ssrRenderStyle(!unref(photoPreview) ? null : { display: "none" })}"${_scopeId}><img${ssrRenderAttr("src", props.user.profile_photo_url)}${ssrRenderAttr("alt", __props.user.name)} class="object-cover w-20 h-20 rounded-full"${_scopeId}></div><div class="mt-2" style="${ssrRenderStyle(unref(photoPreview) ? null : { display: "none" })}"${_scopeId}><span class="block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-full" style="${ssrRenderStyle("background-image: url('" + unref(photoPreview) + "');")}"${_scopeId}></span></div>`);
+              _push2(`<div class="mt-2" style="${ssrRenderStyle(!unref(photoPreview) ? null : { display: "none" })}"${_scopeId}><img${ssrRenderAttr("src", props.user.profile_photo_url)}${ssrRenderAttr("alt", __props.user.name)} class="h-20 w-20 rounded-full object-cover"${_scopeId}></div><div class="mt-2" style="${ssrRenderStyle(unref(photoPreview) ? null : { display: "none" })}"${_scopeId}><span class="block h-20 w-20 rounded-full bg-cover bg-center bg-no-repeat" style="${ssrRenderStyle("background-image: url('" + unref(photoPreview) + "');")}"${_scopeId}></span></div>`);
               _push2(ssrRenderComponent(_component_SecondaryButton, {
-                class: "mt-2 mr-2",
+                class: "mr-2 mt-2",
                 type: "button",
                 onClick: selectNewPhoto
               }, {
@@ -6423,20 +10284,36 @@ const _sfc_main$q = {
             }
             _push2(`<div class="col-span-6 sm:col-span-4"${_scopeId}>`);
             _push2(ssrRenderComponent(_component_Label, {
-              for: "name",
-              value: _ctx.__("Name"),
-              req: ""
+              for: "fname",
+              value: _ctx.__("First Name")
             }, null, _parent2, _scopeId));
             _push2(ssrRenderComponent(_component_Input, {
-              id: "name",
+              id: "fname",
               type: "text",
-              class: "block w-full mt-1",
-              modelValue: unref(form).name,
-              "onUpdate:modelValue": ($event) => unref(form).name = $event,
-              autocomplete: "name"
+              class: "mt-1 block w-full",
+              modelValue: unref(form).fname,
+              "onUpdate:modelValue": ($event) => unref(form).fname = $event,
+              autocomplete: "fname"
             }, null, _parent2, _scopeId));
             _push2(ssrRenderComponent(_component_InputError, {
-              message: unref(form).errors.name,
+              message: unref(form).errors.fname,
+              class: "mt-2"
+            }, null, _parent2, _scopeId));
+            _push2(`</div><div class="col-span-6 sm:col-span-4"${_scopeId}>`);
+            _push2(ssrRenderComponent(_component_Label, {
+              for: "lname",
+              value: _ctx.__("Last Name")
+            }, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent(_component_Input, {
+              id: "lname",
+              type: "text",
+              class: "mt-1 block w-full",
+              modelValue: unref(form).lname,
+              "onUpdate:modelValue": ($event) => unref(form).lname = $event,
+              autocomplete: "lname"
+            }, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent(_component_InputError, {
+              message: unref(form).errors.lname,
               class: "mt-2"
             }, null, _parent2, _scopeId));
             _push2(`</div><div class="col-span-6 sm:col-span-4"${_scopeId}>`);
@@ -6448,7 +10325,7 @@ const _sfc_main$q = {
             _push2(ssrRenderComponent(_component_Input, {
               id: "email",
               type: "email",
-              class: "block w-full mt-1",
+              class: "mt-1 block w-full",
               modelValue: unref(form).email,
               "onUpdate:modelValue": ($event) => unref(form).email = $event
             }, null, _parent2, _scopeId));
@@ -6478,21 +10355,21 @@ const _sfc_main$q = {
                   createVNode("img", {
                     src: props.user.profile_photo_url,
                     alt: __props.user.name,
-                    class: "object-cover w-20 h-20 rounded-full"
+                    class: "h-20 w-20 rounded-full object-cover"
                   }, null, 8, ["src", "alt"])
                 ], 512), [
                   [vShow, !unref(photoPreview)]
                 ]),
                 withDirectives(createVNode("div", { class: "mt-2" }, [
                   createVNode("span", {
-                    class: "block w-20 h-20 bg-center bg-no-repeat bg-cover rounded-full",
+                    class: "block h-20 w-20 rounded-full bg-cover bg-center bg-no-repeat",
                     style: "background-image: url('" + unref(photoPreview) + "');"
                   }, null, 4)
                 ], 512), [
                   [vShow, unref(photoPreview)]
                 ]),
                 createVNode(_component_SecondaryButton, {
-                  class: "mt-2 mr-2",
+                  class: "mr-2 mt-2",
                   type: "button",
                   onClick: withModifiers(selectNewPhoto, ["prevent"])
                 }, {
@@ -6519,20 +10396,37 @@ const _sfc_main$q = {
               ])) : createCommentVNode("", true),
               createVNode("div", { class: "col-span-6 sm:col-span-4" }, [
                 createVNode(_component_Label, {
-                  for: "name",
-                  value: _ctx.__("Name"),
-                  req: ""
+                  for: "fname",
+                  value: _ctx.__("First Name")
                 }, null, 8, ["value"]),
                 createVNode(_component_Input, {
-                  id: "name",
+                  id: "fname",
                   type: "text",
-                  class: "block w-full mt-1",
-                  modelValue: unref(form).name,
-                  "onUpdate:modelValue": ($event) => unref(form).name = $event,
-                  autocomplete: "name"
+                  class: "mt-1 block w-full",
+                  modelValue: unref(form).fname,
+                  "onUpdate:modelValue": ($event) => unref(form).fname = $event,
+                  autocomplete: "fname"
                 }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                 createVNode(_component_InputError, {
-                  message: unref(form).errors.name,
+                  message: unref(form).errors.fname,
+                  class: "mt-2"
+                }, null, 8, ["message"])
+              ]),
+              createVNode("div", { class: "col-span-6 sm:col-span-4" }, [
+                createVNode(_component_Label, {
+                  for: "lname",
+                  value: _ctx.__("Last Name")
+                }, null, 8, ["value"]),
+                createVNode(_component_Input, {
+                  id: "lname",
+                  type: "text",
+                  class: "mt-1 block w-full",
+                  modelValue: unref(form).lname,
+                  "onUpdate:modelValue": ($event) => unref(form).lname = $event,
+                  autocomplete: "lname"
+                }, null, 8, ["modelValue", "onUpdate:modelValue"]),
+                createVNode(_component_InputError, {
+                  message: unref(form).errors.lname,
                   class: "mt-2"
                 }, null, 8, ["message"])
               ]),
@@ -6545,7 +10439,7 @@ const _sfc_main$q = {
                 createVNode(_component_Input, {
                   id: "email",
                   type: "email",
-                  class: "block w-full mt-1",
+                  class: "mt-1 block w-full",
                   modelValue: unref(form).email,
                   "onUpdate:modelValue": ($event) => unref(form).email = $event
                 }, null, 8, ["modelValue", "onUpdate:modelValue"]),
@@ -6629,7 +10523,7 @@ const _sfc_main$p = {
   props: ["sessions"],
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_MainLayout = _sfc_main$Q;
+      const _component_MainLayout = _sfc_main$1b;
       const _component_UpdateProfileInformationForm = _sfc_main$q;
       _push(ssrRenderComponent(_component_MainLayout, mergeProps({
         title: _ctx.__("Profile")
@@ -6670,7 +10564,7 @@ _sfc_main$p.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Profile/Show.vue");
   return _sfc_setup$p ? _sfc_setup$p(props, ctx) : void 0;
 };
-const __vite_glob_0_17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_22 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$p
 }, Symbol.toStringTag, { value: "Module" }));
@@ -6701,12 +10595,12 @@ const _sfc_main$o = {
     };
     __expose({ password });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_ActionSection = __unplugin_components_8$1;
-      const _component_DangerButton = _sfc_main$1r;
-      const _component_DialogModal = _sfc_main$1n;
-      const _component_Input = _sfc_main$1f;
-      const _component_InputError = _sfc_main$1g;
-      const _component_SecondaryButton = _sfc_main$1o;
+      const _component_ActionSection = __unplugin_components_8$2;
+      const _component_DangerButton = _sfc_main$1O;
+      const _component_DialogModal = _sfc_main$1K;
+      const _component_Input = _sfc_main$1C;
+      const _component_InputError = _sfc_main$1D;
+      const _component_SecondaryButton = _sfc_main$1L;
       _push(ssrRenderComponent(_component_ActionSection, _attrs, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -6728,7 +10622,7 @@ const _sfc_main$o = {
         }),
         content: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="max-w-xl text-sm text-gray-600"${_scopeId}>${ssrInterpolate(_ctx.__(
+            _push2(`<div class="max-w-xl text-sm text-gray-600 dark:text-gray-400"${_scopeId}>${ssrInterpolate(_ctx.__(
               "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain."
             ))}</div><div class="mt-5"${_scopeId}>`);
             _push2(ssrRenderComponent(_component_DangerButton, { onClick: confirmUserDeletion }, {
@@ -6856,7 +10750,7 @@ const _sfc_main$o = {
             }, _parent2, _scopeId));
           } else {
             return [
-              createVNode("div", { class: "max-w-xl text-sm text-gray-600" }, toDisplayString(_ctx.__(
+              createVNode("div", { class: "max-w-xl text-sm text-gray-600 dark:text-gray-400" }, toDisplayString(_ctx.__(
                 "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain."
               )), 1),
               createVNode("div", { class: "mt-5" }, [
@@ -6998,15 +10892,15 @@ const _sfc_main$n = {
     };
     __expose({ password });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_ActionSection = __unplugin_components_8$1;
+      const _component_ActionSection = __unplugin_components_8$2;
       const _component_IconOutlineDesktopComputer = __unplugin_components_1;
       const _component_IconOutlineDeviceMobile = __unplugin_components_2$1;
-      const _component_Button = _sfc_main$1j;
-      const _component_ActionMessage = _sfc_main$1i;
-      const _component_DialogModal = _sfc_main$1n;
-      const _component_Input = _sfc_main$1f;
-      const _component_InputError = _sfc_main$1g;
-      const _component_SecondaryButton = _sfc_main$1o;
+      const _component_Button = _sfc_main$1G;
+      const _component_ActionMessage = _sfc_main$1F;
+      const _component_DialogModal = _sfc_main$1K;
+      const _component_Input = _sfc_main$1C;
+      const _component_InputError = _sfc_main$1D;
+      const _component_SecondaryButton = _sfc_main$1L;
       _push(ssrRenderComponent(_component_ActionSection, _attrs, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -7019,16 +10913,20 @@ const _sfc_main$n = {
         }),
         description: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`${ssrInterpolate(_ctx.__("Manage and log out your active sessions on other browsers and devices."))}`);
+            _push2(`${ssrInterpolate(_ctx.__(
+              "Manage and log out your active sessions on other browsers and devices."
+            ))}`);
           } else {
             return [
-              createTextVNode(toDisplayString(_ctx.__("Manage and log out your active sessions on other browsers and devices.")), 1)
+              createTextVNode(toDisplayString(_ctx.__(
+                "Manage and log out your active sessions on other browsers and devices."
+              )), 1)
             ];
           }
         }),
         content: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="max-w-xl text-sm text-gray-600"${_scopeId}>${ssrInterpolate(_ctx.__(
+            _push2(`<div class="max-w-xl text-sm text-gray-600 dark:text-gray-400"${_scopeId}>${ssrInterpolate(_ctx.__(
               "If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password."
             ))}</div>`);
             if (props.sessions.length > 0) {
@@ -7036,11 +10934,11 @@ const _sfc_main$n = {
               ssrRenderList(props.sessions, (session, i2) => {
                 _push2(`<div class="flex items-center"${_scopeId}><div${_scopeId}>`);
                 if (session.agent.is_desktop) {
-                  _push2(ssrRenderComponent(_component_IconOutlineDesktopComputer, { class: "h-8 w-8 text-gray-500" }, null, _parent2, _scopeId));
+                  _push2(ssrRenderComponent(_component_IconOutlineDesktopComputer, { class: "h-8 w-8 text-gray-600 dark:text-gray-400" }, null, _parent2, _scopeId));
                 } else {
-                  _push2(ssrRenderComponent(_component_IconOutlineDeviceMobile, { class: "h-8 w-8 text-gray-500" }, null, _parent2, _scopeId));
+                  _push2(ssrRenderComponent(_component_IconOutlineDeviceMobile, { class: "h-8 w-8 text-gray-600" }, null, _parent2, _scopeId));
                 }
-                _push2(`</div><div class="ml-3"${_scopeId}><div class="text-sm text-gray-600"${_scopeId}>${ssrInterpolate(session.agent.platform)} - ${ssrInterpolate(session.agent.browser)}</div><div${_scopeId}><div class="text-xs text-gray-500"${_scopeId}>${ssrInterpolate(session.ip_address)}, `);
+                _push2(`</div><div class="ml-3"${_scopeId}><div class="text-sm text-gray-600 dark:text-gray-400"${_scopeId}>${ssrInterpolate(session.agent.platform)} - ${ssrInterpolate(session.agent.browser)}</div><div${_scopeId}><div class="text-xs text-gray-600 dark:text-gray-400"${_scopeId}>${ssrInterpolate(session.ip_address)}, `);
                 if (session.is_current_device) {
                   _push2(`<span class="font-semibold text-green-500"${_scopeId}>${ssrInterpolate(_ctx.__("This device"))}</span>`);
                 } else {
@@ -7193,7 +11091,7 @@ const _sfc_main$n = {
             }, _parent2, _scopeId));
           } else {
             return [
-              createVNode("div", { class: "max-w-xl text-sm text-gray-600" }, toDisplayString(_ctx.__(
+              createVNode("div", { class: "max-w-xl text-sm text-gray-600 dark:text-gray-400" }, toDisplayString(_ctx.__(
                 "If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password."
               )), 1),
               props.sessions.length > 0 ? (openBlock(), createBlock("div", {
@@ -7208,16 +11106,16 @@ const _sfc_main$n = {
                     createVNode("div", null, [
                       session.agent.is_desktop ? (openBlock(), createBlock(_component_IconOutlineDesktopComputer, {
                         key: 0,
-                        class: "h-8 w-8 text-gray-500"
+                        class: "h-8 w-8 text-gray-600 dark:text-gray-400"
                       })) : (openBlock(), createBlock(_component_IconOutlineDeviceMobile, {
                         key: 1,
-                        class: "h-8 w-8 text-gray-500"
+                        class: "h-8 w-8 text-gray-600"
                       }))
                     ]),
                     createVNode("div", { class: "ml-3" }, [
-                      createVNode("div", { class: "text-sm text-gray-600" }, toDisplayString(session.agent.platform) + " - " + toDisplayString(session.agent.browser), 1),
+                      createVNode("div", { class: "text-sm text-gray-600 dark:text-gray-400" }, toDisplayString(session.agent.platform) + " - " + toDisplayString(session.agent.browser), 1),
                       createVNode("div", null, [
-                        createVNode("div", { class: "text-xs text-gray-500" }, [
+                        createVNode("div", { class: "text-xs text-gray-600 dark:text-gray-400" }, [
                           createTextVNode(toDisplayString(session.ip_address) + ", ", 1),
                           session.is_current_device ? (openBlock(), createBlock("span", {
                             key: 0,
@@ -7353,11 +11251,11 @@ const _sfc_main$m = {
     };
     __expose({ password });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_DialogModal = _sfc_main$1n;
-      const _component_Input = _sfc_main$1f;
-      const _component_InputError = _sfc_main$1g;
-      const _component_SecondaryButton = _sfc_main$1o;
-      const _component_Button = _sfc_main$1j;
+      const _component_DialogModal = _sfc_main$1K;
+      const _component_Input = _sfc_main$1C;
+      const _component_InputError = _sfc_main$1D;
+      const _component_SecondaryButton = _sfc_main$1L;
+      const _component_Button = _sfc_main$1G;
       _push(`<span${ssrRenderAttrs(_attrs)}><span>`);
       ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
       _push(`</span>`);
@@ -7560,14 +11458,14 @@ const _sfc_main$l = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_ActionSection = __unplugin_components_8$1;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_InputError = _sfc_main$1g;
+      const _component_ActionSection = __unplugin_components_8$2;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_InputError = _sfc_main$1D;
       const _component_ConfirmsPassword = _sfc_main$m;
-      const _component_Button = _sfc_main$1j;
-      const _component_SecondaryButton = _sfc_main$1o;
-      const _component_DangerButton = _sfc_main$1r;
+      const _component_Button = _sfc_main$1G;
+      const _component_SecondaryButton = _sfc_main$1L;
+      const _component_DangerButton = _sfc_main$1O;
       _push(ssrRenderComponent(_component_ActionSection, _attrs, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -8100,12 +11998,12 @@ const _sfc_main$k = {
     };
     __expose({ password, current_password });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1d;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_InputError = _sfc_main$1g;
-      const _component_ActionMessage = _sfc_main$1i;
-      const _component_Button = _sfc_main$1j;
+      const _component_FormSection = _sfc_main$1A;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_InputError = _sfc_main$1D;
+      const _component_ActionMessage = _sfc_main$1F;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_FormSection, mergeProps({
         onSubmitted: updatePassword,
         passform: ""
@@ -8328,9 +12226,9 @@ const _sfc_main$j = {
   setup(__props) {
     const props = __props;
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_MainLayout = _sfc_main$Q;
+      const _component_MainLayout = _sfc_main$1b;
       const _component_UpdatePasswordForm = _sfc_main$k;
-      const _component_SectionBorder = _sfc_main$1k;
+      const _component_SectionBorder = _sfc_main$1H;
       const _component_TwoFactorAuthenticationForm = _sfc_main$l;
       const _component_LogoutOtherBrowserSessionsForm = _sfc_main$n;
       const _component_DeleteUserForm = _sfc_main$o;
@@ -8412,7 +12310,7 @@ _sfc_main$j.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Settings/Show.vue");
   return _sfc_setup$j ? _sfc_setup$j(props, ctx) : void 0;
 };
-const __vite_glob_0_18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_23 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$j
 }, Symbol.toStringTag, { value: "Module" }));
@@ -8430,11 +12328,11 @@ const _sfc_main$i = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1d;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_InputError = _sfc_main$1g;
-      const _component_Button = _sfc_main$1j;
+      const _component_FormSection = _sfc_main$1A;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_InputError = _sfc_main$1D;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_FormSection, mergeProps({ onSubmitted: createTeam }, _attrs), {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -8458,7 +12356,7 @@ const _sfc_main$i = {
           if (_push2) {
             _push2(`<div class="col-span-6"${_scopeId}>`);
             _push2(ssrRenderComponent(_component_Label, { value: "Team Owner" }, null, _parent2, _scopeId));
-            _push2(`<div class="mt-2 flex items-center"${_scopeId}><img class="h-12 w-12 rounded-full object-cover"${ssrRenderAttr("src", _ctx.$page.props.user.profile_photo_url)}${ssrRenderAttr("alt", _ctx.$page.props.user.name)}${_scopeId}><div class="ml-4 leading-tight"${_scopeId}><div${_scopeId}>${ssrInterpolate(_ctx.$page.props.user.name)}</div><div class="text-sm text-gray-700"${_scopeId}>${ssrInterpolate(_ctx.$page.props.user.email)}</div></div></div></div><div class="col-span-6 sm:col-span-4"${_scopeId}>`);
+            _push2(`<div class="mt-2 flex items-center"${_scopeId}><img class="h-12 w-12 rounded-full object-cover"${ssrRenderAttr("src", _ctx.$page.props.user.profile_photo_url)}${ssrRenderAttr("alt", _ctx.$page.props.user.name)}${_scopeId}><div class="ml-4 leading-tight"${_scopeId}><div${_scopeId}>${ssrInterpolate(_ctx.$page.props.user.name)}</div><div class="text-sm text-gray-700 dark:text-gray-500"${_scopeId}>${ssrInterpolate(_ctx.$page.props.user.email)}</div></div></div></div><div class="col-span-6 sm:col-span-4"${_scopeId}>`);
             _push2(ssrRenderComponent(_component_Label, {
               for: "name",
               value: "Team Name"
@@ -8488,7 +12386,7 @@ const _sfc_main$i = {
                   }, null, 8, ["src", "alt"]),
                   createVNode("div", { class: "ml-4 leading-tight" }, [
                     createVNode("div", null, toDisplayString(_ctx.$page.props.user.name), 1),
-                    createVNode("div", { class: "text-sm text-gray-700" }, toDisplayString(_ctx.$page.props.user.email), 1)
+                    createVNode("div", { class: "text-sm text-gray-700 dark:text-gray-500" }, toDisplayString(_ctx.$page.props.user.email), 1)
                   ])
                 ])
               ]),
@@ -8557,7 +12455,7 @@ _sfc_main$i.setup = (props, ctx) => {
 };
 const _sfc_main$h = {};
 function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs) {
-  const _component_MainLayout = _sfc_main$Q;
+  const _component_MainLayout = _sfc_main$1b;
   const _component_create_team_form = _sfc_main$i;
   _push(ssrRenderComponent(_component_MainLayout, mergeProps({
     title: _ctx.__("Create Team")
@@ -8596,7 +12494,7 @@ _sfc_main$h.setup = (props, ctx) => {
   return _sfc_setup$h ? _sfc_setup$h(props, ctx) : void 0;
 };
 const Create = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["ssrRender", _sfc_ssrRender$2]]);
-const __vite_glob_0_19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_24 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Create
 }, Symbol.toStringTag, { value: "Module" }));
@@ -8617,10 +12515,10 @@ const _sfc_main$g = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_ActionSection = __unplugin_components_8$1;
-      const _component_DangerButton = _sfc_main$1r;
-      const _component_ConfirmationModal = _sfc_main$1p;
-      const _component_SecondaryButton = _sfc_main$1o;
+      const _component_ActionSection = __unplugin_components_8$2;
+      const _component_DangerButton = _sfc_main$1O;
+      const _component_ConfirmationModal = _sfc_main$1M;
+      const _component_SecondaryButton = _sfc_main$1L;
       _push(ssrRenderComponent(_component_ActionSection, _attrs, {
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -8880,19 +12778,19 @@ const _sfc_main$f = {
       return availableRoles.value.find((r2) => r2.key === role).name;
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_SectionBorder = _sfc_main$1k;
-      const _component_FormSection = _sfc_main$1d;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_InputError = _sfc_main$1g;
-      const _component_IconOutlineCheckCircle = __unplugin_components_5$2;
-      const _component_ActionMessage = _sfc_main$1i;
-      const _component_Button = _sfc_main$1j;
-      const _component_ActionSection = __unplugin_components_8$1;
-      const _component_DialogModal = _sfc_main$1n;
-      const _component_SecondaryButton = _sfc_main$1o;
-      const _component_ConfirmationModal = _sfc_main$1p;
-      const _component_DangerButton = _sfc_main$1r;
+      const _component_SectionBorder = _sfc_main$1H;
+      const _component_FormSection = _sfc_main$1A;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_InputError = _sfc_main$1D;
+      const _component_IconOutlineCheckCircle = __unplugin_components_5$3;
+      const _component_ActionMessage = _sfc_main$1F;
+      const _component_Button = _sfc_main$1G;
+      const _component_ActionSection = __unplugin_components_8$2;
+      const _component_DialogModal = _sfc_main$1K;
+      const _component_SecondaryButton = _sfc_main$1L;
+      const _component_ConfirmationModal = _sfc_main$1M;
+      const _component_DangerButton = _sfc_main$1O;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
       if (unref(userPermissions).canAddTeamMembers) {
         _push(`<div>`);
@@ -9585,12 +13483,12 @@ const _sfc_main$e = {
       });
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_FormSection = _sfc_main$1d;
-      const _component_Label = _sfc_main$1e;
-      const _component_Input = _sfc_main$1f;
-      const _component_InputError = _sfc_main$1g;
-      const _component_ActionMessage = _sfc_main$1i;
-      const _component_Button = _sfc_main$1j;
+      const _component_FormSection = _sfc_main$1A;
+      const _component_Label = _sfc_main$1B;
+      const _component_Input = _sfc_main$1C;
+      const _component_InputError = _sfc_main$1D;
+      const _component_ActionMessage = _sfc_main$1F;
+      const _component_Button = _sfc_main$1G;
       _push(ssrRenderComponent(_component_FormSection, mergeProps({ onSubmitted: updateTeamName }, _attrs), createSlots({
         title: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -9750,10 +13648,10 @@ const _sfc_main$d = {
   props: ["team", "availableRoles", "permissions"],
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_MainLayout = _sfc_main$Q;
+      const _component_MainLayout = _sfc_main$1b;
       const _component_UpdateTeamNameForm = _sfc_main$e;
       const _component_TeamMemberManager = _sfc_main$f;
-      const _component_SectionBorder = _sfc_main$1k;
+      const _component_SectionBorder = _sfc_main$1H;
       const _component_DeleteTeamForm = _sfc_main$g;
       _push(ssrRenderComponent(_component_MainLayout, mergeProps({
         title: _ctx.__("Team Settings")
@@ -9829,7 +13727,7 @@ _sfc_main$d.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Teams/Show.vue");
   return _sfc_setup$d ? _sfc_setup$d(props, ctx) : void 0;
 };
-const __vite_glob_0_20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_25 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$d
 }, Symbol.toStringTag, { value: "Module" }));
@@ -9838,9 +13736,9 @@ const _sfc_main$c = {
   __ssrInlineRender: true,
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_GuestLayout = _sfc_main$J;
+      const _component_GuestLayout = _sfc_main$14;
       const _component_Head = resolveComponent("Head");
-      const _component_AuthenticationCardLogo = __unplugin_components_1$1;
+      const _component_AuthenticationCardLogo = __unplugin_components_1$4;
       _push(ssrRenderComponent(_component_GuestLayout, _attrs, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -9850,7 +13748,7 @@ const _sfc_main$c = {
             _push2(`<div class="font-sans antialiased"${_scopeId}><div class="pt-4"${_scopeId}><div class="flex min-h-screen flex-col items-center pt-6 sm:pt-0"${_scopeId}><div${_scopeId}>`);
             _push2(ssrRenderComponent(_component_AuthenticationCardLogo, { class: "h-auto w-24" }, null, _parent2, _scopeId));
             _push2(`</div><div class="docs docs-slate dark:docs-invert docs-headings:font-normal mt-6 w-full overflow-hidden bg-white p-6 shadow-md dark:bg-gray-800 sm:max-w-2xl sm:rounded-lg"${_scopeId}>`);
-            _push2(ssrRenderComponent(unref(_sfc_main$t), null, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent(unref(_sfc_main$R), null, null, _parent2, _scopeId));
             _push2(`</div></div></div></div>`);
           } else {
             return [
@@ -9864,7 +13762,7 @@ const _sfc_main$c = {
                       createVNode(_component_AuthenticationCardLogo, { class: "h-auto w-24" })
                     ]),
                     createVNode("div", { class: "docs docs-slate dark:docs-invert docs-headings:font-normal mt-6 w-full overflow-hidden bg-white p-6 shadow-md dark:bg-gray-800 sm:max-w-2xl sm:rounded-lg" }, [
-                      createVNode(unref(_sfc_main$t))
+                      createVNode(unref(_sfc_main$R))
                     ])
                   ])
                 ])
@@ -9883,7 +13781,7 @@ _sfc_main$c.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/TermsOfService.vue");
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
-const __vite_glob_0_21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_26 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$c
 }, Symbol.toStringTag, { value: "Module" }));
@@ -9979,11 +13877,11 @@ const _sfc_main$a = {
     ];
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Head = resolveComponent("Head");
-      const _component_GuestHeader = _sfc_main$K;
-      const _component_ApplicationLogo = __unplugin_components_1$2;
+      const _component_GuestHeader = _sfc_main$15;
+      const _component_ApplicationLogo = __unplugin_components_1$5;
       const _component_Link = resolveComponent("Link");
       const _component_IconOutlineCheck = __unplugin_components_2;
-      const _component_Notification = __unplugin_components_3$2;
+      const _component_Notification = __unplugin_components_3$3;
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_component_Head, {
         title: _ctx.__("Welcome")
@@ -10087,7 +13985,7 @@ _sfc_main$a.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/pages/Welcome.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
-const __vite_glob_0_22 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_27 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _sfc_main$a
 }, Symbol.toStringTag, { value: "Module" }));
@@ -10923,14 +14821,14 @@ const _sfc_main$1 = {
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Link = resolveComponent("Link");
       const _component_ApplicationMark = __unplugin_components_4$1;
-      const _component_NavLink = _sfc_main$U;
+      const _component_NavLink = _sfc_main$1f;
       const _component_IconOutlineSearch = __unplugin_components_2$3;
-      const _component_ThemeSwitcher = _sfc_main$X;
+      const _component_ThemeSwitcher = _sfc_main$1i;
       const _component_IconOutlineMenu = __unplugin_components_4$2;
-      const _component_IconOutlineX = __unplugin_components_5$1;
-      const _component_GuestResponsiveNavMenu = _sfc_main$L;
-      const _component_DocHeaderbar = _sfc_main$_;
-      const _component_SearchModal = _sfc_main$14;
+      const _component_IconOutlineX = __unplugin_components_5$2;
+      const _component_GuestResponsiveNavMenu = _sfc_main$16;
+      const _component_DocHeaderbar = _sfc_main$1l;
+      const _component_SearchModal = _sfc_main$1r;
       _push(`<!--[--><nav class="${ssrRenderClass([{ stickyHeader: unref(stickyHeader) }, "sticky top-0 z-50 bg-white dark:bg-gray-800"])}"><div class="px-6"><div class="flex h-16 justify-center md:justify-between"><div class="flex w-full items-center"><div class="flex shrink-0 items-center">`);
       _push(ssrRenderComponent(_component_Link, {
         href: _ctx.route("home"),
@@ -11073,12 +14971,12 @@ const _sfc_main = {
     status.value = usePage().props.title == "Page Not Found" ? 404 : 200;
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Head = resolveComponent("Head");
-      const _component_MainNavigation = _sfc_main$S;
+      const _component_MainNavigation = _sfc_main$1d;
       const _component_DocNavigation = _sfc_main$1;
       const _component_DocSidebar = _sfc_main$2;
       const _component_MobileCanvas = _sfc_main$3;
       const _component_ApplicationMark = __unplugin_components_4$1;
-      const _component_SectionBorder = _sfc_main$1k;
+      const _component_SectionBorder = _sfc_main$1H;
       const _component_MobileNavTrigger = _sfc_main$4;
       const _component_PageNavigation = __unplugin_components_7;
       const _component_PageFooter = __unplugin_components_8;
@@ -11149,7 +15047,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Layouts/DocLayout.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const pages = /* @__PURE__ */ Object.assign({ "./pages/API/Index.vue": __vite_glob_0_0, "./pages/Auth/ConfirmPassword.vue": __vite_glob_0_1, "./pages/Auth/ForgotPassword.vue": __vite_glob_0_2, "./pages/Auth/InviteUser.vue": __vite_glob_0_3, "./pages/Auth/Login.vue": __vite_glob_0_4, "./pages/Auth/Register.vue": __vite_glob_0_5, "./pages/Auth/ResetPassword.vue": __vite_glob_0_6, "./pages/Auth/TwoFactorChallenge.vue": __vite_glob_0_7, "./pages/Auth/VerifyEmail.vue": __vite_glob_0_8, "./pages/Dashboard.vue": __vite_glob_0_9, "./pages/Docs/2.0/action-domain-responder.md": __vite_glob_0_10, "./pages/Docs/2.0/getting-started.md": __vite_glob_0_11, "./pages/Docs/2.0/installation.md": __vite_glob_0_12, "./pages/Docs/404.md": __vite_glob_0_13, "./pages/Markdown/Policy.md": __vite_glob_0_14, "./pages/Markdown/Terms.md": __vite_glob_0_15, "./pages/PrivacyPolicy.vue": __vite_glob_0_16, "./pages/Profile/Show.vue": __vite_glob_0_17, "./pages/Settings/Show.vue": __vite_glob_0_18, "./pages/Teams/Create.vue": __vite_glob_0_19, "./pages/Teams/Show.vue": __vite_glob_0_20, "./pages/TermsOfService.vue": __vite_glob_0_21, "./pages/Welcome.vue": __vite_glob_0_22 });
+const pages = /* @__PURE__ */ Object.assign({ "./pages/API/Index.vue": __vite_glob_0_0, "./pages/Auth/ConfirmPassword.vue": __vite_glob_0_1, "./pages/Auth/ForgotPassword.vue": __vite_glob_0_2, "./pages/Auth/Login.vue": __vite_glob_0_3, "./pages/Auth/Register.vue": __vite_glob_0_4, "./pages/Auth/ResetPassword.vue": __vite_glob_0_5, "./pages/Auth/TwoFactorChallenge.vue": __vite_glob_0_6, "./pages/Auth/VerifyEmail.vue": __vite_glob_0_7, "./pages/Dashboard.vue": __vite_glob_0_8, "./pages/Docs/2.0/action-domain-responder.md": __vite_glob_0_9, "./pages/Docs/2.0/getting-started.md": __vite_glob_0_10, "./pages/Docs/2.0/installation.md": __vite_glob_0_11, "./pages/Docs/404.md": __vite_glob_0_12, "./pages/Markdown/Policy.md": __vite_glob_0_13, "./pages/Markdown/Terms.md": __vite_glob_0_14, "./pages/PrivacyPolicy.vue": __vite_glob_0_15, "./pages/Private/Admin/Dashboard.vue": __vite_glob_0_16, "./pages/Private/Admin/Playground/Index.vue": __vite_glob_0_17, "./pages/Private/Admin/Users/Create.vue": __vite_glob_0_18, "./pages/Private/Admin/Users/Edit.vue": __vite_glob_0_19, "./pages/Private/Admin/Users/Index.vue": __vite_glob_0_20, "./pages/Private/Admin/Users/Show.vue": __vite_glob_0_21, "./pages/Profile/Show.vue": __vite_glob_0_22, "./pages/Settings/Show.vue": __vite_glob_0_23, "./pages/Teams/Create.vue": __vite_glob_0_24, "./pages/Teams/Show.vue": __vite_glob_0_25, "./pages/TermsOfService.vue": __vite_glob_0_26, "./pages/Welcome.vue": __vite_glob_0_27 });
 const appName = "Serenity";
 createServer(
   (page) => createInertiaApp({

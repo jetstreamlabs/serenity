@@ -1,7 +1,7 @@
 <script setup>
-import { createPopper } from '@popperjs/core/lib/popper-lite'
-import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow'
-import flip from '@popperjs/core/lib/modifiers/flip'
+import { createPopper } from '@popperjs/core'
+import { preventOverflow } from '@popperjs/core'
+import { flip } from '@popperjs/core'
 
 const props = defineProps({
   placement: {
