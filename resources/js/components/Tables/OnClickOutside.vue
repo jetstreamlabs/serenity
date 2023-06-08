@@ -1,22 +1,16 @@
-<template>
-  <div ref="root">
-    <slot />
-  </div>
-</template>
-
 <script setup>
 const props = defineProps({
   do: {
     type: Function,
-    required: true,
-  },
+    required: true
+  }
 })
 
 const listener = ref(null)
 const root = ref(null)
 
 onMounted(() => {
-  listener.value = (e) => {
+  listener.value = e => {
     if (e.target === root.value || root.value.contains(e.target)) {
       return
     }
@@ -33,3 +27,8 @@ onBeforeUnmount(() => {
   document.removeEventListener('touchstart', listener.value)
 })
 </script>
+<template>
+  <div ref="root">
+    <slot />
+  </div>
+</template>

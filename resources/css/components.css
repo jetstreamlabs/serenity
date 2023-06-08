@@ -156,10 +156,10 @@ sup {
 }
 
 .btn-sm {
-  @apply flex cursor-pointer items-center whitespace-nowrap rounded py-1 px-2 text-sm font-medium uppercase leading-none transition-all focus:outline-none focus:ring-0;
+  @apply flex cursor-pointer items-center whitespace-nowrap rounded px-2 py-1 text-sm font-medium uppercase leading-none transition-all focus:outline-none focus:ring-0;
 
   &.primary {
-    @apply bg-violet-600 text-white hover:bg-orange-500 focus:bg-orange-500;
+    @apply bg-blue-500 text-white hover:bg-orange-500 focus:bg-orange-500;
   }
 
   &.success {
@@ -167,11 +167,11 @@ sup {
   }
 
   &.error {
-    @apply bg-red-600 text-white hover:bg-red-700 focus:bg-red-700;
+    @apply bg-red-500 text-white hover:bg-red-600 focus:bg-red-600;
   }
 
   &.info {
-    @apply bg-sky-600 text-white hover:bg-sky-700 focus:bg-sky-700;
+    @apply bg-sky-500 text-white hover:bg-sky-600 focus:bg-sky-600;
   }
 
   &.warning {

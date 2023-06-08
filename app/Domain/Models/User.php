@@ -5,7 +5,6 @@ namespace App\Domain\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Serenity\Concerns\HasProfilePhoto;
@@ -13,19 +12,14 @@ use Serenity\Concerns\HasTeams;
 use Serenity\Concerns\TwoFactorAuthenticatable;
 use Serenity\Database\User as Authenticatable;
 use Spatie\Permission\PermissionRegistrar;
-use Spatie\Permission\Traits\HasPermissions;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
   use HasApiTokens;
   use HasFactory;
-  use HasPermissions;
   use HasProfilePhoto;
-  use HasRoles;
   use HasTeams;
   use Notifiable;
-  use SoftDeletes;
   use TwoFactorAuthenticatable;
 
   /**
@@ -91,18 +85,14 @@ class User extends Authenticatable
     $service = app(PermissionRegistrar::class);
 
     if (is_null($team_id)) {
-      $service->setCurrentTeamId($this->current_team_id);
+      $this->currentTeam();
+      $service->setPermissionsTeamId($this->current_team_id);
 
       return $this;
     }
 
-    $service->setCurrentTeamId($team_id);
+    $service->setPermissionsTeamId($team_id);
 
     return $this;
-  }
-
-  public function getPermissions()
-  {
-    return $this->getAllPermissions();
   }
 }

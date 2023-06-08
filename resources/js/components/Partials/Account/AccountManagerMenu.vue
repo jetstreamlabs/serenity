@@ -2,6 +2,10 @@
 const logout = () => {
   router.post(useRoutes('logout'))
 }
+
+const { hasRole, hasPermission } = usePermissions()
+
+console.log(hasPermission('view-users'))
 </script>
 
 <template>
@@ -47,6 +51,19 @@ const logout = () => {
         </DropdownLink>
 
         <div class="border-t border-gray-200 dark:border-gray-600"></div>
+
+        <template v-if="hasRole('super-admin')">
+          <DropdownLink
+            v-if="$page.url.startsWith('/admin')"
+            :href="route('dashboard')">
+            {{ __('Exit Admin') }}
+          </DropdownLink>
+          <DropdownLink v-else :href="route('admin.dashboard')">
+            {{ __('Admin') }}
+          </DropdownLink>
+
+          <div class="border-t border-gray-200 dark:border-gray-600"></div>
+        </template>
 
         <form @submit.prevent="logout">
           <DropdownLink as="button"> {{ __('Logout') }} </DropdownLink>

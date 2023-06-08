@@ -41,13 +41,13 @@ class ContractMappingServiceProvider extends ServiceProvider
    *
    * @return void
    */
-  public function registerRepositories(): void
+  public function registerRepositories()
   {
-    if (! is_dir(app_path('Repositories'))) {
+    if (! is_dir(app_path('Domain/Repositories'))) {
       return;
     }
 
-    ContractBinder::make(app_path())
+    return ContractBinder::make(app_path())
       ->setNamespace('App')
       ->setConcretePath('Domain/Repositories')
       ->setInterfacePath('Domain/Contracts/Repositories')

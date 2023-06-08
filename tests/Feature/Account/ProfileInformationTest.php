@@ -4,13 +4,16 @@ it("can update a user's profile information", function () {
   actingAs($user = user());
 
   $options = [
-    'name' => 'Test Name',
+    'username' => $user->username,
+    'fname' => 'Joe',
+    'lname' => 'Jones',
     'email' => 'test@example.com',
   ];
 
   $this->put(route('user-profile-information.update', $options));
 
   expect($user->fresh())
-      ->name->toEqual('Test Name')
+      ->fname->toEqual('Joe')
+      ->lname->toEqual('Jones')
       ->email->toEqual('test@example.com');
 });

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Requests\Media;
+namespace App\Domain\Requests\User;
 
-use App\Domain\Models\Media;
+use App\Domain\Models\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +14,7 @@ class UpdateRequest extends FormRequest
    */
   public function authorize(Gate $gate): Response
   {
-    return $gate->authorize('update', Media::class);
+    return $gate->authorize('update', User::class);
   }
 
   /**

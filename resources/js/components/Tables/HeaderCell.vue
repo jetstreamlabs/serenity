@@ -1,3 +1,17 @@
+<script setup>
+const props = defineProps({
+  cell: {
+    type: Object,
+    required: true
+  }
+})
+
+function onClick() {
+  if (props.cell.sortable) {
+    props.cell.onSort(props.cell.key)
+  }
+}
+</script>
 <template>
   <th v-show="!cell.hidden">
     <component
@@ -14,10 +28,10 @@
           <svg
             v-if="cell.sortable"
             aria-hidden="true"
-            class="w-3 h-3 ml-2"
+            class="ml-2 h-3 w-3"
             :class="{
               'text-gray-400': !cell.sorted,
-              'text-violet-500': cell.sorted,
+              'text-secondary-500': cell.sorted
             }"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 320 512"
@@ -42,18 +56,3 @@
     </component>
   </th>
 </template>
-
-<script setup>
-const props = defineProps({
-  cell: {
-    type: Object,
-    required: true,
-  },
-})
-
-function onClick() {
-  if (props.cell.sortable) {
-    props.cell.onSort(props.cell.key)
-  }
-}
-</script>

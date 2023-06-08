@@ -13,10 +13,12 @@ use App\Domain\Operations\ResetUserPassword;
 use App\Domain\Operations\UpdateTeamName;
 use App\Domain\Operations\UpdateUserPassword;
 use App\Domain\Operations\UpdateUserProfileInformation;
+use App\Domain\Packages\InertiaTables\InertiaTable;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Response as InertiaResponse;
 use Serenity\Serenity;
 
 class SerenityServiceProvider extends ServiceProvider
@@ -26,7 +28,7 @@ class SerenityServiceProvider extends ServiceProvider
    */
   public function register(): void
   {
-        //
+    //
   }
 
   /**
@@ -35,6 +37,7 @@ class SerenityServiceProvider extends ServiceProvider
   public function boot(): void
   {
     $this->configurePermissions();
+    $this->configureInertiaTables();
 
     Serenity::createUsersUsing(CreateNewUser::class);
     Serenity::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
@@ -78,5 +81,24 @@ class SerenityServiceProvider extends ServiceProvider
       'create',
       'update',
     ])->description('Editor users have the ability to read, create, and update.');
+  }
+
+  protected function configureInertiaTables(): void
+  {
+    InertiaTable::defaultGlobalSearch('Search ...');
+
+    InertiaResponse::macro('getQueryBuilderProps', function () {
+      return $this->props['queryBuilderProps'] ?? [];
+    });
+
+    InertiaResponse::macro('table', function (callable $withTableBuilder = null) {
+      $tableBuilder = new InertiaTable(request());
+
+      if ($withTableBuilder) {
+        $withTableBuilder($tableBuilder);
+      }
+
+      return $tableBuilder->applyTo($this);
+    });
   }
 }

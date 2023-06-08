@@ -11,6 +11,7 @@ import { Ziggy } from '../ziggy.js'
 import { ZoraVue } from 'zora'
 import { Zora } from '../zora.js'
 import ClickOutside from 'vue-click-outside'
+import UI, { colors } from '@indielayer/ui'
 
 //prettier-ignore
 export const serenity = {
@@ -61,6 +62,10 @@ export const serenity = {
     app.use(ZiggyVue, Ziggy)
     app.use(ZoraVue, Zora)
     app.use(pinia)
+
+    app.use(UI, {
+      prefix: 'Z'
+    })
 
 		app.component('Head', Head)
 		app.component('Link', Link)

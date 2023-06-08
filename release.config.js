@@ -7,14 +7,15 @@ const commitAnalyzerOptions = {
     { type: 'task', release: 'patch' },
     { type: 'refactor', release: 'patch' },
     { type: 'docs', release: 'patch' },
+    { type: 'wip', release: false },
     { type: 'chore', release: false },
     { scope: 'style', release: false },
     { scope: 'test', release: false },
-    { scope: 'deploy', release: false },
+    { scope: 'deploy', release: false }
   ],
   parserOpts: {
-    noteKeywords: [],
-  },
+    noteKeywords: []
+  }
 }
 
 const releaseNotesGeneratorOptions = {
@@ -29,7 +30,8 @@ const releaseNotesGeneratorOptions = {
         task: 'Task Commit',
         refactor: 'Code Refactoring',
         docs: 'Documentation',
-        chore: 'Maintenance',
+        wip: 'Work In Progress',
+        chore: 'Maintenance'
       }
 
       commit.type = types[commit.type]
@@ -39,7 +41,9 @@ const releaseNotesGeneratorOptions = {
       }
 
       if (typeof commit.subject === 'string') {
-        let url = context.repository ? `${context.host}/${context.owner}/${context.repository}` : context.repoUrl
+        let url = context.repository
+          ? `${context.host}/${context.owner}/${context.repository}`
+          : context.repoUrl
         if (url) {
           url = `${url}/issues/`
           // Issue URLs.
@@ -50,18 +54,21 @@ const releaseNotesGeneratorOptions = {
         }
         if (context.host) {
           // User URLs.
-          commit.subject = commit.subject.replace(/\B@([a-z0-9](?:-?[a-z0-9/]){0,38})/g, (_, username) => {
-            if (username.includes('/')) {
-              return `@${username}`
-            }
+          commit.subject = commit.subject.replace(
+            /\B@([a-z0-9](?:-?[a-z0-9/]){0,38})/g,
+            (_, username) => {
+              if (username.includes('/')) {
+                return `@${username}`
+              }
 
-            return `[@${username}](${context.host}/${username})`
-          })
+              return `[@${username}](${context.host}/${username})`
+            }
+          )
         }
       }
 
       // remove references that already appear in the subject
-      commit.references = commit.references.filter((reference) => {
+      commit.references = commit.references.filter(reference => {
         if (issues.indexOf(reference.issue) === -1) {
           return true
         }
@@ -70,8 +77,8 @@ const releaseNotesGeneratorOptions = {
       })
 
       return commit
-    },
-  },
+    }
+  }
 }
 
 module.exports = {
@@ -89,16 +96,16 @@ module.exports = {
       '@semantic-release/changelog',
       {
         changelogFile: 'CHANGELOG.md',
-        changelogTitle: '# Serenity Changelog',
-      },
+        changelogTitle: '# Serenity Changelog'
+      }
     ],
     // creating a new version commit
     [
       '@semantic-release/git',
       {
-        assets: ['CHANGELOG.md'],
-      },
+        assets: ['CHANGELOG.md']
+      }
     ],
-    '@semantic-release/github',
-  ],
+    '@semantic-release/github'
+  ]
 }

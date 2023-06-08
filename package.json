@@ -36,12 +36,14 @@
           "task",
           "refactor",
           "docs",
+          "wip",
           "chore"
         ]
       ]
     }
   },
   "dependencies": {
+    "@indielayer/ui": "^1.0.9",
     "@inertiajs/vue3": "^1.0.6",
     "@popperjs/core": "^2.11.8",
     "@vue/server-renderer": "^3.3.4",

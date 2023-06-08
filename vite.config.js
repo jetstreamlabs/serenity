@@ -189,7 +189,13 @@ export default defineConfig(({ command, mode }) => {
           '@vueuse/core',
           {
             '@inertiajs/vue3': ['router', 'useForm', 'usePage', 'useRemember'],
-            composable: ['useTrans', 'useRoutes', 'useDayjs', 'useClientOnly'],
+            composable: [
+              'useTrans',
+              'useRoutes',
+              'useDayjs',
+              'useClientOnly',
+              'usePermissions'
+            ],
             store: ['useCoreStore', 'useDocStore']
           }
         ],
@@ -226,7 +232,6 @@ export default defineConfig(({ command, mode }) => {
         '@/storage': resolve(__dirname, 'storage/app/public'),
         ziggy: resolve(__dirname, 'vendor/tightenco/ziggy/dist/vue.es.js'),
         zora: resolve(__dirname, 'vendor/jetstreamlabs/zora/dist/index.js'),
-        flowbite: resolve(__dirname, 'node_modules/flowbite/lib/esm/index.js'),
         tableTranslations: resolve(__dirname, 'resources/js/translations.js'),
         composable: resolve(__dirname, 'resources/js/composable/index.js'),
         store: resolve(__dirname, 'resources/js/store/index.js')

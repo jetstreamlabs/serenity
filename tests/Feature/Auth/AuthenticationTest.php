@@ -8,9 +8,19 @@ it('can render the login screen', function () {
   expect($response->getStatusCode())->toBe(200);
 });
 
-it('can authenticate users using the login screen', function () {
+it('can authenticate users using the login screen using email', function () {
   $response = $this->post('/login', [
-    'email' => user()->email,
+    'login' => user()->email,
+    'password' => 'password',
+  ]);
+
+  $this->assertAuthenticated();
+  $response->assertRedirect(RouteServiceProvider::HOME);
+});
+
+it('can authenticate users using the login screen using username', function () {
+  $response = $this->post('/login', [
+    'login' => user()->username,
     'password' => 'password',
   ]);
 
@@ -20,7 +30,7 @@ it('can authenticate users using the login screen', function () {
 
 it('cannot authenticate users with invalid password', function () {
   $this->post('/login', [
-    'email' => user()->email,
+    'login' => user()->email,
     'password' => 'wrong-password',
   ]);
 

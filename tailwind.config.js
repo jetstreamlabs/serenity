@@ -9,7 +9,8 @@ module.exports = {
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
     './resources/js/**/*.vue',
-    './resources/markdown/**/*.md'
+    './resources/markdown/**/*.md',
+    'node_modules/@indielayer/ui/**/*'
   ],
   darkMode: 'class',
   theme: {
@@ -48,7 +49,7 @@ module.exports = {
           600: '#0087AA',
           700: '#005B72',
           800: '#002E3A',
-          900: '#000102',
+          900: '#000102'
         },
         red: {
           DEFAULT: '#C53030',
@@ -61,7 +62,7 @@ module.exports = {
           600: '#982525',
           700: '#6B1A1A',
           800: '#3E0F0F',
-          900: '#110404',
+          900: '#110404'
         },
         orange: {
           DEFAULT: '#ED8936',
@@ -74,15 +75,15 @@ module.exports = {
           600: '#D86C13',
           700: '#A4520F',
           800: '#71390A',
-          900: '#3D1F05',
+          900: '#3D1F05'
         },
         primary: colors.blue,
-        secondary: colors.fuchsia,
-        gray: colors.slate,
-        warning: colors.amber,
-        danger: colors.red,
+        secondary: colors.orange,
         success: colors.emerald,
-        info: colors.sky
+        warning: colors.amber,
+        error: colors.red,
+        gray: colors.slate,
+        pink: colors.fuchsia
       },
       screens: {
         '3xl': '1800px'
@@ -94,6 +95,24 @@ module.exports = {
     require('@tailwindcss/typography')({
       className: 'docs',
     }),
-    require('@tailwindcss/aspect-ratio')
-  ],
+    require('@tailwindcss/aspect-ratio'),
+    ({ addBase, config }) => {
+      addBase({
+        html: {
+          color: config('theme.colors.gray.900'),
+          backgroundColor: 'white'
+        },
+        'html.dark': {
+          color: config('theme.colors.gray.100'),
+          backgroundColor: config('theme.colors.gray.900')
+        },
+        '*, ::before, ::after': {
+          borderColor: colors.slate[200]
+        },
+        '.dark *, .dark ::before, .dark ::after': {
+          borderColor: colors.slate[600]
+        }
+      })
+    }
+  ]
 }
