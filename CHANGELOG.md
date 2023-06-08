@@ -1,5 +1,27 @@
 # Serenity Changelog
 
+## [2.5.4](https://github.com/jetstreamlabs/serenity/compare/v2.5.3...v2.5.4) (2023-06-08)
+
+
+### Code Refactoring
+
+* init admin collection ([6665b4e](https://github.com/jetstreamlabs/serenity/commit/6665b4e62dea8e01ed8cc789e39473699bcdd33a))
+
+
+### Maintenance
+
+* admin work ([5ff482a](https://github.com/jetstreamlabs/serenity/commit/5ff482ab78565a383cb0141ce85ad386cb888d7b))
+* **deps:** update dependencies —dpbot ([287747c](https://github.com/jetstreamlabs/serenity/commit/287747c4c2103e1eebf1723b2b712d986a569736))
+* styles ([c788620](https://github.com/jetstreamlabs/serenity/commit/c788620bfe10366b50c671b16cea5a9c6c427b1b))
+* styles ([b6f7f94](https://github.com/jetstreamlabs/serenity/commit/b6f7f94a2e73c021626f444c327faaab2e2e9cd0))
+* unwinding the previous admin junk ([9b98920](https://github.com/jetstreamlabs/serenity/commit/9b98920c82cbe0c91a06f2cb109b8bde7092e982))
+
+
+### Work In Progress
+
+* continues work on design and components ([ffff834](https://github.com/jetstreamlabs/serenity/commit/ffff834d484d94d40729420967fcac5c85e418e2))
+* update to live package ([68a4353](https://github.com/jetstreamlabs/serenity/commit/68a4353113dd0704f93152ba70578f44cd6ca7f9))
+
 ## [2.5.3](https://github.com/jetstreamlabs/serenity/compare/v2.5.2...v2.5.3) (2023-05-29)
 
 
