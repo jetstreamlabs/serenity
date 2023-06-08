@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b60379c90c0f51698a2d7aaf65dddb04",
+    "content-hash": "93174fc62c1ad3be9f7c0625bd21312a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4425,11 +4425,17 @@
         },
         {
             "name": "serenity/foundation",
-            "version": "dev-develop",
+            "version": "v2.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jetstreamlabs/foundation.git",
+                "reference": "098fdc00118694db753e53da730b4b0a554855a5"
+            },
             "dist": {
-                "type": "path",
-                "url": "../foundation",
-                "reference": "a37befd229a53bef437a85d0d83ad34d5bc951df"
+                "type": "zip",
+                "url": "https://api.github.com/repos/jetstreamlabs/foundation/zipball/098fdc00118694db753e53da730b4b0a554855a5",
+                "reference": "098fdc00118694db753e53da730b4b0a554855a5",
+                "shasum": ""
             },
             "require": {
                 "bacon/bacon-qr-code": "^2.0",
@@ -4473,18 +4479,14 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Serenity\\": "src/"
-                },
                 "files": [
                     "src/helpers.php"
-                ]
-            },
-            "autoload-dev": {
+                ],
                 "psr-4": {
-                    "Tests\\": "tests/"
+                    "Serenity\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4500,9 +4502,7 @@
                 "issues": "https://github.com/jetstreamlabs/foundation/issues",
                 "source": "https://github.com/jetstreamlabs/foundation"
             },
-            "transport-options": {
-                "relative": true
-            }
+            "time": "2023-06-08T16:47:19+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -11470,9 +11470,7 @@
     ],
     "aliases": [],
     "minimum-stability": "RC",
-    "stability-flags": {
-        "serenity/foundation": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
