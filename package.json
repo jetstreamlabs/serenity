@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@indielayer/ui": "^1.0.9",
-    "@inertiajs/vue3": "^1.0.6",
+    "@inertiajs/vue3": "^1.0.8",
     "@popperjs/core": "^2.11.8",
     "@vue/server-renderer": "^3.3.4",
     "dayjs": "^1.11.7",
