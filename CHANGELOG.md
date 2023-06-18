@@ -1,5 +1,25 @@
 # Serenity Changelog
 
+## [2.5.5](https://github.com/jetstreamlabs/serenity/compare/v2.5.4...v2.5.5) (2023-06-18)
+
+
+### Code Refactoring
+
+* update dependencies —dpbot ([1e17126](https://github.com/jetstreamlabs/serenity/commit/1e171263a3bc00518690a9a8502faf988b08f066))
+
+
+### Maintenance
+
+* **deps-dev:** bump eslint from 8.42.0 to 8.43.0 ([3ccc214](https://github.com/jetstreamlabs/serenity/commit/3ccc214d8345e60d705b4afb650373b1b46b45ca))
+* **deps-dev:** bump fakerphp/faker from 1.22.0 to 1.23.0 ([4685beb](https://github.com/jetstreamlabs/serenity/commit/4685beb658f7a55c90ded470b6260ab05d8ec4c5))
+* **deps-dev:** bump nunomaduro/collision from 7.5.2 to 7.6.0 ([2c5b9f2](https://github.com/jetstreamlabs/serenity/commit/2c5b9f2883394dd24d2ca80b9c8a9da55c9d0717))
+* **deps-dev:** bump pestphp/pest from 2.6.3 to 2.7.0 ([3b6bb68](https://github.com/jetstreamlabs/serenity/commit/3b6bb68f3e8c91c697b1edcef7079af301cb25aa))
+* **deps-dev:** bump pinia from 2.1.3 to 2.1.4 ([4f074e4](https://github.com/jetstreamlabs/serenity/commit/4f074e45437f1219d79bf9007878c433937fd7c4))
+* **deps-dev:** bump semantic-release from 21.0.3 to 21.0.5 ([12a4681](https://github.com/jetstreamlabs/serenity/commit/12a46817503312809c7775062217364919d8a5e1))
+* **deps-dev:** bump unplugin-vue-components from 0.24.1 to 0.25.1 ([e10a148](https://github.com/jetstreamlabs/serenity/commit/e10a148055753ac9e290af417332bcf1bc33f953))
+* **deps:** bump @inertiajs/vue3 from 1.0.7 to 1.0.8 ([6fa8e68](https://github.com/jetstreamlabs/serenity/commit/6fa8e6865f5c0ca2088c5953e013ce9884dc2d2f))
+* **deps:** bump laravel/framework from 10.13.2 to 10.13.5 ([a3d1226](https://github.com/jetstreamlabs/serenity/commit/a3d1226dfbe538c34c917f34d0aeeac85b65a74b))
+
 ## [2.5.4](https://github.com/jetstreamlabs/serenity/compare/v2.5.3...v2.5.4) (2023-06-08)
 
 
