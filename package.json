@@ -74,7 +74,7 @@
     "autoprefixer": "^10.4.13",
     "axios": "^1.3.4",
     "eslint": "^8.43.0",
-    "eslint-plugin-vue": "^9.9.0",
+    "eslint-plugin-vue": "^9.17.0",
     "husky": "^8.0.3",
     "laravel-echo": "^1.15.0",
     "laravel-vite-plugin": "^0.7.8",
